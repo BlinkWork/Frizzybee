@@ -19,6 +19,7 @@ body {
   color: #0c0c0c;
   background-color: var(--text-color);
   overflow-x: hidden;
+  padding-top: 150px;
 }
 
 .layout_padding {
@@ -134,6 +135,11 @@ a:focus {
 
 .header_section {
   padding: 15px 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+  background-color: #fff;
 }
 
 .header_section .container-fluid {
@@ -1220,6 +1226,8 @@ form input[type="submit"]:focus {
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;
 }
 
 .nav-list {
@@ -1249,7 +1257,11 @@ form input[type="submit"]:focus {
   text-decoration: none;
   display: block;
   text-align: left;
-
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  border-bottom: 1px solid #ccc;
+  text-transform: capitalize;
 }
 
 .dropdown-content a:hover {
@@ -1258,7 +1270,13 @@ form input[type="submit"]:focus {
 
 .dropdown:hover .dropdown-content {
   display: block;
+  opacity: 1;
 }
+
+.dropdown-content a:last-child {
+  border-bottom: none;
+}
+
 
 @media screen and (max-width: 768px) {
   .nav-list {
@@ -1272,6 +1290,8 @@ form input[type="submit"]:focus {
     color: #ffffff;
     background-color: var(--main-color);
     border-radius: 20px;
+
+
   }
 }
 
