@@ -95,7 +95,7 @@ public class UserDAO extends MyDAO {
         User x;
         try {
             ps = con.prepareStatement(xSql);
-            ps.setString(1, "%"+keyword+"%");
+            ps.setString(1, "%" + keyword + "%");
             rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -125,6 +125,42 @@ public class UserDAO extends MyDAO {
             e.printStackTrace();
         }
         return (t);
+    }
+    
+    public User getUsersByUserName(String keyword) {
+        xSql = "SELECT * FROM [User] WHERE username = ?";
+        User user = null;
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, keyword);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String avatarURL = rs.getString("avatar");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                String sex = rs.getString("sex");
+                Date birthday = rs.getDate("birthday");
+                String email = rs.getString("email");
+                String address = rs.getString("address");
+                String role;
+                if (rs.getBoolean("isAdmin")) {
+                    role = "admin";
+                } else if (rs.getBoolean("isSeller")) {
+                    role = "seller";
+                } else {
+                    role = "user";
+                }
+                user = new User(id, name, avatarURL, username, password, sex, birthday, email, address, role);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 
     public void insert(User x) {
