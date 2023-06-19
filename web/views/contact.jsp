@@ -11,16 +11,16 @@
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <link rel="shortcut icon" href="resources/img/favicon.png" type="">
+    <link rel="shortcut icon" href="../resources/img/favicon.png">
     <title>Famms - Fashion HTML Template</title>
     <!-- bootstrap core css -->
-    <link rel="stylesheet" type="text/css" type="text/css" href="resources/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.css" />
     <!--font awesome style--> 
-    <link href="resources/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+    <link href="../resources/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
     <!--Custom styles for this template--> 
-    <link rel="stylesheet" type="text/css" href="resources/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/style.css">
     <!--responsive style--> 
-    <link href="resources/css/responsive.css" type="text/css" rel="stylesheet" />
+    <link href="../resources/css/responsive.css" type="text/css" rel="stylesheet" />
   </head>
 
   <body class="sub_page">
@@ -29,7 +29,7 @@
       <header class="header_section">
         <div class="container">
           <nav class="navbar navbar-expand-lg custom_nav-container ">
-            <a class="navbar-brand" href="index.html"><img width="250" src="resources/img/logo.jpg" alt="#" style="width: 77px;" /></a>
+            <a class="navbar-brand" href="../index.jsp"><img width="250" src="../resources/img/logo.jpg" alt="#" style="width: 77px;" /></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class=""> </span>
@@ -37,16 +37,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav">
                 <li class="nav-item active">
-                  <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="../index.jsp">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="product.html">Products</a>
+                  <a class="nav-link" href="./product.jsp">Products</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="contact.html">Contact</a>
+                  <a class="nav-link" href="./contact.jsp">Contact</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="cart" href="#">
+                  <a class="nav-link" id="cart" href="./cart.jsp">
                     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                          xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029"
                          style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
@@ -105,11 +105,12 @@
                     </svg>
                   </a>
                 </li>
-                <form class="form-inline">
-                  <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                    <i class="fa fa-search" aria-hidden="true"></i>
-                  </button>
-                </form>
+                <li class="nav-item loginBtn">
+                  <a class="nav-link" href="./views/login.jsp">Log in</a>
+                </li>
+                <li class="nav-item loginBtn">
+                  <a class="nav-link" href="./views/login.jsp">Sign in</a>
+                </li>
               </ul>
             </div>
           </nav>
@@ -137,7 +138,7 @@
         <div class="row">
           <div class="col-lg-8 offset-lg-2">
             <div class="full">
-              <form action="index.html">
+              <form action="index.jsp">
                 <fieldset>
                   <input type="text" placeholder="Enter your full name" name="name" required />
                   <input type="email" placeholder="Enter your email address" name="email" required />
@@ -186,7 +187,7 @@
           </div>
           <div class="col-md-4 footer-col">
             <div class="footer_detail">
-              <a href="index.html" class="footer-logo">
+              <a href="index.jsp" class="footer-logo">
                 Famms
               </a>
               <p>
@@ -234,13 +235,13 @@
     </footer>
     <!-- footer section -->
     <!-- jQery -->
-    <script src="resources/js/jquery-3.4.1.min.js"></script>
+    <script src="../resources/js/jquery-3.4.1.min.js"></script>
     <!--popper js--> 
-    <script src="resources/js/popper.min.js"></script>
+    <script src="../resources/js/popper.min.js"></script>
     <!--bootstrap js--> 
-    <script src="resources/js/bootstrap.js"></script>
+    <script src="../resources/js/bootstrap.js"></script>
     <!--custom js--> 
-    <script src="resources/js/custom.js"></script>
+    <script src="../resources/js/custom.js"></script>
   </body>
 
 </html>

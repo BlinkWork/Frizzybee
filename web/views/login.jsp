@@ -22,11 +22,11 @@
 		}
 	</style>
 
-	<link rel="stylesheet" href="resources/css/login.css">
+	<link rel="stylesheet" href="../resources/css/login.css">
 
 </head>
 
-<body class="img js-fullheight" style="background-image: url(resources/img/bg.jpg);">
+<body class="img js-fullheight" style="background-image: url(../resources/img/bg.jpg);">
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
@@ -72,7 +72,7 @@
 		</div>
 	</section>
 
-	<script src="resources/js/login.js"></script>
+	<script src="../resources/js/login.js"></script>
 </body>
 
 </html>

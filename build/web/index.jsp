@@ -13,17 +13,21 @@
     <meta name="author" content="" />
     <title>Famms - Fashion HTML Template</title>
     <!-- bootstrap core css -->
-    <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="./resources/css/bootstrap.css" />
     <!--font awesome style--> 
-    <link href="resources/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+    <link href="./resources/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
     <!--Custom styles for this template--> 
-    <link rel="stylesheet" type="text/css" href="resources/css/style.css">
-    <link rel="stylesheet" type="text/css" href="resources/css/index.css">
+    <link rel="stylesheet" type="text/css" href="./resources/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./resources/css/index.css">
     <!--responsive style--> 
-    <link href="resources/css/responsive.css" type="text/css" rel="stylesheet" />
+    <link href="./resources/css/responsive.css" type="text/css" rel="stylesheet" />
+    <link href="./resources/css/index.css" type="text/css" rel="stylesheet" />
     <style>
+      *{
+        scroll-behavior: smooth;
+      }
       .img1{
-        background-image: url(resources/img/redsentai.png);
+        background-image: url(./resources/img/redsentai.png);
         height: 700px;
         width: 100%;
         color: aliceblue;
@@ -31,7 +35,7 @@
         background-size: cover;
       }
       .img2{
-        background-image: url(resources/img/bluesentai.png);
+        background-image: url(./resources/img/bluesentai.png);
         height: 700px;
         width: 100%;
         color: aliceblue;
@@ -39,7 +43,7 @@
         background-size: cover;
       }
       .img3{
-        background-image: url(resources/img/yellowsentai.png);
+        background-image: url(./resources/img/yellowsentai.png);
         height: 700px;
         width: 100%;
         color: aliceblue;
@@ -55,8 +59,8 @@
       <header class="header_section">
         <div class="container">
           <nav class="navbar navbar-expand-lg custom_nav-container ">
-            <a class="navbar-brand" href="index.html"><img width="250" src="resources/img/logo.jpg" alt="#"
-                                                           style="width: 77px;" /></a>
+            <a class="navbar-brand" href="#"><img width="250" src="./resources/img/logo.jpg" alt="#"
+                                                  style="width: 77px;" /></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class=""> </span>
@@ -64,16 +68,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav">
                 <li class="nav-item active">
-                  <a class="nav-link" href="index">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="product">Products</a>
+                  <a class="nav-link" href="./views/product.jsp">Products</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="contact">Contact</a>
+                  <a class="nav-link" href="./views/contact.jsp">Contact</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="cart" href="#">
+                <li class="nav-item"> 
+                  <a class="nav-link" id="cart" href="./views/cart.jsp">
                     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                          xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029"
                          style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
@@ -132,13 +136,14 @@
                     </svg>
                   </a>
                 </li>
-
+                <li class="nav-item loginBtn">
+                  <a class="nav-link" href="./views/login.jsp">Log in</a>
+                </li>
+                <li class="nav-item loginBtn">
+                  <a class="nav-link" href="./views/login.jsp">Sign in</a>
+                </li>
               </ul>
-              <form class="form-inline">
-                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </button>
-              </form>
+
             </div>
           </nav>
         </div>
@@ -148,7 +153,7 @@
       <section class="slider_section ">
 
         <div id="customCarousel1" class="carousel slide" data-ride="carousel">
-          
+
           <div class="carousel-inner" style="z-index: -1;">
             <div class="carousel-item active img1">
               <div class="container ">
@@ -174,35 +179,9 @@
                 </div>
               </div>
             </div>
-            <div class="carousel-item img2">
-              <div class="slider_bg_box">
-                <img src="resources/img/yellowsentai.png" alt="">
-              </div>
-              <div class="container ">
-                <div class="row">
-                  <div class="col-md-7 col-lg-6 ">
-                    <div class="detail-box" style="margin-top: 100px;">
-                      <h1>
-                        <span>
-                          Sale 20% Off
-                        </span>
-                        <br>
-                        On Everything
-                      </h1>
-                      <p>
-                        Explicabo esse amet tempora quibusdam laudantium, laborum eaque magnam fugiat hic? Esse dicta
-                        aliquid error repudiandae earum suscipit fugiat molestias, veniam, vel architecto veritatis
-                        delectus repellat modi impedit sequi.
-                      </p>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
             <div class="carousel-item img3">
               <div class="slider_bg_box">
-                <img src="resources/img/bluesentai.png" alt="">
+                <img src="./resources/img/bluesentai.png" alt="">
               </div>
               <div class="container ">
                 <div class="row">
@@ -226,6 +205,33 @@
                 </div>
               </div>
             </div>
+            <div class="carousel-item img2">
+              <div class="slider_bg_box">
+                <img src="./resources/img/yellowsentai.png" alt="">
+              </div>
+              <div class="container ">
+                <div class="row">
+                  <div class="col-md-7 col-lg-6 ">
+                    <div class="detail-box" style="margin-top: 100px;">
+                      <h1>
+                        <span>
+                          Sale 20% Off
+                        </span>
+                        <br>
+                        On Everything
+                      </h1>
+                      <p>
+                        Explicabo esse amet tempora quibusdam laudantium, laborum eaque magnam fugiat hic? Esse dicta
+                        aliquid error repudiandae earum suscipit fugiat molestias, veniam, vel architecto veritatis
+                        delectus repellat modi impedit sequi.
+                      </p>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
           <div class="container" style="z-index: 10; margin-top: -100px; margin-left: 500px">
             <ol class="carousel-indicators" >
@@ -234,6 +240,7 @@
               <li data-target="#customCarousel1" data-slide-to="2"></li>
             </ol>
           </div>
+
         </div>
       </section>
       <!-- end slider section -->
@@ -499,7 +506,7 @@
     <!-- end why section -->
 
     <!-- product section -->
-    <section class="product_section layout_padding" hidden>
+    <section class="product_section layout_padding">
       <div class="container">
         <div class="heading_container heading_center">
           <h2>
@@ -520,7 +527,7 @@
                 </div>
               </div>
               <div class="img-box">
-                <img src="resources/img/p1.png" alt="">
+                <img src="./resources/img/p1.png" alt="">
               </div>
               <div class="detail-box">
                 <h5>
@@ -539,13 +546,16 @@
                   <a href="" class="option1">
                     Add To Cart
                   </a>
+                  <a href="" class="option1">
+                    View Details
+                  </a>
                   <a href="" class="option2">
                     Buy Now
                   </a>
                 </div>
               </div>
               <div class="img-box">
-                <img src="resources/img/p2.png" alt="">
+                <img src="./resources/img/p2.png" alt="">
               </div>
               <div class="detail-box">
                 <h5>
@@ -564,13 +574,16 @@
                   <a href="" class="option1">
                     Add To Cart
                   </a>
+                  <a href="" class="option1">
+                    View Details
+                  </a>
                   <a href="" class="option2">
                     Buy Now
                   </a>
                 </div>
               </div>
               <div class="img-box">
-                <img src="resources/img/p3.png" alt="">
+                <img src="./resources/img/p3.png" alt="">
               </div>
               <div class="detail-box">
                 <h5>
@@ -589,13 +602,16 @@
                   <a href="" class="option1">
                     Add To Cart
                   </a>
+                  <a href="" class="option1">
+                    View Details
+                  </a>
                   <a href="" class="option2">
                     Buy Now
                   </a>
                 </div>
               </div>
               <div class="img-box">
-                <img src="resources/img/p4.png" alt="">
+                <img src="./resources/img/p4.png" alt="">
               </div>
               <div class="detail-box">
                 <h5>
@@ -614,13 +630,16 @@
                   <a href="" class="option1">
                     Add To Cart
                   </a>
+                  <a href="" class="option1">
+                    View Details
+                  </a>
                   <a href="" class="option2">
                     Buy Now
                   </a>
                 </div>
               </div>
               <div class="img-box">
-                <img src="resources/img/p5.png" alt="">
+                <img src="./resources/img/p5.png" alt="">
               </div>
               <div class="detail-box">
                 <h5>
@@ -639,13 +658,16 @@
                   <a href="" class="option1">
                     Add To Cart
                   </a>
+                  <a href="" class="option1">
+                    View Details
+                  </a>
                   <a href="" class="option2">
                     Buy Now
                   </a>
                 </div>
               </div>
               <div class="img-box">
-                <img src="resources/img/p6.png" alt="">
+                <img src="./resources/img/p6.png" alt="">
               </div>
               <div class="detail-box">
                 <h5>
@@ -664,13 +686,16 @@
                   <a href="" class="option1">
                     Add To Cart
                   </a>
+                  <a href="" class="option1">
+                    View Details
+                  </a>
                   <a href="" class="option2">
                     Buy Now
                   </a>
                 </div>
               </div>
               <div class="img-box">
-                <img src="resources/img/p7.png" alt="">
+                <img src="./resources/img/p7.png" alt="">
               </div>
               <div class="detail-box">
                 <h5>
@@ -689,13 +714,16 @@
                   <a href="" class="option1">
                     Add To Cart
                   </a>
+                  <a href="" class="option1">
+                    View Details
+                  </a>
                   <a href="" class="option2">
                     Buy Now
                   </a>
                 </div>
               </div>
               <div class="img-box">
-                <img src="resources/img/p8.png" alt="">
+                <img src="./resources/img/p8.png" alt="">
               </div>
               <div class="detail-box">
                 <h5>
@@ -714,13 +742,16 @@
                   <a href="" class="option1">
                     Add To Cart
                   </a>
+                  <a href="" class="option1">
+                    View Details
+                  </a>
                   <a href="" class="option2">
                     Buy Now
                   </a>
                 </div>
               </div>
               <div class="img-box">
-                <img src="resources/img/p9.png" alt="">
+                <img src="./resources/img/p9.png" alt="">
               </div>
               <div class="detail-box">
                 <h5>
@@ -739,13 +770,16 @@
                   <a href="" class="option1">
                     Add To Cart
                   </a>
+                  <a href="" class="option1">
+                    View Details
+                  </a>
                   <a href="" class="option2">
                     Buy Now
                   </a>
                 </div>
               </div>
               <div class="img-box">
-                <img src="resources/img/p10.png" alt="">
+                <img src="./resources/img/p10.png" alt="">
               </div>
               <div class="detail-box">
                 <h5>
@@ -764,13 +798,16 @@
                   <a href="" class="option1">
                     Add To Cart
                   </a>
+                  <a href="" class="option1">
+                    View Details
+                  </a>
                   <a href="" class="option2">
                     Buy Now
                   </a>
                 </div>
               </div>
               <div class="img-box">
-                <img src="resources/img/p11.png" alt="">
+                <img src="./resources/img/p11.png" alt="">
               </div>
               <div class="detail-box">
                 <h5>
@@ -789,13 +826,16 @@
                   <a href="" class="option1">
                     Add To Cart
                   </a>
+                  <a href="" class="option1">
+                    View Details
+                  </a>
                   <a href="" class="option2">
                     Buy Now
                   </a>
                 </div>
               </div>
               <div class="img-box">
-                <img src="resources/img/p12.png" alt="">
+                <img src="./resources/img/p12.png" alt="">
               </div>
               <div class="detail-box">
                 <h5>
@@ -809,7 +849,7 @@
           </div>
         </div>
         <div class="btn-box">
-          <a href="">
+          <a href="./views/product.jsp">
             View All products
           </a>
         </div>
@@ -856,7 +896,7 @@
                 <div class="img_container">
                   <div class="img-box">
                     <div class="img_box-inner">
-                      <img src="resources/img/client.jpg" alt="">
+                      <img src="./resources/img/client.jpg" alt="">
                     </div>
                   </div>
                 </div>
@@ -880,7 +920,7 @@
                 <div class="img_container">
                   <div class="img-box">
                     <div class="img_box-inner">
-                      <img src="resources/img/client.jpg" alt="">
+                      <img src="./resources/img/client.jpg" alt="">
                     </div>
                   </div>
                 </div>
@@ -904,7 +944,7 @@
                 <div class="img_container">
                   <div class="img-box">
                     <div class="img_box-inner">
-                      <img src="resources/img/client.jpg" alt="">
+                      <img src="./resources/img/client.jpg" alt="">
                     </div>
                   </div>
                 </div>
@@ -945,7 +985,7 @@
           <div class="col-md-4">
             <div class="full">
               <div class="logo_footer">
-                <a href="#"><img width="210" src="resources/img/logo.png" alt="#" /></a>
+                <a href="#"><img width="210" src="./resources/img/logo.png" alt="#" /></a>
               </div>
               <div class="information_f">
                 <p><strong>ADDRESS:</strong> 28 White tower, Street Name New York City, USA</p>
@@ -1014,13 +1054,13 @@
       </p>
     </div>
     <!-- jQery -->
-    <script src="resources/js/jquery-3.4.1.min.js"></script>
+    <script src="./resources/js/jquery-3.4.1.min.js"></script>
     <!--popper js--> 
-    <script src="resources/js/popper.min.js"></script>
+    <script src="./resources/js/popper.min.js"></script>
     <!--bootstrap js--> 
-    <script src="resources/js/bootstrap.js"></script>
+    <script src="./resources/js/bootstrap.js"></script>
     <!--custom js--> 
-    <script src="resources/js/custom.js"></script>
+    <script src="./resources/js/custom.js"></script>
   </body>
 
 </html>

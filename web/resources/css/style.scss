@@ -174,7 +174,7 @@ a:focus {
       }
 
       &:hover,
-        &.active {
+      &.active {
         .nav-link {
           color: $primary1;
 
@@ -269,7 +269,7 @@ a:focus {
 
   #customCarousel1 {
     width: 100%;
-    position: relative;
+    position: unset;
   }
 
   .detail-box {
