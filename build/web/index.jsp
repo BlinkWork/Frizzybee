@@ -13,14 +13,40 @@
     <meta name="author" content="" />
     <title>Famms - Fashion HTML Template</title>
     <!-- bootstrap core css -->
-    <link rel="stylesheet" type="text/css" type="text/css" href="resources/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css" />
     <!--font awesome style--> 
     <link href="resources/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
     <!--Custom styles for this template--> 
     <link rel="stylesheet" type="text/css" href="resources/css/style.css">
+    <link rel="stylesheet" type="text/css" href="resources/css/index.css">
     <!--responsive style--> 
     <link href="resources/css/responsive.css" type="text/css" rel="stylesheet" />
-
+    <style>
+      .img1{
+        background-image: url(resources/img/redsentai.png);
+        height: 700px;
+        width: 100%;
+        color: aliceblue;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      .img2{
+        background-image: url(resources/img/bluesentai.png);
+        height: 700px;
+        width: 100%;
+        color: aliceblue;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      .img3{
+        background-image: url(resources/img/yellowsentai.png);
+        height: 700px;
+        width: 100%;
+        color: aliceblue;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    </style>
   </head>
 
   <body>
@@ -106,12 +132,13 @@
                     </svg>
                   </a>
                 </li>
-                <form class="form-inline">
-                  <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                    <i class="fa fa-search" aria-hidden="true"></i>
-                  </button>
-                </form>
+
               </ul>
+              <form class="form-inline">
+                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+              </form>
             </div>
           </nav>
         </div>
@@ -119,16 +146,16 @@
       <!-- end header section -->
       <!-- slider section -->
       <section class="slider_section ">
-        <div class="slider_bg_box">
-          <img src="resources/img/slider-bg.jpg" alt="">
-        </div>
+
         <div id="customCarousel1" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
+          
+          <div class="carousel-inner" style="z-index: -1;">
+            <div class="carousel-item active img1">
               <div class="container ">
                 <div class="row">
+                  <div class="col-md-4 col-lg-6 "></div>
                   <div class="col-md-7 col-lg-6 ">
-                    <div class="detail-box">
+                    <div class="detail-box" style="margin-top: 100px;" >
                       <h1>
                         <span>
                           Sale 20% Off
@@ -141,21 +168,20 @@
                         aliquid error repudiandae earum suscipit fugiat molestias, veniam, vel architecto veritatis
                         delectus repellat modi impedit sequi.
                       </p>
-                      <div class="btn-box">
-                        <a href="" class="btn1">
-                          Shop Now
-                        </a>
-                      </div>
+
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="carousel-item ">
+            <div class="carousel-item img2">
+              <div class="slider_bg_box">
+                <img src="resources/img/yellowsentai.png" alt="">
+              </div>
               <div class="container ">
                 <div class="row">
                   <div class="col-md-7 col-lg-6 ">
-                    <div class="detail-box">
+                    <div class="detail-box" style="margin-top: 100px;">
                       <h1>
                         <span>
                           Sale 20% Off
@@ -168,21 +194,20 @@
                         aliquid error repudiandae earum suscipit fugiat molestias, veniam, vel architecto veritatis
                         delectus repellat modi impedit sequi.
                       </p>
-                      <div class="btn-box">
-                        <a href="" class="btn1">
-                          Shop Now
-                        </a>
-                      </div>
+
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="carousel-item">
+            <div class="carousel-item img3">
+              <div class="slider_bg_box">
+                <img src="resources/img/bluesentai.png" alt="">
+              </div>
               <div class="container ">
                 <div class="row">
                   <div class="col-md-7 col-lg-6 ">
-                    <div class="detail-box">
+                    <div class="detail-box" style="margin-top: 100px;">
                       <h1>
                         <span>
                           Sale 20% Off
@@ -195,19 +220,15 @@
                         aliquid error repudiandae earum suscipit fugiat molestias, veniam, vel architecto veritatis
                         delectus repellat modi impedit sequi.
                       </p>
-                      <div class="btn-box">
-                        <a href="" class="btn1">
-                          Shop Now
-                        </a>
-                      </div>
+
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="container">
-            <ol class="carousel-indicators">
+          <div class="container" style="z-index: 10; margin-top: -100px; margin-left: 500px">
+            <ol class="carousel-indicators" >
               <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
               <li data-target="#customCarousel1" data-slide-to="1"></li>
               <li data-target="#customCarousel1" data-slide-to="2"></li>
@@ -986,7 +1007,7 @@
     </footer>
     <!-- footer end -->
     <div class="cpy_">
-      <p class="mx-auto">Â© 2021 All Rights Reserved By <a href="https://html.design/">Free Html Templates</a><br>
+      <p class="mx-auto">© 2021 All Rights Reserved By <a href="https://html.design/">Free Html Templates</a><br>
 
         Distributed By <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
 

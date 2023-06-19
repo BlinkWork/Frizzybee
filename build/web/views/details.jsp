@@ -11,10 +11,10 @@
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <link rel="shortcut icon" href="resources/img/favicon.png" type="">
+    <link rel="shortcut icon" href="resources/img/favicon.png">
     <title>Famms - Fashion HTML Template</title>
     <!-- bootstrap core css -->
-    <link rel="stylesheet" type="text/css" type="text/css" href="resources/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css" />
     <!--font awesome style--> 
     <link href="resources/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
     <!--Custom styles for this template--> 

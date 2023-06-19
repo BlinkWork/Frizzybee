@@ -368,12 +368,30 @@ a:focus {
 }
 
 .slider_bg_box img {
+  position: absolute;
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
   object-fit: cover;
   -o-object-position: top right;
   object-position: top right;
+}
+
+.slider_bg_box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.slider_bg_box.active {
+  opacity: 1;
 }
 
 .product_section .heading_container {
@@ -1295,6 +1313,4 @@ form input[type="submit"]:focus {
   }
 }
 
-/*https: //kute-themes.com/html/boutique/html/index.html
-https: //template.hasthemes.com/noraure/noraure/index.html
-https: //preview.hasthemes.com/xoss-preview/xoss/index.html*/
+
