@@ -33,7 +33,7 @@ public class BrandDAO extends MyDAO {
     }
 
     public Brand getBrandByID(String ID) {
-        xSql = "select * from \"User\" where id = ?";
+        xSql = "select * from [dbo].[Brand] where id = ?";
         Brand x = null;
         try {
             ps = con.prepareStatement(xSql);

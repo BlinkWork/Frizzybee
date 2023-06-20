@@ -9,7 +9,7 @@ public class UserDAO extends MyDAO {
 
   public List<User> getUsers() {
     List<User> t = new ArrayList<>();
-    xSql = "select * from \"User\"";
+    xSql = "select * from [dbo].[User]";
     try {
       ps = con.prepareStatement(xSql);
       rs = ps.executeQuery();
@@ -54,7 +54,7 @@ public class UserDAO extends MyDAO {
   }
 
   public User getUserByID(String ID) {
-    xSql = "select * from User where id = ?";
+    xSql = "select * from [dbo].[User] where id = ?";
     User x = null;
     try {
       ps = con.prepareStatement(xSql);
@@ -91,7 +91,7 @@ public class UserDAO extends MyDAO {
 
   public List<User> getUsersByName(String keyword) {
     List<User> t = new ArrayList<>();
-    xSql = "select * from User where name like ?";
+    xSql = "select * from [dbo].[User] where name like ?";
     User x;
     try {
       ps = con.prepareStatement(xSql);
@@ -128,7 +128,7 @@ public class UserDAO extends MyDAO {
   }
 
   public User getUsersByUserName(String keyword) {
-    xSql = "SELECT * FROM [User] WHERE username = ?";
+    xSql = "SELECT * FROM [dbo].[User] WHERE username = ?";
     User user = null;
     try {
       ps = con.prepareStatement(xSql);
@@ -198,7 +198,7 @@ public class UserDAO extends MyDAO {
   }
 
   public void delete(String ID) {
-    xSql = "delete from User where id=?";
+    xSql = "delete from [dbo].[User] where id=?";
     try {
       ps = con.prepareStatement(xSql);
       ps.setString(1, ID);

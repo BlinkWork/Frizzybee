@@ -48,9 +48,51 @@ public class ProductDAO extends MyDAO {
         return (t);
     }
 
+    public List<Product> getProductsByPage(int startPage, int numberOfPage) {
+        List<Product> t = new ArrayList<>();
+        xSql = "SELECT *  FROM [dbo].[Product] OFFSET ? ROWS\n" +
+"FETCH NEXT ? ROWS ONLY";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, startPage);
+            ps.setInt(2, numberOfPage);
+            rs = ps.executeQuery();
+            int productID;
+            String productName;
+            String description;
+            Category category;
+            Brand brand;
+            double price;
+            int quantity;
+            String imageURL;
+            int discount;
+            Product x;
+            CategoryDAO categoryDAO = new CategoryDAO();
+            BrandDAO brandDAO = new BrandDAO();
+            while (rs.next()) {
+                productID = rs.getInt("product_id");
+                productName = rs.getString("product_name");
+                description = rs.getString("product_description");
+                category = categoryDAO.getCategoryByID(rs.getInt("category_id") + "");
+                brand = brandDAO.getBrandByID(rs.getInt("brand_id") + "");
+                price = rs.getDouble("price");
+                quantity = rs.getInt("quantity");
+                imageURL = rs.getString("image");
+                discount = rs.getInt("discount");
+                x = new Product(productID, productName, description, category, brand, price, quantity, imageURL, discount);
+                t.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
+    }
+    
     public Product getProductByID(String ID) {
         Product x = null;
-        xSql = "select * from Product where product_id = ?";
+        xSql = "select * from [dbo].[Product] where product_id = ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, ID);
@@ -81,7 +123,7 @@ public class ProductDAO extends MyDAO {
 
     public List<Product> getProductsByCategory(String categoryID) {
         List<Product> t = new ArrayList<>();
-        xSql = "select * from Product where category_id = ?";
+        xSql = "select * from [dbo].[Product] where category_id = ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, categoryID);
@@ -114,7 +156,7 @@ public class ProductDAO extends MyDAO {
 
     public List<Product> getProductsByBrand(String brandID) {
         List<Product> t = new ArrayList<>();
-        xSql = "select * from Product where brand_id = ?";
+        xSql = "select * from [dbo].[Product] where brand_id = ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, brandID);
@@ -146,7 +188,7 @@ public class ProductDAO extends MyDAO {
 
     public List<Product> getProductsByName(String keyword) {
         List<Product> t = new ArrayList<>();
-        xSql = "select * from Product where name like ?";
+        xSql = "select * from [dbo].[Product] where name like ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, "%" + keyword + "%");
