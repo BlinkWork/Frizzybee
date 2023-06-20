@@ -150,7 +150,7 @@
       </header>
       <!-- end header section -->
       <!-- slider section -->
-      <section class="slider_section ">
+      <section class="slider_section" style="padding-top: 0">
 
         <div id="customCarousel1" class="carousel slide" data-ride="carousel">
 
@@ -1061,6 +1061,10 @@
     <script src="./resources/js/bootstrap.js"></script>
     <!--custom js--> 
     <script src="./resources/js/custom.js"></script>
+    
+    <script>
+      
+    </script>
   </body>
 
 </html>
