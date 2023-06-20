@@ -50,7 +50,7 @@ public class ProductDAO extends MyDAO {
 
     public Product getProductByID(String ID) {
         Product x = null;
-        xSql = "select * from Product where product_id = ?";
+        xSql = "select * from [dbo].[Product] where product_id = ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, ID);
@@ -81,7 +81,7 @@ public class ProductDAO extends MyDAO {
 
     public List<Product> getProductsByCategory(String categoryID) {
         List<Product> t = new ArrayList<>();
-        xSql = "select * from Product where category_id = ?";
+        xSql = "select * from [dbo].[Product] where category_id = ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, categoryID);
@@ -114,7 +114,7 @@ public class ProductDAO extends MyDAO {
 
     public List<Product> getProductsByBrand(String brandID) {
         List<Product> t = new ArrayList<>();
-        xSql = "select * from Product where brand_id = ?";
+        xSql = "select * from [dbo].[Product] where brand_id = ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, brandID);
@@ -146,7 +146,7 @@ public class ProductDAO extends MyDAO {
 
     public List<Product> getProductsByName(String keyword) {
         List<Product> t = new ArrayList<>();
-        xSql = "select * from Product where name like ?";
+        xSql = "select * from [dbo].[Product] where name like ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, "%" + keyword + "%");
@@ -197,7 +197,7 @@ public class ProductDAO extends MyDAO {
     }
 
     public void deleteByID(String ID) {
-        xSql = "delete from Product where [ProductID]=?";
+        xSql = "delete from [dbo].[Product] where [ProductID]=?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, ID);

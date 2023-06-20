@@ -9,7 +9,7 @@ public class UserDAO extends MyDAO {
 
     public List<User> getUsers() {
         List<User> t = new ArrayList<>();
-        xSql = "select * from User";
+        xSql = "select * from [User]";
         try {
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
@@ -54,7 +54,7 @@ public class UserDAO extends MyDAO {
     }
 
     public User getUserByID(String ID) {
-        xSql = "select * from User where id = ?";
+        xSql = "select * from [User] where id = ?";
         User x = null;
         try {
             ps = con.prepareStatement(xSql);
@@ -91,7 +91,7 @@ public class UserDAO extends MyDAO {
 
     public List<User> getUsersByName(String keyword) {
         List<User> t = new ArrayList<>();
-        xSql = "select * from User where name like ?";
+        xSql = "select * from [User] where name like ?";
         User x;
         try {
             ps = con.prepareStatement(xSql);
@@ -198,7 +198,7 @@ public class UserDAO extends MyDAO {
     }
 
     public void delete(String ID) {
-        xSql = "delete from User where id=?";
+        xSql = "delete from [dbo].[User] where id=?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, ID);
@@ -258,7 +258,11 @@ public class UserDAO extends MyDAO {
 
 //    public static void main(String[] args) {
 //        UserDAO dao = new UserDAO();
-//        dao.insert(new User(1, "Lê Minh Thang", "aaa", "lethangd", "123456", "M",Date.valueOf("2003-08-05") , "lethangd@gmail.com", "Phu Ly", "admin"));
+//        try {
+//            List<User> liuser = dao.getUsers();
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
 //        
 //    }
 }

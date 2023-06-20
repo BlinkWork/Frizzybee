@@ -33,7 +33,7 @@ public class CategoryDAO extends MyDAO {
     }
 
     public Category getCategoryByID(String ID) {
-        xSql = "select * from Category where id = ?";
+        xSql = "select * from [dbo].[Category] where id = ?";
         Category x = null;
         try {
             ps = con.prepareStatement(xSql);

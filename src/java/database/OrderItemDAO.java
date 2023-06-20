@@ -40,7 +40,7 @@ public class OrderItemDAO extends MyDAO {
     }
 
     public OrderItem getOrderItemByID(String ID) {
-        xSql = "select * from OrderItem where OrderItemID = ?";
+        xSql = "select * from [dbo].[OrderItem] where OrderItemID = ?";
         OrderItem x = null;
         try {
             ps = con.prepareStatement(xSql);
@@ -68,7 +68,7 @@ public class OrderItemDAO extends MyDAO {
 
     public List<OrderItem> getOrderItemsByOrderID(String orderId) {
         List<OrderItem> t = new ArrayList<>();
-        xSql = "select * from OrderItem where OrderID = ?";
+        xSql = "select * from [dbo].[OrderItem] where OrderID = ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, orderId);
@@ -110,7 +110,7 @@ public class OrderItemDAO extends MyDAO {
     }
 
     public void deleteByID(String ID) {
-        xSql = "delete from OrderItem where [OrderItemID]=?";
+        xSql = "delete from [dbo].[OrderItem] where [OrderItemID]=?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, ID);

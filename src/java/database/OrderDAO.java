@@ -45,7 +45,7 @@ public class OrderDAO extends MyDAO {
     }
 
     public Order getOrderByID(String ID) {
-        xSql = "select * from Order where OrderID = ?";
+        xSql = "select * from [dbo].[Order] where OrderID = ?";
         Order x = null;
         UserDAO userDAO = new UserDAO();
         try {
@@ -75,7 +75,7 @@ public class OrderDAO extends MyDAO {
 
     public List<Order> getOrdersByUserID(String userId) {
         List<Order> t = new ArrayList<>();
-        xSql = "select * from Order where user_id = ?";
+        xSql = "select * from [dbo].[Order] where user_id = ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, userId);
@@ -122,7 +122,7 @@ public class OrderDAO extends MyDAO {
     }
 
     public void deleteByID(String ID) {
-        xSql = "delete from Order where [OrderID]=?";
+        xSql = "delete from [dbo].[Order] where [OrderID]=?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, ID);
