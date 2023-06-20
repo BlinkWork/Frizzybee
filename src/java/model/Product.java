@@ -108,5 +108,12 @@ public class Product {
         this.discount = discount;
     }
 
+    @Override
+    public String toString() {
+        return productID+ " | " + productName+ " | " + description+ " | " + category.getCategoryName()+ " | " + brand.getBrandName()+ " | " + price+ " | " + quantity+ " | " + imageURL+ " | " + discount;
+
+    }
+
+    
     
 }

@@ -50,8 +50,8 @@ public class ProductDAO extends MyDAO {
 
     public List<Product> getProductsByPage(int startPage, int numberOfPage) {
         List<Product> t = new ArrayList<>();
-        xSql = "SELECT *  FROM [dbo].[Product] OFFSET ? ROWS\n" +
-"FETCH NEXT ? ROWS ONLY";
+        xSql = "SELECT *  FROM [dbo].[Product] OFFSET ? ROWS\n"
+                + "FETCH NEXT ? ROWS ONLY";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, startPage);
@@ -89,7 +89,7 @@ public class ProductDAO extends MyDAO {
         }
         return (t);
     }
-    
+
     public Product getProductByID(String ID) {
         Product x = null;
         xSql = "select * from [dbo].[Product] where product_id = ?";
@@ -219,7 +219,7 @@ public class ProductDAO extends MyDAO {
     }
 
     public void insert(Product x) {
-        xSql = "INSERT INTO [dbo].[Product]([product_name],[product_description],[category_id],[brand_id],[price],[quantity],[image],[status])\n"
+        xSql = "INSERT INTO [dbo].[Product]([product_name],[product_description],[category_id],[brand_id],[price],[quantity],[image],[discount])\n"
                 + "     VALUES (?,?,?,?,?,?,?,?)";
         try {
             ps = con.prepareStatement(xSql);
@@ -276,4 +276,20 @@ public class ProductDAO extends MyDAO {
         }
     }
 
+    public static void main(String[] args) {
+        ProductDAO dao = new ProductDAO();
+        CategoryDAO ctdao = new CategoryDAO();
+        BrandDAO bdao = new BrandDAO();
+        ctdao.insert(new Category(0, "t"));
+        bdao.insert(new Brand(0, "nn"));
+        dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
+        dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
+        dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
+        dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
+        dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
+        dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
+        dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
+        dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
+
+    }
 }
