@@ -30,21 +30,23 @@
         margin-bottom: 20px;
       }
 
-      .category, .department, .tag {
+      .filter .category,
+      .filter .department,
+      .filter .tag {
         margin-right: 20px;
       }
 
-      h3 {
+      .filter h3 {
         font-size: 16px;
         margin-bottom: 10px;
       }
 
-      label {
+      .filter label {
         display: block;
         margin-bottom: 5px;
       }
 
-      input[type="checkbox"] {
+      .filter input[type="checkbox"] {
         margin-right: 5px;
       }
     </style>
@@ -225,7 +227,14 @@
                 <label for="new-arrival"><input type="checkbox" id="new-arrival" name="tag" value="new-arrival"> New Arrival</label>
                 <label for="discounted"><input type="checkbox" id="discounted" name="tag" value="discounted"> Discounted</label>
               </div>
-              <button type="submit">Filter</button>
+
+              <button type="submit" class="btn-box" style="padding: 0">
+                <a style="width:100%; font-size: 15px">
+                  Filter
+                </a>
+              </button>
+
+
             </div>
           </div>
           <div class="col-sm-10 col-md-10 col-lg-9">
@@ -654,7 +663,6 @@
     <!--custom js--> 
     <script src="../resources/js/custom.js"></script>
     <script src="../resources/js/script.js"></script>
-
   </body>
 
 </html>
