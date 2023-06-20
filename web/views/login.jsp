@@ -46,7 +46,8 @@
                   <input id="password-field" type="password" class="form-control" placeholder="Password">
                   <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                 </div>
-                <div class="check_input_false" id="check_input"></div>
+                <div class="check_input_false" id="check_input"
+                     style="display:inline-block; width: 330px; height: 29px;"></div>
                 <div class="form-group">
                   <button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button>
                 </div>

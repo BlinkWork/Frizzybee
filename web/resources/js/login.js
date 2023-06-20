@@ -32,14 +32,14 @@ document.querySelector('.signin-form').addEventListener('submit', function (even
     passwordError.style = 'color: #FFFFFF; width: 200px; padding: 10px; background-color:#C40000; position: absolute; left: 80%; bottom: 30px; border-radius: 20px';
     passwordInput.parentNode.insertBefore(passwordError, passwordInput.nextSibling);
   }
-  document.getElementById('check_input').textContent = "";
+  document.getElementById('check_input').innerHTML = "";
   if (usernameInput.value != "" && passwordInput.value != "") {
 
     if (check_input.classList.contains("check_input_false")) {
-      document.getElementById('check_input').textContent = "Username or password is wrong";
+      document.getElementById('check_input').innerHTML = "Username or password is wrong";
     }
     if (check_input.classList.contains("check_input_true")) {
-      document.getElementById('check_input').textContent = "";
+      document.getElementById('check_input').innerHTML = "";
     }
   }
 });
