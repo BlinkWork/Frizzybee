@@ -23,7 +23,7 @@ public class ProductDAO extends MyDAO {
             double price;
             int quantity;
             String imageURL;
-            String status;
+            int discount;
             Product x;
             CategoryDAO categoryDAO = new CategoryDAO();
             BrandDAO brandDAO = new BrandDAO();
@@ -36,8 +36,8 @@ public class ProductDAO extends MyDAO {
                 price = rs.getDouble("price");
                 quantity = rs.getInt("quantity");
                 imageURL = rs.getString("image");
-                status = rs.getString("status");
-                x = new Product(productID, productName, description, category, brand, price, quantity, imageURL, status);
+                discount = rs.getInt("discount");
+                x = new Product(productID, productName, description, category, brand, price, quantity, imageURL, discount);
                 t.add(x);
             }
             rs.close();
@@ -47,7 +47,7 @@ public class ProductDAO extends MyDAO {
         }
         return (t);
     }
-    
+
     public Product getProductByID(String ID) {
         Product x = null;
         xSql = "select * from Product where product_id = ?";
@@ -67,8 +67,8 @@ public class ProductDAO extends MyDAO {
                     double price = rs.getDouble("price");
                     int quantity = rs.getInt("quantity");
                     String imageURL = rs.getString("image");
-                    String status = rs.getString("status");
-                     x = new Product(productID, productName, description, category, brand, price, quantity, imageURL, status);
+                    int discount = rs.getInt("discount");
+                    x = new Product(productID, productName, description, category, brand, price, quantity, imageURL, discount);
                 }
             }
             rs.close();
@@ -99,8 +99,8 @@ public class ProductDAO extends MyDAO {
                     double price = rs.getDouble("price");
                     int quantity = rs.getInt("quantity");
                     String imageURL = rs.getString("image");
-                    String status = rs.getString("status");
-                    Product x = new Product(productID, productName, description, category, brand, price, quantity, imageURL, status);
+                    int discount = rs.getInt("discount");
+                    Product x = new Product(productID, productName, description, category, brand, price, quantity, imageURL, discount);
                     t.add(x);
                 }
             }
@@ -131,8 +131,8 @@ public class ProductDAO extends MyDAO {
                     double price = rs.getDouble("price");
                     int quantity = rs.getInt("quantity");
                     String imageURL = rs.getString("image");
-                    String status = rs.getString("status");
-                    Product x = new Product(productID, productName, description, category, brand, price, quantity, imageURL, status);
+                    int discount = rs.getInt("discount");
+                    Product x = new Product(productID, productName, description, category, brand, price, quantity, imageURL, discount);
                     t.add(x);
                 }
             }
@@ -163,8 +163,8 @@ public class ProductDAO extends MyDAO {
                     double price = rs.getDouble("price");
                     int quantity = rs.getInt("quantity");
                     String imageURL = rs.getString("image");
-                    String status = rs.getString("status");
-                    Product x = new Product(productID, productName, description, category, brand, price, quantity, imageURL, status);
+                    int discount = rs.getInt("discount");
+                    Product x = new Product(productID, productName, description, category, brand, price, quantity, imageURL, discount);
                     t.add(x);
                 }
             }
@@ -188,7 +188,7 @@ public class ProductDAO extends MyDAO {
             ps.setDouble(5, x.getPrice());
             ps.setInt(6, x.getQuantity());
             ps.setString(7, x.getImageURL());
-            ps.setString(8, x.getStatus());
+            ps.setInt(8, x.getDiscount());
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
@@ -223,8 +223,8 @@ public class ProductDAO extends MyDAO {
             ps.setDouble(5, x.getPrice());
             ps.setInt(6, x.getQuantity());
             ps.setString(7, x.getImageURL());
-            ps.setString(8, x.getStatus());
-            ps.setInt(8, x.getProductID());
+            ps.setInt(8, x.getDiscount());
+            ps.setInt(9, x.getProductID());
 
             ps.executeUpdate();
             ps.close();
