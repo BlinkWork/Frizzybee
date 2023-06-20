@@ -1,5 +1,8 @@
-package com.frizzybee.controllers;
+package database;
 
+import database.CategoryDAO;
+import database.BrandDAO;
+import database.MyDAO;
 import java.util.*;
 import java.sql.*;
 import com.frizzybee.model.Product;

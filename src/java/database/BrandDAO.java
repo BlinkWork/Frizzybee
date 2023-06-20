@@ -1,5 +1,6 @@
-package com.frizzybee.controllers;
+package database;
 
+import database.MyDAO;
 import java.util.*;
 import java.sql.*;
 import com.frizzybee.model.User;
@@ -33,11 +34,7 @@ public class BrandDAO extends MyDAO {
     }
 
     public Brand getBrandByID(String ID) {
-<<<<<<< HEAD:src/java/database/BrandDAO.java
         xSql = "select * from [dbo].[Brand] where id = ?";
-=======
-        xSql = "select * from \"User\" where id = ?";
->>>>>>> ae6ce6ebea6551d8f7083cc1e9690c83528aaa04:src/java/com/frizzybee/controllers/BrandDAO.java
         Brand x = null;
         try {
             ps = con.prepareStatement(xSql);

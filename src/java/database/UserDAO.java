@@ -1,8 +1,8 @@
 package database;
 
+import com.frizzybee.model.User;
 import java.util.*;
 import java.sql.*;
-import model.User;
 import java.sql.Date;
 
 public class UserDAO extends MyDAO {

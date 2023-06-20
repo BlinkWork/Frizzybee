@@ -1,5 +1,6 @@
-package com.frizzybee.controllers;
+package database;
 
+import database.MyDAO;
 import java.util.*;
 import java.sql.*;
 import com.frizzybee.model.Rating;
