@@ -32,18 +32,14 @@ document.querySelector('.signin-form').addEventListener('submit', function (even
     passwordError.style = 'color: #FFFFFF; width: 200px; padding: 10px; background-color:#C40000; position: absolute; left: 80%; bottom: 30px; border-radius: 20px';
     passwordInput.parentNode.insertBefore(passwordError, passwordInput.nextSibling);
   }
+  document.getElementById('check_input').textContent = "";
   if (usernameInput.value != "" && passwordInput.value != "") {
-    let errorElement = document.createElement('div');
-    if (check_input.classList.contains("check_input_false")) {
-      // Thêm phần tử HTML thông báo lỗi vào trước ô mật khẩu
-      let submitBtn = document.querySelector('.submit');
 
-      errorElement.classList.add('invalid--input');
-      errorElement.textContent = 'Tên tài khoản hoặc mật khẩu sai';
-      submitBtn.parentNode.insertBefore(errorElement, submitBtn);
+    if (check_input.classList.contains("check_input_false")) {
+      document.getElementById('check_input').textContent = "Username or password is wrong";
     }
     if (check_input.classList.contains("check_input_true")) {
-      document.querySelector(".invalid--input").remove();
+      document.getElementById('check_input').textContent = "";
     }
   }
 });
