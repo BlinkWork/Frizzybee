@@ -108,10 +108,10 @@
                   </a>
                 </li>
                 <li class="nav-item loginBtn">
-                  <a class="nav-link" href="./views/login.jsp">Log in</a>
+                  <a class="nav-link" href="./login.jsp">Log in</a>
                 </li>
                 <li class="nav-item loginBtn">
-                  <a class="nav-link" href="./views/login.jsp">Sign in</a>
+                  <a class="nav-link" href="./login.jsp">Sign in</a>
                 </li>
               </ul>
             </div>
