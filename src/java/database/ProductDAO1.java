@@ -1,14 +1,22 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package database;
 
-import java.util.*;
-import java.sql.*;
-import model.Product;
-import java.sql.Date;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import model.Brand;
 import model.Category;
+import model.Product;
 
-public class ProductDAO extends MyDAO {
-
+/**
+ *
+ * @author Admin
+ */
+public class ProductDAO1 extends MyDAO{
+    
     public List<Product> getProducts() {
         List<Product> t = new ArrayList<>();
         xSql = "SELECT *  FROM [dbo].[Product]";

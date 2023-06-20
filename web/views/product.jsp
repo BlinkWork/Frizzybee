@@ -21,36 +21,7 @@
     <link rel="stylesheet" type="text/css" href="../resources/css/style.css">
     <!--responsive style--> 
     <link href="../resources/css/responsive.css" type="text/css" rel="stylesheet" />
-
-    <style>
-      .filter {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        margin-bottom: 20px;
-      }
-
-      .filter .category,
-      .filter .department,
-      .filter .tag {
-        margin-right: 20px;
-      }
-
-      .filter h3 {
-        font-size: 16px;
-        margin-bottom: 10px;
-      }
-
-      .filter label {
-        display: block;
-        margin-bottom: 5px;
-      }
-
-      .filter input[type="checkbox"] {
-        margin-right: 5px;
-      }
-    </style>
-
+    <link href="../resources/css/product.css" type="text/css" rel="stylesheet" />
   </head>
 
   <body class="sub_page">
@@ -228,7 +199,25 @@
                 <label for="discounted"><input type="checkbox" id="discounted" name="tag" value="discounted"> Discounted</label>
               </div>
 
-              <button type="submit" class="btn-box" style="padding: 0">
+              <div class="slider-wrapper">
+                <div class="values">
+                  <span id="range1">
+                    0
+                  </span>
+                  <span> &dash; </span>
+                  <span id="range2">
+                    100
+                  </span>
+                </div>
+                <div class="slider-range">
+                  <div class="slider-track"></div>
+                  <input type="range" min="0" max="100000000" value="0" id="slider-1" oninput="slideOne()">
+                  <input type="range" min="0" max="100000000" value="100000000" id="slider-2" oninput="slideTwo()">
+                </div>
+              </div>
+
+
+              <button type="submit" class="btn-box submitBtn" style="padding: 0">
                 <a style="width:100%; font-size: 15px">
                   Filter
                 </a>
@@ -566,11 +555,15 @@
             </div>
           </div>
         </div>
-        <div class="btn-box">
-          <a href="">
-            View All products
-          </a>
-        </div>
+        <nav aria-label="Page navigation">
+          <ul class="pagination justify-content-center" style="gap: 10px;">
+            <li class="page-item"><a class="page-link" href="./product.jsp?page=1">1</a></li>
+            <li class="page-item"><a class="page-link" href="./product.jsp?page=2">2</a></li>
+            <li class="page-item"><a class="page-link" href="./product.jsp?page=3">3</a></li>
+            <li class="page-item"><a class="page-link" href="./product.jsp?page=4">4</a></li>
+            <li class="page-item"><a class="page-link" href="./product.jsp?page=5">5</a></li>
+          </ul>
+        </nav>
       </div>
     </section>
     <!-- end product section -->
@@ -663,6 +656,13 @@
     <!--custom js--> 
     <script src="../resources/js/custom.js"></script>
     <script src="../resources/js/script.js"></script>
+    <script src="../resources/js/product.js"></script>
+<!--    <script>
+      document.querySelector('.submitBtn').addEventListener("click", function () {
+        let range = sliderTwo.value - sliderOne.value;
+        console.log(range);
+      })
+    </script>-->
   </body>
 
 </html>
