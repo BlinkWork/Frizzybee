@@ -183,7 +183,7 @@
               <div class="menu">
                 <nav>
                   <ul>
-                    <li><a href="#">Home</a></li>
+                    <li><a href="../index.jsp">Home</a></li>
                     <li><a href="./about.jsp">About</a></li>
                     <li><a href="./shop.jsp">Shop</a></li>
                     <li><a href="./privacy-policy.jsp">Privacy Policy</a></li>
