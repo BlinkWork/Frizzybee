@@ -319,7 +319,20 @@
     <section class="hero-area">
       <div class="hero-area-full owl-carousel">
         <!-- Single -->
-        <div class="hero-slider-single" style="background-image: url('./resources/img/slider1.jpg');">
+        <div class="hero-slider-single" style="background-image: url('./resources/img/redsentai.png');">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="hero-slider-single-content" style="float:right;">
+                  <h2>Leading Hand Tools <span>Manufacturer</span></h2>
+                  <p>Ostromi Is A Specialist Of Hand Tools Which Are</p>
+                  <a class="button-1" href="shop.jsp">Shop Now</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-slider-single" style="background-image: url('./resources/img/yellowsentai.png');">
           <div class="container">
             <div class="row">
               <div class="col-lg-12">
@@ -333,7 +346,7 @@
           </div>
         </div>
         <!-- Single -->
-        <div class="hero-slider-single" style="background-image: url('./resources/img/slider2.jpg');">
+        <div class="hero-slider-single" style="background-image: url('./resources/img/bluesentai.png');">
           <div class="container">
             <div class="row">
               <div class="col-lg-12">
