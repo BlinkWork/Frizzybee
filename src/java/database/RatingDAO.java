@@ -38,7 +38,7 @@ public class RatingDAO extends MyDAO {
     }
 
     public Rating getRatingByProductID(String productID) {
-        xSql = "select * from Rating where product_id = ?";
+        xSql = "select * from [dbo].[Rating] where product_id = ?";
         Rating x = null;
         try {
             ps = con.prepareStatement(xSql);
@@ -86,7 +86,7 @@ public class RatingDAO extends MyDAO {
     }
 
     public void deleteByID(String ID) {
-        xSql = "delete from Rating where [RatingID]=?";
+        xSql = "delete from [dbo].[Rating] where [RatingID]=?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, ID);

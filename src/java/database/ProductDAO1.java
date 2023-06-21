@@ -1,13 +1,21 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package database;
 
-import java.util.*;
-import java.sql.*;
-import model.Product;
-import java.sql.Date;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import model.Brand;
 import model.Category;
+import model.Product;
 
-public class ProductDAO extends MyDAO {
+/**
+ *
+ * @author Admin
+ */
+public class ProductDAO1 extends MyDAO {
 
   public List<Product> getProducts() {
     List<Product> t = new ArrayList<>();
@@ -277,23 +285,22 @@ public class ProductDAO extends MyDAO {
   }
 
   public static void main(String[] args) {
-        ProductDAO dao = new ProductDAO();
-    //    CategoryDAO ctdao = new CategoryDAO();
-    //    BrandDAO bdao = new BrandDAO();
-    //    ctdao.insert(new Category(0, "t"));
-    //    bdao.insert(new Brand(0, "nn"));
-    //    dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
-    //    dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
-    //    dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
-    //    dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
-    //    dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
-    //    dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
-    //    dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
-    //    dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
+    ProductDAO dao = new ProductDAO();
+    CategoryDAO cdao = new CategoryDAO();
+    BrandDAO bdao = new BrandDAO();
+    cdao.insert(new Category(1, "ao"));
+    bdao.insert(new Brand(1, "hm"));
+    dao.insert(new Product(1, "Menkirt", "dep", cdao.getCategoryByName("ao"), bdao.getBrandByName("hm"), 75, 20, "ch co", 10));
+    dao.insert(new Product(2, "Mqwdenirt", "desp", cdao.getCategoryByName("ao"), bdao.getBrandByName("hm"), 75, 20, "ch co", 10));
+    dao.insert(new Product(3, "Meqewqt", "deap", cdao.getCategoryByName("ao"), bdao.getBrandByName("hm"), 75, 20, "ch co", 10));
+    dao.insert(new Product(4, "sadqwnirt", "daep", cdao.getCategoryByName("ao"), bdao.getBrandByName("hm"), 75, 20, "ch co", 10));
+    dao.insert(new Product(6, "Mqqweqwt", "qdep", cdao.getCategoryByName("ao"), bdao.getBrandByName("hm"), 75, 20, "ch co", 10));
+    dao.insert(new Product(7, "Meqwert", "deap", cdao.getCategoryByName("ao"), bdao.getBrandByName("hm"), 75, 20, "ch co", 10));
+    dao.insert(new Product(8, "Mqweqweqrt", "dsep", cdao.getCategoryByName("ao"), bdao.getBrandByName("hm"), 75, 20, "ch co", 10));
+    dao.insert(new Product(9, "Mqweqqwekirt", "daep", cdao.getCategoryByName("ao"), bdao.getBrandByName("hm"), 75, 20, "ch co", 10));
+    dao.insert(new Product(10, "Mqweqwert", "desp", cdao.getCategoryByName("ao"), bdao.getBrandByName("hm"), 75, 20, "ch co", 10));
+    dao.insert(new Product(11, "Mqweirt", "deap", cdao.getCategoryByName("ao"), bdao.getBrandByName("hm"), 75, 20, "ch co", 10));
 
-    List<Product> temp = dao.getProducts();
-    for(Product test : temp){
-      System.out.println(test.getProductName());
-    }
   }
+
 }
