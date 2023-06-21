@@ -1,3 +1,5 @@
+<%@page import="database.*, java.util.List, model.*" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
@@ -168,7 +170,7 @@
                     <a href="shop-list.jsp"><i class="fa fa-list"></i></a>
                   </div>
                   <div class="product-amount">
-                    <p>Showing 1–16 of 21 results</p>
+                    <p>Showing 9 of 21 results</p>
                   </div>
                 </div>
               </div>
@@ -185,6 +187,24 @@
             </div>
             <!-- Shop -->
             <div class="row">
+
+              <%  
+              String spageid=request.getParameter("page");  
+              int pageid=Integer.parseInt(spageid);  
+              System.out.print(pageid + " ");
+
+              int total=9;  
+              pageid=pageid*total+1;  
+
+              System.out.println(pageid);
+                      ProductDAO dao = new ProductDAO();
+
+//List<Product> temp = dao.getProductsByPage(1, 10);
+//    for(Product test : temp){
+//      System.out.println(test.getProductName());
+//    }
+              %>
+
               <!-- Product Single -->
               <div class="col-lg-4 col-md-4 col-sm-6 mb-30">
                 <div class="product-single">
@@ -503,9 +523,9 @@
               <h4 class="title">Recent Post</h4>
               <ul>
                 <li><a href="#">Gallery Post with Supported Animation</a></li>
-                <li><a href="#">Announcement – Standard Post without Image</a></li>
-                <li><a href="#">We’re the best Designers from UK</a></li>
-                <li><a href="#">A Beautiful Day – Standard Post with Image</a></li>
+                <li><a href="#">Announcement â Standard Post without Image</a></li>
+                <li><a href="#">Weâre the best Designers from UK</a></li>
+                <li><a href="#">A Beautiful Day â Standard Post with Image</a></li>
               </ul>
             </div>
           </div>

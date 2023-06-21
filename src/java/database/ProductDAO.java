@@ -293,6 +293,11 @@ public class ProductDAO extends MyDAO {
 
     List<Product> temp = dao.getProducts();
     for(Product test : temp){
+      System.out.println(test);
+    }
+    
+    temp = dao.getProductsByPage(1, 3);
+    for(Product test : temp){
       System.out.println(test.getProductName());
     }
   }
