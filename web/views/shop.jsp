@@ -1,4 +1,4 @@
-<%@page import="database.*, java.util.List, model.*" %>
+<%@page import="database.*, java.util.List, model.*, java.io.IOException" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -8,19 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>BulkShop - Electronics Shop HTML Template | Shop</title>
-    <link rel="icon" href="../resources/img/icon.png" type="image/gif" sizes="16x16">
-    <link rel="icon" href="../resources/img/icon.png" type="image/gif" sizes="18x18">
-    <link rel="icon" href="../resources/img/icon.png" type="image/gif" sizes="20x20">
+    <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="16x16">
+    <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="18x18">
+    <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="20x20">
 
-    <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../resources/css/fontawesome.all.min.css">
-    <link rel="stylesheet" href="../resources/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../resources/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="../resources/css/animate.css">
-    <link rel="stylesheet" href="../resources/css/magnific-popup.css">
-    <link rel="stylesheet" href="../resources/css/normalize.css">
-    <link rel="stylesheet" href="../resources/css/style.css">
-    <link rel="stylesheet" href="../resources/css/responsive.css">
+    <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./resources/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="./resources/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="./resources/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="./resources/css/animate.css">
+    <link rel="stylesheet" href="./resources/css/magnific-popup.css">
+    <link rel="stylesheet" href="./resources/css/normalize.css">
+    <link rel="stylesheet" href="./resources/css/style.css">
+    <link rel="stylesheet" href="./resources/css/responsive.css">
 
   </head>
 
@@ -41,12 +41,12 @@
             <a href="javascript:void(0)"><i class="fas fa-times"></i></a>
           </div>
           <div class="mobile-logo">
-            <h2><a href="../index.jsp"><img src="../resources/img/logo.png"></a></h2>
+            <h2><a href="./index.jsp"><img src="./resources/img/logo.png"></a></h2>
           </div>
           <div id="menu" class="text-left ">
             <ul class="offcanvas_main_menu">
               <li class="menu-item-has-children">
-                <a href="../index.jsp">Home</a>
+                <a href="./index.jsp">Home</a>
               </li>
               <li class="menu-item-has-children">
                 <a href="about.jsp">about Us</a>
@@ -139,14 +139,14 @@
     <!--offcanvas menu area end-->
     <!-- End Mobile Menu Area -->
     <!-- Start BreadCrumb Area -->
-    <div class="breadcrumb-area pt-100 pb-100" style="background-image: url('../resources/img/breadcrumb.jpg');">
+    <div class="breadcrumb-area pt-100 pb-100" style="background-image: url('./resources/img/breadcrumb.jpg');">
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
             <div class="breadcrumb-content">
               <h2>Shop</h2>
               <ul>
-                <li><a href="../index.jsp">Home</a></li>
+                <li><a href="./index.jsp">Home</a></li>
                 <li class="active">Shop</li>
               </ul>
             </div>
@@ -186,30 +186,72 @@
               </div>
             </div>
             <!-- Shop -->
+
+            <%!
+              public void printHTML(Product product, JspWriter out) throws IOException {
+                out.println(
+                  "<div class='col-lg-4 col-md-4 col-sm-6 mb-30'>"
+                    + "<div class='product-single'>"
+                      + "<div class='product-thumbnail'>"
+                        + "<a href='product-details.jsp'><img src='../resources/img/product/1.jpg' alt='product'></a>"
+                        + "<div class='product-thumbnail-overly'>"
+                          + "<ul>"
+                            + "<li><a href='cart.jsp'><i class='fas fa-shopping-cart'></i></a></li>"
+                            + "<li><a href='wishlist.jsp'><i class='far fa-heart'></i></a></li>"
+                            + "<li><a href='#'><i class='far fa-eye'></i></a></li>"
+                          + "</ul>"
+                        + "</div>"
+                      + "</div>"
+                      + "<div class='product-content'>"
+                        + "<h4><a href='product-details.jsp'>Funda Para Ebook 7' 128GB full HD</a></h4>"
+                        + "<div class='pricing'>"
+                          + "<span>$200 <del>$210</del></span>"
+                        + "</div>"
+                      + "</div>"
+                    + "</div>"
+                  + "</div>");
+              }
+            %>
+
+            <%
+                List<Product> listProduct = (List<Product>) request.getAttribute("listProduct");
+                for(int i = 0; i < listProduct.size(); i+=3){
+                  out.println("<div class='row'>");
+                  printHTML(listProduct.get(i), out);
+                  printHTML(listProduct.get(i+1), out);
+                  printHTML(listProduct.get(i+2), out);
+                  out.println("</div>");
+                }
+            %>
+
             <div class="row">
+              <!-- Product Single -->
+              <div class="col-lg-4 col-md-4 col-sm-6 mb-30">
+                <div class="product-single">
+                  <div class="product-thumbnail">
+                    <a href="product-details.jsp"><img src="./resources/img/product/1.jpg" alt="product"></a>
+                    <div class="product-thumbnail-overly">
+                      <ul>
+                        <li><a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a></li>
+                        <li><a href="wishlist.jsp"><i class="far fa-heart"></i></a></li>
+                        <li><a href="#"><i class="far fa-eye"></i></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="product-content">
+                    <h4><a href="product-details.jsp">Funda Para Ebook 7" 128GB full HD</a></h4>
+                    <div class="pricing">
+                      <span>$200 <del>$210</del></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              <%  
-              String spageid=request.getParameter("page");  
-              int pageid=Integer.parseInt(spageid);  
-              System.out.print(pageid + " ");
-
-              int total=9;  
-              pageid=pageid*total+1;  
-
-              System.out.println(pageid);
-                      ProductDAO dao = new ProductDAO();
-
-//List<Product> temp = dao.getProductsByPage(1, 10);
-//    for(Product test : temp){
-//      System.out.println(test.getProductName());
-//    }
-              %>
-
               <!-- Product Single -->
               <div class="col-lg-4 col-md-4 col-sm-6 mb-30">
                 <div class="product-single">
                   <div class="product-thumbnail">
-                    <a href="product-details.jsp"><img src="../resources/img/product/1.jpg" alt="product"></a>
+                    <a href="product-details.jsp"><img src="./resources/img/product/8.jpg" alt="product"></a>
                     <div class="product-thumbnail-overly">
                       <ul>
                         <li><a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a></li>
@@ -230,7 +272,7 @@
               <div class="col-lg-4 col-md-4 col-sm-6 mb-30">
                 <div class="product-single">
                   <div class="product-thumbnail">
-                    <a href="product-details.jsp"><img src="../resources/img/product/8.jpg" alt="product"></a>
+                    <a href="product-details.jsp"><img src="./resources/img/product/2.jpg" alt="product"></a>
                     <div class="product-thumbnail-overly">
                       <ul>
                         <li><a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a></li>
@@ -251,7 +293,7 @@
               <div class="col-lg-4 col-md-4 col-sm-6 mb-30">
                 <div class="product-single">
                   <div class="product-thumbnail">
-                    <a href="product-details.jsp"><img src="../resources/img/product/2.jpg" alt="product"></a>
+                    <a href="product-details.jsp"><img src="./resources/img/product/4.jpg" alt="product"></a>
                     <div class="product-thumbnail-overly">
                       <ul>
                         <li><a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a></li>
@@ -272,7 +314,7 @@
               <div class="col-lg-4 col-md-4 col-sm-6 mb-30">
                 <div class="product-single">
                   <div class="product-thumbnail">
-                    <a href="product-details.jsp"><img src="../resources/img/product/4.jpg" alt="product"></a>
+                    <a href="product-details.jsp"><img src="./resources/img/product/5.jpg" alt="product"></a>
                     <div class="product-thumbnail-overly">
                       <ul>
                         <li><a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a></li>
@@ -293,7 +335,7 @@
               <div class="col-lg-4 col-md-4 col-sm-6 mb-30">
                 <div class="product-single">
                   <div class="product-thumbnail">
-                    <a href="product-details.jsp"><img src="../resources/img/product/5.jpg" alt="product"></a>
+                    <a href="product-details.jsp"><img src="./resources/img/product/6.jpg" alt="product"></a>
                     <div class="product-thumbnail-overly">
                       <ul>
                         <li><a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a></li>
@@ -314,7 +356,7 @@
               <div class="col-lg-4 col-md-4 col-sm-6 mb-30">
                 <div class="product-single">
                   <div class="product-thumbnail">
-                    <a href="product-details.jsp"><img src="../resources/img/product/6.jpg" alt="product"></a>
+                    <a href="product-details.jsp"><img src="./resources/img/product/7.jpg" alt="product"></a>
                     <div class="product-thumbnail-overly">
                       <ul>
                         <li><a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a></li>
@@ -335,7 +377,7 @@
               <div class="col-lg-4 col-md-4 col-sm-6 mb-30">
                 <div class="product-single">
                   <div class="product-thumbnail">
-                    <a href="product-details.jsp"><img src="../resources/img/product/7.jpg" alt="product"></a>
+                    <a href="product-details.jsp"><img src="./resources/img/product/8.jpg" alt="product"></a>
                     <div class="product-thumbnail-overly">
                       <ul>
                         <li><a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a></li>
@@ -356,28 +398,7 @@
               <div class="col-lg-4 col-md-4 col-sm-6 mb-30">
                 <div class="product-single">
                   <div class="product-thumbnail">
-                    <a href="product-details.jsp"><img src="../resources/img/product/8.jpg" alt="product"></a>
-                    <div class="product-thumbnail-overly">
-                      <ul>
-                        <li><a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a></li>
-                        <li><a href="wishlist.jsp"><i class="far fa-heart"></i></a></li>
-                        <li><a href="#"><i class="far fa-eye"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="product-content">
-                    <h4><a href="product-details.jsp">Funda Para Ebook 7" 128GB full HD</a></h4>
-                    <div class="pricing">
-                      <span>$200 <del>$210</del></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- Product Single -->
-              <div class="col-lg-4 col-md-4 col-sm-6 mb-30">
-                <div class="product-single">
-                  <div class="product-thumbnail">
-                    <a href="product-details.jsp"><img src="../resources/img/product/9.jpg" alt="product"></a>
+                    <a href="product-details.jsp"><img src="./resources/img/product/9.jpg" alt="product"></a>
                     <div class="product-thumbnail-overly">
                       <ul>
                         <li><a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a></li>
@@ -401,13 +422,13 @@
                 <div class="page-pagination text-center">
                   <ul>
                     <!--<li class="page-item"><a href="#"><i class="fa fa-angle-left"></i></a></li>-->
-                    <li class="page-item"><a href="./shop.jsp?page=1">1</a></li>
-                    <li class="page-item"><a href="./shop.jsp?page=2">2</a></li>
-                    <li class="page-item"><a href="./shop.jsp?page=3">3</a></li>
-                    <li class="page-item"><a href="./shop.jsp?page=4">4</a></li>
-                    <li class="page-item"><a href="./shop.jsp?page=5">5</a></li>
-                    <li class="page-item"><a href="./shop.jsp?page=6">6</a></li>
-                    <li class="page-item"><a href="./shop.jsp?page=7">7</a></li>
+                    <li class="page-item"><a href="./shop?page=1">1</a></li>
+                    <li class="page-item"><a href="./shop?page=2">2</a></li>
+                    <li class="page-item"><a href="./shop?page=3">3</a></li>
+                    <li class="page-item"><a href="./shop?page=4">4</a></li>
+                    <li class="page-item"><a href="./shop?page=5">5</a></li>
+                    <li class="page-item"><a href="./shop?page=6">6</a></li>
+                    <li class="page-item"><a href="./shop?page=7">7</a></li>
                     <!--<li class="page-item"><a href="#"><i class="fa fa-angle-right"></i></a></li>-->
                   </ul>
                 </div>
@@ -420,7 +441,7 @@
             <div class="sidebar-widgets">
               <h4 class="title">Search</h4>
               <form action="#">
-                <input type="search" name="search" placeholder="Search Here..">
+                <input type="search" name="search" placeholder="Search Here.">
                 <button type="submit"><i class="fas fa-search"></i></button>
               </form>
             </div>
@@ -432,7 +453,7 @@
                 <div class="widgets-latest-product-single mb-30">
                   <div class="thumbanil">
                     <a href="#">
-                      <img src="../resources/img/product/1.jpg" alt="Products">
+                      <img src="./resources/img/product/1.jpg" alt="Products">
                     </a>
                   </div>
                   <div class="content">
@@ -453,7 +474,7 @@
                 <div class="widgets-latest-product-single mb-30">
                   <div class="thumbanil">
                     <a href="#">
-                      <img src="../resources/img/product/2.jpg" alt="Products">
+                      <img src="./resources/img/product/2.jpg" alt="Products">
                     </a>
                   </div>
                   <div class="content">
@@ -474,7 +495,7 @@
                 <div class="widgets-latest-product-single mb-30">
                   <div class="thumbanil">
                     <a href="#">
-                      <img src="../resources/img/product/3.jpg" alt="Products">
+                      <img src="./resources/img/product/3.jpg" alt="Products">
                     </a>
                   </div>
                   <div class="content">
@@ -544,18 +565,18 @@
 
 
     <!-- Js File -->
-    <script src="../resources/js/modernizr.min.js"></script>
-    <script src="../resources/js/jquery-3.5.1.min.js"></script>
-    <script src="../resources/js/popper.min.js"></script>
-    <script src="../resources/js/bootstrap.min.js"></script>
-    <script src="../resources/js/owl.carousel.min.js"></script>
-    <script src="../resources/js/jquery.nav.min.js"></script>
-    <script src="../resources/js/jquery.magnific-popup.min.js"></script>
-    <script src="../resources/js/mixitup.min.js"></script>
-    <script src="../resources/js/wow.min.js"></script>
-    <script src="../resources/js/script.js"></script>
-    <script src="../resources/js/mobile-menu.js"></script>
-    <script src="../resources/js/shop.js"></script>
+    <script src="./resources/js/modernizr.min.js"></script>
+    <script src="./resources/js/jquery-3.5.1.min.js"></script>
+    <script src="./resources/js/popper.min.js"></script>
+    <script src="./resources/js/bootstrap.min.js"></script>
+    <script src="./resources/js/owl.carousel.min.js"></script>
+    <script src="./resources/js/jquery.nav.min.js"></script>
+    <script src="./resources/js/jquery.magnific-popup.min.js"></script>
+    <script src="./resources/js/mixitup.min.js"></script>
+    <script src="./resources/js/wow.min.js"></script>
+    <script src="./resources/js/script.js"></script>
+    <script src="./resources/js/mobile-menu.js"></script>
+    <script src="./resources/js/shop.js"></script>
 
   </body>
 

@@ -292,14 +292,14 @@ public class ProductDAO extends MyDAO {
         dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
         dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
 
-        List<Product> temp = dao.getProducts();
+//        List<Product> temp = dao.getProducts();
 //        for (Product test : temp) {
 //            System.out.println(test.getProductName());
 //        }
 
-        temp = dao.getProductsByPage(0, 3);
-        for (Product test : temp) {
-            System.out.println(test.getProductName());
-        }
+//        List<Product> temp = dao.getProductsByPage(0, 3);
+//        for (Product test : temp) {
+//            System.out.println(test.getProductName());
+//        }
     }
 }
