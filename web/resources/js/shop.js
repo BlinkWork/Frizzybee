@@ -1,6 +1,6 @@
 const urlParams = new URLSearchParams(window.location.search);
 let currentPage = urlParams.get('page');
-console.log(currentPage);
+
 if (currentPage == null) {
   currentPage = 1;
 }
