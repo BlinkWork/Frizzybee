@@ -380,12 +380,15 @@
               <div class="col-12 mb-30">
                 <div class="page-pagination text-center">
                   <ul>
-                    <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><span>3</span></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                    <!--<li class="page-item"><a href="#"><i class="fa fa-angle-left"></i></a></li>-->
+                    <li class="page-item"><a href="./shop.jsp?page=1">1</a></li>
+                    <li class="page-item"><a href="./shop.jsp?page=2">2</a></li>
+                    <li class="page-item"><a href="./shop.jsp?page=3">3</a></li>
+                    <li class="page-item"><a href="./shop.jsp?page=4">4</a></li>
+                    <li class="page-item"><a href="./shop.jsp?page=5">5</a></li>
+                    <li class="page-item"><a href="./shop.jsp?page=6">6</a></li>
+                    <li class="page-item"><a href="./shop.jsp?page=7">7</a></li>
+                    <!--<li class="page-item"><a href="#"><i class="fa fa-angle-right"></i></a></li>-->
                   </ul>
                 </div>
               </div>
@@ -532,6 +535,8 @@
     <script src="../resources/js/wow.min.js"></script>
     <script src="../resources/js/script.js"></script>
     <script src="../resources/js/mobile-menu.js"></script>
+    <script src="../resources/js/shop.js"></script>
+
   </body>
 
 </html>
