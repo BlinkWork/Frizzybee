@@ -13,19 +13,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>BulkShop - Electronics Shop HTML Template | Home</title>
-    <link rel="icon" href="../resources/img/icon.png" type="image/gif" sizes="16x16">
-    <link rel="icon" href="../resources/img/icon.png" type="image/gif" sizes="18x18">
-    <link rel="icon" href="../resources/img/icon.png" type="image/gif" sizes="20x20">
+    <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="16x16">
+    <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="18x18">
+    <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="20x20">
 
-    <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../resources/css/fontawesome.all.min.css">
-    <link rel="stylesheet" href="../resources/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../resources/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="../resources/css/animate.css">
-    <link rel="stylesheet" href="../resources/css/magnific-popup.css">
-    <link rel="stylesheet" href="../resources/css/normalize.css">
-    <link rel="stylesheet" href="../resources/css/style.css">
-    <link rel="stylesheet" href="../resources/css/responsive.css">
+    <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./resources/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="./resources/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="./resources/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="./resources/css/animate.css">
+    <link rel="stylesheet" href="./resources/css/magnific-popup.css">
+    <link rel="stylesheet" href="./resources/css/normalize.css">
+    <link rel="stylesheet" href="./resources/css/style.css">
+    <link rel="stylesheet" href="./resources/css/responsive.css">
 
   </head>
 
@@ -60,9 +60,9 @@
             </div>
             <div class="col-lg-7">
               <div class="top-list">
-                <a href="#"><i class="fas fa-mobile-alt"></i> +02456 054546</a>
-                <a href="./wishlist.jsp"><i class="far fa-heart"></i> Wishlist</a>
-                <a href="./login.jsp"><i class="fas fa-user"></i> Login / Register</a>
+                <a href="./views/contact.jsp"><i class="fas fa-mobile-alt"></i> +02456 054546</a>
+                <a href="./views/wishlist.jsp"><i class="far fa-heart"></i> Wishlist</a>
+                <a href="./views/login.jsp"><i class="fas fa-user"></i> Login / Register</a>
               </div>
             </div>
           </div>
@@ -75,7 +75,7 @@
             <!-- Logo -->
             <div class="col-lg-2">
               <div class="logo">
-                <h2><a href="../index.jsp"><img src="../resources/img/logo.png"></a></h2>
+                <h2><a href="./index.jsp"><img src="./resources/img/logo.png"></a></h2>
               </div>
             </div>
             <!-- Search Bar -->
@@ -110,14 +110,14 @@
                       <ul class="cart-list-full">
                         <!-- Single -->
                         <li class="cart-list-single">
-                          <img src="../resources/img/product/1.jpg" alt="img">
+                          <img src="./resources/img/product/1.jpg" alt="img">
                           <h5><a href="#">simple product</a></h5>
                           <span class="price">$120</span>
                           <div class="close"><i class="fas fa-times"></i></div>
                         </li>
                         <!-- Single -->
                         <li class="cart-list-single">
-                          <img src="../resources/img/product/2.jpg" alt="img">
+                          <img src="./resources/img/product/2.jpg" alt="img">
                           <h5><a href="#">simple product</a></h5>
                           <span class="price">$120</span>
                           <div class="close"><i class="fas fa-times"></i></div>
@@ -142,7 +142,7 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="logo-2">
-                <h2><a href="../index.jsp"><img src="../resources/img/logo.png"></a></h2>
+                <h2><a href="./index.jsp"><img src="./resources/img/logo.png"></a></h2>
               </div>
               <div class="canvas_open">
                 <a href="javascript:void(0)"><i class="fas fa-bars"></i></a>
@@ -158,14 +158,14 @@
                       <ul class="cart-list-full">
                         <!-- Single -->
                         <li class="cart-list-single">
-                          <img src="../resources/img/product/1.jpg" alt="img">
+                          <img src="./resources/img/product/1.jpg" alt="img">
                           <h5><a href="#">simple product</a></h5>
                           <span class="price">$120</span>
                           <div class="close"><i class="fas fa-times"></i></div>
                         </li>
                         <!-- Single -->
                         <li class="cart-list-single">
-                          <img src="../resources/img/product/2.jpg" alt="img">
+                          <img src="./resources/img/product/2.jpg" alt="img">
                           <h5><a href="#">simple product</a></h5>
                           <span class="price">$120</span>
                           <div class="close"><i class="fas fa-times"></i></div>
@@ -183,12 +183,12 @@
               <div class="menu">
                 <nav>
                   <ul>
-                    <li><a href="../index.jsp">Home</a></li>
-                    <li><a href="./about.jsp">About</a></li>
-                    <li><a href="../shop">Shop</a></li>
-                    <li><a href="./privacy-policy.jsp">Privacy Policy</a></li>
-                    <li><a href="./faq.jsp">Faq</a></li>
-                    <li><a href="./contact.jsp">Contact</a></li>
+                    <li><a href="./index.jsp">Home</a></li>
+                    <li><a href="./views/about.jsp">About</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="./views/privacy-policy.jsp">Privacy Policy</a></li>
+                    <li><a href="./views/faq.jsp">Faq</a></li>
+                    <li><a href="./views/contact.jsp">Contact</a></li>
                   </ul>
                 </nav>
               </div>
@@ -205,17 +205,17 @@
 
 
     <!-- Js File -->
-    <script src="../resources/js/modernizr.min.js"></script>
-    <script src="../resources/js/jquery-3.5.1.min.js"></script>
-    <script src="../resources/js/popper.min.js"></script>
-    <script src="../resources/js/bootstrap.min.js"></script>
-    <script src="../resources/js/owl.carousel.min.js"></script>
-    <script src="../resources/js/jquery.nav.min.js"></script>
-    <script src="../resources/js/jquery.magnific-popup.min.js"></script>
-    <script src="../resources/js/mixitup.min.js"></script>
-    <script src="../resources/js/wow.min.js"></script>
-    <script src="../resources/js/script.js"></script>
-    <script src="../resources/js/mobile-menu.js"></script>
+    <script src="./resources/js/modernizr.min.js"></script>
+    <script src="./resources/js/jquery-3.5.1.min.js"></script>
+    <script src="./resources/js/popper.min.js"></script>
+    <script src="./resources/js/bootstrap.min.js"></script>
+    <script src="./resources/js/owl.carousel.min.js"></script>
+    <script src="./resources/js/jquery.nav.min.js"></script>
+    <script src="./resources/js/jquery.magnific-popup.min.js"></script>
+    <script src="./resources/js/mixitup.min.js"></script>
+    <script src="./resources/js/wow.min.js"></script>
+    <script src="./resources/js/script.js"></script>
+    <script src="./resources/js/mobile-menu.js"></script>
   </body>
 
 </html>

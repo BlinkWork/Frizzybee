@@ -185,7 +185,7 @@
                   <ul>
                     <li><a href="../index.jsp">Home</a></li>
                     <li><a href="./about.jsp">About</a></li>
-                    <li><a href="./shop.jsp">Shop</a></li>
+                    <li><a href="../shop">Shop</a></li>
                     <li><a href="./privacy-policy.jsp">Privacy Policy</a></li>
                     <li><a href="./faq.jsp">Faq</a></li>
                     <li><a href="./contact.jsp">Contact</a></li>

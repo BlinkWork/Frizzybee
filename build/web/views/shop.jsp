@@ -25,7 +25,7 @@
   </head>
 
   <body>
-    <%@include file="../views/components/header_component.jsp" %>
+    <%@include file="../views/servletComponents/header_component.jsp" %>
 
 
     <!-- Start Mobile Menu Area -->
@@ -193,7 +193,7 @@
                   "<div class='col-lg-4 col-md-4 col-sm-6 mb-30'>"
                     + "<div class='product-single'>"
                       + "<div class='product-thumbnail'>"
-                        + "<a href='product-details.jsp'><img src='../resources/img/product/1.jpg' alt='product'></a>"
+                        + "<a href='product-details.jsp'><img src='"+product.getImageURL()+ "' alt='product' style='width:100px;'></a>"
                         + "<div class='product-thumbnail-overly'>"
                           + "<ul>"
                             + "<li><a href='cart.jsp'><i class='fas fa-shopping-cart'></i></a></li>"
@@ -203,7 +203,7 @@
                         + "</div>"
                       + "</div>"
                       + "<div class='product-content'>"
-                        + "<h4><a href='product-details.jsp'>Funda Para Ebook 7' 128GB full HD</a></h4>"
+                        + "<h4><a href='product-details.jsp'>" + product.getProductName() +"</a></h4>"
                         + "<div class='pricing'>"
                           + "<span>$200 <del>$210</del></span>"
                         + "</div>"
@@ -218,13 +218,17 @@
                 for(int i = 0; i < listProduct.size(); i+=3){
                   out.println("<div class='row'>");
                   printHTML(listProduct.get(i), out);
-                  printHTML(listProduct.get(i+1), out);
-                  printHTML(listProduct.get(i+2), out);
+                  if(i + 1 < listProduct.size()){
+                    printHTML(listProduct.get(i+1), out);
+                  }
+                  if(i + 2 < listProduct.size()){
+                    printHTML(listProduct.get(i+2), out);
+                  }
                   out.println("</div>");
                 }
             %>
 
-            <div class="row">
+            <div class="row" hidden="">
               <!-- Product Single -->
               <div class="col-lg-4 col-md-4 col-sm-6 mb-30">
                 <div class="product-single">
@@ -416,6 +420,7 @@
                 </div>
               </div>
             </div>
+            
             <!-- Pagination -->
             <div class="row">
               <div class="col-12 mb-30">

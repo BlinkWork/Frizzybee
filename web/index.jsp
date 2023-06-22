@@ -244,7 +244,7 @@
               <li class="menu-item-has-children">
                 <a href="#">Shop</a>
                 <ul class="sub-menu">
-                  <li><a href="shop.jsp">Shop</a></li>
+                  <li><a href="./shop">Shop</a></li>
                   <li><a href="shop2-columns.jsp">Shop 2 Columns</a></li>
                   <li><a href="shop-grid.jsp">Shop Grid</a></li>
                   <li><a href="shop-left-sidebar.jsp">Shop Left Sidebar</a></li>
@@ -277,7 +277,7 @@
                   <li class="menu-item-has-children">
                     <a href="#">Elements</a>
                     <ul class="sub-menu">
-                      <li><a href="shop.jsp">Element Shop</a></li>
+                      <li><a href="./shop">Element Shop</a></li>
                       <li><a href="shop2-columns.jsp">Element Shop 2 Columns</a></li>
                       <li><a href="shop-grid.jsp">Element Shop Grid</a></li>
                       <li><a href="shop-left-sidebar.jsp">Element Shop Left Sidebar</a></li>
@@ -326,7 +326,7 @@
                 <div class="hero-slider-single-content" style="float:right;">
                   <h2>Leading Hand Tools <span>Manufacturer</span></h2>
                   <p>Ostromi Is A Specialist Of Hand Tools Which Are</p>
-                  <a class="button-1" href="shop.jsp">Shop Now</a>
+                  <a class="button-1" href="./shop">Shop Now</a>
                 </div>
               </div>
             </div>
@@ -339,7 +339,7 @@
                 <div class="hero-slider-single-content">
                   <h2>Leading Hand Tools <span>Manufacturer</span></h2>
                   <p>Ostromi Is A Specialist Of Hand Tools Which Are</p>
-                  <a class="button-1" href="shop.jsp">Shop Now</a>
+                  <a class="button-1" href="./shop">Shop Now</a>
                 </div>
               </div>
             </div>
@@ -353,7 +353,7 @@
                 <div class="hero-slider-single-content">
                   <h2>Leading Hand Tools <span>Manufacturer</span></h2>
                   <p>Ostromi Is A Specialist Of Hand Tools Which Are</p>
-                  <a class="button-1" href="shop.jsp">Shop Now</a>
+                  <a class="button-1" href="./shop">Shop Now</a>
                 </div>
               </div>
             </div>
@@ -1029,7 +1029,7 @@
                 </div>
                 <!-- Singel -->
                 <div class="deal-popular-product-single read-btn">
-                  <a href="shop.jsp">View More +</a>
+                  <a href="./shop">View More +</a>
                 </div>
               </div>
             </div>
@@ -1075,7 +1075,7 @@
                             sit amet consectetur adipisicing elit. We are a team of designers and developers that create
                             high quality HTML template Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate
                             perferendis consequuntur. </p>
-                          <a class="button-1" href="shop.jsp">Shop Now</a>
+                          <a class="button-1" href="./shop">Shop Now</a>
                         </div>
                       </div>
                     </div>
