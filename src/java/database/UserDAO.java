@@ -260,7 +260,7 @@ public class UserDAO extends MyDAO {
 
   public static void main(String[] args) {
     UserDAO dao = new UserDAO();
-//    dao.insert(new User(1, "Lê Minh Thang", "aaa", "lethangd", "123456", "M", Date.valueOf("2003-08-05"), "lethangd@gmail.com", "Phu Ly", "admin"));
+    dao.insert(new User(1, "Lê Minh Thang", "cccc", "lethangd", "123456", "M", Date.valueOf("2003-08-05"), "lethangd@gmail.com", "Phu Ly", "admin"));
 
     List<User> temp = dao.getUsers();
     for (User te : temp) {
