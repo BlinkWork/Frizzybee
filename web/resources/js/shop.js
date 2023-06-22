@@ -11,15 +11,16 @@ if (currentPage) {
   const pagination = document.querySelector('.page-pagination');
   const pages = pagination.querySelectorAll('.page-item a');
   for (let i = 0; i < pages.length; i++) {
-    if (pages[i].textContent == currentPage) {
+    if (pages[ i ].textContent == currentPage) {
 
       let paginationItems = document.querySelectorAll('.page-pagination ul li');
       if (currentPage > 1) {
 
         let newListItem = document.createElement('li');
         newListItem.innerHTML = '<span>' + currentPage + '</span>';
-        let before = parseInt(pages[i].textContent) - 1;
-        paginationItems.forEach(function (item) {
+        let before = parseInt(pages[ i ].textContent) - 1;
+        paginationItems.forEach(function (item)
+        {
           if (item.querySelector('a') && item.querySelector('a').textContent == before) {
             item.after(newListItem);
           }
@@ -30,7 +31,8 @@ if (currentPage) {
 
       }
 
-      paginationItems.forEach(function (item) {
+      paginationItems.forEach(function (item)
+      {
         if (item.querySelector('a') && item.querySelector('a').textContent == currentPage) {
           item.remove();
         }
@@ -40,3 +42,4 @@ if (currentPage) {
     }
   }
 }
+

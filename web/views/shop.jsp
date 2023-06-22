@@ -193,7 +193,7 @@
                   "<div class='col-lg-4 col-md-4 col-sm-6 mb-30'>"
                     + "<div class='product-single'>"
                       + "<div class='product-thumbnail'>"
-                        + "<a href='product-details.jsp'><img src='"+product.getImageURL()+ "' alt='product' style='width:100px;'></a>"
+                        + "<a href='product-details.jsp'><img src='"+product.getImageURL()+ "' alt='product' style='width:200px;'></a>"
                         + "<div class='product-thumbnail-overly'>"
                           + "<ul>"
                             + "<li><a href='cart.jsp'><i class='fas fa-shopping-cart'></i></a></li>"
@@ -205,7 +205,7 @@
                       + "<div class='product-content'>"
                         + "<h4><a href='product-details.jsp'>" + product.getProductName() +"</a></h4>"
                         + "<div class='pricing'>"
-                          + "<span>$200 <del>$210</del></span>"
+                          + "<span class='priceDiscount'>" + product.getPrice() * (100 - product.getDiscount()) / 100 + " <del>" + product.getPrice() + "</del></span>"
                         + "</div>"
                       + "</div>"
                     + "</div>"
@@ -420,7 +420,7 @@
                 </div>
               </div>
             </div>
-            
+
             <!-- Pagination -->
             <div class="row">
               <div class="col-12 mb-30">
@@ -562,7 +562,7 @@
 
 
 
-    <%@include file="../views/components/footer_component.jsp" %>
+    <%@include file="../views/servletComponents/footer_component.jsp" %>
 
     <div class="scroll-area">
       <i class="fa fa-angle-up"></i>
@@ -582,6 +582,17 @@
     <script src="./resources/js/script.js"></script>
     <script src="./resources/js/mobile-menu.js"></script>
     <script src="./resources/js/shop.js"></script>
+
+    <script>
+      let priceArray = document.querySelectorAll('.priceDiscount');
+      priceArray.forEach(function (item)
+      {
+        let dualString = item.textContent.split(' ');
+        if (dualString[0] === dualString[1]) {
+          item.children[0].remove();
+        }
+      });
+    </script>
 
   </body>
 
