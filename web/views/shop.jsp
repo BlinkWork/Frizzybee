@@ -57,8 +57,8 @@
                   <li><a href="cart.jsp">Cart</a></li>
                   <li><a href="wishlist.jsp"> Wishlist</a></li>
                   <li><a href="checkout.jsp">Checkout</a></li>
-                  <li><a href="login.jsp">Login</a></li>
-                  <li><a href="register.jsp">Register</a></li>
+                  <li><a href="login">Login</a></li>
+                  <li><a href="register">Register</a></li>
                   <li><a href="reset-password.jsp">Reset Password</a></li>
                   <li><a href="privacy-policy.jsp">Privacy Policy</a></li>
                   <li><a href="terms-condition.jsp">Terms & Condition</a></li>
