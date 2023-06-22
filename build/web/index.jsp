@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import = "model.*" %>
+<%@page import = "database.*" %>
+<%@page import = "java.util.*" %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
@@ -30,6 +33,11 @@
   </head>
 
   <body>
+      <%
+      String username = (String) session.getAttribute("username");
+      UserDAO dao = new UserDAO();
+      User curUser = dao.getUserByUsername(username);
+      %>
     <div id="preloader" class="preeloader">
       <div class="sk-circle">
         <div class="sk-circle1 sk-child"></div>
@@ -60,9 +68,13 @@
             </div>
             <div class="col-lg-7">
               <div class="top-list">
-                <a href="#"><i class="fas fa-mobile-alt"></i> +02456 054546</a>
+                <a href="#"><i class="fas fa-mobile-alt"></i>0834398268</a>
                 <a href="./views/wishlist.jsp"><i class="far fa-heart"></i> Wishlist</a>
+                <%if(curUser!=null){%>
+                <a href="logout"><i class="fas fa-user"></i> Logout </a>
+                <%}else{%>
                 <a href="login"><i class="fas fa-user"></i> Login / Register</a>
+                <%}%>
               </div>
             </div>
           </div>
