@@ -44,12 +44,10 @@ public class CategoryDAO extends MyDAO {
             if (rs.next()) {
                 int categoryID;
                 String categoryName;
-                while (rs.next()) {
                     categoryID = rs.getInt("category_id");
                     categoryName = rs.getString("category_name");
 
                     x = new Category(categoryID, categoryName);
-                }
             }
             rs.close();
             ps.close();
@@ -70,12 +68,10 @@ public class CategoryDAO extends MyDAO {
             if (rs.next()) {
                 int categoryID;
                 String categoryName;
-                while (rs.next()) {
                     categoryID = rs.getInt("category_id");
                     categoryName = rs.getString("category_name");
 
                     x = new Category(categoryID, categoryName);
-                }
             }
             rs.close();
             ps.close();
@@ -100,9 +96,10 @@ public class CategoryDAO extends MyDAO {
     public static void main(String[] args) {
         CategoryDAO ctdao = new CategoryDAO();
 //        ctdao.insert(new Category(0, "t"));
-        List<Category> t = ctdao.getCategorys();
-        for (Category category : t) {
-            System.out.println(category.getCategoryName());
-        }
+//        List<Category> t = ctdao.getCategorys();
+//        for (Category category : t) {
+//            System.out.println(category.getCategoryName());
+//        }
+System.out.println(ctdao.getCategoryByID("2").getCategoryName());
     }
 }

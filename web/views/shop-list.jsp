@@ -1,3 +1,7 @@
+<%@page import = "model.*" %>
+<%@page import = "database.*" %>
+<%@page import = "java.util.*" %>
+
 <!DOCTYPE html>
 <html  class="no-js" lang="en">
   <head>
@@ -5,19 +9,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>BulkShop - Electronics Shop HTML Template | Shop Left</title>
-    <link rel="icon" href="../resources/img/icon.png" type="image/gif" sizes="16x16">
-    <link rel="icon" href="../resources/img/icon.png" type="image/gif" sizes="18x18">
-    <link rel="icon" href="../resources/img/icon.png" type="image/gif" sizes="20x20">
+    <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="16x16">
+    <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="18x18">
+    <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="20x20">
 
-    <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../resources/css/fontawesome.all.min.css">
-    <link rel="stylesheet" href="../resources/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../resources/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="../resources/css/animate.css">
-    <link rel="stylesheet" href="../resources/css/magnific-popup.css">
-    <link rel="stylesheet" href="../resources/css/normalize.css">
-    <link rel="stylesheet" href="../resources/css/style.css">
-    <link rel="stylesheet" href="../resources/css/responsive.css">
+    <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./resources/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="./resources/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="./resources/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="./resources/css/animate.css">
+    <link rel="stylesheet" href="./resources/css/magnific-popup.css">
+    <link rel="stylesheet" href="./resources/css/normalize.css">
+    <link rel="stylesheet" href="./resources/css/style.css">
+    <link rel="stylesheet" href="./resources/css/responsive.css">
 
   </head>
   <body>
@@ -42,8 +46,8 @@
           <div class="canvas_close">
             <a href="javascript:void(0)"><i class="fas fa-times"></i></a>
           </div>
-          <div class="mobile-logo">
-            <h2><a href="index.jsp"><img src="../resources/img/logo.png"></a></h2>
+          <div class="logo">
+                <h2><a href="./index.jsp"><img src="./resources/img/logo.png"></a></h2>
           </div>
           <div id="menu" class="text-left ">
             <ul class="offcanvas_main_menu">
@@ -141,7 +145,7 @@
     <!--offcanvas menu area end-->
     <!-- End Mobile Menu Area -->
     <!-- Start BreadCrumb Area -->
-    <div class="breadcrumb-area pt-100 pb-100" style="background-image: url('../resources/img/breadcrumb.jpg');">
+    <div class="breadcrumb-area pt-100 pb-100" style="background-image: url('./resources/img/breadcrumb.jpg');">
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
@@ -195,7 +199,7 @@
                   <div class="row">
                     <div class="col-lg-4 col-sm-5">
                       <div class="product-thumbnail-list-view">
-                        <a href="product-details.jsp"><img src="../resources/img/product/1.jpg" alt="product"></a>
+                        <a href="product-details.jsp"><img src="./resources/img/product/1.jpg" alt="product"></a>
                       </div>
                     </div>
                     <div class="col-lg-8 col-sm-7">
@@ -229,7 +233,7 @@
                   <div class="row">
                     <div class="col-lg-4 col-sm-5">
                       <div class="product-thumbnail-list-view">
-                        <a href="product-details.jsp"><img src="../resources/img/product/2.jpg" alt="product"></a>
+                        <a href="product-details.jsp"><img src="./resources/img/product/2.jpg" alt="product"></a>
                       </div>
                     </div>
                     <div class="col-lg-8 col-sm-7">
@@ -263,7 +267,7 @@
                   <div class="row">
                     <div class="col-lg-4 col-sm-5">
                       <div class="product-thumbnail-list-view">
-                        <a href="product-details.jsp"><img src="../resources/img/product/3.jpg" alt="product"></a>
+                        <a href="product-details.jsp"><img src="./resources/img/product/3.jpg" alt="product"></a>
                       </div>
                     </div>
                     <div class="col-lg-8 col-sm-7">
@@ -297,7 +301,7 @@
                   <div class="row">
                     <div class="col-lg-4 col-sm-5">
                       <div class="product-thumbnail-list-view">
-                        <a href="product-details.jsp"><img src="../resources/img/product/4.jpg" alt="product"></a>
+                        <a href="product-details.jsp"><img src="./resources/img/product/4.jpg" alt="product"></a>
                       </div>
                     </div>
                     <div class="col-lg-8 col-sm-7">
@@ -331,7 +335,7 @@
                   <div class="row">
                     <div class="col-lg-4 col-sm-5">
                       <div class="product-thumbnail-list-view">
-                        <a href="product-details.jsp"><img src="../resources/img/product/5.jpg" alt="product"></a>
+                        <a href="product-details.jsp"><img src="./resources/img/product/5.jpg" alt="product"></a>
                       </div>
                     </div>
                     <div class="col-lg-8 col-sm-7">
@@ -365,7 +369,7 @@
                   <div class="row">
                     <div class="col-lg-4 col-sm-5">
                       <div class="product-thumbnail-list-view">
-                        <a href="product-details.jsp"><img src="../resources/img/product/6.jpg" alt="product"></a>
+                        <a href="product-details.jsp"><img src="./resources/img/product/6.jpg" alt="product"></a>
                       </div>
                     </div>
                     <div class="col-lg-8 col-sm-7">
@@ -399,7 +403,7 @@
                   <div class="row">
                     <div class="col-lg-4 col-sm-5">
                       <div class="product-thumbnail-list-view">
-                        <a href="product-details.jsp"><img src="../resources/img/product/7.jpg" alt="product"></a>
+                        <a href="product-details.jsp"><img src="./resources/img/product/7.jpg" alt="product"></a>
                       </div>
                     </div>
                     <div class="col-lg-8 col-sm-7">
@@ -433,7 +437,7 @@
                   <div class="row">
                     <div class="col-lg-4 col-sm-5">
                       <div class="product-thumbnail-list-view">
-                        <a href="product-details.jsp"><img src="../resources/img/product/8.jpg" alt="product"></a>
+                        <a href="product-details.jsp"><img src="./resources/img/product/8.jpg" alt="product"></a>
                       </div>
                     </div>
                     <div class="col-lg-8 col-sm-7">
@@ -467,7 +471,7 @@
                   <div class="row">
                     <div class="col-lg-4 col-sm-5">
                       <div class="product-thumbnail-list-view">
-                        <a href="product-details.jsp"><img src="../resources/img/product/9.jpg" alt="product"></a>
+                        <a href="product-details.jsp"><img src="./resources/img/product/9.jpg" alt="product"></a>
                       </div>
                     </div>
                     <div class="col-lg-8 col-sm-7">
@@ -519,7 +523,7 @@
             <div class="sidebar-widgets">
               <h4 class="title">Search</h4>
               <form action="#">
-                <input type="search" name="search" placeholder="Search Here..">
+                <input type="search" name="search" placeholder="Search Here.">
                 <button type="submit"><i class="fas fa-search"></i></button>
               </form>
             </div>
@@ -531,7 +535,7 @@
                 <div class="widgets-latest-product-single mb-30">
                   <div class="thumbanil">
                     <a href="#">
-                      <img src="../resources/img/product/1.jpg" alt="Products">
+                      <img src="./resources/img/product/1.jpg" alt="Products">
                     </a>
                   </div>
                   <div class="content">
@@ -552,7 +556,7 @@
                 <div class="widgets-latest-product-single mb-30">
                   <div class="thumbanil">
                     <a href="#">
-                      <img src="../resources/img/product/2.jpg" alt="Products">
+                      <img src="./resources/img/product/2.jpg" alt="Products">
                     </a>
                   </div>
                   <div class="content">
@@ -573,7 +577,7 @@
                 <div class="widgets-latest-product-single mb-30">
                   <div class="thumbanil">
                     <a href="#">
-                      <img src="../resources/img/product/3.jpg" alt="Products">
+                      <img src="./resources/img/product/3.jpg" alt="Products">
                     </a>
                   </div>
                   <div class="content">
@@ -643,16 +647,16 @@
 
 
     <!-- Js File -->
-    <script src="../resources/js/modernizr.min.js"></script>
-    <script src="../resources/js/jquery-3.5.1.min.js"></script>
-    <script src="../resources/js/popper.min.js"></script>
-    <script src="../resources/js/bootstrap.min.js"></script>
-    <script src="../resources/js/owl.carousel.min.js"></script>
-    <script src="../resources/js/jquery.nav.min.js"></script>
-    <script src="../resources/js/jquery.magnific-popup.min.js"></script>
-    <script src="../resources/js/mixitup.min.js"></script>
-    <script src="../resources/js/wow.min.js"></script>
-    <script src="../resources/js/script.js"></script>
-    <script src="../resources/js/mobile-menu.js"></script>
+    <script src="./resources/js/modernizr.min.js"></script>
+    <script src="./resources/js/jquery-3.5.1.min.js"></script>
+    <script src="./resources/js/popper.min.js"></script>
+    <script src="./resources/js/bootstrap.min.js"></script>
+    <script src="./resources/js/owl.carousel.min.js"></script>
+    <script src="./resources/js/jquery.nav.min.js"></script>
+    <script src="./resources/js/jquery.magnific-popup.min.js"></script>
+    <script src="./resources/js/mixitup.min.js"></script>
+    <script src="./resources/js/wow.min.js"></script>
+    <script src="./resources/js/script.js"></script>
+    <script src="./resources/js/mobile-menu.js"></script>
   </body>
 </html>

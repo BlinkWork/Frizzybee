@@ -3,15 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/java%20web%20workspace/clone/Frizzybee/src/java/controller/LogoutServlet.java</file>
+            <file>file:/E:/java%20web%20workspace/clone/Frizzybee/web/views/shop.jsp</file>
+            <file>file:/E:/java%20web%20workspace/clone/Frizzybee/web/views/shop-list.jsp</file>
             <file>file:/E:/java%20web%20workspace/clone/Frizzybee/src/java/model/User.java</file>
-            <file>file:/E:/java%20web%20workspace/clone/Frizzybee/src/java/database/UserDAO.java</file>
-            <file>file:/E:/java%20web%20workspace/clone/Frizzybee/src/java/database/OrderItemDAO.java</file>
-            <file>file:/E:/java%20web%20workspace/clone/Frizzybee/src/java/controller/LoginServlet.java</file>
             <file>file:/E:/java%20web%20workspace/clone/Frizzybee/web/index.jsp</file>
-            <file>file:/E:/java%20web%20workspace/clone/Frizzybee/src/java/database/OrderDAO.java</file>
+            <file>file:/E:/java%20web%20workspace/clone/Frizzybee/src/java/controller/ProductManageServlet.java</file>
+            <file>file:/E:/java%20web%20workspace/clone/Frizzybee/src/java/controller/ShopServlet.java</file>
             <file>file:/E:/java%20web%20workspace/clone/Frizzybee/src/java/database/ProductDAO.java</file>
-            <file>file:/E:/java%20web%20workspace/clone/Frizzybee/src/java/model/Rating.java</file>
         </group>
     </open-files>
 </project-private>

@@ -86,7 +86,7 @@
 								<li><a class="dropdown-item" href="#">Change password</a></li>
 								<li><hr class="dropdown-divider"></li>
 								<li><a class="dropdown-item" href="logout">Logout</a></li>
-                                                                <%if(curUser.getRole().equals("seller")){%>
+                                                                <%if(curUser.getRole().equals("seller") || curUser.getRole().equals("admin")){%>
                                                                 <li><hr class="dropdown-divider"></li>
                                                                 <li><a class="dropdown-item" href="product-management">Product manage</a></li>
                                                                 <%}%>
