@@ -75,7 +75,7 @@
             <!-- Logo -->
             <div class="col-lg-2">
               <div class="logo">
-                <h2><a href="../index.jsp"><img src="../resources/img/logo.png"></a></h2>
+                <h2><a href="../index.jsp"><img src="../resources/img/logo_1.png" style="width: 75px"></a></h2>
               </div>
             </div>
             <!-- Search Bar -->
@@ -142,7 +142,7 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="logo-2">
-                <h2><a href="../index.jsp"><img src="../resources/img/logo.png"></a></h2>
+                <h2><a href="../index.jsp"><img src="../resources/img/logo_1.png" style="width: 75px"></a></h2>
               </div>
               <div class="canvas_open">
                 <a href="javascript:void(0)"><i class="fas fa-bars"></i></a>
@@ -187,7 +187,7 @@
                     <li><a href="./about.jsp">About</a></li>
                     <li><a href="../shop">Shop</a></li>
                     <li><a href="./privacy-policy.jsp">Privacy Policy</a></li>
-                    <li><a href="./faq.jsp">Faq</a></li>
+                    <li><a href="./faq.jsp">FAQ</a></li>
                     <li><a href="./contact.jsp">Contact</a></li>
                   </ul>
                 </nav>

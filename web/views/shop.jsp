@@ -1,4 +1,4 @@
-<%@page import="database.*, java.util.List, model.*, java.io.IOException" %>
+<%@page import="database.*, java.util.List, model.*, java.text.DecimalFormat, java.io.IOException" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -163,7 +163,7 @@
           <div class="col-lg-8">
             <!-- Shop Top Pagination -->
             <div class="row section-bg pt-20 pb-20 mb-30">
-              <div class="col-lg-7 col-md-6 order-2 order-md-1">
+              <div class="col-lg-7 col-md-6 order-2 order-md-1" hidden>
                 <div class="top-bar-left">
                   <div class="product-view-mode">
                     <a href="shop.jsp" class="active"><i class="fa fa-th"></i></a>
@@ -176,24 +176,32 @@
               </div>
               <div class="col-lg-5 col-md-6 order-1 order-md-2">
                 <div class="top-bar-right">
-                  <select class="form-select" aria-label="Default select example">
-                    <option selected>Sort by popularity</option>
-                    <option value="1">Sort by Name</option>
-                    <option value="2">Sort by Price</option>
-                    <option value="3">Sort by Ratting</option>
+                  <select id="sort-select" class="form-select" aria-label="Default select example">
+                    <option value="1">Sort by Name Ascending</option>
+                    <option value="2">Sort by Name Descending</option>
+                    <option value="3">Sort by Price Ascending</option>
+                    <option value="4">Sort by Price Descending</option>
                   </select>
                 </div>
               </div>
             </div>
             <!-- Shop -->
 
-            <%!
+            <div id="productList">
+              <%!
               public void printHTML(Product product, JspWriter out) throws IOException {
+                DecimalFormat df = new DecimalFormat("#.##");
+
+                double price = product.getPrice() * (100 - product.getDiscount()) / 100;
+                String formattedPrice = df.format(price);
+
+                double priceBefore = product.getPrice();
+                String formattedPriceBefore = df.format(priceBefore);
                 out.println(
                   "<div class='col-lg-4 col-md-4 col-sm-6 mb-30'>"
                     + "<div class='product-single'>"
                       + "<div class='product-thumbnail'>"
-                        + "<a href='product-details.jsp'><img src='"+product.getImageURL()+ "' alt='product' style='width:200px;'></a>"
+                        + "<a href='product-details.jsp'><img src='"+ product.getImageURL() + "' alt='product' style='width:200px;'></a>"
                         + "<div class='product-thumbnail-overly'>"
                           + "<ul>"
                             + "<li><a href='cart.jsp'><i class='fas fa-shopping-cart'></i></a></li>"
@@ -205,220 +213,30 @@
                       + "<div class='product-content'>"
                         + "<h4><a href='product-details.jsp'>" + product.getProductName() +"</a></h4>"
                         + "<div class='pricing'>"
-                          + "<span class='priceDiscount'>" + product.getPrice() * (100 - product.getDiscount()) / 100 + " <del>" + product.getPrice() + "</del></span>"
+                          + "<span class='priceDiscount' style='display: flex; flex-direction: column;'>" + formattedPrice + " <del>" + formattedPriceBefore + "</del></span>"
                         + "</div>"
                       + "</div>"
                     + "</div>"
                   + "</div>");
               }
-            %>
+              %>
 
-            <%
-                List<Product> listProduct = (List<Product>) request.getAttribute("listProduct");
-                for(int i = 0; i < listProduct.size(); i+=3){
-                  out.println("<div class='row'>");
-                  printHTML(listProduct.get(i), out);
-                  if(i + 1 < listProduct.size()){
-                    printHTML(listProduct.get(i+1), out);
+              <%
+                  List<Product> listProduct = (List<Product>) request.getAttribute("listProduct");
+                  if(listProduct != null){
+                    for(int i = 0; i < listProduct.size(); i+=3){
+                      out.println("<div class='row'>");
+                      printHTML(listProduct.get(i), out);
+                      if(i + 1 < listProduct.size()){
+                        printHTML(listProduct.get(i+1), out);
+                      }
+                      if(i + 2 < listProduct.size()){
+                        printHTML(listProduct.get(i+2), out);
+                      }
+                      out.println("</div>");
+                    }
                   }
-                  if(i + 2 < listProduct.size()){
-                    printHTML(listProduct.get(i+2), out);
-                  }
-                  out.println("</div>");
-                }
-            %>
-
-            <div class="row" hidden="">
-              <!-- Product Single -->
-              <div class="col-lg-4 col-md-4 col-sm-6 mb-30">
-                <div class="product-single">
-                  <div class="product-thumbnail">
-                    <a href="product-details.jsp"><img src="./resources/img/product/1.jpg" alt="product"></a>
-                    <div class="product-thumbnail-overly">
-                      <ul>
-                        <li><a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a></li>
-                        <li><a href="wishlist.jsp"><i class="far fa-heart"></i></a></li>
-                        <li><a href="#"><i class="far fa-eye"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="product-content">
-                    <h4><a href="product-details.jsp">Funda Para Ebook 7" 128GB full HD</a></h4>
-                    <div class="pricing">
-                      <span>$200 <del>$210</del></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Product Single -->
-              <div class="col-lg-4 col-md-4 col-sm-6 mb-30">
-                <div class="product-single">
-                  <div class="product-thumbnail">
-                    <a href="product-details.jsp"><img src="./resources/img/product/8.jpg" alt="product"></a>
-                    <div class="product-thumbnail-overly">
-                      <ul>
-                        <li><a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a></li>
-                        <li><a href="wishlist.jsp"><i class="far fa-heart"></i></a></li>
-                        <li><a href="#"><i class="far fa-eye"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="product-content">
-                    <h4><a href="product-details.jsp">Funda Para Ebook 7" 128GB full HD</a></h4>
-                    <div class="pricing">
-                      <span>$200 <del>$210</del></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- Product Single -->
-              <div class="col-lg-4 col-md-4 col-sm-6 mb-30">
-                <div class="product-single">
-                  <div class="product-thumbnail">
-                    <a href="product-details.jsp"><img src="./resources/img/product/2.jpg" alt="product"></a>
-                    <div class="product-thumbnail-overly">
-                      <ul>
-                        <li><a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a></li>
-                        <li><a href="wishlist.jsp"><i class="far fa-heart"></i></a></li>
-                        <li><a href="#"><i class="far fa-eye"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="product-content">
-                    <h4><a href="product-details.jsp">Funda Para Ebook 7" 128GB full HD</a></h4>
-                    <div class="pricing">
-                      <span>$200 <del>$210</del></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- Product Single -->
-              <div class="col-lg-4 col-md-4 col-sm-6 mb-30">
-                <div class="product-single">
-                  <div class="product-thumbnail">
-                    <a href="product-details.jsp"><img src="./resources/img/product/4.jpg" alt="product"></a>
-                    <div class="product-thumbnail-overly">
-                      <ul>
-                        <li><a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a></li>
-                        <li><a href="wishlist.jsp"><i class="far fa-heart"></i></a></li>
-                        <li><a href="#"><i class="far fa-eye"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="product-content">
-                    <h4><a href="product-details.jsp">Funda Para Ebook 7" 128GB full HD</a></h4>
-                    <div class="pricing">
-                      <span>$200 <del>$210</del></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- Product Single -->
-              <div class="col-lg-4 col-md-4 col-sm-6 mb-30">
-                <div class="product-single">
-                  <div class="product-thumbnail">
-                    <a href="product-details.jsp"><img src="./resources/img/product/5.jpg" alt="product"></a>
-                    <div class="product-thumbnail-overly">
-                      <ul>
-                        <li><a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a></li>
-                        <li><a href="wishlist.jsp"><i class="far fa-heart"></i></a></li>
-                        <li><a href="#"><i class="far fa-eye"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="product-content">
-                    <h4><a href="product-details.jsp">Funda Para Ebook 7" 128GB full HD</a></h4>
-                    <div class="pricing">
-                      <span>$200 <del>$210</del></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- Product Single -->
-              <div class="col-lg-4 col-md-4 col-sm-6 mb-30">
-                <div class="product-single">
-                  <div class="product-thumbnail">
-                    <a href="product-details.jsp"><img src="./resources/img/product/6.jpg" alt="product"></a>
-                    <div class="product-thumbnail-overly">
-                      <ul>
-                        <li><a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a></li>
-                        <li><a href="wishlist.jsp"><i class="far fa-heart"></i></a></li>
-                        <li><a href="#"><i class="far fa-eye"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="product-content">
-                    <h4><a href="product-details.jsp">Funda Para Ebook 7" 128GB full HD</a></h4>
-                    <div class="pricing">
-                      <span>$200 <del>$210</del></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- Product Single -->
-              <div class="col-lg-4 col-md-4 col-sm-6 mb-30">
-                <div class="product-single">
-                  <div class="product-thumbnail">
-                    <a href="product-details.jsp"><img src="./resources/img/product/7.jpg" alt="product"></a>
-                    <div class="product-thumbnail-overly">
-                      <ul>
-                        <li><a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a></li>
-                        <li><a href="wishlist.jsp"><i class="far fa-heart"></i></a></li>
-                        <li><a href="#"><i class="far fa-eye"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="product-content">
-                    <h4><a href="product-details.jsp">Funda Para Ebook 7" 128GB full HD</a></h4>
-                    <div class="pricing">
-                      <span>$200 <del>$210</del></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- Product Single -->
-              <div class="col-lg-4 col-md-4 col-sm-6 mb-30">
-                <div class="product-single">
-                  <div class="product-thumbnail">
-                    <a href="product-details.jsp"><img src="./resources/img/product/8.jpg" alt="product"></a>
-                    <div class="product-thumbnail-overly">
-                      <ul>
-                        <li><a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a></li>
-                        <li><a href="wishlist.jsp"><i class="far fa-heart"></i></a></li>
-                        <li><a href="#"><i class="far fa-eye"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="product-content">
-                    <h4><a href="product-details.jsp">Funda Para Ebook 7" 128GB full HD</a></h4>
-                    <div class="pricing">
-                      <span>$200 <del>$210</del></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- Product Single -->
-              <div class="col-lg-4 col-md-4 col-sm-6 mb-30">
-                <div class="product-single">
-                  <div class="product-thumbnail">
-                    <a href="product-details.jsp"><img src="./resources/img/product/9.jpg" alt="product"></a>
-                    <div class="product-thumbnail-overly">
-                      <ul>
-                        <li><a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a></li>
-                        <li><a href="wishlist.jsp"><i class="far fa-heart"></i></a></li>
-                        <li><a href="#"><i class="far fa-eye"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="product-content">
-                    <h4><a href="product-details.jsp">Funda Para Ebook 7" 128GB full HD</a></h4>
-                    <div class="pricing">
-                      <span>$200 <del>$210</del></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              %>
             </div>
 
             <!-- Pagination -->
@@ -427,13 +245,13 @@
                 <div class="page-pagination text-center">
                   <ul>
                     <!--<li class="page-item"><a href="#"><i class="fa fa-angle-left"></i></a></li>-->
-                    <li class="page-item"><a href="./shop?page=1">1</a></li>
-                    <li class="page-item"><a href="./shop?page=2">2</a></li>
-                    <li class="page-item"><a href="./shop?page=3">3</a></li>
-                    <li class="page-item"><a href="./shop?page=4">4</a></li>
-                    <li class="page-item"><a href="./shop?page=5">5</a></li>
-                    <li class="page-item"><a href="./shop?page=6">6</a></li>
-                    <li class="page-item"><a href="./shop?page=7">7</a></li>
+                    <li class="page-item"><a style="cursor: pointer">1</a></li>
+                    <li class="page-item"><a style="cursor: pointer">2</a></li>
+                    <li class="page-item"><a style="cursor: pointer">3</a></li>
+                    <li class="page-item"><a style="cursor: pointer">4</a></li>
+                    <li class="page-item"><a style="cursor: pointer">5</a></li>
+                    <li class="page-item"><a style="cursor: pointer">6</a></li>
+                    <li class="page-item"><a style="cursor: pointer">7</a></li>
                     <!--<li class="page-item"><a href="#"><i class="fa fa-angle-right"></i></a></li>-->
                   </ul>
                 </div>
@@ -445,8 +263,8 @@
             <!-- Single -->
             <div class="sidebar-widgets">
               <h4 class="title">Search</h4>
-              <form action="#">
-                <input type="search" name="search" placeholder="Search Here.">
+              <form action="searching">
+                <input type="search" name="search" placeholder="Search Here...">
                 <button type="submit"><i class="fas fa-search"></i></button>
               </form>
             </div>
@@ -455,105 +273,54 @@
               <h4 class="title">Latest Products</h4>
               <div class="widgets-latest-product-full">
                 <!-- Single -->
-                <div class="widgets-latest-product-single mb-30">
-                  <div class="thumbanil">
-                    <a href="#">
-                      <img src="./resources/img/product/1.jpg" alt="Products">
-                    </a>
-                  </div>
-                  <div class="content">
-                    <h4><a href="#">Homasy Portable</a></h4>
-                    <div class="pricing">
-                      <span>$200 <del>$210</del></span>
-                    </div>
-                    <div class="ratting">
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                    </div>
-                  </div>
-                </div>
-                <!-- Single -->
-                <div class="widgets-latest-product-single mb-30">
-                  <div class="thumbanil">
-                    <a href="#">
-                      <img src="./resources/img/product/2.jpg" alt="Products">
-                    </a>
-                  </div>
-                  <div class="content">
-                    <h4><a href="#">Homasy Portable</a></h4>
-                    <div class="pricing">
-                      <span>$200 <del>$210</del></span>
-                    </div>
-                    <div class="ratting">
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                    </div>
-                  </div>
-                </div>
-                <!-- Single -->
-                <div class="widgets-latest-product-single mb-30">
-                  <div class="thumbanil">
-                    <a href="#">
-                      <img src="./resources/img/product/3.jpg" alt="Products">
-                    </a>
-                  </div>
-                  <div class="content">
-                    <h4><a href="#">Homasy Portable</a></h4>
-                    <div class="pricing">
-                      <span>$200 <del>$210</del></span>
-                    </div>
-                    <div class="ratting">
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                    </div>
-                  </div>
-                </div>
+                <%
+                  DecimalFormat df = new DecimalFormat("#.##");
+           
+                  List<Product> latestProducts = (List<Product>) request.getAttribute("latestProducts");
+                  if(latestProducts != null){
+                    for(Product p : latestProducts){
+                      double price = p.getPrice() * (100 - p.getDiscount()) / 100;
+                      String formattedPrice = df.format(price);
+
+                      double priceBefore = p.getPrice();
+                      String formattedPriceBefore = df.format(priceBefore);
+                      out.println(
+                        "<div class='widgets-latest-product-single mb-30'>"
+                        + "<div class='thumbanil'>"
+                        + " <a href='#'>"
+                        + "   <img src='"+ p.getImageURL() + "' alt='Products'>"
+                        + " </a>"
+                        + "</div>"
+                        + "<div class='content'>"
+                        + " <h4><a href='#'>" + p.getProductName() + "</a></h4>"
+                        + "<div class='pricing'>"
+                        + " <span>" + formattedPrice + " <del>" + formattedPriceBefore + "</del></span>"
+                        + "</div>"
+                        + "<div class='ratting'>"
+                        + " <span><i class='fas fa-star'></i></span>"
+                        + " <span><i class='fas fa-star'></i></span>"
+                        + " <span><i class='fas fa-star'></i></span>"
+                        + " <span><i class='fas fa-star'></i></span>"
+                        + " <span><i class='fas fa-star'></i></span>"
+                        + "</div>"
+                        + "</div>"
+                        + "</div>"
+                      );
+                    }
+                  }
+                %>
               </div>
-            </div>
-            <!-- Single -->
-            <div class="sidebar-widgets">
-              <h4 class="title">Blog categories</h4>
-              <ul>
-                <li><a href="#">All about Digital</a></li>
-                <li><a href="#">Smartphone & Tablett</a></li>
-                <li><a href="#">Camera</a></li>
-                <li><a href="#">Printer & ink</a></li>
-                <li><a href="#">Cameras</a></li>
-              </ul>
             </div>
             <!-- Single -->
             <div class="sidebar-widgets">
               <h4 class="title">Tags</h4>
               <div class="tags">
-                <a href="#">camera</a>
-                <a href="#">Computer</a>
-                <a href="#">Mobile</a>
-                <a href="#">Bag</a>
-                <a href="#">shoes</a>
-                <a href="#">Store</a>
-                <a href="#">smartphone</a>
-                <a href="#">Watch</a>
+                <a href="#">Laptop</a>
+                <a href="#">Smart Phone</a>
+                <a href="#">Tablet</a>
+
               </div>
-            </div>
-            <!-- Single -->
-            <div class="sidebar-widgets">
-              <h4 class="title">Recent Post</h4>
-              <ul>
-                <li><a href="#">Gallery Post with Supported Animation</a></li>
-                <li><a href="#">Announcement â Standard Post without Image</a></li>
-                <li><a href="#">Weâre the best Designers from UK</a></li>
-                <li><a href="#">A Beautiful Day â Standard Post with Image</a></li>
-              </ul>
-            </div>
+            </div>           
           </div>
         </div>
       </div>
@@ -564,9 +331,6 @@
 
     <%@include file="../views/servletComponents/footer_component.jsp" %>
 
-    <div class="scroll-area">
-      <i class="fa fa-angle-up"></i>
-    </div>
 
 
     <!-- Js File -->
@@ -592,6 +356,8 @@
           item.children[0].remove();
         }
       });
+
+
     </script>
 
   </body>
