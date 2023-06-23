@@ -84,13 +84,11 @@
                 <form action="#">
                   <select class="form-select">
                     <option selected>All Categories</option>
-                    <option value="1">Mobile</option>
-                    <option value="2">LifeStyle</option>
-                    <option value="3">Leptop</option>
-                    <option value="4">Cell Phones</option>
-                    <option value="5">Game & Consoles</option>
-                    <option value="6">Smart Watchs</option>
-                    <option value="7">Smartphone</option>
+                    <option value="Laptop">Laptop</option>
+                    <option value="Phone">Phone</option>
+                    <option value="Computer">Computer</option>
+                    <option value="Smart Watch">Smart Watch</option>
+                    <option value="Headphones">Headphones</option>
                   </select>
                   <input type="search" name="search" placeholder="Search keyword here...">
                   <button type="submit"><i class="fas fa-search"></i></button>

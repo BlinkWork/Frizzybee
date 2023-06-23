@@ -136,7 +136,6 @@
                     <!--<li class="page-item"><a href="#"><i class="fa fa-angle-left"></i></a></li>-->
                     <%
                       int number = (Integer)request.getAttribute("pageNumbers");
-                      System.out.println(number);
                       for(int i = 1; i <= number ; i++){
                         out.println(
                         "<li class='page-item'><a style='cursor: pointer'>" + i + "</a></li>"
@@ -154,7 +153,7 @@
             <!-- Single -->
             <div class="sidebar-widgets">
               <h4 class="title">Search</h4>
-              <form action="searching">
+              <form id="form-searching" action="shop">
                 <input type="search" name="search" placeholder="Search Here...">
                 <button type="submit"><i class="fas fa-search"></i></button>
               </form>
@@ -205,11 +204,12 @@
             <!-- Single -->
             <div class="sidebar-widgets">
               <h4 class="title">Tags</h4>
-              <div class="tags">
-                <a href="#">Laptop</a>
-                <a href="#">Smart Phone</a>
-                <a href="#">Tablet</a>
-
+              <div class="tags category-tags">
+                <a href="">Laptop</a>
+                <a href="">Phone</a>
+                <a href="">Computer</a>
+                <a href="">Smart Watch</a>
+                <a href="">Headphones</a>
               </div>
             </div>           
           </div>
