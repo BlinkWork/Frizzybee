@@ -318,10 +318,12 @@ public class ProductDAO extends MyDAO {
 
   public static void main(String[] args) {
     ProductDAO dao = new ProductDAO();
-    List<Product> temp = dao.getLatest3Products();
+    List<Product> temp = dao.getProducts();
     for(Product p: temp ){
-      System.out.println(p.getBrand());
+      System.out.println(p.getProductID());
     }
+    
+    System.out.println(dao.getProductByID("2"));
     
 //    CategoryDAO ctdao = new CategoryDAO();
 //    BrandDAO bdao = new BrandDAO();

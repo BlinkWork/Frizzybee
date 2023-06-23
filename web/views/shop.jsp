@@ -201,17 +201,17 @@
                   "<div class='col-lg-4 col-md-4 col-sm-6 mb-30'>"
                     + "<div class='product-single'>"
                       + "<div class='product-thumbnail'>"
-                        + "<a href='product-details.jsp'><img src='"+ product.getImageURL() + "' alt='product' style='width:200px;'></a>"
+                        + "<a href='./productDetails?id=" + product.getProductID() + "'><img src='"+ product.getImageURL() + "' alt='product' style='width:200px;'></a>"
                         + "<div class='product-thumbnail-overly'>"
                           + "<ul>"
                             + "<li><a href='cart.jsp'><i class='fas fa-shopping-cart'></i></a></li>"
                             + "<li><a href='wishlist.jsp'><i class='far fa-heart'></i></a></li>"
-                            + "<li><a href='#'><i class='far fa-eye'></i></a></li>"
+                            + "<li><a href='./productDetails?id=" + product.getProductID() + "'><i class='far fa-eye'></i></a></li>"
                           + "</ul>"
                         + "</div>"
                       + "</div>"
                       + "<div class='product-content'>"
-                        + "<h4><a href='product-details.jsp'>" + product.getProductName() +"</a></h4>"
+                        + "<h4><a href='./productDetails?id=" + product.getProductID() + "'>" + product.getProductName() +"</a></h4>"
                         + "<div class='pricing'>"
                           + "<span class='priceDiscount' style='display: flex; flex-direction: column;'>" + formattedPrice + " <del>" + formattedPriceBefore + "</del></span>"
                         + "</div>"
@@ -278,21 +278,21 @@
            
                   List<Product> latestProducts = (List<Product>) request.getAttribute("latestProducts");
                   if(latestProducts != null){
-                    for(Product p : latestProducts){
-                      double price = p.getPrice() * (100 - p.getDiscount()) / 100;
+                    for(Product product : latestProducts){
+                      double price = product.getPrice() * (100 - product.getDiscount()) / 100;
                       String formattedPrice = df.format(price);
 
-                      double priceBefore = p.getPrice();
+                      double priceBefore = product.getPrice();
                       String formattedPriceBefore = df.format(priceBefore);
                       out.println(
                         "<div class='widgets-latest-product-single mb-30'>"
                         + "<div class='thumbanil'>"
-                        + " <a href='#'>"
-                        + "   <img src='"+ p.getImageURL() + "' alt='Products'>"
+                        + " <a href='./productDetails?id=" + product.getProductID() + "'>"
+                        + "   <img src='"+ product.getImageURL() + "' alt='Products'>"
                         + " </a>"
                         + "</div>"
                         + "<div class='content'>"
-                        + " <h4><a href='#'>" + p.getProductName() + "</a></h4>"
+                        + " <h4><a href='./productDetails?id=" + product.getProductID() + "'>" + product.getProductName() + "</a></h4>"
                         + "<div class='pricing'>"
                         + " <span>" + formattedPrice + " <del>" + formattedPriceBefore + "</del></span>"
                         + "</div>"
