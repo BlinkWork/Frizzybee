@@ -81,7 +81,6 @@ public class OrderDAO extends MyDAO {
             ps.setString(1, userId);
             rs = ps.executeQuery();
             UserDAO userDAO = new UserDAO();
-            if (rs.next()) {
                 while (rs.next()) {
                     int orderID = rs.getInt("OrderID");
                     User user = userDAO.getUserByID(rs.getInt("user_id") + "");
@@ -94,7 +93,6 @@ public class OrderDAO extends MyDAO {
                     Order x = new Order(orderID, user, orderDate, address, paymentMethod, status, totalPrice);
                     t.add(x);
                 }
-            }
             rs.close();
             ps.close();
         } catch (Exception e) {
@@ -154,5 +152,17 @@ public class OrderDAO extends MyDAO {
             System.out.println(e);
         }
     }
+    public static void main(String[] args) {
+        OrderDAO dao = new OrderDAO();
+//        dao.insert(new Order(0, new User(1, "Lê Minh Thang", "cccc", "lethangd", "123456", "M", Date.valueOf("2003-08-05"), "lethangd@gmail.com", "Phu Ly", "admin"), Date.valueOf("2003-08-05"), "aaa", "chuyen khoan", "done", 100));
+//        dao.insert(new Order(0, new User(1, "Lê Minh Thang", "cccc", "lethangd", "123456", "M", Date.valueOf("2003-08-05"), "lethangd@gmail.com", "Phu Ly", "admin"), Date.valueOf("2003-08-05"), "aaa", "chuyen khoan", "done", 100));
+//        dao.insert(new Order(0, new User(1, "Lê Minh Thang", "cccc", "lethangd", "123456", "M", Date.valueOf("2003-08-05"), "lethangd@gmail.com", "Phu Ly", "admin"), Date.valueOf("2003-08-05"), "aaa", "chuyen khoan", "done", 100));
 
+//        dao.update(new Order(2, new User(1, "Lê Minh Thang", "cccc", "lethangd", "123456", "M", Date.valueOf("2003-08-05"), "lethangd@gmail.com", "Phu Ly", "admin"), Date.valueOf("2003-08-05"), "bbbb", "chuyen khoan", "done", 100));
+        dao.deleteByID("2");
+        List<Order> t = dao.getOrders();
+        for (Order order : t) {
+            System.out.println(order.getAddress());
+        }
+    }
 }

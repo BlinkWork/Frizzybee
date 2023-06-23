@@ -95,7 +95,7 @@ public class OrderItemDAO extends MyDAO {
 
     public void insert(OrderItem x) {
         xSql = "INSERT INTO [dbo].[OrderItem]([OrderID] ,[product_id],[Quantity],[Price])\n"
-                + "     VALUES(?,?,?,?,?)";
+                + "     VALUES(?,?,?,?)";
         try {
             ps = con.prepareStatement(xSql);
             ps.setInt(1, x.getOrderID());
@@ -142,4 +142,17 @@ public class OrderItemDAO extends MyDAO {
         }
     }
 
+    public static void main(String[] args) {
+        OrderItemDAO dao = new OrderItemDAO();
+        CategoryDAO ctdao = new CategoryDAO();
+        BrandDAO bdao = new BrandDAO();
+//        dao.insert(new OrderItem(0, 1, new Product(1, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10), 10, 10));
+//        dao.insert(new OrderItem(0, 1, new Product(1, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10), 10, 10));
+//        dao.update(new OrderItem(4, 1, new Product(1, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10), 10, 200));
+//dao.deleteByID("4");
+        List<OrderItem> t = dao.getOrderItems();
+        for (OrderItem orderItem : t) {
+            System.out.println(orderItem.getPrice());
+        }
+    }
 }
