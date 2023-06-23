@@ -201,7 +201,7 @@
                   "<div class='col-lg-4 col-md-4 col-sm-6 mb-30'>"
                     + "<div class='product-single'>"
                       + "<div class='product-thumbnail'>"
-                        + "<a href='product-details.jsp'><img src='"+product.getImageURL()+ "' alt='product' style='width:200px;'></a>"
+                        + "<a href='product-details.jsp'><img src='"+ product.getImageURL() + "' alt='product' style='width:200px;'></a>"
                         + "<div class='product-thumbnail-overly'>"
                           + "<ul>"
                             + "<li><a href='cart.jsp'><i class='fas fa-shopping-cart'></i></a></li>"
@@ -223,16 +223,18 @@
 
               <%
                   List<Product> listProduct = (List<Product>) request.getAttribute("listProduct");
-                  for(int i = 0; i < listProduct.size(); i+=3){
-                    out.println("<div class='row'>");
-                    printHTML(listProduct.get(i), out);
-                    if(i + 1 < listProduct.size()){
-                      printHTML(listProduct.get(i+1), out);
+                  if(listProduct != null){
+                    for(int i = 0; i < listProduct.size(); i+=3){
+                      out.println("<div class='row'>");
+                      printHTML(listProduct.get(i), out);
+                      if(i + 1 < listProduct.size()){
+                        printHTML(listProduct.get(i+1), out);
+                      }
+                      if(i + 2 < listProduct.size()){
+                        printHTML(listProduct.get(i+2), out);
+                      }
+                      out.println("</div>");
                     }
-                    if(i + 2 < listProduct.size()){
-                      printHTML(listProduct.get(i+2), out);
-                    }
-                    out.println("</div>");
                   }
               %>
             </div>
@@ -261,8 +263,8 @@
             <!-- Single -->
             <div class="sidebar-widgets">
               <h4 class="title">Search</h4>
-              <form action="SearchingServlet">
-                <input type="search" name="search" placeholder="Search Here.">
+              <form action="searching">
+                <input type="search" name="search" placeholder="Search Here...">
                 <button type="submit"><i class="fas fa-search"></i></button>
               </form>
             </div>
@@ -271,68 +273,42 @@
               <h4 class="title">Latest Products</h4>
               <div class="widgets-latest-product-full">
                 <!-- Single -->
-                <div class="widgets-latest-product-single mb-30">
-                  <div class="thumbanil">
-                    <a href="#">
-                      <img src="./resources/img/product/1.jpg" alt="Products">
-                    </a>
-                  </div>
-                  <div class="content">
-                    <h4><a href="#">Homasy Portable</a></h4>
-                    <div class="pricing">
-                      <span>$200 <del>$210</del></span>
-                    </div>
-                    <div class="ratting">
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                    </div>
-                  </div>
-                </div>
-                <!-- Single -->
-                <div class="widgets-latest-product-single mb-30">
-                  <div class="thumbanil">
-                    <a href="#">
-                      <img src="./resources/img/product/2.jpg" alt="Products">
-                    </a>
-                  </div>
-                  <div class="content">
-                    <h4><a href="#">Homasy Portable</a></h4>
-                    <div class="pricing">
-                      <span>$200 <del>$210</del></span>
-                    </div>
-                    <div class="ratting">
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                    </div>
-                  </div>
-                </div>
-                <!-- Single -->
-                <div class="widgets-latest-product-single mb-30">
-                  <div class="thumbanil">
-                    <a href="#">
-                      <img src="./resources/img/product/3.jpg" alt="Products">
-                    </a>
-                  </div>
-                  <div class="content">
-                    <h4><a href="#">Homasy Portable</a></h4>
-                    <div class="pricing">
-                      <span>$200 <del>$210</del></span>
-                    </div>
-                    <div class="ratting">
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                    </div>
-                  </div>
-                </div>
+                <%
+                  DecimalFormat df = new DecimalFormat("#.##");
+           
+                  List<Product> latestProducts = (List<Product>) request.getAttribute("latestProducts");
+                  if(latestProducts != null){
+                    for(Product p : latestProducts){
+                      double price = p.getPrice() * (100 - p.getDiscount()) / 100;
+                      String formattedPrice = df.format(price);
+
+                      double priceBefore = p.getPrice();
+                      String formattedPriceBefore = df.format(priceBefore);
+                      out.println(
+                        "<div class='widgets-latest-product-single mb-30'>"
+                        + "<div class='thumbanil'>"
+                        + " <a href='#'>"
+                        + "   <img src='"+ p.getImageURL() + "' alt='Products'>"
+                        + " </a>"
+                        + "</div>"
+                        + "<div class='content'>"
+                        + " <h4><a href='#'>" + p.getProductName() + "</a></h4>"
+                        + "<div class='pricing'>"
+                        + " <span>" + formattedPrice + " <del>" + formattedPriceBefore + "</del></span>"
+                        + "</div>"
+                        + "<div class='ratting'>"
+                        + " <span><i class='fas fa-star'></i></span>"
+                        + " <span><i class='fas fa-star'></i></span>"
+                        + " <span><i class='fas fa-star'></i></span>"
+                        + " <span><i class='fas fa-star'></i></span>"
+                        + " <span><i class='fas fa-star'></i></span>"
+                        + "</div>"
+                        + "</div>"
+                        + "</div>"
+                      );
+                    }
+                  }
+                %>
               </div>
             </div>
             <!-- Single -->
@@ -342,7 +318,7 @@
                 <a href="#">Laptop</a>
                 <a href="#">Smart Phone</a>
                 <a href="#">Tablet</a>
-                
+
               </div>
             </div>           
           </div>

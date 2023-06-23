@@ -277,20 +277,64 @@ public class ProductDAO extends MyDAO {
     }
   }
 
+  public List<Product> getLatest3Products() {
+    List<Product> t = new ArrayList<>();
+    xSql = "SELECT TOP 3 * FROM [dbo].[Product] ORDER BY product_id DESC";
+    try {
+      ps = con.prepareStatement(xSql);
+      rs = ps.executeQuery();
+      int productID;
+      String productName;
+      String description;
+      Category category;
+      Brand brand;
+      double price;
+      int quantity;
+      String imageURL;
+      int discount;
+      Product x;
+      CategoryDAO categoryDAO = new CategoryDAO();
+      BrandDAO brandDAO = new BrandDAO();
+      while (rs.next()) {
+        productID = rs.getInt("product_id");
+        productName = rs.getString("product_name");
+        description = rs.getString("product_description");
+        category = categoryDAO.getCategoryByID(rs.getInt("category_id") + "");
+        brand = brandDAO.getBrandByID(rs.getInt("brand_id") + "");
+        price = rs.getDouble("price");
+        quantity = rs.getInt("quantity");
+        imageURL = rs.getString("image");
+        discount = rs.getInt("discount");
+        x = new Product(productID, productName, description, category, brand, price, quantity, imageURL, discount);
+        t.add(x);
+      }
+      rs.close();
+      ps.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return (t);
+  }
+
   public static void main(String[] args) {
     ProductDAO dao = new ProductDAO();
-    CategoryDAO ctdao = new CategoryDAO();
-    BrandDAO bdao = new BrandDAO();
-    ctdao.insert(new Category(0, "t"));
-    bdao.insert(new Brand(0, "nn"));
-    dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
-    dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
-    dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
-    dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
-    dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
-    dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
-    dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
-    dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
+    List<Product> temp = dao.getLatest3Products();
+    for(Product p: temp ){
+      System.out.println(p.getBrand());
+    }
+    
+//    CategoryDAO ctdao = new CategoryDAO();
+//    BrandDAO bdao = new BrandDAO();
+//    ctdao.insert(new Category(0, "t"));
+//    bdao.insert(new Brand(0, "nn"));
+//    dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
+//    dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
+//    dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
+//    dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
+//    dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
+//    dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
+//    dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
+//    dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
 
 //        List<Product> temp = dao.getProducts();
 //        for (Product test : temp) {

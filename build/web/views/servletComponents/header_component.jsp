@@ -187,7 +187,7 @@
                     <li><a href="./views/about.jsp">About</a></li>
                     <li><a href="#">Shop</a></li>
                     <li><a href="./views/privacy-policy.jsp">Privacy Policy</a></li>
-                    <li><a href="./views/faq.jsp">Faq</a></li>
+                    <li><a href="./views/faq.jsp">FAQ</a></li>
                     <li><a href="./views/contact.jsp">Contact</a></li>
                   </ul>
                 </nav>

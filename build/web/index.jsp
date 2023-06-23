@@ -187,7 +187,7 @@
                     <li><a href="./views/about.jsp">About</a></li>
                     <li><a href="./shop">Shop</a></li>
                     <li><a href="./views/privacy-policy.jsp">Privacy Policy</a></li>
-                    <li><a href="./views/faq.jsp">Faq</a></li>
+                    <li><a href="./views/faq.jsp">FAQ</a></li>
                     <li><a href="./views/contact.jsp">Contact</a></li>
                   </ul>
                 </nav>
@@ -238,7 +238,7 @@
                   <li><a href="privacy-policy.jsp">Privacy Policy</a></li>
                   <li><a href="terms-condition.jsp">Terms & Condition</a></li>
                   <li><a href="404.jsp">404 Error</a></li>
-                  <li><a href="faq.jsp">Faq</a></li>
+                  <li><a href="faq.jsp">FAQ</a></li>
                 </ul>
               </li>
               <li class="menu-item-has-children">

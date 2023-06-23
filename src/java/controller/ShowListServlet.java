@@ -29,7 +29,9 @@ public class ShowListServlet extends HttpServlet {
 
     ProductDAO dao = new ProductDAO();
     paging(dao, request, response);
-
+    getLatestProducts(dao, request, response);
+    RequestDispatcher rs = request.getRequestDispatcher("./views/shop.jsp");
+    rs.forward(request, response);
   }
 
   @Override
@@ -84,7 +86,10 @@ public class ShowListServlet extends HttpServlet {
 
     List<Product> listProduct = dao.getProductsByPage(pageid, total, kind, order);
     request.setAttribute("listProduct", listProduct);
-    RequestDispatcher rs = request.getRequestDispatcher("./views/shop.jsp");
-    rs.forward(request, response);
+  }
+
+  public void getLatestProducts(ProductDAO dao, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    List<Product> latestProducts = dao.getLatest3Products();
+    request.setAttribute("latestProducts", latestProducts);
   }
 }
