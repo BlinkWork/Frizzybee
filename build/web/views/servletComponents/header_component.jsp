@@ -62,7 +62,7 @@
               <div class="top-list">
                 <a href="./views/contact.jsp"><i class="fas fa-mobile-alt"></i> +02456 054546</a>
                 <a href="./views/wishlist.jsp"><i class="far fa-heart"></i> Wishlist</a>
-                <a href="./views/login.jsp"><i class="fas fa-user"></i> Login / Register</a>
+                <a href="./login"><i class="fas fa-user"></i> Login / Register</a>
               </div>
             </div>
           </div>
@@ -185,7 +185,7 @@
                   <ul>
                     <li><a href="./index.jsp">Home</a></li>
                     <li><a href="./views/about.jsp">About</a></li>
-                    <li><a href="#">Shop</a></li>
+                    <li><a href="./shop">Shop</a></li>
                     <li><a href="./views/privacy-policy.jsp">Privacy Policy</a></li>
                     <li><a href="./views/faq.jsp">FAQ</a></li>
                     <li><a href="./views/contact.jsp">Contact</a></li>

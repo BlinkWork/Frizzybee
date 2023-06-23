@@ -311,13 +311,13 @@ public class ProductDAO extends MyDAO {
   public static void main(String[] args) {
     ProductDAO dao = new ProductDAO();
     List<Product> temp = dao.getProducts();
-    for (Product p : temp) {
-      System.out.println(p.getProductID());
-    }
+//    for (Product p : temp) {
+//      System.out.println(p.getProductID());
+//    }
 
     CategoryDAO ctdao = new CategoryDAO();
     BrandDAO bdao = new BrandDAO();
-    System.out.println(dao.getProductByID("2").getProductName());
+//    System.out.println(dao.getProductByID("2").getProductName());
 //    ctdao.insert(new Category(0, "t"));
 //    bdao.insert(new Brand(0, "nn"));
   }

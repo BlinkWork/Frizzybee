@@ -62,7 +62,7 @@
               <div class="top-list">
                 <a href="#"><i class="fas fa-mobile-alt"></i> +02456 054546</a>
                 <a href="./wishlist.jsp"><i class="far fa-heart"></i> Wishlist</a>
-                <a href="./login.jsp"><i class="fas fa-user"></i> Login / Register</a>
+                <a href="./login"><i class="fas fa-user"></i> Login / Register</a>
               </div>
             </div>
           </div>

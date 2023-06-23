@@ -4,6 +4,8 @@
  */
 package controller;
 
+import database.ProductDAO;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -11,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Product;
 
 /**
  *
@@ -22,7 +25,15 @@ public class DetailServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
-    
+    String id = request.getParameter("id");
+    System.out.println(id);
+    ProductDAO dao = new ProductDAO();
+    Product product = dao.getProductByID(id);
+    if(product != null){
+      request.setAttribute("productDetail", product);
+      RequestDispatcher rd = request.getRequestDispatcher("./views/product-details.jsp");
+      rd.forward(request, response);
+    }
   }
 
   @Override
