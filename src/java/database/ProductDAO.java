@@ -47,50 +47,6 @@ public class ProductDAO extends MyDAO {
     }
     return (t);
   }
-
-  public List<Product> getProductsByPage(int offSetPage, int numberOfPage, String kindOfSort, String order) {
-    List<Product> t = new ArrayList<>();
-    xSql = "SELECT *  FROM [dbo].[Product] ORDER BY [" + kindOfSort + "] " + order + "\n"
-            + "OFFSET ? ROWS \n"
-            + "FETCH NEXT ? ROWS ONLY;";
-    try {
-      ps = con.prepareStatement(xSql);
-      ps.setInt(1, offSetPage);
-      ps.setInt(2, numberOfPage);
-      rs = ps.executeQuery();
-      int productID;
-      String productName;
-      String description;
-      Category category;
-      Brand brand;
-      double price;
-      int quantity;
-      String imageURL;
-      int discount;
-      Product x;
-      CategoryDAO categoryDAO = new CategoryDAO();
-      BrandDAO brandDAO = new BrandDAO();
-      while (rs.next()) {
-        productID = rs.getInt("product_id");
-        productName = rs.getString("product_name");
-        description = rs.getString("product_description");
-        category = categoryDAO.getCategoryByID(rs.getInt("category_id") + "");
-        brand = brandDAO.getBrandByID(rs.getInt("brand_id") + "");
-        price = rs.getDouble("price");
-        quantity = rs.getInt("quantity");
-        imageURL = rs.getString("image");
-        discount = rs.getInt("discount");
-        x = new Product(productID, productName, description, category, brand, price, quantity, imageURL, discount);
-        t.add(x);
-      }
-      rs.close();
-      ps.close();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return (t);
-  }
-
   public Product getProductByID(String ID) {
     Product x = null;
     xSql = "select * from [dbo].[Product] where product_id = ?";
@@ -308,10 +264,15 @@ public class ProductDAO extends MyDAO {
     return (t);
   }
 
-  public int getRecordNum() {
+  public int getRecordNum(String scope) {
     Product x = null;
     int rowCount = 1;
     xSql = "select COUNT(*) from [dbo].[Product]";
+
+    if (scope.trim().isEmpty() == false) {
+      xSql += " where " + scope;
+    }
+    System.out.println(xSql);
     try {
       ps = con.prepareStatement(xSql);
       rs = ps.executeQuery();
@@ -341,13 +302,12 @@ public class ProductDAO extends MyDAO {
 //    bdao.insert(new Brand(0, "nn"));
   }
 
-  public List<Product> getProductsByPageDemo(int offSetPage, int numberOfPage, String query, String kindOfSort, String order) {
+  public List<Product> getProductsByPage(int offSetPage, int numberOfPage, String query, String kindOfSort, String order) {
     List<Product> t = new ArrayList<>();
-    xSql = query + " ORDER BY [" + kindOfSort + "] " + order + "\n"  + 
-            "OFFSET ? ROWS \n"
+    xSql = query + " ORDER BY [" + kindOfSort + "] " + order + "\n"
+            + "OFFSET ? ROWS \n"
             + "FETCH NEXT ? ROWS ONLY;";
     try {
-      System.out.println(offSetPage + " " + numberOfPage);
       ps = con.prepareStatement(xSql);
       ps.setInt(1, offSetPage);
       ps.setInt(2, numberOfPage);

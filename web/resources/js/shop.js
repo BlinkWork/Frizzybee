@@ -54,18 +54,17 @@ select.value = value;
 
 select.addEventListener('change', function () {
   const value = this.value;
-  const url = 'shop?page=' + currentPage + '&&sortOption=' + value;
-
   setCookie('sortOption', value, 7);
-
   event.preventDefault();
 
   let params = getParams();
 
   params['sortOption'] = select.value;
+  params['page'] = currentPage;
   if (select.value == "" || select.value == null) {
     params['sortOption'] = '1';
   }
+
   redirect(params);
 
 });
@@ -93,7 +92,9 @@ const pagination = document.querySelector('.page-pagination');
 const pages = pagination.querySelectorAll('.page-item a');
 for (let i = 0; i < pages.length; i++) {
   pages[i].addEventListener('click', function () {
-    window.location.href = 'shop?page=' + pages[i].textContent + '&&sortOption=' + value;
+    let params = getParams();
+    params['page'] = pages[i].textContent;
+    redirect(params);
   });
 }
 
@@ -143,6 +144,7 @@ function getParams() {
   urlSearchParams.forEach(function (value, key) {
     params[key] = value;
   });
+  console.log(params)
   return params;
 }
 

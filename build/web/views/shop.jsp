@@ -52,14 +52,21 @@
           <div class="col-lg-8">
             <!-- Shop Top Pagination -->
             <div class="row section-bg pt-20 pb-20 mb-30">
-              <div class="col-lg-7 col-md-6 order-2 order-md-1" hidden>
+              <div class="col-lg-7 col-md-6 order-2 order-md-1">
                 <div class="top-bar-left">
                   <div class="product-view-mode">
                     <a href="shop.jsp" class="active"><i class="fa fa-th"></i></a>
-                    <a href="shop-list.jsp"><i class="fa fa-list"></i></a>
                   </div>
+                  <%
+                    int recordNumbers = (Integer) request.getAttribute("recordNumbers");
+                    int recordShow = recordNumbers;
+                    if(recordNumbers > 9){
+                      recordShow = 9;
+                    }
+                  %>
+                  
                   <div class="product-amount">
-                    <p>Showing 9 of 21 results</p>
+                    <p>Showing <%=recordShow%> of <%=recordNumbers%> results</p>
                   </div>
                 </div>
               </div>
