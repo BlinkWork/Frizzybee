@@ -52,14 +52,21 @@
           <div class="col-lg-8">
             <!-- Shop Top Pagination -->
             <div class="row section-bg pt-20 pb-20 mb-30">
-              <div class="col-lg-7 col-md-6 order-2 order-md-1" hidden>
+              <div class="col-lg-7 col-md-6 order-2 order-md-1">
                 <div class="top-bar-left">
                   <div class="product-view-mode">
                     <a href="shop.jsp" class="active"><i class="fa fa-th"></i></a>
-                    <a href="shop-list.jsp"><i class="fa fa-list"></i></a>
                   </div>
+                  <%
+                    int recordNumbers = (Integer) request.getAttribute("recordNumbers");
+                    int recordShow = recordNumbers;
+                    if(recordNumbers > 9){
+                      recordShow = 9;
+                    }
+                  %>
+                  
                   <div class="product-amount">
-                    <p>Showing 9 of 21 results</p>
+                    <p>Showing <%=recordShow%> of <%=recordNumbers%> results</p>
                   </div>
                 </div>
               </div>
@@ -136,7 +143,6 @@
                     <!--<li class="page-item"><a href="#"><i class="fa fa-angle-left"></i></a></li>-->
                     <%
                       int number = (Integer)request.getAttribute("pageNumbers");
-                      System.out.println(number);
                       for(int i = 1; i <= number ; i++){
                         out.println(
                         "<li class='page-item'><a style='cursor: pointer'>" + i + "</a></li>"
@@ -154,7 +160,7 @@
             <!-- Single -->
             <div class="sidebar-widgets">
               <h4 class="title">Search</h4>
-              <form action="searching">
+              <form id="form-searching" action="shop">
                 <input type="search" name="search" placeholder="Search Here...">
                 <button type="submit"><i class="fas fa-search"></i></button>
               </form>
@@ -205,11 +211,12 @@
             <!-- Single -->
             <div class="sidebar-widgets">
               <h4 class="title">Tags</h4>
-              <div class="tags">
-                <a href="#">Laptop</a>
-                <a href="#">Smart Phone</a>
-                <a href="#">Tablet</a>
-
+              <div class="tags category-tags">
+                <a href="">Laptop</a>
+                <a href="">Phone</a>
+                <a href="">Computer</a>
+                <a href="">Smart Watch</a>
+                <a href="">Headphones</a>
               </div>
             </div>           
           </div>

@@ -54,11 +54,19 @@ select.value = value;
 
 select.addEventListener('change', function () {
   const value = this.value;
-  const url = 'shop?page=' + currentPage + '&&sortOption=' + value;
-
   setCookie('sortOption', value, 7);
+  event.preventDefault();
 
-  window.location.href = url;
+  let params = getParams();
+
+  params['sortOption'] = select.value;
+  params['page'] = currentPage;
+  if (select.value == "" || select.value == null) {
+    params['sortOption'] = '1';
+  }
+
+  redirect(params);
+
 });
 
 function getCookie(name) {
@@ -84,6 +92,65 @@ const pagination = document.querySelector('.page-pagination');
 const pages = pagination.querySelectorAll('.page-item a');
 for (let i = 0; i < pages.length; i++) {
   pages[i].addEventListener('click', function () {
-    window.location.href = 'shop?page=' + pages[i].textContent + '&&sortOption=' + value;
+    let params = getParams();
+    params['page'] = pages[i].textContent;
+    redirect(params);
   });
+}
+
+
+let urlSearchParams = new URLSearchParams(window.location.search);
+let params = {};
+urlSearchParams.forEach(function (value, key) {
+  params[key] = value;
+});
+newUrl = new URLSearchParams(params);
+queryString = newUrl.toString();
+test = '/shop?' + queryString;
+
+document.getElementById('form-searching').addEventListener('submit', function (event) {
+  event.preventDefault();
+  let temp = document.getElementById('form-searching');
+  var searchValue = temp.querySelector('input[name="search"]').value;
+
+  let params = getParams();
+
+  params['search'] = searchValue;
+  if (searchValue == "" || searchValue == null) {
+    delete params['search'];
+  }
+  redirect(params);
+});
+
+document.querySelector('.category-tags').querySelectorAll('a').forEach(function (e) {
+  e.addEventListener('click', function (event) {
+    event.preventDefault();
+    let text = e.textContent;
+    console.log(text);
+
+    let params = getParams();
+
+    params['tag'] = text;
+    if (text == "" || text == null) {
+      delete params['text'];
+    }
+    redirect(params);
+  });
+})
+
+function getParams() {
+  let urlSearchParams = new URLSearchParams(window.location.search);
+  let params = {};
+  urlSearchParams.forEach(function (value, key) {
+    params[key] = value;
+  });
+  console.log(params)
+  return params;
+}
+
+function redirect(params) {
+  newUrl = new URLSearchParams(params);
+  queryString = newUrl.toString();
+  test = './shop?' + queryString;
+  window.location.href = test;
 }
