@@ -48,15 +48,13 @@ public class OrderItemDAO extends MyDAO {
             rs = ps.executeQuery();
             ProductDAO productDAO = new ProductDAO();
             if (rs.next()) {
-                while (rs.next()) {
-                    int orderItemID = rs.getInt("OrderItemID");
-                    int orderID = rs.getInt("OrderID");
-                    Product product = productDAO.getProductByID(rs.getInt("product_id") + "");
-                    int quantity = rs.getInt("Quantity");
-                    double price = rs.getDouble("Price");
+                int orderItemID = rs.getInt("OrderItemID");
+                int orderID = rs.getInt("OrderID");
+                Product product = productDAO.getProductByID(rs.getInt("product_id") + "");
+                int quantity = rs.getInt("Quantity");
+                double price = rs.getDouble("Price");
 
-                    x = new OrderItem(orderItemID, orderID, product, quantity, price);
-                }
+                x = new OrderItem(orderItemID, orderID, product, quantity, price);
             }
             rs.close();
             ps.close();
@@ -74,16 +72,15 @@ public class OrderItemDAO extends MyDAO {
             ps.setString(1, orderId);
             rs = ps.executeQuery();
             ProductDAO productDAO = new ProductDAO();
-            if (rs.next()) {
-                while (rs.next()) {
-                    int orderItemID = rs.getInt("OrderItemID");
-                    int orderID = rs.getInt("OrderID");
-                    Product product = productDAO.getProductByID(rs.getInt("product_id") + "");
-                    int quantity = rs.getInt("Quantity");
-                    double price = rs.getDouble("Price");
-                    OrderItem x = new OrderItem(orderItemID, orderID, product, quantity, price);
-                    t.add(x);
-                }
+
+            while (rs.next()) {
+                int orderItemID = rs.getInt("OrderItemID");
+                int orderID = rs.getInt("OrderID");
+                Product product = productDAO.getProductByID(rs.getInt("product_id") + "");
+                int quantity = rs.getInt("Quantity");
+                double price = rs.getDouble("Price");
+                OrderItem x = new OrderItem(orderItemID, orderID, product, quantity, price);
+                t.add(x);
             }
             rs.close();
             ps.close();

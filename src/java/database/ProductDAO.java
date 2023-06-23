@@ -130,7 +130,6 @@ public class ProductDAO extends MyDAO {
             CategoryDAO categoryDAO = new CategoryDAO();
             BrandDAO brandDAO = new BrandDAO();
 
-            if (rs.next()) {
                 while (rs.next()) {
                     int productID = rs.getInt("product_id");
                     String productName = rs.getString("product_name");
@@ -144,7 +143,6 @@ public class ProductDAO extends MyDAO {
                     Product x = new Product(productID, productName, description, category, brand, price, quantity, imageURL, discount);
                     t.add(x);
                 }
-            }
             rs.close();
             ps.close();
         } catch (Exception e) {
@@ -162,7 +160,6 @@ public class ProductDAO extends MyDAO {
             rs = ps.executeQuery();
             CategoryDAO categoryDAO = new CategoryDAO();
             BrandDAO brandDAO = new BrandDAO();
-            if (rs.next()) {
                 while (rs.next()) {
                     int productID = rs.getInt("product_id");
                     String productName = rs.getString("product_name");
@@ -176,7 +173,6 @@ public class ProductDAO extends MyDAO {
                     Product x = new Product(productID, productName, description, category, brand, price, quantity, imageURL, discount);
                     t.add(x);
                 }
-            }
             rs.close();
             ps.close();
         } catch (Exception e) {
@@ -194,20 +190,18 @@ public class ProductDAO extends MyDAO {
             rs = ps.executeQuery();
             CategoryDAO categoryDAO = new CategoryDAO();
             BrandDAO brandDAO = new BrandDAO();
-            if (rs.next()) {
-                while (rs.next()) {
-                    int productID = rs.getInt("product_id");
-                    String productName = rs.getString("product_name");
-                    String description = rs.getString("product_description");
-                    Category category = categoryDAO.getCategoryByID(rs.getInt("category_id") + "");
-                    Brand brand = brandDAO.getBrandByID(rs.getInt("brand_id") + "");
-                    double price = rs.getDouble("price");
-                    int quantity = rs.getInt("quantity");
-                    String imageURL = rs.getString("image");
-                    int discount = rs.getInt("discount");
-                    Product x = new Product(productID, productName, description, category, brand, price, quantity, imageURL, discount);
-                    t.add(x);
-                }
+            while (rs.next()) {
+                int productID = rs.getInt("product_id");
+                String productName = rs.getString("product_name");
+                String description = rs.getString("product_description");
+                Category category = categoryDAO.getCategoryByID(rs.getInt("category_id") + "");
+                Brand brand = brandDAO.getBrandByID(rs.getInt("brand_id") + "");
+                double price = rs.getDouble("price");
+                int quantity = rs.getInt("quantity");
+                String imageURL = rs.getString("image");
+                int discount = rs.getInt("discount");
+                Product x = new Product(productID, productName, description, category, brand, price, quantity, imageURL, discount);
+                t.add(x);
             }
             rs.close();
             ps.close();

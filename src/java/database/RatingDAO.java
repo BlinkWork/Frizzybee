@@ -38,7 +38,7 @@ public class RatingDAO extends MyDAO {
     }
 
     public List<Rating> getRatingByProductID(String productID) {
-        List<Rating> t =  new ArrayList<>();
+        List<Rating> t = new ArrayList<>();
         xSql = "select * from [dbo].[Rating] where product_id = ?";
         Rating x = null;
         try {
@@ -46,12 +46,12 @@ public class RatingDAO extends MyDAO {
             ps.setString(1, productID);
             rs = ps.executeQuery();
 
-                int ratingID;
+            int ratingID;
             int userID;
             int productId;
             double vote;
             String comment;
-            
+
             while (rs.next()) {
                 ratingID = rs.getInt("RatingID");
                 userID = rs.getInt("user_id");
@@ -74,10 +74,10 @@ public class RatingDAO extends MyDAO {
         xSql = "INSERT INTO [dbo].[Rating] ([user_id],[product_id],[vote],[comment]) VALUES (?,?,?,?)";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setInt(1 , x.getUserID());
-            ps.setInt(2 , x.getProductID());
-            ps.setDouble(3 , x.getVote());
-            ps.setString(4 , x.getComment());
+            ps.setInt(1, x.getUserID());
+            ps.setInt(2, x.getProductID());
+            ps.setDouble(3, x.getVote());
+            ps.setString(4, x.getComment());
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
@@ -99,16 +99,16 @@ public class RatingDAO extends MyDAO {
     }
 
     public void update(Rating x) {
-        xSql = "UPDATE [dbo].[Rating] SET [user_id] = ?,[product_id] = ?,[vote] = ?,[comment] = ?\n" +
-                " WHERE [RatingID] = ?";
+        xSql = "UPDATE [dbo].[Rating] SET [user_id] = ?,[product_id] = ?,[vote] = ?,[comment] = ?\n"
+                + " WHERE [RatingID] = ?";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setInt(1 , x.getUserID());
-            ps.setInt(2 , x.getProductID());
-            ps.setDouble(3 , x.getVote());
-            ps.setString(4 , x.getComment());
-            ps.setInt(5 , x.getRatingID());
-            
+            ps.setInt(1, x.getUserID());
+            ps.setInt(2, x.getProductID());
+            ps.setDouble(3, x.getVote());
+            ps.setString(4, x.getComment());
+            ps.setInt(5, x.getRatingID());
+
             ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
@@ -116,14 +116,14 @@ public class RatingDAO extends MyDAO {
             System.out.println(e);
         }
     }
-    
+
     public static void main(String[] args) {
         RatingDAO dao = new RatingDAO();
 //        dao.insert(new Rating(0, 1, 1, 0, "dat ngu"));
 //        dao.insert(new Rating(0, 1, 1, 0, "dat ngu"));
 //        dao.insert(new Rating(0, 1, 1, 0, "dat ngu"));
 //dao.update(new Rating(5, 1, 1, 0, "dat del ngu"));
-dao.deleteByID("5");
+        dao.deleteByID("5");
         List<Rating> t = dao.getRatingByProductID("1");
         for (Rating rating : t) {
             System.out.println(rating.getComment());

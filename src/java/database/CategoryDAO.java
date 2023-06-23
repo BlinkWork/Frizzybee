@@ -19,8 +19,8 @@ public class CategoryDAO extends MyDAO {
             String categoryName;
             Category x;
             while (rs.next()) {
-                categoryID = rs.getInt("brand_id");
-                categoryName = rs.getString("brand_name");
+                categoryID = rs.getInt("category_id");
+                categoryName = rs.getString("category_name");
 
                 x = new Category(categoryID, categoryName);
                 t.add(x);
@@ -96,8 +96,13 @@ public class CategoryDAO extends MyDAO {
             e.printStackTrace();
         }
     }
+
     public static void main(String[] args) {
         CategoryDAO ctdao = new CategoryDAO();
-        ctdao.insert(new Category(0, "t"));
+//        ctdao.insert(new Category(0, "t"));
+        List<Category> t = ctdao.getCategorys();
+        for (Category category : t) {
+            System.out.println(category.getCategoryName());
+        }
     }
 }

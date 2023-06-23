@@ -41,14 +41,10 @@ public class BrandDAO extends MyDAO {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                int brandID;
-            String brandName;
-            while (rs.next()) {
-                brandID = rs.getInt("brand_id");
-                brandName = rs.getString("brand_name");
+                int brandID = rs.getInt("brand_id");
+                String brandName = rs.getString("brand_name");
 
                 x = new Brand(brandID, brandName);
-            }
             }
             rs.close();
             ps.close();
@@ -67,14 +63,10 @@ public class BrandDAO extends MyDAO {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                int brandID;
-            String brandName;
-            while (rs.next()) {
-                brandID = rs.getInt("brand_id");
-                brandName = rs.getString("brand_name");
+                int brandID = rs.getInt("brand_id");
+                String brandName = rs.getString("brand_name");
 
                 x = new Brand(brandID, brandName);
-            }
             }
             rs.close();
             ps.close();
@@ -83,19 +75,20 @@ public class BrandDAO extends MyDAO {
         }
         return (x);
     }
-    
-   public void insert(Brand x) {
+
+    public void insert(Brand x) {
         xSql = "INSERT INTO [dbo].[Brand] ([brand_name]) VALUES(?)";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setString(1 , x.getBrandName());
+            ps.setString(1, x.getBrandName());
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-   public static void main(String[] args) {
+
+    public static void main(String[] args) {
         BrandDAO bdao = new BrandDAO();
         bdao.insert(new Brand(0, "nn"));
     }

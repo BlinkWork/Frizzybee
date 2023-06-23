@@ -53,7 +53,6 @@ public class OrderDAO extends MyDAO {
             ps.setString(1, ID);
             rs = ps.executeQuery();
             if (rs.next()) {
-                while (rs.next()) {
                     int orderID = rs.getInt("OrderID");
                     User user = userDAO.getUserByID(rs.getInt("user_id") + "");
                     Date orderDate = rs.getDate("OrderDate");
@@ -63,7 +62,6 @@ public class OrderDAO extends MyDAO {
                     double totalPrice = rs.getDouble("total_price");
 
                     x = new Order(orderID, user, orderDate, address, paymentMethod, status, totalPrice);
-                }
             }
             rs.close();
             ps.close();
