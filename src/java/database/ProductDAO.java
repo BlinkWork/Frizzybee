@@ -308,14 +308,34 @@ public class ProductDAO extends MyDAO {
     return (t);
   }
 
+  public int getRecordNum() {
+    Product x = null;
+    int rowCount = 1;
+    xSql = "select COUNT(*) from [dbo].[Product]";
+    try {
+      ps = con.prepareStatement(xSql);
+      rs = ps.executeQuery();
+      if (rs.next()) {
+        rowCount = rs.getInt(1);
+      }
+      rs.close();
+      ps.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return rowCount;
+  }
+
   public static void main(String[] args) {
     ProductDAO dao = new ProductDAO();
-    List<Product> temp = dao.getProducts();
-//    for (Product p : temp) {
-//      System.out.println(p.getProductID());
-//    }
-
     CategoryDAO ctdao = new CategoryDAO();
+    
+    List<Product> temp = dao.getProducts();
+    for (Product p : temp) {
+      System.out.println(p.getCategory().getCategoryName());
+    }
+
+    
     BrandDAO bdao = new BrandDAO();
 //    System.out.println(dao.getProductByID("2").getProductName());
 //    ctdao.insert(new Category(0, "t"));

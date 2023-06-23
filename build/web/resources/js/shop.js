@@ -78,6 +78,8 @@ function setCookie(name, value, minutes) {
   }
   document.cookie = name + '=' + value + expires + '; path=/';
 }
+
+
 const pagination = document.querySelector('.page-pagination');
 const pages = pagination.querySelectorAll('.page-item a');
 for (let i = 0; i < pages.length; i++) {
