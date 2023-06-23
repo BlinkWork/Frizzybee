@@ -269,6 +269,24 @@ public class ProductDAO extends MyDAO {
         }
     }
 
+    public int getPageNum() {
+        Product x = null;
+        int rowCount = 1;
+        xSql = "select COUNT(*) from [dbo].[Product]";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                rowCount = rs.getInt(1);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rowCount;
+    }
+    
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
         CategoryDAO ctdao = new CategoryDAO();
@@ -283,12 +301,12 @@ public class ProductDAO extends MyDAO {
 //        dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
 //        dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
 //        dao.insert(new Product(0, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10));
-
-        List<Product> temp = dao.getProducts();
-        for (Product test : temp) {
-            System.out.println(test.getProductID());
-        }
-        System.out.println(dao.getProductByID("2").getProductName());
+//
+//        List<Product> temp = dao.getProducts();
+//        for (Product test : temp) {
+//            System.out.println(test.getProductID());
+//        }
+        System.out.println(dao.getPageNum());
 //        List<Product> temp = dao.getProductsByPage(0, 3);
 //        for (Product test : temp) {
 //            System.out.println(test.getProductName());

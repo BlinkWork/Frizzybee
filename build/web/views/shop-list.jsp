@@ -22,7 +22,13 @@
   </head>
   <body>
     <%@include file="../views/components/header_component.jsp" %>
-
+        <%
+        String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()  + request.getContextPath();
+        String username = (String) session.getAttribute("username");
+        UserDAO dao = new UserDAO();
+        User curUser = dao.getUserByUsername(username);
+        List<Product> listProduct = (List<Product>) request.getAttribute("listProduct");
+        %>
 
     <!-- Start Mobile Menu Area -->
     <div class="mobile-menu-area">
