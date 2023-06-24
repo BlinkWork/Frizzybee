@@ -4,15 +4,21 @@
  */
 package controller;
 
+import static controller.CartServlet.encodeCarts;
+import static controller.CartServlet.parseCarts;
 import database.ProductDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.List;
+import model.Cart;
 import model.Product;
 
 /**
@@ -26,24 +32,27 @@ public class DetailServlet extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     String id = request.getParameter("id");
-    System.out.println(id);
     ProductDAO dao = new ProductDAO();
     Product product = dao.getProductByID(id);
-    if(product != null){
+    if (product != null) {
       request.setAttribute("productDetail", product);
       RequestDispatcher rd = request.getRequestDispatcher("./views/product-details.jsp");
       rd.forward(request, response);
     }
-  }
-
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
 
   }
 
-  @Override
-  public String getServletInfo() {
-    return "Short description";
-  }// </editor-fold>
+  private String getCartCookie(HttpServletRequest request, HttpServletResponse response) {
+    Cookie[] cookies = request.getCookies();
+    String cartItems = null;
+    if (cookies != null) {
+      for (Cookie cookie : cookies) {
+        if (cookie.getName().equals("cartItems")) {
+          cartItems = cookie.getValue();
+          break;
+        }
+      }
+    }
+    return cartItems;
+  }
 }

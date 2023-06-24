@@ -272,7 +272,7 @@ public class ProductDAO extends MyDAO {
     if (scope.trim().isEmpty() == false) {
       xSql += " where " + scope;
     }
-    System.out.println(xSql);
+
     try {
       ps = con.prepareStatement(xSql);
       rs = ps.executeQuery();
@@ -293,7 +293,7 @@ public class ProductDAO extends MyDAO {
 
     List<Product> temp = dao.getProducts();
     for (Product p : temp) {
-      System.out.println(p.getCategory().getCategoryName());
+
     }
 
     BrandDAO bdao = new BrandDAO();
