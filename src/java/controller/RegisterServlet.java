@@ -33,46 +33,79 @@ public class RegisterServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String xFirstname = request.getParameter("fname").trim();
+        String xLastname = request.getParameter("lname").trim();
+        String xUsername = request.getParameter("username").trim();
+        String xEmail = request.getParameter("email").trim();
+        String xAddress = request.getParameter("address").trim();
+        String xGender = request.getParameter("gender").trim();
+        String xPass = request.getParameter("pass").trim();
+        String xCPass = request.getParameter("cpass").trim();
+        Date xDate = null;
         if (xFirstname == "") {
+            request.setAttribute("lname", xLastname);
+            request.setAttribute("username", xUsername);
+            request.setAttribute("email", xEmail);
+            request.setAttribute("address", xAddress);
+            request.setAttribute("dob", xDate);
+            request.setAttribute("gender", xGender);
+            request.setAttribute("pass", xPass);
+            request.setAttribute("cpass", xCPass);
             request.setAttribute("errorMessage", "You must enter your first name");
             request.getRequestDispatcher("views/register.jsp").forward(request, response);
             return;
         }
-        String xLastname = request.getParameter("lname").trim();
         if (xLastname == "") {
             request.setAttribute("fname", xFirstname);
+            request.setAttribute("username", xUsername);
+            request.setAttribute("email", xEmail);
+            request.setAttribute("address", xAddress);
+            request.setAttribute("dob", xDate);
+            request.setAttribute("gender", xGender);
+            request.setAttribute("pass", xPass);
+            request.setAttribute("cpass", xCPass);
             request.setAttribute("errorMessage", "You must enter your last name");
             request.getRequestDispatcher("views/register.jsp").forward(request, response);
             return;
         }
-        String xUsername = request.getParameter("username").trim();
         if (xUsername == "") {
             request.setAttribute("fname", xFirstname);
             request.setAttribute("lname", xLastname);
+            request.setAttribute("email", xEmail);
+            request.setAttribute("address", xAddress);
+            request.setAttribute("dob", xDate);
+            request.setAttribute("gender", xGender);
+            request.setAttribute("pass", xPass);
+            request.setAttribute("cpass", xCPass);
             request.setAttribute("errorMessage", "You must enter your username");
             request.getRequestDispatcher("views/register.jsp").forward(request, response);
             return;
         }
-        String xEmail = request.getParameter("email").trim();
         if (xEmail == "") {
             request.setAttribute("fname", xFirstname);
             request.setAttribute("lname", xLastname);
             request.setAttribute("username", xUsername);
+            request.setAttribute("address", xAddress);
+            request.setAttribute("dob", xDate);
+            request.setAttribute("gender", xGender);
+            request.setAttribute("pass", xPass);
+            request.setAttribute("cpass", xCPass);
             request.setAttribute("errorMessage", "You must enter your email");
             request.getRequestDispatcher("views/register.jsp").forward(request, response);
             return;
         }
-        String xAddress = request.getParameter("address").trim();
         if (xAddress == "") {
             request.setAttribute("fname", xFirstname);
             request.setAttribute("lname", xLastname);
             request.setAttribute("username", xUsername);
             request.setAttribute("email", xEmail);
+            request.setAttribute("dob", xDate);
+            request.setAttribute("gender", xGender);
+            request.setAttribute("pass", xPass);
+            request.setAttribute("cpass", xCPass);
             request.setAttribute("errorMessage", "You must enter your address");
             request.getRequestDispatcher("views/register.jsp").forward(request, response);
             return;
         }
-        Date xDate = null;
         try {
             xDate = Date.valueOf(request.getParameter("dob"));
         } catch (Exception e) {
@@ -81,11 +114,13 @@ public class RegisterServlet extends HttpServlet {
             request.setAttribute("username", xUsername);
             request.setAttribute("email", xEmail);
             request.setAttribute("address", xAddress);
+            request.setAttribute("gender", xGender);
+            request.setAttribute("pass", xPass);
+            request.setAttribute("cpass", xCPass);
             request.setAttribute("errorMessage", "Your date of birth is invalid");
             request.getRequestDispatcher("views/register.jsp").forward(request, response);
             return;
         }
-        String xGender = request.getParameter("gender").trim();
         if (xGender == "") {
             request.setAttribute("fname", xFirstname);
             request.setAttribute("lname", xLastname);
@@ -93,11 +128,13 @@ public class RegisterServlet extends HttpServlet {
             request.setAttribute("email", xEmail);
             request.setAttribute("address", xAddress);
             request.setAttribute("dob", xDate);
+            request.setAttribute("gender", xGender);
+            request.setAttribute("pass", xPass);
+            request.setAttribute("cpass", xCPass);
             request.setAttribute("errorMessage", "You must select your gender");
             request.getRequestDispatcher("views/register.jsp").forward(request, response);
             return;
         }
-        String xPass = request.getParameter("pass").trim();
         if (xPass == "") {
             request.setAttribute("fname", xFirstname);
             request.setAttribute("lname", xLastname);
@@ -106,11 +143,11 @@ public class RegisterServlet extends HttpServlet {
             request.setAttribute("address", xAddress);
             request.setAttribute("dob", xDate);
             request.setAttribute("gender", xGender);
+            request.setAttribute("cpass", xCPass);
             request.setAttribute("errorMessage", "You must enter your password");
             request.getRequestDispatcher("views/register.jsp").forward(request, response);
             return;
         }
-        String xCPass = request.getParameter("cpass").trim();
         if (xCPass == "") {
             request.setAttribute("fname", xFirstname);
             request.setAttribute("lname", xLastname);
