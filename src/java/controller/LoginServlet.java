@@ -31,12 +31,13 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String xUsername = request.getParameter("username").trim();
+        String xPassword = request.getParameter("pass").trim();
         if (xUsername == "") {
+            request.setAttribute("pass", xPassword);
             request.setAttribute("errorMessage", "You must enter your username");
             request.getRequestDispatcher("views/login.jsp").forward(request, response);
             return;
         }
-        String xPassword = request.getParameter("pass").trim();
         if (xPassword == "") {
             request.setAttribute("username", xUsername);
             request.setAttribute("errorMessage", "You must enter your password");
