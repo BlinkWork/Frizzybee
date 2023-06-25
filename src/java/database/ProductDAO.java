@@ -232,7 +232,7 @@ public class ProductDAO extends MyDAO {
     }
 
     public void deleteByID(String ID) {
-        xSql = "delete from Product where [ProductID]=?";
+        xSql = "delete from Product where [product_id]=?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, ID);
@@ -247,7 +247,7 @@ public class ProductDAO extends MyDAO {
     public void update(Product x) {
         xSql = "UPDATE [dbo].[Product]\n"
                 + "   SET [product_name] = ?,[product_description] = ?,[category_id] = ?,[brand_id] = ?\n"
-                + "      ,[price] = ?,[quantity] = ?,[image] = ?,[status] = ?\n"
+                + "      ,[price] = ?,[quantity] = ?,[image] = ?,[discount] = ?\n"
                 + " WHERE [product_id] = ?";
         try {
             ps = con.prepareStatement(xSql);

@@ -72,7 +72,7 @@
                                 <a href="#"><i class="fas fa-mobile-alt"></i>0834398268</a>
                                 <a href="./views/wishlist.jsp"><i class="far fa-heart"></i> Wishlist</a>
                                 <%if(curUser!=null){%>
-                                <div class="d-flex" />
+                                <div class="d-flex align-items-center justify-content-center" style="float: right" />
                                 <img src="<%=curUser.getAvatarURL()%>" alt="user" width="20px" style="object-fit: contain;">
 					<p><%=curUser.getName()%></p>
 					
@@ -88,7 +88,7 @@
 								<li><a class="dropdown-item" href="logout">Logout</a></li>
                                                                 <%if(curUser.getRole().equals("seller") || curUser.getRole().equals("admin")){%>
                                                                 <li><hr class="dropdown-divider"></li>
-                                                                <li><a class="dropdown-item" href="product-management">Product manage</a></li>
+                                                                <li><a class="dropdown-item" href="product-management?event=product-management">Product manage</a></li>
                                                                 <%}%>
 							</ul></li>
 					</ul>
