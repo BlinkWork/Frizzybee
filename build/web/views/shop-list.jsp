@@ -426,9 +426,9 @@
                           <span><i class="fas fa-star"></i></span>
                         </div>
                         <p><%=product.getDescription()%></p>
-                        <ul>
+                        <ul class="d-flex">
                             <li><a href="#" onclick="handleProduct('<%=product.getProductID()%>','product-edit')"><img src="./resources/img/pen.png" width="30px" height="30px" alt="alt"/></a></li>
-                            <li><a href="#" onclick="handleProduct('<%=product.getProductID()%>','product-detail')"><img src="./resources/img/visible.png" width="30px" height="30px" alt="alt"/></a></li>
+                            <li><a href="#" onclick="handleProduct('<%=product.getProductID()%>','product-detail')"><i class="far fa-eye"></i></a></li>
                             <li><a href="#" onclick="handleProduct('<%=product.getProductID()%>','product-delete')"><img src="./resources/img/bin.png" width="30px" height="30px" alt="alt"/></a></li>
                         </ul>
                       </div>

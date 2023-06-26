@@ -60,7 +60,7 @@ public class ProductManageServlet extends HttpServlet {
             pageid = pageid * total + 1;
         }
 
-        List<Product> listProduct = dao.getProductsByPageSeller(pageid, total);
+        List<Product> listProduct = dao.getProductsByPage(pageid, total);
         request.setAttribute("listProduct", listProduct);
         RequestDispatcher rs = request.getRequestDispatcher("./views/shop-list.jsp");
         rs.forward(request, response);
@@ -85,6 +85,8 @@ public class ProductManageServlet extends HttpServlet {
             renderProductDetails(request, response);
         }else if (event.equals("send-to-add")) {
             request.getRequestDispatcher("./views/add-product.jsp").forward(request, response);
+        }else if(event.equals("sort-product")){
+            renderSortProductList(request, response);
         }
     }
 
@@ -178,7 +180,7 @@ public class ProductManageServlet extends HttpServlet {
         String ProductID = request.getParameter("ProductID");
         String imageURL = productDAO.getProductByID(ProductID).getImageURL();
         // Lấy phần tệp được tải lên
-        Part filePart = request.getPart("file");
+        Part filePart = request.getPart("productImage");
         if (filePart != null) {
             String fileName = filePart.getSubmittedFileName();
 
@@ -188,8 +190,9 @@ public class ProductManageServlet extends HttpServlet {
             if (!uploadDir.exists()) {
                 uploadDir.mkdir();
             }
-            imageURL = uploadPath + File.separator + fileName;
-            filePart.write(imageURL);
+            String url = uploadPath+ File.separator + fileName;
+            imageURL = "./uploads/"+ fileName;
+            filePart.write(url);
         } else if (newImg.length() > 0) {
             imageURL = newImg;
         }
@@ -289,9 +292,9 @@ public class ProductManageServlet extends HttpServlet {
         int discount = 0;
         String imageURL = "./resources/img/product-default.jpg";
         // Lấy phần tệp được tải lên
-        Part filePart = request.getPart("file");
+        Part filePart = request.getPart("productImage");
         if (filePart != null) {
-            String fileName = filePart.getSubmittedFileName();
+             String fileName = filePart.getSubmittedFileName();
 
             // Lưu tệp vào đường dẫn cụ thể trên server
             String uploadPath = getServletContext().getRealPath("") + File.separator + "uploads";
@@ -299,8 +302,9 @@ public class ProductManageServlet extends HttpServlet {
             if (!uploadDir.exists()) {
                 uploadDir.mkdir();
             }
-            imageURL = uploadPath + File.separator + fileName;
-            filePart.write(imageURL);
+            String url = uploadPath+ File.separator + fileName;
+            imageURL = "./uploads/"+ fileName;
+            filePart.write(url);
         } else if (newImg.length() > 0) {
             imageURL = newImg;
         }
@@ -371,5 +375,10 @@ public class ProductManageServlet extends HttpServlet {
             System.out.println("oke oke");
             response.sendRedirect("product-management?event=product-management");
         }
+    }
+
+    private void renderSortProductList(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
     }
 }
