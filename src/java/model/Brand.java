@@ -9,6 +9,7 @@ package model;
  * @author Admin
  */
 public class Brand {
+
     private int brandID;
     private String brandName;
 
@@ -20,6 +21,10 @@ public class Brand {
         this.brandName = brandName;
     }
 
+    public Brand(String brandName) {
+        this.brandName = brandName;
+    }
+
     public int getBrandID() {
         return brandID;
     }
@@ -28,8 +33,6 @@ public class Brand {
         this.brandID = brandID;
     }
 
-    
-
     public String getBrandName() {
         return brandName;
     }
@@ -37,7 +40,5 @@ public class Brand {
     public void setBrandName(String brandName) {
         this.brandName = brandName;
     }
-    
-    
-    
+
 }
