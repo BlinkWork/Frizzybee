@@ -71,6 +71,7 @@ function showListProduct() {
     success: function (res) {
       document.getElementById("productList").innerHTML = res;
       scrollHTML();
+      addCartEvent();
     },
     error: function () {
       alert('Error shows request.');
@@ -97,6 +98,23 @@ function showListProduct() {
       'scrollTop': 550,
     }, 700);
   }
-
-
+}
+addCartEvent();
+function addCartEvent() {
+  $('.addCart').click(function (event) {
+    event.preventDefault();
+    let idAdd = this.id.split("_")[1];
+    let add = "add";
+    $.ajax({
+      type: 'POST',
+      url: '/FrizzyBee/cart',
+      data: {id: idAdd, quantity: 1, action: add},
+      success: function () {
+        showMiniCart("add");
+      },
+      error: function () {
+        alert('Error add request.');
+      }
+    });
+  });
 }
