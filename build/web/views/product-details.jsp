@@ -249,12 +249,34 @@
                 </select>
               </div>
 
+              <!-- Modal -->
+              <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="myModalLabel">Add to cart successfully</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Your item has been added to the cart.
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" id="back--shop" class="btn btn-primary">Continue to Buy</button>
+                      <button type="button" id="view--cart" class="btn btn-warning" style="color: white;">View Cart</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              
               <div class="modal_add_to_cart">
-                <form action="#">
+                <form action="./cart" id="cart-view">
                   <span class="quantity">
-                    <input type='number' min='1' max='<%=product.getQuantity()%>' step='1' value='1'>
+                    <input type='number' min='1' max='<%=product.getQuantity()%>' step='1' name='quantity' value='1'>
                   </span>
-                  <button class="button-1" type="submit">add to cart</button>
+                  <button type="submit" class="btn button-1" data-bs-toggle="modal" data-bs-target="#myModal">
+                    Add to cart
+                  </button>
                 </form>
               </div>
               <h3>Share This Product</h3>
@@ -529,5 +551,6 @@
     <script src="./resources/js/wow.min.js"></script>
     <script src="./resources/js/script.js"></script>
     <script src="./resources/js/mobile-menu.js"></script>
+    <script src="./resources/js/detail.js"></script>
   </body>
 </html>
