@@ -273,7 +273,7 @@ public class ProductDAO extends MyDAO {
         if (scope.trim().isEmpty() == false) {
             xSql += " where " + scope;
         }
-
+       
         try {
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
