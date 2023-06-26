@@ -49,7 +49,7 @@
         <nav>
             <ul>
                 <li><a class="panel" href="usermanagement">User Management</a></li>
-                <li><a class="panel" href="productManagement.jsp">Product Management</a></li>
+                <li><a class="panel" href="productmanagement">Product Management</a></li>
             </ul>
         </nav>
     </body>

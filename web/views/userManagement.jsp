@@ -86,11 +86,11 @@
 
                 <% } %>
 
-            <form action="edituser" method="get">
+            <form action="editUser" method="get">
                 <input type="hidden" name="userId" value="<%=user.getId()%>">
                 <td> <input type="submit" value="Edit" /> </td>
             </form>
-            <form action="remove" method="post">
+            <form action="removeUser" method="post">
                 <input type="hidden" name="userId" value="<%=user.getId()%>">
                 <td> <input type="submit" value="Remove" /> </td>
             </form>

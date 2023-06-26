@@ -1,7 +1,6 @@
 
 package controller;
 
-import database.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,17 +13,14 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author hbich
  */
-@WebServlet(name="UserEditPanel", urlPatterns={"/editUser"})
-public class UserEditPanel extends HttpServlet {
-  @Override
+@WebServlet(name="ProductManagementPanel", urlPatterns={"/productmanagement"})
+public class ProductManagementPanel extends HttpServlet {
+   @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String id = request.getParameter("userId");
-        UserDAO u = new UserDAO();
-        request.setAttribute("user", u.getUserByID(id));
-        request.getRequestDispatcher("views/userEdit.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/productManagement.jsp").forward(request, response);
 
     }
 

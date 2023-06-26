@@ -9,8 +9,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "AdminRemoveServlet", urlPatterns = {"/remove"})
-public class AdminRemoveServlet extends HttpServlet {
+@WebServlet(name = "UserRemoveServlet", urlPatterns = {"/removeUser"})
+public class UserRemoveServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

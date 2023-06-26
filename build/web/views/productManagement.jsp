@@ -3,7 +3,6 @@
 <%@page import="java.util.*"%>
 <%@page import="database.*"%>
 <%@page import="model.*"%>
-<%UserDAO u = new UserDAO();%>
 
 <!DOCTYPE html>
 <html>
@@ -14,17 +13,11 @@
         <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="18x18">
         <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="20x20">
         <style>
-            /*            body {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            min-height: 100vh;
-                        }*/
-
             table {
                 border-collapse: collapse;
                 width: 80%;
                 max-width: 800px;
+                overflow-x : auto;
                 margin: 0 auto;
                 margin-top : 30px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -32,6 +25,9 @@
 
             th, td {
                 padding: 10px;
+                max-width: 500px;
+                overflow-x: auto;
+                word-wrap: break-word;
                 text-align: left;
             }
 
@@ -67,8 +63,8 @@
         <jsp:include page="adminnavbar.jsp" />
 
         <%
-            String xTable = "User";
-            String[] cols = (String[]) u.getColNames(xTable);
+            ProductDAO p = new ProductDAO();
+            String[] cols = (String[]) p.getColNames("Product");
         %>
 
         <table border="1">
@@ -76,27 +72,29 @@
                 <% for (String s : cols) { %>
                 <th><%= s %></th>
                     <% } %>
-                <th></th>
+                <form action="editproduct" method="get">
+                    <td> <input type="submit" value="Insert" /> </td>
+                </form>
                 <th></th>
             </tr>
-            <% for (User user : u.getUsers()) { %>
-            <tr> 
-                <% for (String infor : cols) { %>
-                <td><%= u.getUserInformation(user.getUsername(), infor) %></td>
+        <% for (Product product : p.getProducts()) { %>
+        <tr> 
+            <% for (String infor : cols) { %>
+            <td><%= p.getProductInformation(Integer.toString(product.getProductID()), infor) %></td>
 
-                <% } %>
+            <% } %>
 
-            <form action="edituser" method="get">
-                <input type="hidden" name="userId" value="<%=user.getId()%>">
-                <td> <input type="submit" value="Edit" /> </td>
-            </form>
-            <form action="remove" method="post">
-                <input type="hidden" name="userId" value="<%=user.getId()%>">
-                <td> <input type="submit" value="Remove" /> </td>
-            </form>
+        <form action="editProduct" method="get">
+            <input type="hidden" name="productId" value="<%=product.getProductID()%>">
+            <td> <input type="submit" value="Edit" /> </td>
+        </form>
+        <form action="removeProduct" method="post">
+            <input type="hidden" name="productId" value="<%=product.getProductID()%>">
+            <td> <input type="submit" value="Remove" /> </td>
+        </form>
 
-        </tr>
-        <% } %>
-    </table>
+    </tr>
+    <% } %>
+</table>
 </body>
 </html>
