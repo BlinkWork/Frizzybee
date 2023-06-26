@@ -17,9 +17,7 @@
         <h1>Admin Panel</h1>
 
         <jsp:include page="adminnavbar.jsp" />
-
         <div class="live-statistic"> 
-            
             <p> Number of users : <%=request.getAttribute("count")%> 
             </p>
         </div>

@@ -1,6 +1,7 @@
 
 package controller;
 
+import database.ProductDAO;
 import database.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,7 +23,6 @@ public class AdminPanel extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         UserDAO u = new UserDAO();
-        
         request.setAttribute("count", u.countNumberUser());
         request.getRequestDispatcher("/views/adminpage.jsp").forward(request, response);
 

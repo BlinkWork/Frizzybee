@@ -63,7 +63,12 @@
                 border: 1px solid #ccc;
                 border-radius: 4px;
             }
-
+            .form-selected {
+                flex: 1;
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
             input[type="Date"] {
                 flex: 1;
                 padding: 8px;
@@ -116,17 +121,26 @@
         <h2>Update a product</h2>
         <form action="updateProduct" method="POST">
             <% for (String col : cols) {
-    if (col.equals("product_id")) { %>
+                if (col.equals("product_id")) { %>
             <div class="form-group">
                 <label><%=col%></label>
                 <input type="text" name="<%=col%>" value="<%=product.getProductID()%>" readonly />
             </div>
-            <%} if (col.equals("product_description")) { %> 
+            <%} else if (col.equals("product_description")) { %> 
             <div class="form-group">
                 <label><%=col%></label>
                 <textarea class="product-description" name="<%=col%>" rows="10" cols="20" style="overflow-y:scroll;"><%= p.getProductInformation(Integer.toString(product.getProductID()), col) %></textarea>
             </div>
-            <%} else { %>
+            <%} else if (col.equals("category_id") || col.equals("brand_id")) { %> 
+            <div class="form-group">
+                <label><%=col%></label>
+                <select class="form-selected" name="<%=col%>">
+                    <% for (String rowData : p.getRowNames(col)) { %>
+                    <option value="<%=rowData%>"><%=rowData%></option>
+                    <% } %>
+                </select>            
+            </div>
+            <% } else { %>
             <div class="form-group">
                 <label><%=col%></label>
                 <input type="text" name="<%=col%>" value="<%= p.getProductInformation(Integer.toString(product.getProductID()), col) %>"/>

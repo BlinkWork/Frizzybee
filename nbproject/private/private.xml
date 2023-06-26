@@ -4,10 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/hoctap/PRJ301/Frizzybee/src/java/controller/ProductEditPanel.java</file>
+            <file>file:/D:/hoctap/PRJ301/Frizzybee/src/java/controller/ProductManagementPanel.java</file>
+            <file>file:/D:/hoctap/PRJ301/Frizzybee/src/java/controller/ProductUpdateServlet.java</file>
             <file>file:/D:/hoctap/PRJ301/Frizzybee/web/views/productEdit.jsp</file>
-            <file>file:/D:/hoctap/PRJ301/Frizzybee/src/java/database/ProductDAO.java</file>
-            <file>file:/D:/hoctap/PRJ301/Frizzybee/src/java/database/UserDAO.java</file>
-            <file>file:/D:/hoctap/PRJ301/Frizzybee/web/views/productManagement.jsp</file>
         </group>
     </open-files>
 </project-private>

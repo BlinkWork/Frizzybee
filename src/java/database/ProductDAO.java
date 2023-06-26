@@ -204,7 +204,7 @@ public class ProductDAO extends MyDAO {
     public void update(Product x) {
         xSql = "UPDATE [dbo].[Product]\n"
                 + "   SET [product_name] = ?,[product_description] = ?,[category_id] = ?,[brand_id] = ?\n"
-                + "      ,[price] = ?,[quantity] = ?,[image] = ?,[status] = ?\n"
+                + "      ,[price] = ?,[quantity] = ?,[image] = ?,[discount] = ?\n"
                 + " WHERE [product_id] = ?";
         try {
             ps = con.prepareStatement(xSql);
@@ -422,5 +422,23 @@ public class ProductDAO extends MyDAO {
             e.printStackTrace();
         }
         return columnNames.toArray(new String[0]);
+    }
+
+    public String[] getRowNames(String xColumns) {
+        xSql = "SELECT DISTINCT " + xColumns + " from [dbo].[Product]";
+        List<String> rowNames = new ArrayList<>();
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String rowName = rs.getString(xColumns);
+                rowNames.add(rowName);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rowNames.toArray(new String[0]);
     }
 }
