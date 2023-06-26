@@ -55,7 +55,6 @@ select.value = value;
 select.addEventListener('change', function () {
   const value = this.value;
   setCookie('sortOption', value, 7);
-  event.preventDefault();
 
   let params = getParams();
 
@@ -154,3 +153,6 @@ function redirect(params) {
   test = './shop?' + queryString;
   window.location.href = test;
 }
+
+
+

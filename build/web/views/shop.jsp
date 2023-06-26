@@ -244,6 +244,8 @@
     <script src="./resources/js/script.js"></script>
     <script src="./resources/js/mobile-menu.js"></script>
     <script src="./resources/js/shop.js"></script>
+    <script src="./resources/js/shopDemo.js"></script>
+    <script src="./resources/js/cart.js"></script>
 
     <script>
       let priceArray = document.querySelectorAll('.priceDiscount');

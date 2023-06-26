@@ -38,12 +38,23 @@ public class ShowListServlet extends HttpServlet {
         RequestDispatcher rs = request.getRequestDispatcher("./views/shop.jsp");
         rs.forward(request, response);
     }
-
+    
+    
     @Override
-    public String getServletInfo() {
-        return "Short description";
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String query = "select * from [dbo].[Product]";
+        if (getScope(request, response).trim().isEmpty() == false) {
+            query = query + " where " + getScope(request, response);
+        }
+        ProductDAO dao = new ProductDAO();
+        paging(dao, request, response, query);
+        getLatestProducts(dao, request, response);
+        getPageNumber(getScope(request, response), dao, request, response);
+        RequestDispatcher rs = request.getRequestDispatcher("./views/shop.jsp");
+        rs.forward(request, response);
     }
-
+    
     private void paging(ProductDAO dao, HttpServletRequest request, HttpServletResponse response, String query) throws ServletException, IOException {
         String spageid = request.getParameter("page");
         int pageid;
