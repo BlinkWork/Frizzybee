@@ -10,6 +10,7 @@ package model;
  */
 public class Product {
     private int productID;
+    private int sellerID;
     private String productName;
     private String description;
     private Category category;
@@ -34,7 +35,21 @@ public class Product {
         this.discount = discount;
     }
 
-    public Product( String productName, String description, Category category, Brand brand, double price, int quantity, String imageURL, int discount) {
+    public Product(int productID, int sellerID, String productName, String description, Category category, Brand brand, double price, int quantity, String imageURL, int discount) {
+        this.productID = productID;
+        this.sellerID = sellerID;
+        this.productName = productName;
+        this.description = description;
+        this.category = category;
+        this.brand = brand;
+        this.price = price;
+        this.quantity = quantity;
+        this.imageURL = imageURL;
+        this.discount = discount;
+    }
+
+    public Product(String productName,int sellerID,  String description, Category category, Brand brand, double price, int quantity, String imageURL, int discount) {
+        this.sellerID = sellerID;
         this.productName = productName;
         this.description = description;
         this.category = category;
@@ -45,6 +60,8 @@ public class Product {
         this.discount = discount;
     }
     
+    
+    
     public int getProductID() {
         return productID;
     }
@@ -53,7 +70,13 @@ public class Product {
         this.productID = productID;
     }
 
-    
+    public int getSellerID() {
+        return sellerID;
+    }
+
+    public void setSellerID(int sellerID) {
+        this.sellerID = sellerID;
+    }
 
     public String getProductName() {
         return productName;

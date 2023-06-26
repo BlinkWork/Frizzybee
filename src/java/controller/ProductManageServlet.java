@@ -7,6 +7,7 @@ package controller;
 import database.BrandDAO;
 import database.CategoryDAO;
 import database.ProductDAO;
+import database.UserDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,11 +16,13 @@ import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import java.io.File;
 import java.util.List;
 import model.Brand;
 import model.Product;
+import model.User;
 
 /**
  *
@@ -59,8 +62,11 @@ public class ProductManageServlet extends HttpServlet {
             pageid = pageid - 1;
             pageid = pageid * total + 1;
         }
-
-        List<Product> listProduct = dao.getProductsByPage(pageid, total);
+        HttpSession session = request.getSession(true);
+        String username = (String) session.getAttribute("username");
+        UserDAO userDAO = new UserDAO();
+        User curUser = userDAO.getUserByUsername(username);
+        List<Product> listProduct = dao.getProductsByPageBySeller(pageid, total, curUser.getId());
         request.setAttribute("listProduct", listProduct);
         RequestDispatcher rs = request.getRequestDispatcher("./views/shop-list.jsp");
         rs.forward(request, response);
@@ -180,8 +186,8 @@ public class ProductManageServlet extends HttpServlet {
         String ProductID = request.getParameter("ProductID");
         String imageURL = productDAO.getProductByID(ProductID).getImageURL();
         // Lấy phần tệp được tải lên
-        Part filePart = request.getPart("productImage");
-        if (filePart != null) {
+        try {
+            Part filePart = request.getPart("productImage");
             String fileName = filePart.getSubmittedFileName();
 
             // Lưu tệp vào đường dẫn cụ thể trên server
@@ -193,10 +199,11 @@ public class ProductManageServlet extends HttpServlet {
             String url = uploadPath+ File.separator + fileName;
             imageURL = "./uploads/"+ fileName;
             filePart.write(url);
-        } else if (newImg.length() > 0) {
+        } catch (IOException e) {
+            if (newImg.length() > 0) {
             imageURL = newImg;
+            }
         }
-
         //validate input
         boolean check = true;
         if (productName.isEmpty()) {
@@ -276,6 +283,13 @@ public class ProductManageServlet extends HttpServlet {
     
     protected void createProduct(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession(true);
+        String username = (String) session.getAttribute("username");
+        System.out.println("username: "+username);
+        UserDAO userDAO = new UserDAO();
+        User curUser = userDAO.getUserByUsername(username);
+        System.out.println("ID: "+  curUser.getId());
+        int sellerID=  curUser.getId();
         String productName = request.getParameter("productName");
         String description = request.getParameter("description");
         String category = request.getParameter("category");
@@ -292,9 +306,9 @@ public class ProductManageServlet extends HttpServlet {
         int discount = 0;
         String imageURL = "./resources/img/product-default.jpg";
         // Lấy phần tệp được tải lên
-        Part filePart = request.getPart("productImage");
-        if (filePart != null) {
-             String fileName = filePart.getSubmittedFileName();
+        try {
+            Part filePart = request.getPart("productImage");
+            String fileName = filePart.getSubmittedFileName();
 
             // Lưu tệp vào đường dẫn cụ thể trên server
             String uploadPath = getServletContext().getRealPath("") + File.separator + "uploads";
@@ -305,8 +319,10 @@ public class ProductManageServlet extends HttpServlet {
             String url = uploadPath+ File.separator + fileName;
             imageURL = "./uploads/"+ fileName;
             filePart.write(url);
-        } else if (newImg.length() > 0) {
+        } catch (IOException e) {
+            if (newImg.length() > 0) {
             imageURL = newImg;
+            }
         }
 
         //validate input
@@ -370,7 +386,7 @@ public class ProductManageServlet extends HttpServlet {
             System.out.println(check);
             request.getRequestDispatcher("./views/add-product.jsp").forward(request, response);
         } else {
-            Product product = new Product(productName, description, categoryDAO.getCategoryByName(category), brandDAO.getBrandByName(brand), price, quantity, imageURL, discount);
+            Product product = new Product(productName, sellerID, description,categoryDAO.getCategoryByName(category), brandDAO.getBrandByName(brand), price, quantity, imageURL, discount);
             productDAO.insert(product);
             System.out.println("oke oke");
             response.sendRedirect("product-management?event=product-management");
