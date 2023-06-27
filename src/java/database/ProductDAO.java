@@ -559,4 +559,57 @@ public class ProductDAO extends MyDAO {
         }
         return (t);
     }
+
+    public String getProductInformation(String id, String proper) {
+        xSql = "select " + proper + " from [dbo].[Product] where product_id = '" + id + "'";
+        String result = "";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                result = rs.getString(proper);
+
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public String[] getColNames(String xTable) {
+        List<String> columnNames = new ArrayList<>();
+        String sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = ?";
+        try ( PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, xTable);
+            try ( ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    String columnName = rs.getString("COLUMN_NAME");
+                    columnNames.add(columnName);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return columnNames.toArray(new String[0]);
+    }
+
+    public String[] getRowNames(String xColumns) {
+        xSql = "SELECT DISTINCT " + xColumns + " from [dbo].[Product]";
+        List<String> rowNames = new ArrayList<>();
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String rowName = rs.getString(xColumns);
+                rowNames.add(rowName);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rowNames.toArray(new String[0]);
+    }
 }

@@ -293,6 +293,60 @@ public class UserDAO extends MyDAO {
             System.out.println(e);
         }
     }
+    
+    public int countNumberUser() {
+        int number = 0;
+        xSql = "select count(*) as numberUser from [dbo].[User] where isAdmin = 'FALSE'";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                number = rs.getInt("numberUser");
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return number;
+    }
+
+    public String[] getColNames(String xTable) {
+        List<String> columnNames = new ArrayList<>();
+        String sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = ?";
+        try ( PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, xTable);
+            try ( ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    String columnName = rs.getString("COLUMN_NAME");
+                    columnNames.add(columnName);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return columnNames.toArray(new String[0]);
+    }
+    
+    public String getUserInformation(String username, String proper) {
+        xSql = "select " + proper + " from [dbo].[User] where username = '" + username +"'";
+        String result = "";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                result = rs.getString(proper);
+                if (proper.equals("isAdmin")|| proper.equals("isSeller")) {
+                    result = (result.equals("1") ? "true" : "false");
+                }
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     public static void main(String[] args) {
         UserDAO dao = new UserDAO();
