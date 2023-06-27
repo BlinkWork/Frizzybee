@@ -356,6 +356,6 @@ public class UserDAO extends MyDAO {
 //    for (User te : temp) {
 //      System.out.println(te.getName());
 //    }
-//        System.out.println(dao.getUserByUsername("lethangd").getName());
+        System.out.println(dao.getUserByUsername("nguyendat").getId());
     }
 }

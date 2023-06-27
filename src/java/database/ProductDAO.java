@@ -48,6 +48,46 @@ public class ProductDAO extends MyDAO {
         return (t);
     }
 
+    public List<Product> getProductsBySeller(int sellerID) {
+        List<Product> t = new ArrayList<>();
+        xSql = "SELECT *  FROM [dbo].[Product] where [seller_id] = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, sellerID);
+            rs = ps.executeQuery();
+            int productID;
+            String productName;
+            String description;
+            Category category;
+            Brand brand;
+            double price;
+            int quantity;
+            String imageURL;
+            int discount;
+            Product x;
+            CategoryDAO categoryDAO = new CategoryDAO();
+            BrandDAO brandDAO = new BrandDAO();
+            while (rs.next()) {
+                productID = rs.getInt("product_id");
+                productName = rs.getString("product_name");
+                description = rs.getString("product_description");
+                category = categoryDAO.getCategoryByID(rs.getInt("category_id") + "");
+                brand = brandDAO.getBrandByID(rs.getInt("brand_id") + "");
+                price = rs.getDouble("price");
+                quantity = rs.getInt("quantity");
+                imageURL = rs.getString("image");
+                discount = rs.getInt("discount");
+                x = new Product(productID, sellerID, productName, description, category, brand, price, quantity, imageURL, discount);
+                t.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
+    }
+
     public Product getProductByID(String ID) {
         Product x = null;
         xSql = "select * from [dbo].[Product] where product_id = ?";
@@ -169,18 +209,19 @@ public class ProductDAO extends MyDAO {
     }
 
     public void insert(Product x) {
-        xSql = "INSERT INTO [dbo].[Product]([product_name],[product_description],[category_id],[brand_id],[price],[quantity],[image],[discount])\n"
-                + "     VALUES (?,?,?,?,?,?,?,?)";
+        xSql = "INSERT INTO [dbo].[Product]([seller_id], [product_name],[product_description],[category_id],[brand_id],[price],[quantity],[image],[discount])\n"
+                + "     VALUES (?,?,?,?,?,?,?,?,?)";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setString(1, x.getProductName());
-            ps.setString(2, x.getDescription());
-            ps.setInt(3, x.getCategory().getCategoryID());
-            ps.setInt(4, x.getBrand().getBrandID());
-            ps.setDouble(5, x.getPrice());
-            ps.setInt(6, x.getQuantity());
-            ps.setString(7, x.getImageURL());
-            ps.setInt(8, x.getDiscount());
+            ps.setInt(1, x.getSellerID());
+            ps.setString(2, x.getProductName());
+            ps.setString(3, x.getDescription());
+            ps.setInt(4, x.getCategory().getCategoryID());
+            ps.setInt(5, x.getBrand().getBrandID());
+            ps.setDouble(6, x.getPrice());
+            ps.setInt(7, x.getQuantity());
+            ps.setString(8, x.getImageURL());
+            ps.setInt(9, x.getDiscount());
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
@@ -288,19 +329,149 @@ public class ProductDAO extends MyDAO {
         return rowCount;
     }
 
+    public int getPageNum() {
+        Product x = null;
+        int rowCount = 1;
+        xSql = "select COUNT(*) from [dbo].[Product]";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                rowCount = rs.getInt(1);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rowCount;
+    }
+    
+    public int getPageNumBySeller(int sellerID) {
+        Product x = null;
+        int rowCount = 1;
+        xSql = "select COUNT(*) from [dbo].[Product] where [seller_id] = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, sellerID);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                rowCount = rs.getInt(1);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rowCount;
+    }
+
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
         CategoryDAO ctdao = new CategoryDAO();
 
-        List<Product> temp = dao.getProducts();
-        for (Product p : temp) {
+        List<Product> temp = dao.getProductsByPageBySeller(0, 9, 1);
+//        for (Product p : temp) {
+//            System.out.println(p.getProductName());
+//        }
 
-        }
-
+        System.out.println(dao.getPageNumBySeller(2));
         BrandDAO bdao = new BrandDAO();
 //    System.out.println(dao.getProductByID("2").getProductName());
 //    ctdao.insert(new Category(0, "t"));
 //    bdao.insert(new Brand(0, "nn"));
+    }
+
+    public List<Product> getProductsByPage(int offSetPage, int numberOfPage) {
+        List<Product> t = new ArrayList<>();
+        xSql = "SELECT *  FROM [dbo].[Product] ORDER BY (SELECT NULL) \n"
+                + "OFFSET ? ROWS \n"
+                + "FETCH NEXT ? ROWS ONLY;";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, offSetPage);
+            ps.setInt(2, numberOfPage);
+            rs = ps.executeQuery();
+            int productID;
+            String productName;
+            String description;
+            Category category;
+            Brand brand;
+            double price;
+            int quantity;
+            String imageURL;
+            int discount;
+            Product x;
+            CategoryDAO categoryDAO = new CategoryDAO();
+            BrandDAO brandDAO = new BrandDAO();
+            while (rs.next()) {
+                productID = rs.getInt("product_id");
+                productName = rs.getString("product_name");
+                description = rs.getString("product_description");
+                category = categoryDAO.getCategoryByID(rs.getInt("category_id") + "");
+                brand = brandDAO.getBrandByID(rs.getInt("brand_id") + "");
+                price = rs.getDouble("price");
+                quantity = rs.getInt("quantity");
+                imageURL = rs.getString("image");
+                discount = rs.getInt("discount");
+                x = new Product(productID, productName, description, category, brand, price, quantity, imageURL, discount);
+                t.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
+    }
+
+    public List<Product> getProductsByPageBySeller(int offSetPage, int numberOfPage, int sellerID) {
+        List<Product> t = new ArrayList<>();
+        xSql = "SELECT * FROM (\n"
+                + "    SELECT *\n"
+                + "    FROM [dbo].[Product]\n"
+                + "    WHERE [seller_id] = ?\n"
+                + ") AS Products\n"
+                + "ORDER BY (SELECT NULL)\n"
+                + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, sellerID);
+            ps.setInt(2, offSetPage);
+            ps.setInt(3, numberOfPage);
+            rs = ps.executeQuery();
+            int productID;
+            String productName;
+            String description;
+            Category category;
+            Brand brand;
+            double price;
+            int quantity;
+            String imageURL;
+            int discount;
+            Product x;
+            CategoryDAO categoryDAO = new CategoryDAO();
+            BrandDAO brandDAO = new BrandDAO();
+            while (rs.next()) {
+                productID = rs.getInt("product_id");
+                sellerID = rs.getInt("seller_id");
+                productName = rs.getString("product_name");
+                description = rs.getString("product_description");
+                category = categoryDAO.getCategoryByID(rs.getInt("category_id") + "");
+                brand = brandDAO.getBrandByID(rs.getInt("brand_id") + "");
+                price = rs.getDouble("price");
+                quantity = rs.getInt("quantity");
+                imageURL = rs.getString("image");
+                discount = rs.getInt("discount");
+                x = new Product(productID, sellerID, productName, description, category, brand, price, quantity, imageURL, discount);
+                t.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
     }
 
     public List<Product> getProductsByPage(int offSetPage, int numberOfPage, String query, String kindOfSort, String order) {
