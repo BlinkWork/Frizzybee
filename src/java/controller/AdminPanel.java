@@ -22,9 +22,22 @@ public class AdminPanel extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+       
+        HttpSession session = request.getSession();
+        String username = (String)session.getAttribute("username");
         UserDAO u = new UserDAO();
-        request.setAttribute("count", u.countNumberUser());
-        request.getRequestDispatcher("/views/adminpage.jsp").forward(request, response);
+        if (username == null) {
+            out.println("ACCESS DENIED");
+            return;
+        }
+        if (u.getUserByUsername(username).getRole().equals("admin")) {
+            request.setAttribute("count", u.countNumberUser());
+            request.getRequestDispatcher("/views/adminpage.jsp").forward(request, response);
+            return;
+        } else {
+            out.println("ACCESS DENIED");
+            return;
+        }
 
     }
 }
