@@ -79,7 +79,15 @@
                     <option value="4">Sort by Price Descending</option>
                   </select>
                 </div>
+                <div class="bottom-bar-right">
+                  <button type="submit" class="btn button-2" data-bs-toggle="modal" data-bs-target="#myModal"
+                          id="clearSelection" style="padding: 5px 10px; float: right; margin-top: 5px;">
+                   Clear Selection
+                  </button>
+                </div> 
+                
               </div>
+              
             </div>
             <!-- Shop -->
 
@@ -100,7 +108,7 @@
                         + "<a href='./productDetails?id=" + product.getProductID() + "'><img src='"+ product.getImageURL() + "' alt='product' style='width:200px;'></a>"
                         + "<div class='product-thumbnail-overly'>"
                           + "<ul>"
-                            + "<li><a href='cart.jsp'><i class='fas fa-shopping-cart'></i></a></li>"
+                            + "<li><a href='' class='addCart' id='cart_" + product.getProductID() + "'><i class='fas fa-shopping-cart'></i></a></li>"
                             + "<li><a href='wishlist.jsp'><i class='far fa-heart'></i></a></li>"
                             + "<li><a href='./productDetails?id=" + product.getProductID() + "'><i class='far fa-eye'></i></a></li>"
                           + "</ul>"
@@ -144,9 +152,16 @@
                     <%
                       int number = (Integer)request.getAttribute("pageNumbers");
                       for(int i = 1; i <= number ; i++){
-                        out.println(
-                        "<li class='page-item'><a style='cursor: pointer'>" + i + "</a></li>"
-                        );
+                        if(i == 1){
+                          out.println(
+                            "<li class='page-item'><a href=''> <span>" + i + "</span></a></li>"
+                          );
+                        }
+                        else{
+                          out.println(
+                          "<li class='page-item'><a href=''>" + i + "</a></li>"
+                          );
+                        }
                       }
                     %>
                     <!--<li class="page-item"><a href="#"><i class="fa fa-angle-right"></i></a></li>-->
@@ -244,6 +259,7 @@
     <script src="./resources/js/script.js"></script>
     <script src="./resources/js/mobile-menu.js"></script>
     <script src="./resources/js/shop.js"></script>
+    <script src="./resources/js/cart.js"></script>
 
     <script>
       let priceArray = document.querySelectorAll('.priceDiscount');

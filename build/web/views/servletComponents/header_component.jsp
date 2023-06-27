@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import = "model.*" %>
 <%@page import = "database.*" %>
+<%@page import = "controller.*" %>
 <%@page import = "java.util.*" %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -131,31 +132,30 @@
                             </form>
                         </div>
                     </div>
-                    <!-- MiniCart -->
+                    
+                    <%
+                        CartServlet cartTest = new CartServlet();
+                        
+                        String cartItems = cartTest.getCartCookie(request, response);
+                        List<Cart> listCartId = null;
+                        if (cartItems != null) {
+                          listCartId = cartTest.parseCarts(cartItems);
+                        }
+                    %>
+                    
+                    <!-- Mini Cart -->
                     <div class="col-lg-2">
                         <div class="desktop-mini-cart">
                             <div class="mini-cart">
                                 <div class="mini-cart-icon">
                                     <i class="fas fa-shopping-cart"></i>
-                                    <span class="counter">02</span>
+                                    <span class="counter"><%=listCartId.size()%></span>
                                     <span class="counter-cart"><small>Your Cart</small>$10.00</span>
                                     <!-- Mini Cart Content -->
                                     <div class="minicart-content-wrapper">
                                         <ul class="cart-list-full">
                                             <!-- Single -->
-                                            <li class="cart-list-single">
-                                                <img src="./resources/img/product/1.jpg" alt="img">
-                                                <h5><a href="#">simple product</a></h5>
-                                                <span class="price">$120</span>
-                                                <div class="close"><i class="fas fa-times"></i></div>
-                                            </li>
-                                            <!-- Single -->
-                                            <li class="cart-list-single">
-                                                <img src="./resources/img/product/2.jpg" alt="img">
-                                                <h5><a href="#">simple product</a></h5>
-                                                <span class="price">$120</span>
-                                                <div class="close"><i class="fas fa-times"></i></div>
-                                            </li>
+                                            
                                         </ul>
                                         <h2 class="subtotal">Subtotal : <span>$220</span></h2>
                                         <div class="minicart-btn">
@@ -219,7 +219,7 @@
                                 <ul>
                                     <li><a href="./index.jsp">Home</a></li>
                                     <li><a href="./views/about.jsp">About</a></li>
-                                    <li><a href="#">Shop</a></li>
+                                    <li><a href="./shop">Shop</a></li>
                                     <li><a href="./views/privacy-policy.jsp">Privacy Policy</a></li>
                                     <li><a href="./views/faq.jsp">Faq</a></li>
                                     <li><a href="./views/contact.jsp">Contact</a></li>
