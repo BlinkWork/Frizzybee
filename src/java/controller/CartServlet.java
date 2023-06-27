@@ -193,7 +193,7 @@ public class CartServlet extends HttpServlet {
         return cartItems;
     }
 
-    private void returnCartCookie(HttpServletResponse response, String cartItems) {
+    public void returnCartCookie(HttpServletResponse response, String cartItems) {
         Cookie cookie = new Cookie("cartItems", cartItems);
         cookie.setMaxAge(24 * 60 * 60);
         response.addCookie(cookie);

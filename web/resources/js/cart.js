@@ -196,6 +196,7 @@ function addSubTotalEvent()
     let subtotalString = element.querySelector(".pro-subtotal").textContent;
     let subtotal = subtotalString.split(",")[ 0 ] + "." + subtotalString.split(",")[ 1 ];
     total += subtotal * 1;
+    total = total.toFixed(2);
   });
   document.getElementById("subTotal").innerHTML = "$" + total;
 

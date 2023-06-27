@@ -106,7 +106,7 @@
                   </table>
                 </div>
               </div>
-              <a href="checkout.jsp" class="button-1">Proceed To Checkout</a>
+              <a href="./checkout" class="button-1">Proceed To Checkout</a>
             </div>
           </div>
         </div>
