@@ -72,7 +72,7 @@
                 <% for (String s : cols) { %>
                 <th><%= s %></th>
                     <% } %>
-                <form action="editproduct" method="get">
+                <form action="insertProductPanel" method="get">
                     <td> <input type="submit" value="Insert" /> </td>
                 </form>
                 <th></th>

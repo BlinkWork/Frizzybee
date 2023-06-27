@@ -19,7 +19,7 @@ public class ProductRemoveServlet extends HttpServlet {
         String id = (String) request.getParameter("productId");
         ProductDAO p = new ProductDAO();
         p.deleteByID(id);
-        response.sendRedirect("usermanagement");
+        response.sendRedirect("productmanagement");
     }
 
 }

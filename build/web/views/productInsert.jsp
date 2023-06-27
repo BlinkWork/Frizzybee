@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@page import="database.*" %>
+<%@page import="model.*" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -73,7 +74,7 @@
                 overflow-y: scroll;
                 resize: none;
             }
-            
+
             .form-selected {
                 flex: 1;
                 padding: 8px;
@@ -127,32 +128,28 @@
 
         <jsp:include page="adminnavbar.jsp" />
 
-        <h2>Update a product</h2>
-        <form action="updateProduct" method="POST">
+        <h2>Insert a product</h2>
+        <form action="insertProduct" method="post">
             <% for (String col : cols) {
-                if (col.equals("product_id")) { %>
-            <div class="form-group">
-                <label><%=col%></label>
-                <input type="text" name="<%=col%>" value=""  />
-            </div>
-            <%} else if (col.equals("product_description")) { %> 
+                 if (col.equals("product_description")) { %> 
             <div class="product_description">
                 <label><%=col%></label>
-                <textarea name="<%=col%>" rows="10" cols="20" style="overflow-y:scroll;"></textarea>
+                <textarea name="<%=col%>" rows="10" cols="20" style="overflow-y:scroll;"><%=request.getAttribute(col) == null ? "" : request.getAttribute(col)%></textarea>
             </div>
             <%} else if (col.equals("category_id") || col.equals("brand_id")) { %> 
             <div class="form-group">
                 <label><%=col%></label>
                 <select class="form-selected" name="<%=col%>">
-                    <% for (String rowData : p.getRowNames(col)) { %>
-                    <option value="<%=rowData%>"><%=rowData%></option>
+                    <% for (String rowData : p.getRowNames(col)) {  
+                    boolean isSelected = rowData.equals(request.getAttribute(col)); %>
+                    <option value="<%=rowData%>" <%=isSelected ? "selected" : ""%>><%=rowData%></option>
                     <% } %>
                 </select>            
             </div>
             <% } else { %>
             <div class="form-group">
                 <label><%=col%></label>
-                <input type="text" name="<%=col%>" value=""/>
+                <input type="text" name="<%=col%>" value="<%=request.getAttribute(col) == null ? "" : request.getAttribute(col)%>"/>
             </div>
             <% }
         }
@@ -161,7 +158,7 @@
             <div class="error" style="color:red;">
                 <p> <%=((error == null) ? "" : error)%>
             </div>
-            <input type="submit" value="Insert">
+            <input type ="submit" value="Insert">
         </form>  
     </body>
 </html>

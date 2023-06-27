@@ -189,7 +189,7 @@ public class ProductDAO extends MyDAO {
     }
 
     public void deleteByID(String ID) {
-        xSql = "delete from Product where [ProductID]=?";
+        xSql = "delete from Product where [product_id]=?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, ID);
