@@ -413,7 +413,7 @@
                           <h4><a href="product-management?event=product-detail&product-id=<%=product.getProductID()%>"><%=product.getProductName()%></a></h4>
                         <div class="pricing">
                             <%if(product.getDiscount()>0){%>
-                          <span>$<%=product.getPrice()-product.getPrice()*product.getDiscount()%> <del>$<%=product.getPrice()%></del></span>
+                          <span>$<%=product.getPrice()-product.getPrice()*product.getDiscount()/100%> <del>$<%=product.getPrice()%></del></span>
                           <%}else{%>
                           <span>$<%=product.getPrice()%></span>
                           <%}%>
@@ -426,9 +426,9 @@
                           <span><i class="fas fa-star"></i></span>
                         </div>
                         <p><%=product.getDescription()%></p>
-                        <ul>
+                        <ul class="d-flex">
                             <li><a href="#" onclick="handleProduct('<%=product.getProductID()%>','product-edit')"><img src="./resources/img/pen.png" width="30px" height="30px" alt="alt"/></a></li>
-                            <li><a href="#" onclick="handleProduct('<%=product.getProductID()%>','product-detail')"><img src="./resources/img/visible.png" width="30px" height="30px" alt="alt"/></a></li>
+                            <li><a href="#" onclick="handleProduct('<%=product.getProductID()%>','product-detail')"><i class="far fa-eye"></i></a></li>
                             <li><a href="#" onclick="handleProduct('<%=product.getProductID()%>','product-delete')"><img src="./resources/img/bin.png" width="30px" height="30px" alt="alt"/></a></li>
                         </ul>
                       </div>
@@ -445,7 +445,7 @@
               <div class="col-12 mb-30">
                 <div class="page-pagination text-center">
                   <ul>
-                      <%int pageNum = (productDao.getPageNum()%9==0)?productDao.getPageNum()/9:productDao.getPageNum()/9+1;
+                      <%int pageNum = (productDao.getPageNumBySeller(curUser.getId())%9==0)?productDao.getPageNumBySeller(curUser.getId())/9:productDao.getPageNumBySeller(curUser.getId())/9+1;
                       int pageID = (int) request.getAttribute("pageid");
                       for(int i=1;i<=pageNum;i++){ 
                       if(i==pageID){
