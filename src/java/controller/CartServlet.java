@@ -40,7 +40,6 @@ public class CartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        System.out.println(action);
         if (action.equals("add")) {
             addToCart(request, response);
         }

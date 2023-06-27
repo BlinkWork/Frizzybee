@@ -149,7 +149,16 @@
                             <div class="mini-cart">
                                 <div class="mini-cart-icon">
                                     <i class="fas fa-shopping-cart"></i>
-                                    <span class="counter"><%=listCartId.size()%></span>
+                                    <span class="counter"> 
+                                      <%
+                                          if(listCartId != null){
+                                            out.println(listCartId.size());
+                                          }
+                                          else{
+                                            out.println(0);
+                                          }
+                                      %>
+                                    </span>
                                     <span class="counter-cart"><small>Your Cart</small>$10.00</span>
                                     <!-- Mini Cart Content -->
                                     <div class="minicart-content-wrapper">

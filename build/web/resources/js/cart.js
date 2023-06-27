@@ -1,12 +1,14 @@
-/* 
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
  */
 
 
-$(document).ready(function () {
+$(document).ready(function ()
+{
   showMiniCart("show");
-  $('.addToCartBtn').click(function (event) {
+  $('.addToCartBtn').click(function (event)
+  {
     event.preventDefault();
 
     // Lấy id từ URL
@@ -21,11 +23,13 @@ $(document).ready(function () {
     $.ajax({
       type: 'POST',
       url: '/FrizzyBee/cart',
-      data: {id: id, quantity: quantity, action: action},
-      success: function () {
+      data: { id: id, quantity: quantity, action: action },
+      success: function ()
+      {
         showMiniCart("add");
       },
-      error: function () {
+      error: function ()
+      {
         alert('Error add request.');
       }
     });
@@ -34,67 +38,81 @@ $(document).ready(function () {
 
 
 });
-let backShop = document.getElementById("back--shop")
+let backShop = document.getElementById("back--shop");
 if (backShop != null) {
-  backShop.addEventListener("click", function () {
+  backShop.addEventListener("click", function ()
+  {
     window.location.href = "./shop";
   });
 }
 
-let viewCart = document.getElementById("back--shop")
+let viewCart = document.getElementById("back--shop");
 if (viewCart != null) {
-  document.getElementById("view--cart").addEventListener("click", function () {
+  document.getElementById("view--cart").addEventListener("click", function ()
+  {
     window.location.href = "./cart";
   });
 }
 
-function showMiniCart(action) {
+function showMiniCart(action)
+{
   $.ajax({
     type: 'POST',
     url: '/FrizzyBee/miniCart',
-    data: {action: action},
-    success: function (response) {
+    data: { action: action },
+    success: function (response)
+    {
       document.querySelector(".mini-cart-icon").innerHTML = response;
       addRemoveButton();
     },
-    error: function () {
+    error: function ()
+    {
       alert('Error show request.');
     }
   });
 }
-function showCart(action) {
+function showCart(action)
+{
   $.ajax({
     type: 'POST',
     url: '/FrizzyBee/cart',
-    data: {action: action},
-    success: function (response) {
-      console.log(response);
-      document.getElementById("tbody--cart").innerHTML = response
+    data: { action: action },
+    success: function (response)
+    {
+      document.getElementById("tbody--cart").innerHTML = response;
       addEventQuantityBtn();
+      addSubTotalEvent();
+
     },
-    error: function () {
+    error: function ()
+    {
       alert('Error show request.');
     }
   });
 }
 
-function addRemoveButton() {
+function addRemoveButton()
+{
   let closeButton = document.querySelectorAll(".removeProduct");
   if (closeButton != null) {
-    closeButton.forEach(element => {
-      let productId = element.className.split(" ")[1].split("_")[1];
+    closeButton.forEach(element =>
+    {
+      let productId = element.className.split(" ")[ 1 ].split("_")[ 1 ];
       let action = "remove";
-      element.addEventListener("click", function (event) {
+      element.addEventListener("click", function (event)
+      {
         event.preventDefault();
         $.ajax({
           type: 'POST',
           url: '/FrizzyBee/cart',
-          data: {id: productId, action: action},
-          success: function () {
+          data: { id: productId, action: action },
+          success: function ()
+          {
             showMiniCart("show");
             showCart("show");
           },
-          error: function () {
+          error: function ()
+          {
             alert('Error remove request.');
           }
         });
@@ -103,19 +121,22 @@ function addRemoveButton() {
   }
 }
 
-temp();
-function temp() {
+addEventUpdate();
+function addEventUpdate()
+{
   let cartUpdate = document.querySelector(".cart-update").querySelector("a");
 
-  cartUpdate.addEventListener("click", function (event) {
+  cartUpdate.addEventListener("click", function (event)
+  {
     event.preventDefault();
     let updateItem = "update";
     let cartItems = document.getElementById("tbody--cart").querySelectorAll("tr");
 
     let dataTransfer = "";
-    cartItems.forEach(function (element) {
+    cartItems.forEach(function (element)
+    {
 
-      let productId = element.id.split("_")[1];
+      let productId = element.id.split("_")[ 1 ];
 
       let productQuantity = element.querySelector(".pro-quantity--btn").value;
       dataTransfer += productId + "_" + productQuantity + "@";
@@ -123,12 +144,15 @@ function temp() {
     $.ajax({
       type: 'POST',
       url: '/FrizzyBee/cart',
-      data: {dataTransfer: dataTransfer, action: updateItem},
-      success: function () {
+      data: { dataTransfer: dataTransfer, action: updateItem },
+      success: function ()
+      {
         showMiniCart("show");
         showCart("show");
+
       },
-      error: function () {
+      error: function ()
+      {
         alert('Error remove request.');
       }
     });
@@ -137,10 +161,13 @@ function temp() {
 
 
 addEventQuantityBtn();
-function addEventQuantityBtn() {
+function addEventQuantityBtn()
+{
   let upQuantity = document.querySelectorAll(".quantity-up");
-  upQuantity.forEach(function (element) {
-    element.addEventListener("click", function () {
+  upQuantity.forEach(function (element)
+  {
+    element.addEventListener("click", function ()
+    {
       let inputNumber = this.closest(".quantity").querySelector("input[type='number']");
       if (inputNumber.max - inputNumber.value > 0) {
         inputNumber.value++;
@@ -148,12 +175,29 @@ function addEventQuantityBtn() {
     });
   });
   let downQuantity = document.querySelectorAll(".quantity-down");
-  downQuantity.forEach(function (element) {
-    element.addEventListener("click", function () {
+  downQuantity.forEach(function (element)
+  {
+    element.addEventListener("click", function ()
+    {
       let inputNumber = this.closest(".quantity").querySelector("input[type='number']");
       if (inputNumber.value > inputNumber.min) {
         inputNumber.value--;
       }
     });
   });
+}
+addSubTotalEvent();
+function addSubTotalEvent()
+{
+  let total = 0;
+  let items = document.getElementById("tbody--cart").querySelectorAll("tr");
+  items.forEach(function (element)
+  {
+    let subtotalString = element.querySelector(".pro-subtotal").textContent;
+    let subtotal = subtotalString.split(",")[ 0 ] + "." + subtotalString.split(",")[ 1 ];
+    total += subtotal * 1;
+  });
+  document.getElementById("subTotal").innerHTML = "$" + total;
+
+  document.querySelector(".total-amount").innerHTML = "$" + (total + 10);
 }
