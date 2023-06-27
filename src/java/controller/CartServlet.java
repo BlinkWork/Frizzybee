@@ -40,6 +40,7 @@ public class CartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
+        System.out.println(action);
         if (action.equals("add")) {
             addToCart(request, response);
         }
@@ -48,6 +49,10 @@ public class CartServlet extends HttpServlet {
             showCartList(request, response);
         }
         if (action.equals("show")) {
+            showCartList(request, response);
+        }
+        if (action.equals("update")) {
+            updateCart(request, response);
             showCartList(request, response);
         }
     }
@@ -68,13 +73,14 @@ public class CartServlet extends HttpServlet {
                 if (cartItem.getQuantity() > p.getQuantity()) {
                     cartItem.setQuantity(p.getQuantity());
                 }
-                String dataItem = "<tr>\n"
+                String dataItem = "<tr id='product_" + p.getProductID() + "'>\n"
                         + "  <td class='pro-thumbnail'><a href='#'><img class='img-fluid' src='" + p.getImageURL() + "' alt='Product'></a></td>\n"
                         + "  <td class='pro-title'><a href='#'>" + p.getProductName() + "</a></td>\n"
                         + "  <td class='pro-price'><span>" + formattedPrice + "</span></td>\n"
                         + "  <td class='pro-quantity'>\n"
                         + "    <span class='quantity'>\n"
-                        + "      <input type='number' min='1' max='" + p.getQuantity() + "' step='1' value='" + cartItem.getQuantity() + "'>\n"
+                        + "      <input class='pro-quantity--btn'  type='number' min='1' max='" + p.getQuantity() + "' step='1' value='" + cartItem.getQuantity() + "'>\n"
+                        + "<div class=\"quantity-nav\"><div class=\"quantity-button quantity-up\">+</div><div class=\"quantity-button quantity-down\">-</div></div>"
                         + "    </span>\n"
                         + "  </td>\n"
                         + "  <td class='pro-subtotal'><span>" + formattedAmount + "</span></td>\n"
@@ -122,6 +128,29 @@ public class CartServlet extends HttpServlet {
             cartItems = encodeCarts(cartItemList);
         } else {
             cartItems = encodeCarts(Arrays.asList(new Cart(id, quantity, "", "")));
+        }
+
+        returnCartCookie(response, cartItems);
+    }
+
+    private void updateCart(HttpServletRequest request, HttpServletResponse response) {
+        String dataItems = request.getParameter("dataTransfer");
+        String[] items = dataItems.split("@");
+
+        String cartItems = getCartCookie(request, response);
+        if (cartItems != null) {
+            List<Cart> cartItemList = parseCarts(cartItems);
+            for (String item : items) {
+                String id = item.split("_")[0];
+                String quantity = item.split("_")[1];
+                for (Cart cart : cartItemList) {
+                    if (cart.getProduct_id().equals(id)) {
+                        cart.setQuantity(Integer.parseInt(quantity));
+                    }
+                }
+            }
+
+            cartItems = encodeCarts(cartItemList);
         }
 
         returnCartCookie(response, cartItems);

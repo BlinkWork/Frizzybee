@@ -6,7 +6,7 @@
 
 $(document).ready(function () {
   showMiniCart("show");
-  $('.button-1').click(function (event) {
+  $('.addToCartBtn').click(function (event) {
     event.preventDefault();
 
     // Lấy id từ URL
@@ -14,8 +14,9 @@ $(document).ready(function () {
 
     let id = urlParams.get('id');
     let form = document.getElementById('cart-view');
-    
-    let quantity = form.elements.quantity.value;
+    if (form != null) {
+      let quantity = form.elements.quantity.value;
+    }
     let action = "add";
     $.ajax({
       type: 'POST',
@@ -68,7 +69,8 @@ function showCart(action) {
     data: {action: action},
     success: function (response) {
       console.log(response);
-      document.getElementById("tbody--cart").innerHTML = response;
+      document.getElementById("tbody--cart").innerHTML = response
+      addEventQuantityBtn();
     },
     error: function () {
       alert('Error show request.');
@@ -99,4 +101,59 @@ function addRemoveButton() {
       });
     });
   }
+}
+
+temp();
+function temp() {
+  let cartUpdate = document.querySelector(".cart-update").querySelector("a");
+
+  cartUpdate.addEventListener("click", function (event) {
+    event.preventDefault();
+    let updateItem = "update";
+    let cartItems = document.getElementById("tbody--cart").querySelectorAll("tr");
+
+    let dataTransfer = "";
+    cartItems.forEach(function (element) {
+
+      let productId = element.id.split("_")[1];
+
+      let productQuantity = element.querySelector(".pro-quantity--btn").value;
+      dataTransfer += productId + "_" + productQuantity + "@";
+    });
+    $.ajax({
+      type: 'POST',
+      url: '/FrizzyBee/cart',
+      data: {dataTransfer: dataTransfer, action: updateItem},
+      success: function () {
+        showMiniCart("show");
+        showCart("show");
+      },
+      error: function () {
+        alert('Error remove request.');
+      }
+    });
+  });
+}
+
+
+addEventQuantityBtn();
+function addEventQuantityBtn() {
+  let upQuantity = document.querySelectorAll(".quantity-up");
+  upQuantity.forEach(function (element) {
+    element.addEventListener("click", function () {
+      let inputNumber = this.closest(".quantity").querySelector("input[type='number']");
+      if (inputNumber.max - inputNumber.value > 0) {
+        inputNumber.value++;
+      }
+    });
+  });
+  let downQuantity = document.querySelectorAll(".quantity-down");
+  downQuantity.forEach(function (element) {
+    element.addEventListener("click", function () {
+      let inputNumber = this.closest(".quantity").querySelector("input[type='number']");
+      if (inputNumber.value > inputNumber.min) {
+        inputNumber.value--;
+      }
+    });
+  });
 }

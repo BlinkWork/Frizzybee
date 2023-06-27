@@ -274,7 +274,7 @@
                   <span class="quantity">
                     <input type='number' min='1' max='<%=product.getQuantity()%>' step='1' name='quantity' value='1'>
                   </span>
-                  <button type="submit" class="btn button-1" data-bs-toggle="modal" data-bs-target="#myModal">
+                  <button type="submit" class="btn button-1 addToCartBtn" data-bs-toggle="modal" data-bs-target="#myModal">
                     Add to cart
                   </button>
                 </form>
