@@ -1,4 +1,3 @@
-
 package controller;
 
 import database.UserDAO;
@@ -14,9 +13,10 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author hbich
  */
-@WebServlet(name="UserEditPanel", urlPatterns={"/editUser"})
+@WebServlet(name = "UserEditPanel", urlPatterns = {"/editUser"})
 public class UserEditPanel extends HttpServlet {
-  @Override
+
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -25,7 +25,5 @@ public class UserEditPanel extends HttpServlet {
         UserDAO u = new UserDAO();
         request.setAttribute("user", u.getUserByID(id));
         request.getRequestDispatcher("views/userEdit.jsp").forward(request, response);
-
     }
-
 }

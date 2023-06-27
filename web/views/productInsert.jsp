@@ -1,6 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%@page import="model.*" %>
 <%@page import="database.*" %>
 <!DOCTYPE html>
 <html>
@@ -121,10 +120,8 @@
     <body>
         <%
             ProductDAO p = new ProductDAO();
-            Product product = (Product) request.getAttribute("product");
             String[] cols = (String[]) p.getColNames("Product");
             String error = (String) request.getAttribute("error");
-            if (product == null) return;
         %>  
         <h1>Admin Panel</h1>
 
@@ -136,28 +133,26 @@
                 if (col.equals("product_id")) { %>
             <div class="form-group">
                 <label><%=col%></label>
-                <input type="text" name="<%=col%>" value="<%=product.getProductID()%>" readonly />
+                <input type="text" name="<%=col%>" value=""  />
             </div>
             <%} else if (col.equals("product_description")) { %> 
             <div class="product_description">
                 <label><%=col%></label>
-                <textarea name="<%=col%>" rows="10" cols="20" style="overflow-y:scroll;"><%= p.getProductInformation(Integer.toString(product.getProductID()), col) %></textarea>
+                <textarea name="<%=col%>" rows="10" cols="20" style="overflow-y:scroll;"></textarea>
             </div>
             <%} else if (col.equals("category_id") || col.equals("brand_id")) { %> 
             <div class="form-group">
                 <label><%=col%></label>
                 <select class="form-selected" name="<%=col%>">
-                    <% for (String rowData : p.getRowNames(col)) { 
-                        boolean isSelected = rowData.equals(p.getProductInformation(Integer.toString(product.getProductID()), col));
-                    %>
-                    <option value="<%=rowData%>" <%=isSelected ? "selected" : ""%>><%=rowData%></option>
+                    <% for (String rowData : p.getRowNames(col)) { %>
+                    <option value="<%=rowData%>"><%=rowData%></option>
                     <% } %>
                 </select>            
             </div>
             <% } else { %>
             <div class="form-group">
                 <label><%=col%></label>
-                <input type="text" name="<%=col%>" value="<%= p.getProductInformation(Integer.toString(product.getProductID()), col) %>"/>
+                <input type="text" name="<%=col%>" value=""/>
             </div>
             <% }
         }
@@ -166,7 +161,7 @@
             <div class="error" style="color:red;">
                 <p> <%=((error == null) ? "" : error)%>
             </div>
-            <input type="submit" value="Update">
+            <input type="submit" value="Insert">
         </form>  
     </body>
 </html>

@@ -57,7 +57,7 @@
                 border: 1px solid #ccc;
                 border-radius: 4px;
             }
-            
+
             input[type="Date"] {
                 flex: 1;
                 padding: 8px;
@@ -92,6 +92,12 @@
                 background-color: #333;
                 color: #fff;
             }
+            .form-selected {
+                flex: 1;
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
         </style>
     </head>
 
@@ -119,6 +125,15 @@
             <div class="form-group">    
                 <label><%=col%></label>
                 <input type="Date" name="<%=col%>" value="<%= u.getUserInformation(user.getUsername(), col) %>"/>
+            </div>
+            <%} else if (col.equals("isAdmin") || col.equals("isSeller")) {%>
+            <div class="form-group">   
+                <label><%=col%></label>
+
+                <select class="form-selected" name="<%=col%>">
+                    <option value="true" <%= "true".equals(u.getUserInformation(user.getUsername(), col)) ? "selected" : "" %>>true</option>
+                    <option value="false" <%= "false".equals(u.getUserInformation(user.getUsername(), col)) ? "selected" : "" %>>false</option>
+                </select>
             </div>
             <%} else { %>
             <div class="form-group">

@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/hoctap/PRJ301/Frizzybee/src/java/controller/ProductEditPanel.java</file>
-            <file>file:/D:/hoctap/PRJ301/Frizzybee/src/java/controller/ProductManagementPanel.java</file>
             <file>file:/D:/hoctap/PRJ301/Frizzybee/src/java/controller/ProductUpdateServlet.java</file>
-            <file>file:/D:/hoctap/PRJ301/Frizzybee/web/views/productEdit.jsp</file>
+            <file>file:/D:/hoctap/PRJ301/Frizzybee/web/META-INF/context.xml</file>
+            <file>file:/D:/hoctap/PRJ301/Frizzybee/web/views/productInsert.jsp</file>
+            <file>file:/D:/hoctap/PRJ301/Frizzybee/src/java/controller/UserEditPanel.java</file>
         </group>
     </open-files>
 </project-private>

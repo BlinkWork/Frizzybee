@@ -57,12 +57,24 @@
                 border-radius: 4px;
             }
 
-            .product-description {
-                flex: 1;
-                padding: 8px;
-                border: 1px solid #ccc;
-                border-radius: 4px;
+            .product_description {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                margin-bottom: 10px;
             }
+
+            .product_description label {
+                display: block;
+                padding-bottom: 10px;
+            }
+
+            .product_description textarea {
+                width: 98.5%;
+                overflow-y: scroll;
+                resize: none;
+            }
+            
             .form-selected {
                 flex: 1;
                 padding: 8px;
@@ -127,16 +139,18 @@
                 <input type="text" name="<%=col%>" value="<%=product.getProductID()%>" readonly />
             </div>
             <%} else if (col.equals("product_description")) { %> 
-            <div class="form-group">
+            <div class="product_description">
                 <label><%=col%></label>
-                <textarea class="product-description" name="<%=col%>" rows="10" cols="20" style="overflow-y:scroll;"><%= p.getProductInformation(Integer.toString(product.getProductID()), col) %></textarea>
+                <textarea name="<%=col%>" rows="10" cols="20" style="overflow-y:scroll;"><%= p.getProductInformation(Integer.toString(product.getProductID()), col) %></textarea>
             </div>
             <%} else if (col.equals("category_id") || col.equals("brand_id")) { %> 
             <div class="form-group">
                 <label><%=col%></label>
                 <select class="form-selected" name="<%=col%>">
-                    <% for (String rowData : p.getRowNames(col)) { %>
-                    <option value="<%=rowData%>"><%=rowData%></option>
+                    <% for (String rowData : p.getRowNames(col)) { 
+                        boolean isSelected = rowData.equals(p.getProductInformation(Integer.toString(product.getProductID()), col));
+                    %>
+                    <option value="<%=rowData%>" <%=isSelected ? "selected" : ""%>><%=rowData%></option>
                     <% } %>
                 </select>            
             </div>
