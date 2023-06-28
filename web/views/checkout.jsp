@@ -9,7 +9,6 @@
   <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="16x16">
   <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="18x18">
   <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="20x20">
-
   <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
   <link rel="stylesheet" href="./resources/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="./resources/css/owl.carousel.min.css">
@@ -19,17 +18,7 @@
   <link rel="stylesheet" href="./resources/css/normalize.css">
   <link rel="stylesheet" href="./resources/css/style.css">
   <link rel="stylesheet" href="./resources/css/responsive.css">
-  <style>
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 1;
-    }
-  </style>
+
 </head>
 
 <body>
@@ -54,8 +43,6 @@
         </div>
       </div>
       <!-- End BreadCrumb Area -->
-
-      <!-- Modal -->
 
 
       <!-- Start Chekout Page -->
@@ -240,31 +227,25 @@
         </div>
       </div>
 
-
-      <div id="modalTemp" style="z-index: 20; display: none;">
-        <div class="modal-dialog modal-dialog-centered modal-lg"
-          style="display: block; position: absolute; top: 70rem; right: 0; left:  0; padding-bottom: 50px; z-index: 20;">
-          <div class="modal-content">
-            <div class="modal-body text-center" style="padding-bottom: 50px; z-index: 20;">
-              <svg xmlns=" http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="w-6 h-6" style="width: 200px; stroke: green;">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-
-              <h3 class="mt-3" style="color: #ff9c4a;">Order placed successfully!</h3>
-              <div class="modal-footer">
-                Waiting for second...
-              </div>
-
+<div class="modal fade" id="my-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body" style="padding-top: 100px; padding-bottom: 100px">
+        <div class="row">
+          <div class="col-md-4 d-flex align-items-center justify-content-center">
+            <div class="bg-success text-light rounded-circle d-flex align-items-center justify-content-center" style="width: 150px; height: 150px;">
+              <i class="fas fa-check fa-4x"></i>
             </div>
           </div>
-
+          <div class="col-md-8">
+            <h4 class="modal-title mb-3">Success</h4>
+            <p>Your order has been placed successfully.</p>
+          </div>
         </div>
       </div>
-      <div class="overlay" hidden></div>
-
-
+    </div>
+  </div>
+</div>
       <%@include file="../views/servletComponents/footer_component.jsp" %>
 
 

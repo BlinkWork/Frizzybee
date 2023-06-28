@@ -40,7 +40,6 @@ public class MiniCartServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         String userName = (String) session.getAttribute("username");
-        System.out.println(userName);
         if (userName != null) {
             UserDAO udao = new UserDAO();
             String user_id = String.valueOf(udao.getUserByUsername(userName).getId());

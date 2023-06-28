@@ -16,8 +16,11 @@ $(document).ready(function ()
 
     let id = urlParams.get('id');
     let form = document.getElementById('cart-view');
+    let quantity = 1;
     if (form != null) {
-      let quantity = form.elements.quantity.value;
+      quantity = form.elements.quantity.value;
+    } else {
+      console.log(1);
     }
     let action = "add";
     $.ajax({
@@ -175,28 +178,32 @@ function addEventUpdate()
 addEventQuantityBtn();
 function addEventQuantityBtn()
 {
-  let upQuantity = document.querySelectorAll(".quantity-up");
-  upQuantity.forEach(function (element)
-  {
-    element.addEventListener("click", function ()
+  let cartQuantiy = document.querySelector(".cart--quantity");
+  if (cartQuantiy != null) {
+    let upQuantity = cartQuantiy.querySelectorAll(" .quantity-up");
+    upQuantity.forEach(function (element)
     {
-      let inputNumber = this.closest(".quantity").querySelector("input[type='number']");
-      if (inputNumber.max - inputNumber.value > 0) {
-        inputNumber.value++;
-      }
+      element.addEventListener("click", function ()
+      {
+        let inputNumber = this.closest(".quantity").querySelector("input[type='number']");
+        if (inputNumber.max - inputNumber.value > 0) {
+//        inputNumber.value++;
+        }
+      });
     });
-  });
-  let downQuantity = document.querySelectorAll(".quantity-down");
-  downQuantity.forEach(function (element)
-  {
-    element.addEventListener("click", function ()
+    let downQuantity = cartQuantiy.querySelectorAll(".cart--quantity .quantity-down");
+    downQuantity.forEach(function (element)
     {
-      let inputNumber = this.closest(".quantity").querySelector("input[type='number']");
-      if (inputNumber.value > inputNumber.min) {
-        inputNumber.value--;
-      }
+      element.addEventListener("click", function ()
+      {
+        let inputNumber = this.closest(".quantity").querySelector("input[type='number']");
+        if (inputNumber.value > inputNumber.min) {
+//        inputNumber.value--;
+        }
+      });
     });
-  });
+  }
+
 }
 addSubTotalEvent();
 function addSubTotalEvent()

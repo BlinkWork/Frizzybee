@@ -16,6 +16,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.*;
 import controller.*;
+import static controller.CartServlet.parseCarts;
+import database.CartDAO;
 import database.ProductDAO;
 import database.UserDAO;
 import jakarta.servlet.http.HttpSession;
@@ -65,6 +67,28 @@ public class CheckoutServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        HttpSession session = request.getSession();
+        String userName = (String) session.getAttribute("username");
+        if (userName != null) {
+            UserDAO udao = new UserDAO();
+            String user_id = String.valueOf(udao.getUserByUsername(userName).getId());
+            removeCartItems(request, response, user_id);
+        }
+        session.setAttribute("cartItems", null);
+    }
+
+    private void removeCartItems(HttpServletRequest request, HttpServletResponse response, String user_id) {
+        CartServlet sessionHandle = new CartServlet();
+        String cartItems = sessionHandle.getCartSession(request, response, user_id);
+
+        CartDAO cdao = new CartDAO();
+        if (cartItems != null) {
+            List<Cart> cartItemList = parseCarts(cartItems);
+            for (Cart cartItem : cartItemList) {
+                cdao.deleteAllCartsByUserId(Integer.parseInt(cartItem.getUser_id()));
+            }
+        }
 
     }
 

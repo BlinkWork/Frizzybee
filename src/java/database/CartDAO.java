@@ -66,6 +66,18 @@ public class CartDAO extends MyDAO {
         }
     }
 
+    public void deleteAllCartsByUserId(int userId) {
+        xSql = "delete from [dbo].[Cart] where [user_id]=?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void insert(Cart x) {
         xSql = "INSERT INTO [dbo].[Cart] ([product_id] ,[quantity] ,[user_id])\n"
                 + "     VALUES (?,?,?)";
@@ -129,7 +141,7 @@ public class CartDAO extends MyDAO {
             if (x.getUser_id().trim().isEmpty() == false) {
                 cart_id = Integer.parseInt(x.getCart_id());
             }
-            System.out.println(x.getProduct_id() + "-" + quantity + "-" + cart_id + "-" + user_id);
+//            System.out.println(x.getProduct_id() + "-" + quantity + "-" + cart_id + "-" + user_id);
 
             ps.setInt(1, product_id);
             ps.setInt(2, quantity);

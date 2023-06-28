@@ -103,7 +103,7 @@ public class CartServlet extends HttpServlet {
                         + "  <td class='pro-quantity'>\n"
                         + "    <span class='quantity'>\n"
                         + "      <input class='pro-quantity--btn'  type='number' min='1' max='" + p.getQuantity() + "' step='1' value='" + cartItem.getQuantity() + "'>\n"
-                        + "<div class=\"quantity-nav\"><div class=\"quantity-button quantity-up\">+</div><div class=\"quantity-button quantity-down\">-</div></div>"
+                        + "<div class=\"quantity-nav cart--quantity\"><div class=\"quantity-button quantity-up\">+</div><div class=\"quantity-button quantity-down\">-</div></div>"
                         + "    </span>\n"
                         + "  </td>\n"
                         + "  <td class='pro-subtotal'><span>" + formattedAmount + "</span></td>\n"
@@ -252,7 +252,7 @@ public class CartServlet extends HttpServlet {
             List<Cart> listTemp = cdao.getCarts(Integer.parseInt(user_id));
             if (listTemp != null) {
                 for (Cart cart : listTemp) {
-                    System.out.println(cart.getCart_id() + "-" + cart.getUser_id() + "-" + cart.getProduct_id() + "-" + cart.getQuantity());
+//                    System.out.println(cart.getCart_id() + "-" + cart.getUser_id() + "-" + cart.getProduct_id() + "-" + cart.getQuantity());
 
                     sb.append(cart.getUser_id()).append("_").append(cart.getCart_id()).append("_");
                     sb.append(cart.getProduct_id()).append("_").append(cart.getQuantity()).append("@");

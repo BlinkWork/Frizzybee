@@ -22,22 +22,50 @@ function calAmount(shipCost)
   let totalAmount = ((subPrice * 1) + shipCost) + "";
   totalAmount = totalAmount.split(".")[ 0 ] + "," + totalAmount.split(".")[ 1 ];
   document.getElementById("totalAmount").textContent = "$" + totalAmount;
-  document.querySelector(".grand-total").querySelector("span").textContent = "$" + totalAmount;
+  if (document.querySelector(".grand-total") != null) {
+    document.querySelector(".grand-total").querySelector("span").textContent = "$" + totalAmount;
+  }
 }
 
-document.querySelector(".proceedOrder").addEventListener("click", function (event)
-{
-  document.querySelector(".loadPlaced").style.display = "";
-  setTimeout(function ()
-  {
-    document.querySelector(".loadPlaced").style.display = 'none';
-    document.getElementById("modalTemp").style.display = "";
-    document.querySelector(".overlay").removeAttribute("hidden");
-    setTimeout(function ()
-    {
-      document.querySelector(".overlay").setAttribute("hidden");
+
+if (document.querySelector(".proceedOrder") != null) {
+  let placeOrder = document.querySelector(".proceedOrder");
+  placeOrder.addEventListener("click", function (event) {
+    event.preventDefault();
+    $.ajax({
+      type: 'POST',
+      url: '/FrizzyBee/checkout',
+      data: {},
+      success: function (response)
+      {
+        console.log(response)
+      },
+      error: function ()
+      {
+        alert('Error checkout request.');
+      }
+    });
+    
+    showLoading();
+    showModalSuccess();
+  })
+}
+
+function showModalSuccess() {
+  setTimeout(function () {
+    $('#my-modal').modal('show');
+    setTimeout(function () {
+      $('#my-modal').modal('hide');
       window.location.href = "./shop";
-    }, 2000);
+    }, 1000);
   }, 2000);
-});
+}
+
+function showLoading() {
+  let loadPlaced = document.querySelector(".loadPlaced");
+  loadPlaced.style.display = "";
+  setTimeout(function () {
+    loadPlaced.style.display = "none";
+  }, 2000);
+}
 
