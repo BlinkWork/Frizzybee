@@ -5,6 +5,7 @@
 package controller;
 
 import static controller.CartServlet.parseCarts;
+import database.CartDAO;
 import database.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,6 +15,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.text.DecimalFormat;
 import java.util.List;
 import model.Cart;
@@ -43,7 +45,7 @@ public class MiniCartServlet extends HttpServlet {
 
     private String returnMiniCart(HttpServletRequest request, HttpServletResponse response) {
         ProductDAO dao = new ProductDAO();
-        String cartItems = getCartCookie(request, response);
+        String cartItems = getCartSession(request, response);
         String data = "<i class=\"fas fa-shopping-cart\"></i>\n"
                 + "<span class=\"counter\">0></span>\n"
                 + "<span class=\"counter-cart\"><small>Your Cart</small>$0</span>\n"
@@ -92,22 +94,24 @@ public class MiniCartServlet extends HttpServlet {
 
             for (int i = listItemCarts.size() - 1; i >= 0; i--) {
                 Cart cartItem = listItemCarts.get(i);
-                Product p = dao.getProductByID(cartItem.getProduct_id());
-                if (p != null) {
-                    double price = p.getPrice() * (100 - p.getDiscount()) / 100;
-                    String formattedPrice = df.format(price);
-                    double amount = price * cartItem.getQuantity();
-                    String formattedAmount = df.format(amount);
-                    if (cartItem.getQuantity() > p.getQuantity()) {
-                        cartItem.setQuantity(p.getQuantity());
+                if (cartItem != null) {
+                    Product p = dao.getProductByID(cartItem.getProduct_id());
+                    if (p != null) {
+                        double price = p.getPrice() * (100 - p.getDiscount()) / 100;
+                        String formattedPrice = df.format(price);
+                        double amount = price * cartItem.getQuantity();
+                        String formattedAmount = df.format(amount);
+                        if (cartItem.getQuantity() > p.getQuantity()) {
+                            cartItem.setQuantity(p.getQuantity());
+                        }
+                        String dataItem = "<li class='cart-list-single'>\n"
+                                + "<img src='" + p.getImageURL() + "' alt='img'>\n"
+                                + "<h5><a href='/productDetails?id=" + p.getProductID() + "'>" + p.getProductName() + "</a></h5>\n"
+                                + "<span class='price'>$ " + p.getPrice() + " X " + cartItem.getQuantity() + "</span>\n"
+                                + "<div class='close'><a href=\"#\" class=\"removeProduct productId_" + cartItem.getProduct_id() + "\" style=\"color: black\"><i class=\"fas fa-times\"></i></div>\n"
+                                + "</li>";
+                        data += dataItem + "\n";
                     }
-                    String dataItem = "<li class='cart-list-single'>\n"
-                            + "<img src='" + p.getImageURL() + "' alt='img'>\n"
-                            + "<h5><a href='/productDetails?id=" + p.getProductID() + "'>" + p.getProductName() + "</a></h5>\n"
-                            + "<span class='price'>$ " + p.getPrice() + " X " + cartItem.getQuantity() + "</span>\n"
-                            + "<div class='close'><a href=\"#\" class=\"removeProduct productId_" + cartItem.getProduct_id() + "\" style=\"color: black\"><i class=\"fas fa-times\"></i></div>\n"
-                            + "</li>";
-                    data += dataItem + "\n";
                 }
             }
 
@@ -148,6 +152,41 @@ public class MiniCartServlet extends HttpServlet {
                     break;
                 }
             }
+        }
+        if (cartItems.trim().isEmpty() || cartItems == null) {
+            StringBuilder sb = new StringBuilder();
+            CartDAO cdao = new CartDAO();
+            List<Cart> listTemp = cdao.getCarts();
+            if (listTemp != null) {
+                for (Cart cart : listTemp) {
+                    sb.append(cart.getUser_id()).append("_").append(cart.getCart_id()).append("_");
+
+                    sb.append(cart.getProduct_id()).append("_").append(cart.getQuantity()).append("@");
+                }
+            }
+            cartItems = sb.toString();
+        }
+        return cartItems;
+    }
+    
+     public String getCartSession(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        String cartItems = (String) session.getAttribute("cartItems");
+        if (cartItems == null || cartItems.trim().isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            CartDAO cdao = new CartDAO();
+            List<Cart> listTemp = cdao.getCarts();
+            if (listTemp != null) {
+                for (Cart cart : listTemp) {
+//                    System.out.println(cart.getCart_id() + "-" + cart.getUser_id() + "-" + cart.getProduct_id() + "-" + cart.getQuantity());
+
+                    sb.append(cart.getUser_id()).append("_").append(cart.getCart_id()).append("_");
+                    sb.append(cart.getProduct_id()).append("_").append(cart.getQuantity()).append("@");
+                }
+            } else {
+            }
+            cartItems = sb.toString();
+            session.setAttribute("cartItems", cartItems);
         }
         return cartItems;
     }

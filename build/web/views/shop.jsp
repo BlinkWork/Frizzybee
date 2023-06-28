@@ -270,8 +270,6 @@
           item.children[0].remove();
         }
       });
-
-
     </script>
 
   </body>

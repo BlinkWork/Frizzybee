@@ -30,7 +30,7 @@ public class CheckoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         CartServlet cookieHandle = new CartServlet();
-        String cartItems = cookieHandle.getCartCookie(request, response);
+        String cartItems = cookieHandle.getCartSession(request, response);
         ProductDAO dao = new ProductDAO();
         String data = "";
         if (cartItems != null) {

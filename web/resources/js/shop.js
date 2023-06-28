@@ -9,7 +9,7 @@ document.getElementById("clearSelection").addEventListener("click", function () 
   sortOption = 1;
   let searchInput = searchBtn.querySelector('input[name="search"]');
   searchInput.value = "";
-  showListProduct();
+  showListProduct(1);
 })
 
 addEventPageNumber();
@@ -23,7 +23,7 @@ function addEventPageNumber() {
       }
       this.innerHTML = "<span>" + this.textContent + "</span>";
       currentPage = this.textContent;
-      showListProduct();
+      showListProduct(0);
     });
   }
 }
@@ -34,14 +34,14 @@ for (let i = 0; i < tagLinks.length; i++) {
   tagLinks[i].addEventListener('click', function (event) {
     event.preventDefault();
     tag = tagLinks[i].textContent;
-    showListProduct();
+    showListProduct(1);
   });
 }
 
 let selector = document.getElementById("sort-select");
 selector.addEventListener('change', function (event) {
   sortOption = selector.value;
-  showListProduct();
+  showListProduct(1);
 });
 
 let searchBtn = document.getElementById("form-searching");
@@ -49,21 +49,18 @@ searchBtn.addEventListener('submit', function (event) {
   event.preventDefault();
   let searchInput = searchBtn.querySelector('input[name="search"]');
   searchValue = searchInput.value;
-  showListProduct();
+  showListProduct(1);
 });
 
 
 
-function showListProduct() {
+function showListProduct(pageBack) {
   let paging = currentPage;
   let sorting = sortOption;
   let taging = tag;
   let searching = searchValue;
   let action = "show";
-  console.log(paging)
-
-
-
+  console.log(pageBack);
   $.ajax({
     type: 'POST',
     url: '/FrizzyBee/shop',

@@ -28,6 +28,7 @@ public class ShowListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         String query = "select * from [dbo].[Product]";
         if (getScope(request, response).trim().isEmpty() == false) {
             query = query + " where " + getScope(request, response);
@@ -43,7 +44,6 @@ public class ShowListServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         ProductDAO dao = new ProductDAO();
 
         String action = request.getParameter("action");

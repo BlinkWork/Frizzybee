@@ -136,7 +136,7 @@
                     <%
                         CartServlet cartTest = new CartServlet();
                         
-                        String cartItems = cartTest.getCartCookie(request, response);
+                        String cartItems = cartTest.getCartSession(request, response);
                         List<Cart> listCartId = null;
                         if (cartItems != null) {
                           listCartId = cartTest.parseCarts(cartItems);

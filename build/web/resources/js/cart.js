@@ -124,39 +124,44 @@ function addRemoveButton()
 addEventUpdate();
 function addEventUpdate()
 {
-  let cartUpdate = document.querySelector(".cart-update").querySelector("a");
-
-  cartUpdate.addEventListener("click", function (event)
-  {
-    event.preventDefault();
-    let updateItem = "update";
-    let cartItems = document.getElementById("tbody--cart").querySelectorAll("tr");
-
-    let dataTransfer = "";
-    cartItems.forEach(function (element)
-    {
-
-      let productId = element.id.split("_")[ 1 ];
-
-      let productQuantity = element.querySelector(".pro-quantity--btn").value;
-      dataTransfer += productId + "_" + productQuantity + "@";
-    });
-    $.ajax({
-      type: 'POST',
-      url: '/FrizzyBee/cart',
-      data: {dataTransfer: dataTransfer, action: updateItem},
-      success: function ()
+  let cartUpdateTemp = document.querySelector(".cart-update")
+  if (cartUpdateTemp != null) {
+    cartUpdate = cartUpdateTemp.querySelector("a");
+    if (cartUpdate != null) {
+      cartUpdate.addEventListener("click", function (event)
       {
-        showMiniCart("show");
-        showCart("show");
+        event.preventDefault();
+        let updateItem = "update";
+        let cartItems = document.getElementById("tbody--cart").querySelectorAll("tr");
 
-      },
-      error: function ()
-      {
-        alert('Error remove request.');
-      }
-    });
-  });
+        let dataTransfer = "";
+        cartItems.forEach(function (element)
+        {
+
+          let productId = element.id.split("_")[ 1 ];
+
+          let productQuantity = element.querySelector(".pro-quantity--btn").value;
+          dataTransfer += productId + "_" + productQuantity + "@";
+        });
+        $.ajax({
+          type: 'POST',
+          url: '/FrizzyBee/cart',
+          data: {dataTransfer: dataTransfer, action: updateItem},
+          success: function ()
+          {
+            showMiniCart("show");
+            showCart("show");
+
+          },
+          error: function ()
+          {
+            alert('Error remove request.');
+          }
+        });
+      });
+    }
+  }
+
 }
 
 
@@ -190,13 +195,18 @@ addSubTotalEvent();
 function addSubTotalEvent()
 {
   let total = 0;
-  let items = document.getElementById("tbody--cart").querySelectorAll("tr");
-  items.forEach(function (element)
-  {
-    let subtotalString = element.querySelector(".pro-subtotal").textContent;
-    let subtotal = subtotalString.split(",")[ 0 ] + "." + subtotalString.split(",")[ 1 ];
-    total += subtotal * 1;
-  });
-  document.getElementById("subTotal").innerHTML = "$" + total.toFixed(2);
-  document.querySelector(".total-amount").innerHTML = "$" + (total + 10).toFixed(2);
+  let term = document.getElementById("tbody--cart");
+  if (term != null) {
+    let items = term.querySelectorAll("tr");
+    items.forEach(function (element)
+    {
+      let subtotalString = element.querySelector(".pro-subtotal").textContent;
+      let subtotal = subtotalString.split(",")[ 0 ] + "." + subtotalString.split(",")[ 1 ];
+      total += subtotal * 1;
+    });
+    document.getElementById("subTotal").innerHTML = "$" + total.toFixed(2);
+    document.querySelector(".total-amount").innerHTML = "$" + (total + 10).toFixed(2);
+  }
+
+
 }
