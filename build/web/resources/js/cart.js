@@ -45,6 +45,13 @@ if (backShop != null) {
     window.location.href = "./shop";
   });
 }
+let loginFunction = document.getElementById("login--function");
+if (loginFunction != null) {
+  loginFunction.addEventListener("click", function ()
+  {
+    window.location.href = "./login";
+  });
+}
 
 let viewCart = document.getElementById("back--shop");
 if (viewCart != null) {
@@ -106,7 +113,7 @@ function addRemoveButton()
           type: 'POST',
           url: '/FrizzyBee/cart',
           data: {id: productId, action: action},
-          success: function ()
+          success: function (response)
           {
             showMiniCart("show");
             showCart("show");

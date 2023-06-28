@@ -33,6 +33,10 @@ public class LogoutServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.removeAttribute("username");
+        session.removeAttribute("cartItems");
+        if (session != null) {
+            session.invalidate();
+        }
         String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
                 + request.getContextPath();
         response.sendRedirect(url + "/index.jsp");

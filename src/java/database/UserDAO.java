@@ -354,8 +354,8 @@ public class UserDAO extends MyDAO {
 
         List<User> temp = dao.getUsers();
         for (User te : temp) {
-            System.out.println(te.getPassword());
-            System.out.println(dao.loginAccount(te.getUsername(), te.getPassword()));
+            System.out.println(te.getId());
+
         }       
         
     }

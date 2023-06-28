@@ -106,8 +106,13 @@ function addCartEvent() {
       type: 'POST',
       url: '/FrizzyBee/cart',
       data: {id: idAdd, quantity: 1, action: add},
-      success: function () {
+      success: function (response) {
         showMiniCart("add");
+        if (response == "user not found") {
+          $('#modal--warning--login').modal('show');
+        } else {
+
+        }
       },
       error: function () {
         alert('Error add request.');

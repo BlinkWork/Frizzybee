@@ -89,6 +89,27 @@
               </div>
               
             </div>
+            
+            <!-- Modal -->
+              <div class="modal fade" id="modal--warning--login" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="myModalLabel">Add to cart successfully</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body warning-login">
+                      You must login before add something to cart !!!
+                    </div>
+                    <div class="modal-footer">
+                      <button style="display: none" type="button" id="login--function" class="btn btn-warning warning-login">Login</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+             
+                  
             <!-- Shop -->
 
             <div id="productList">

@@ -177,7 +177,6 @@ public class MiniCartServlet extends HttpServlet {
 //        }
 //        return cartItems;
 //    }
-
     public String getCartSession(HttpServletRequest request, HttpServletResponse response, String user_id) {
         HttpSession session = request.getSession();
         String cartItems = (String) session.getAttribute("cartItems");

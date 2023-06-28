@@ -42,8 +42,9 @@ public class CartServlet extends HttpServlet {
             showCartList(request, response, user_id);
             RequestDispatcher rd = request.getRequestDispatcher("./views/cart.jsp");
             rd.forward(request, response);
+        } else {
+            response.sendRedirect("./views/404.jsp");
         }
-
     }
 
     @Override
@@ -51,7 +52,7 @@ public class CartServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         String userName = (String) session.getAttribute("username");
-        System.out.println(userName);
+
         if (userName != null) {
             UserDAO udao = new UserDAO();
             String user_id = String.valueOf(udao.getUserByUsername(userName).getId());
@@ -70,6 +71,11 @@ public class CartServlet extends HttpServlet {
                 updateCart(request, response, user_id);
                 showCartList(request, response, user_id);
             }
+        } else {
+            String data = "user not found";
+            response.setContentType("text/plain");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(data);
         }
 
     }
@@ -141,8 +147,8 @@ public class CartServlet extends HttpServlet {
                 }
             }
             if (!found) {
-                cartItemList.add(new Cart(id, quantity, "", ""));
-                cdao.insert(new Cart(id, quantity, "1", "1"));
+                cartItemList.add(new Cart(id, quantity, "", user_id));
+                cdao.insert(new Cart(id, quantity, "1", user_id));
             }
             cartItems = encodeCarts(cartItemList);
         } else {
