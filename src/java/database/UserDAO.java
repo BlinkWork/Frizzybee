@@ -221,11 +221,11 @@ public class UserDAO extends MyDAO {
                     break;
                 case "seller":
                     ps.setBoolean(9, true);
-                    ps.setBoolean(10, true);
+                    ps.setBoolean(10, false);
                     break;
                 default:
-                    ps.setBoolean(9, true);
-                    ps.setBoolean(10, true);
+                    ps.setBoolean(9, false);
+                    ps.setBoolean(10, false);
                     break;
             }
             ps.executeUpdate();
