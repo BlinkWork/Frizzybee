@@ -21,7 +21,6 @@
   <link rel="stylesheet" href="./resources/css/responsive.css">
 
 </head>
-
 <body>
   <%@include file="../views/servletComponents/header_component.jsp" %>
 

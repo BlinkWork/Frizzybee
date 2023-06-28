@@ -23,7 +23,7 @@ $(document).ready(function ()
     $.ajax({
       type: 'POST',
       url: '/FrizzyBee/cart',
-      data: { id: id, quantity: quantity, action: action },
+      data: {id: id, quantity: quantity, action: action},
       success: function ()
       {
         showMiniCart("add");
@@ -59,7 +59,7 @@ function showMiniCart(action)
   $.ajax({
     type: 'POST',
     url: '/FrizzyBee/miniCart',
-    data: { action: action },
+    data: {action: action},
     success: function (response)
     {
       document.querySelector(".mini-cart-icon").innerHTML = response;
@@ -76,7 +76,7 @@ function showCart(action)
   $.ajax({
     type: 'POST',
     url: '/FrizzyBee/cart',
-    data: { action: action },
+    data: {action: action},
     success: function (response)
     {
       document.getElementById("tbody--cart").innerHTML = response;
@@ -105,7 +105,7 @@ function addRemoveButton()
         $.ajax({
           type: 'POST',
           url: '/FrizzyBee/cart',
-          data: { id: productId, action: action },
+          data: {id: productId, action: action},
           success: function ()
           {
             showMiniCart("show");
@@ -144,7 +144,7 @@ function addEventUpdate()
     $.ajax({
       type: 'POST',
       url: '/FrizzyBee/cart',
-      data: { dataTransfer: dataTransfer, action: updateItem },
+      data: {dataTransfer: dataTransfer, action: updateItem},
       success: function ()
       {
         showMiniCart("show");
@@ -196,9 +196,7 @@ function addSubTotalEvent()
     let subtotalString = element.querySelector(".pro-subtotal").textContent;
     let subtotal = subtotalString.split(",")[ 0 ] + "." + subtotalString.split(",")[ 1 ];
     total += subtotal * 1;
-    total = total.toFixed(2);
   });
-  document.getElementById("subTotal").innerHTML = "$" + total;
-
-  document.querySelector(".total-amount").innerHTML = "$" + (total + 10);
+  document.getElementById("subTotal").innerHTML = "$" + total.toFixed(2);
+  document.querySelector(".total-amount").innerHTML = "$" + (total + 10).toFixed(2);
 }

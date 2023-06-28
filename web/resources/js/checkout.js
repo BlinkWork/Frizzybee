@@ -33,6 +33,11 @@ document.querySelector(".proceedOrder").addEventListener("click", function (even
     document.querySelector(".loadPlaced").style.display = 'none';
     document.getElementById("modalTemp").style.display = "";
     document.querySelector(".overlay").removeAttribute("hidden");
+    setTimeout(function ()
+    {
+      document.querySelector(".overlay").setAttribute("hidden");
+      window.location.href = "./shop";
+    }, 2000);
   }, 2000);
 });
 

@@ -59,14 +59,16 @@ public class MiniCartServlet extends HttpServlet {
             for (Cart cartItem : listCartId) {
                 Product p = dao.getProductByID(cartItem.getProduct_id());
 
-                double price = p.getPrice() * (100 - p.getDiscount()) / 100;
-                String formattedPrice = df.format(price);
-                double amount = price * cartItem.getQuantity();
-                String formattedAmount = df.format(amount);
-                if (cartItem.getQuantity() > p.getQuantity()) {
-                    cartItem.setQuantity(p.getQuantity());
+                if (p != null) {
+                    double price = p.getPrice() * (100 - p.getDiscount()) / 100;
+                    String formattedPrice = df.format(price);
+                    double amount = price * cartItem.getQuantity();
+                    String formattedAmount = df.format(amount);
+                    if (cartItem.getQuantity() > p.getQuantity()) {
+                        cartItem.setQuantity(p.getQuantity());
+                    }
+                    totalPrice += amount;
                 }
-                totalPrice += amount;
             }
             String sizeCart = String.valueOf(listCartId.size());
             if (listCartId.size() > 10) {
@@ -91,20 +93,22 @@ public class MiniCartServlet extends HttpServlet {
             for (int i = listItemCarts.size() - 1; i >= 0; i--) {
                 Cart cartItem = listItemCarts.get(i);
                 Product p = dao.getProductByID(cartItem.getProduct_id());
-                double price = p.getPrice() * (100 - p.getDiscount()) / 100;
-                String formattedPrice = df.format(price);
-                double amount = price * cartItem.getQuantity();
-                String formattedAmount = df.format(amount);
-                if (cartItem.getQuantity() > p.getQuantity()) {
-                    cartItem.setQuantity(p.getQuantity());
+                if (p != null) {
+                    double price = p.getPrice() * (100 - p.getDiscount()) / 100;
+                    String formattedPrice = df.format(price);
+                    double amount = price * cartItem.getQuantity();
+                    String formattedAmount = df.format(amount);
+                    if (cartItem.getQuantity() > p.getQuantity()) {
+                        cartItem.setQuantity(p.getQuantity());
+                    }
+                    String dataItem = "<li class='cart-list-single'>\n"
+                            + "<img src='" + p.getImageURL() + "' alt='img'>\n"
+                            + "<h5><a href='/productDetails?id=" + p.getProductID() + "'>" + p.getProductName() + "</a></h5>\n"
+                            + "<span class='price'>$ " + p.getPrice() + " X " + cartItem.getQuantity() + "</span>\n"
+                            + "<div class='close'><a href=\"#\" class=\"removeProduct productId_" + cartItem.getProduct_id() + "\" style=\"color: black\"><i class=\"fas fa-times\"></i></div>\n"
+                            + "</li>";
+                    data += dataItem + "\n";
                 }
-                String dataItem = "<li class='cart-list-single'>\n"
-                        + "<img src='" + p.getImageURL() + "' alt='img'>\n"
-                        + "<h5><a href='/productDetails?id=" + p.getProductID() + "'>" + p.getProductName() + "</a></h5>\n"
-                        + "<span class='price'>$ " + p.getPrice() + " X " + cartItem.getQuantity() + "</span>\n"
-                        + "<div class='close'><a href=\"#\" class=\"removeProduct productId_" + cartItem.getProduct_id() + "\" style=\"color: black\"><i class=\"fas fa-times\"></i></div>\n"
-                        + "</li>";
-                data += dataItem + "\n";
             }
 
             if (listCartId.size() > 3) {

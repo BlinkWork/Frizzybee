@@ -87,37 +87,12 @@
                       <input type="email" id="l_eamil" placeholder="Email Address" required="required">
                     </div>
                     <div class="single-input-item">
-                      <label for="company_name" class="required"> Company Name </label>
-                      <input type="text" id="company_name" placeholder="Company Name ">
-                    </div>
-                    <div class="single-input-item">
-                      <label for="Country" class="required"> Country </label>
-                      <select class="form-select" id="Country">
-                        <option selected>Bangladesh</option>
-                        <option value="1">India</option>
-                        <option value="2">Pakistan</option>
-                        <option value="3">London</option>
-                      </select>
-                    </div>
-                    <div class="single-input-item">
-                      <label for="Street_address" class="required"> Street address Line 1</label>
-                      <input type="text" id="Street_address" placeholder="Street address Line 1">
-                    </div>
-                    <div class="single-input-item">
-                      <label for="Street_address_2" class="required"> Street address Line 2</label>
-                      <input type="text" id="Street_address_2" placeholder="Street address Line 2">
+                      <label for="Street_address" class="required"> Street address</label>
+                      <input type="text" id="Street_address" placeholder="Street address">
                     </div>
                     <div class="single-input-item">
                       <label for="city" class="required"> Town / City </label>
                       <input type="text" id="city" placeholder=" Town / City ">
-                    </div>
-                    <div class="single-input-item">
-                      <label for="Divition" class="required">State / Divition </label>
-                      <input type="text" id="Divition" placeholder=" State / Divition ">
-                    </div>
-                    <div class="single-input-item">
-                      <label for="postcode" class="required">Postcode / ZIP</label>
-                      <input type="text" id="postcode" placeholder=" Postcode / ZIP ">
                     </div>
                     <div class="single-input-item">
                       <label for="phone" class="required">Phone</label>
