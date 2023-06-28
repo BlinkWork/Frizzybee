@@ -7,6 +7,7 @@ package controller;
 import static controller.CartServlet.parseCarts;
 import database.CartDAO;
 import database.ProductDAO;
+import database.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -37,15 +38,23 @@ public class MiniCartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String miniCartData = returnMiniCart(request, response);
-        response.setContentType("text/plain");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(miniCartData);
+        HttpSession session = request.getSession();
+        String userName = (String) session.getAttribute("username");
+        System.out.println(userName);
+        if (userName != null) {
+            UserDAO udao = new UserDAO();
+            String user_id = String.valueOf(udao.getUserByUsername(userName).getId());
+            String miniCartData = returnMiniCart(request, response, user_id);
+            response.setContentType("text/plain");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(miniCartData);
+        }
+
     }
 
-    private String returnMiniCart(HttpServletRequest request, HttpServletResponse response) {
+    private String returnMiniCart(HttpServletRequest request, HttpServletResponse response, String user_id) {
         ProductDAO dao = new ProductDAO();
-        String cartItems = getCartSession(request, response);
+        String cartItems = getCartSession(request, response, user_id);
         String data = "<i class=\"fas fa-shopping-cart\"></i>\n"
                 + "<span class=\"counter\">0></span>\n"
                 + "<span class=\"counter-cart\"><small>Your Cart</small>$0</span>\n"
@@ -142,40 +151,42 @@ public class MiniCartServlet extends HttpServlet {
         return data;
     }
 
-    public String getCartCookie(HttpServletRequest request, HttpServletResponse response) {
-        Cookie[] cookies = request.getCookies();
-        String cartItems = null;
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("cartItems")) {
-                    cartItems = cookie.getValue();
-                    break;
-                }
-            }
-        }
-        if (cartItems.trim().isEmpty() || cartItems == null) {
-            StringBuilder sb = new StringBuilder();
-            CartDAO cdao = new CartDAO();
-            List<Cart> listTemp = cdao.getCarts();
-            if (listTemp != null) {
-                for (Cart cart : listTemp) {
-                    sb.append(cart.getUser_id()).append("_").append(cart.getCart_id()).append("_");
+//    public String getCartCookie(HttpServletRequest request, HttpServletResponse response) {
+//        Cookie[] cookies = request.getCookies();
+//        String cartItems = null;
+//        if (cookies != null) {
+//            for (Cookie cookie : cookies) {
+//                if (cookie.getName().equals("cartItems")) {
+//                    cartItems = cookie.getValue();
+//                    break;
+//                }
+//            }
+//        }
+//        if (cartItems.trim().isEmpty() || cartItems == null) {
+//            StringBuilder sb = new StringBuilder();
+//            CartDAO cdao = new CartDAO();
+//            List<Cart> listTemp = cdao.getCarts();
+//            if (listTemp != null) {
+//                for (Cart cart : listTemp) {
+//                    sb.append(cart.getUser_id()).append("_").append(cart.getCart_id()).append("_");
+//
+//                    sb.append(cart.getProduct_id()).append("_").append(cart.getQuantity()).append("@");
+//                }
+//            }
+//            cartItems = sb.toString();
+//        }
+//        return cartItems;
+//    }
 
-                    sb.append(cart.getProduct_id()).append("_").append(cart.getQuantity()).append("@");
-                }
-            }
-            cartItems = sb.toString();
-        }
-        return cartItems;
-    }
-    
-     public String getCartSession(HttpServletRequest request, HttpServletResponse response) {
+    public String getCartSession(HttpServletRequest request, HttpServletResponse response, String user_id) {
         HttpSession session = request.getSession();
         String cartItems = (String) session.getAttribute("cartItems");
         if (cartItems == null || cartItems.trim().isEmpty()) {
             StringBuilder sb = new StringBuilder();
             CartDAO cdao = new CartDAO();
-            List<Cart> listTemp = cdao.getCarts();
+//            List<Cart> listTemp = cdao.getCarts();
+            List<Cart> listTemp = cdao.getCarts(Integer.parseInt(user_id));
+
             if (listTemp != null) {
                 for (Cart cart : listTemp) {
 //                    System.out.println(cart.getCart_id() + "-" + cart.getUser_id() + "-" + cart.getProduct_id() + "-" + cart.getQuantity());

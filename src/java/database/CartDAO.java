@@ -31,6 +31,30 @@ public class CartDAO extends MyDAO {
         return (t);
     }
 
+    public List<Cart> getCarts(int user_id) {
+        List<Cart> carts = new ArrayList<>();
+        xSql = "SELECT * FROM [dbo].[Cart] WHERE user_id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, user_id);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int cart_id = rs.getInt("cart_id");
+                int product_id = rs.getInt("product_id");
+                int quanity = rs.getInt("quantity");
+
+                Cart cart = new Cart(String.valueOf(product_id), quanity, String.valueOf(cart_id), String.valueOf(user_id));
+                carts.add(cart);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return carts;
+    }
+
     public void deleteAllCarts() {
         xSql = "DELETE FROM [dbo].[Cart]";
         try {

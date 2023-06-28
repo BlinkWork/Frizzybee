@@ -6,6 +6,7 @@ package controller;
 
 import database.CartDAO;
 import database.ProductDAO;
+import database.UserDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -33,9 +34,16 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        showCartList(request, response);
-        RequestDispatcher rd = request.getRequestDispatcher("./views/cart.jsp");
-        rd.forward(request, response);
+        HttpSession session = request.getSession();
+        String userName = (String) session.getAttribute("username");
+        if (userName != null) {
+            UserDAO udao = new UserDAO();
+            String user_id = String.valueOf(udao.getUserByUsername(userName).getId());
+            showCartList(request, response, user_id);
+            RequestDispatcher rd = request.getRequestDispatcher("./views/cart.jsp");
+            rd.forward(request, response);
+        }
+
     }
 
     @Override
@@ -44,28 +52,31 @@ public class CartServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String userName = (String) session.getAttribute("username");
         System.out.println(userName);
-        
-        
-        String action = request.getParameter("action");
-        if (action.equals("add")) {
-            addToCart(request, response);
+        if (userName != null) {
+            UserDAO udao = new UserDAO();
+            String user_id = String.valueOf(udao.getUserByUsername(userName).getId());
+            String action = request.getParameter("action");
+            if (action.equals("add")) {
+                addToCart(request, response, user_id);
+            }
+            if (action.equals("remove")) {
+                removeFromCart(request, response, user_id);
+                showCartList(request, response, user_id);
+            }
+            if (action.equals("show")) {
+                showCartList(request, response, user_id);
+            }
+            if (action.equals("update")) {
+                updateCart(request, response, user_id);
+                showCartList(request, response, user_id);
+            }
         }
-        if (action.equals("remove")) {
-            removeFromCart(request, response);
-            showCartList(request, response);
-        }
-        if (action.equals("show")) {
-            showCartList(request, response);
-        }
-        if (action.equals("update")) {
-            updateCart(request, response);
-            showCartList(request, response);
-        }
+
     }
 
-    private void showCartList(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    private void showCartList(HttpServletRequest request, HttpServletResponse response, String user_id) throws IOException, ServletException {
         ProductDAO dao = new ProductDAO();
-        String cartItems = getCartSession(request, response);
+        String cartItems = getCartSession(request, response, user_id);
         String data = "";
         if (cartItems != null) {
             List<Cart> listCartId = parseCarts(cartItems);
@@ -103,7 +114,7 @@ public class CartServlet extends HttpServlet {
         response.getWriter().write(data);
     }
 
-    private void addToCart(HttpServletRequest request, HttpServletResponse response) {
+    private void addToCart(HttpServletRequest request, HttpServletResponse response, String user_id) {
         String id = request.getParameter("id");
         String q = request.getParameter("quantity");
 
@@ -111,7 +122,7 @@ public class CartServlet extends HttpServlet {
         if (q != null) {
             quantity = Integer.parseInt(q);
         }
-        String cartItems = getCartSession(request, response);
+        String cartItems = getCartSession(request, response, user_id);
         CartDAO cdao = new CartDAO();
         if (cartItems != null) {
             List<Cart> cartItemList = parseCarts(cartItems);
@@ -141,12 +152,12 @@ public class CartServlet extends HttpServlet {
         returnCartSession(request, cartItems);
     }
 
-    private void updateCart(HttpServletRequest request, HttpServletResponse response) {
+    private void updateCart(HttpServletRequest request, HttpServletResponse response, String user_id) {
         String dataItems = request.getParameter("dataTransfer");
         String[] items = dataItems.split("@");
         CartDAO cdao = new CartDAO();
 
-        String cartItems = getCartSession(request, response);
+        String cartItems = getCartSession(request, response, user_id);
         if (cartItems != null) {
             List<Cart> cartItemList = parseCarts(cartItems);
             for (String item : items) {
@@ -202,9 +213,9 @@ public class CartServlet extends HttpServlet {
         return sb.toString();
     }
 
-    private void removeFromCart(HttpServletRequest request, HttpServletResponse response) {
+    private void removeFromCart(HttpServletRequest request, HttpServletResponse response, String user_id) {
         String id = request.getParameter("id");
-        String cartItems = getCartSession(request, response);
+        String cartItems = getCartSession(request, response, user_id);
         CartDAO cdao = new CartDAO();
         if (cartItems != null) {
             List<Cart> cartItemList = parseCarts(cartItems);
@@ -226,16 +237,16 @@ public class CartServlet extends HttpServlet {
         returnCartSession(request, cartItems);
     }
 
-    public String getCartSession(HttpServletRequest request, HttpServletResponse response) {
+    public String getCartSession(HttpServletRequest request, HttpServletResponse response, String user_id) {
         HttpSession session = request.getSession();
         String cartItems = (String) session.getAttribute("cartItems");
         if (cartItems == null || cartItems.trim().isEmpty()) {
             StringBuilder sb = new StringBuilder();
             CartDAO cdao = new CartDAO();
-            List<Cart> listTemp = cdao.getCarts();
+            List<Cart> listTemp = cdao.getCarts(Integer.parseInt(user_id));
             if (listTemp != null) {
                 for (Cart cart : listTemp) {
-//                    System.out.println(cart.getCart_id() + "-" + cart.getUser_id() + "-" + cart.getProduct_id() + "-" + cart.getQuantity());
+                    System.out.println(cart.getCart_id() + "-" + cart.getUser_id() + "-" + cart.getProduct_id() + "-" + cart.getQuantity());
 
                     sb.append(cart.getUser_id()).append("_").append(cart.getCart_id()).append("_");
                     sb.append(cart.getProduct_id()).append("_").append(cart.getQuantity()).append("@");

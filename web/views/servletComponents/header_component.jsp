@@ -135,12 +135,19 @@
                     
                     <%
                         CartServlet cartTest = new CartServlet();
-                        
-                        String cartItems = cartTest.getCartSession(request, response);
+                        HttpSession sessions = request.getSession();
+                        String userName = (String) sessions.getAttribute("username");
                         List<Cart> listCartId = null;
-                        if (cartItems != null) {
-                          listCartId = cartTest.parseCarts(cartItems);
+
+                        if (userName != null) {
+                          UserDAO udao = new UserDAO();
+                          String user_id = String.valueOf(udao.getUserByUsername(userName).getId());
+                          String cartItems = cartTest.getCartSession(request, response, user_id);
+                            if (cartItems != null) {
+                            listCartId = cartTest.parseCarts(cartItems);
+                          }
                         }
+                        
                     %>
                     
                     <!-- Mini Cart -->

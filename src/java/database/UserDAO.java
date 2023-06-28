@@ -293,7 +293,7 @@ public class UserDAO extends MyDAO {
             System.out.println(e);
         }
     }
-    
+
     public int countNumberUser() {
         int number = 0;
         xSql = "select count(*) as numberUser from [dbo].[User] where isAdmin = 'FALSE'";
@@ -327,16 +327,16 @@ public class UserDAO extends MyDAO {
         }
         return columnNames.toArray(new String[0]);
     }
-    
+
     public String getUserInformation(String username, String proper) {
-        xSql = "select " + proper + " from [dbo].[User] where username = '" + username +"'";
+        xSql = "select " + proper + " from [dbo].[User] where username = '" + username + "'";
         String result = "";
         try {
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
             while (rs.next()) {
                 result = rs.getString(proper);
-                if (proper.equals("isAdmin")|| proper.equals("isSeller")) {
+                if (proper.equals("isAdmin") || proper.equals("isSeller")) {
                     result = (result.equals("1") ? "true" : "false");
                 }
             }
@@ -352,10 +352,11 @@ public class UserDAO extends MyDAO {
         UserDAO dao = new UserDAO();
 //    dao.insert(new User(1, "Lê Minh Thang", "cccc", "lethangd", "123456", "M", Date.valueOf("2003-08-05"), "lethangd@gmail.com", "Phu Ly", "admin"));
 
-//    List<User> temp = dao.getUsers();
-//    for (User te : temp) {
-//      System.out.println(te.getName());
-//    }
-        System.out.println(dao.getUserByUsername("nguyendat").getId());
+        List<User> temp = dao.getUsers();
+        for (User te : temp) {
+            System.out.println(te.getPassword());
+            System.out.println(dao.loginAccount(te.getUsername(), te.getPassword()));
+        }       
+        
     }
 }
