@@ -16,7 +16,7 @@
             table {
                 border-collapse: collapse;
                 width: 80%;
-                max-width: 800px;
+                max-width: 400px;
                 overflow-x : auto;
                 margin: 0 auto;
                 margin-top : 30px;
@@ -25,7 +25,7 @@
 
             th, td {
                 padding: 10px;
-                max-width: 500px;
+                max-width: 400px;
                 overflow-x: auto;
                 word-wrap: break-word;
                 text-align: left;
