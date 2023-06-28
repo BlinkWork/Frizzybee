@@ -18,9 +18,12 @@ import model.*;
 import controller.*;
 import static controller.CartServlet.parseCarts;
 import database.CartDAO;
+import database.OrderDAO;
+import database.OrderItemDAO;
 import database.ProductDAO;
 import database.UserDAO;
 import jakarta.servlet.http.HttpSession;
+import java.sql.Date;
 import java.text.DecimalFormat;
 
 /**
@@ -60,6 +63,8 @@ public class CheckoutServlet extends HttpServlet {
             request.setAttribute("dataCart", data);
             RequestDispatcher rd = request.getRequestDispatcher("./views/checkout.jsp");
             rd.forward(request, response);
+        } else {
+            response.sendRedirect("./views/404.jsp");
         }
 
     }
@@ -75,7 +80,7 @@ public class CheckoutServlet extends HttpServlet {
             String user_id = String.valueOf(udao.getUserByUsername(userName).getId());
             removeCartItems(request, response, user_id);
         }
-        session.setAttribute("cartItems", null);
+//        session.setAttribute("cartItems", null);
     }
 
     private void removeCartItems(HttpServletRequest request, HttpServletResponse response, String user_id) {
@@ -85,8 +90,71 @@ public class CheckoutServlet extends HttpServlet {
         CartDAO cdao = new CartDAO();
         if (cartItems != null) {
             List<Cart> cartItemList = parseCarts(cartItems);
-            for (Cart cartItem : cartItemList) {
-                cdao.deleteAllCartsByUserId(Integer.parseInt(cartItem.getUser_id()));
+            UserDAO udao = new UserDAO();
+            User user = udao.getUserByID(cartItemList.get(0).getUser_id());
+
+//            int orderId = odao.getOrderByID(String.valueOf(order.getOrderID())).getOrderID();
+//            for (Cart cartItem : cartItemList) {
+//                ProductDAO pdao = new ProductDAO();
+//                Product p = pdao.getProductByID(cartItem.getProduct_id());
+//                OrderItem oderItem = new OrderItem(1, orderId, p, cartItem.getQuantity(), p.getPrice() * cartItem.getQuantity());
+//                OrderItemDAO oidao = new OrderItemDAO();
+//                oidao.insert(oderItem);
+//            }
+//                cdao.deleteAllCartsByUserId(Integer.parseInt(cartItem.getUser_id()));
+        }
+
+    }
+
+    private void addToOrderItem(HttpServletRequest request, HttpServletResponse response, String user_id) {
+        CartServlet sessionHandle = new CartServlet();
+        String cartItems = sessionHandle.getCartSession(request, response, user_id);
+
+        CartDAO cdao = new CartDAO();
+        if (cartItems != null) {
+            List<Cart> cartItemList = parseCarts(cartItems);
+            UserDAO udao = new UserDAO();
+            User user = udao.getUserByID(cartItemList.get(0).getUser_id());
+
+            OrderDAO odao = new OrderDAO();
+
+//            int orderId = odao.getOrderByID(String.valueOf(order.getOrderID())).getOrderID();
+//            for (Cart cartItem : cartItemList) {
+//                ProductDAO pdao = new ProductDAO();
+//                Product p = pdao.getProductByID(cartItem.getProduct_id());
+//                OrderItem oderItem = new OrderItem(1, orderId, p, cartItem.getQuantity(), p.getPrice() * cartItem.getQuantity());
+//                OrderItemDAO oidao = new OrderItemDAO();
+//                oidao.insert(oderItem);
+//            }
+//                cdao.deleteAllCartsByUserId(Integer.parseInt(cartItem.getUser_id()));
+        }
+
+    }
+
+    private void addToOrder(HttpServletRequest request, HttpServletResponse response, String user_id) {
+        CartServlet sessionHandle = new CartServlet();
+        String cartItems = sessionHandle.getCartSession(request, response, user_id);
+
+        CartDAO cdao = new CartDAO();
+        if (cartItems != null) {
+            List<Cart> cartItemList = parseCarts(cartItems);
+            String address = request.getParameter("address");
+            if (address == null || address.equals("null") || address.trim().isEmpty()) {
+                address = "";
+            }
+            String totalPrice = request.getParameter("totalPrice");
+            String paymentMethod = request.getParameter("paymentMethod");
+
+            UserDAO udao = new UserDAO();
+            User user = udao.getUserByID(cartItemList.get(0).getUser_id());
+            Date currentDate = new Date(System.currentTimeMillis());
+            Order order = null;
+            OrderDAO odao = new OrderDAO();
+
+            try {
+                order = new Order(1, user, currentDate, address, paymentMethod, "not", Double.parseDouble(totalPrice));
+                odao.insert(order);
+            } catch (Exception e) {
             }
         }
 

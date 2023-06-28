@@ -157,10 +157,10 @@ public class OrderDAO extends MyDAO {
 //        dao.insert(new Order(0, new User(1, "Lê Minh Thang", "cccc", "lethangd", "123456", "M", Date.valueOf("2003-08-05"), "lethangd@gmail.com", "Phu Ly", "admin"), Date.valueOf("2003-08-05"), "aaa", "chuyen khoan", "done", 100));
 
 //        dao.update(new Order(2, new User(1, "Lê Minh Thang", "cccc", "lethangd", "123456", "M", Date.valueOf("2003-08-05"), "lethangd@gmail.com", "Phu Ly", "admin"), Date.valueOf("2003-08-05"), "bbbb", "chuyen khoan", "done", 100));
-        dao.deleteByID("2");
+//        dao.deleteByID("2");
         List<Order> t = dao.getOrders();
         for (Order order : t) {
-            System.out.println(order.getAddress());
+            System.out.println(order.getOrderID());
         }
     }
 }

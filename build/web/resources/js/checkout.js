@@ -46,8 +46,8 @@ if (document.querySelector(".proceedOrder") != null) {
       }
     });
     
-    showLoading();
-    showModalSuccess();
+//    showLoading();
+//    showModalSuccess();
   })
 }
 

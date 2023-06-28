@@ -178,16 +178,19 @@ function addEventUpdate()
 addEventQuantityBtn();
 function addEventQuantityBtn()
 {
-  let cartQuantiy = document.querySelector(".cart--quantity");
+  let cartQuantiy = document.querySelector(".cart-list-tbody");
   if (cartQuantiy != null) {
+
     let upQuantity = cartQuantiy.querySelectorAll(" .quantity-up");
+
     upQuantity.forEach(function (element)
     {
+
       element.addEventListener("click", function ()
       {
         let inputNumber = this.closest(".quantity").querySelector("input[type='number']");
         if (inputNumber.max - inputNumber.value > 0) {
-//        inputNumber.value++;
+        inputNumber.value++;
         }
       });
     });
@@ -198,7 +201,7 @@ function addEventQuantityBtn()
       {
         let inputNumber = this.closest(".quantity").querySelector("input[type='number']");
         if (inputNumber.value > inputNumber.min) {
-//        inputNumber.value--;
+        inputNumber.value--;
         }
       });
     });

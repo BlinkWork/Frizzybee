@@ -59,7 +59,7 @@
                     <th class="pro-remove">Remove</th>
                   </tr>
                 </thead>
-                <tbody id="tbody--cart">
+                <tbody id="tbody--cart" class="cart-list-tbody">
                   <% String cartTable=(String) request.getAttribute("dataList"); if(request.getAttribute("dataList")
                     !=null){ if(cartTable.equals("not found")==false && cartTable !=null){ out.println(cartTable); } }
                     %>
@@ -135,6 +135,7 @@
       <script src="./resources/js/script.js"></script>
       <script src="./resources/js/mobile-menu.js"></script>
       <script src="./resources/js/cart.js"></script>
+
 
 </body>
 

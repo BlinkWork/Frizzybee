@@ -71,11 +71,11 @@
                     </div>
                     <div class="single-input-item">
                       <label for="l_eamil" class="required">Email Address</label>
-                      <input type="email" id="l_eamil" placeholder="Email Address" required="required">
+                      <input type="email" id="l_email" placeholder="Email Address" required="required">
                     </div>
                     <div class="single-input-item">
                       <label for="Street_address" class="required"> Street address</label>
-                      <input type="text" id="Street_address" placeholder="Street address">
+                      <input type="text" id="street_address" placeholder="Street address">
                     </div>
                     <div class="single-input-item">
                       <label for="city" class="required"> Town / City </label>
@@ -267,7 +267,7 @@
         <script src="./resources/js/wow.min.js"></script>
         <script src="./resources/js/script.js"></script>
         <script src="./resources/js/mobile-menu.js"></script>
-        <script src="./resources/js/checkout.js"></script>
+        <script src="./resources/js/checkout_1.js"></script>
 
 </body>
 

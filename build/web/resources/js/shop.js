@@ -56,11 +56,14 @@ searchBtn.addEventListener('submit', function (event) {
 
 function showListProduct(pageBack) {
   let paging = currentPage;
+  if (pageBack != 0) {
+    paging = 1;
+  }
   let sorting = sortOption;
   let taging = tag;
   let searching = searchValue;
   let action = "show";
-  console.log(pageBack);
+
   $.ajax({
     type: 'POST',
     url: '/FrizzyBee/shop',
