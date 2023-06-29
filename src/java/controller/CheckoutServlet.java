@@ -78,9 +78,12 @@ public class CheckoutServlet extends HttpServlet {
         if (userName != null) {
             UserDAO udao = new UserDAO();
             String user_id = String.valueOf(udao.getUserByUsername(userName).getId());
+            addToOrder(request, response, user_id);
+
             removeCartItems(request, response, user_id);
+            session.setAttribute("cartItems", null);
+
         }
-//        session.setAttribute("cartItems", null);
     }
 
     private void removeCartItems(HttpServletRequest request, HttpServletResponse response, String user_id) {
@@ -93,40 +96,29 @@ public class CheckoutServlet extends HttpServlet {
             UserDAO udao = new UserDAO();
             User user = udao.getUserByID(cartItemList.get(0).getUser_id());
 
-//            int orderId = odao.getOrderByID(String.valueOf(order.getOrderID())).getOrderID();
-//            for (Cart cartItem : cartItemList) {
-//                ProductDAO pdao = new ProductDAO();
-//                Product p = pdao.getProductByID(cartItem.getProduct_id());
-//                OrderItem oderItem = new OrderItem(1, orderId, p, cartItem.getQuantity(), p.getPrice() * cartItem.getQuantity());
-//                OrderItemDAO oidao = new OrderItemDAO();
-//                oidao.insert(oderItem);
-//            }
-//                cdao.deleteAllCartsByUserId(Integer.parseInt(cartItem.getUser_id()));
+            for (Cart cartItem : cartItemList) {
+                cdao.deleteAllCartsByUserId(Integer.parseInt(cartItem.getUser_id()));
+                break;
+            }
         }
 
     }
 
-    private void addToOrderItem(HttpServletRequest request, HttpServletResponse response, String user_id) {
+    private void addToOrderItem(HttpServletRequest request, HttpServletResponse response, String user_id, int order_id) {
         CartServlet sessionHandle = new CartServlet();
         String cartItems = sessionHandle.getCartSession(request, response, user_id);
 
         CartDAO cdao = new CartDAO();
         if (cartItems != null) {
             List<Cart> cartItemList = parseCarts(cartItems);
-            UserDAO udao = new UserDAO();
-            User user = udao.getUserByID(cartItemList.get(0).getUser_id());
 
-            OrderDAO odao = new OrderDAO();
-
-//            int orderId = odao.getOrderByID(String.valueOf(order.getOrderID())).getOrderID();
-//            for (Cart cartItem : cartItemList) {
-//                ProductDAO pdao = new ProductDAO();
-//                Product p = pdao.getProductByID(cartItem.getProduct_id());
-//                OrderItem oderItem = new OrderItem(1, orderId, p, cartItem.getQuantity(), p.getPrice() * cartItem.getQuantity());
-//                OrderItemDAO oidao = new OrderItemDAO();
-//                oidao.insert(oderItem);
-//            }
-//                cdao.deleteAllCartsByUserId(Integer.parseInt(cartItem.getUser_id()));
+            for (Cart cartItem : cartItemList) {
+                ProductDAO pdao = new ProductDAO();
+                Product p = pdao.getProductByID(cartItem.getProduct_id());
+                OrderItem oderItem = new OrderItem(1, order_id, p, cartItem.getQuantity(), p.getPrice() * cartItem.getQuantity());
+                OrderItemDAO oidao = new OrderItemDAO();
+                oidao.insert(oderItem);
+            }
         }
 
     }
@@ -153,7 +145,8 @@ public class CheckoutServlet extends HttpServlet {
 
             try {
                 order = new Order(1, user, currentDate, address, paymentMethod, "not", Double.parseDouble(totalPrice));
-                odao.insert(order);
+                int order_id = odao.insert(order);
+                addToOrderItem(request, response, user_id, order_id);
             } catch (Exception e) {
             }
         }

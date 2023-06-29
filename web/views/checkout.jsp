@@ -267,7 +267,7 @@
         <script src="./resources/js/wow.min.js"></script>
         <script src="./resources/js/script.js"></script>
         <script src="./resources/js/mobile-menu.js"></script>
-        <script src="./resources/js/checkout_1.js"></script>
+        <script src="./resources/js/checkout.js"></script>
 
 </body>
 

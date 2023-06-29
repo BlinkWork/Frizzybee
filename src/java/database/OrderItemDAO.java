@@ -149,7 +149,7 @@ public class OrderItemDAO extends MyDAO {
 //dao.deleteByID("4");
         List<OrderItem> t = dao.getOrderItems();
         for (OrderItem orderItem : t) {
-            System.out.println(orderItem.getPrice());
+            System.out.println(orderItem.getPrice() + " " + orderItem.getOrderID() + " " + orderItem.getQuantity());
         }
     }
 }

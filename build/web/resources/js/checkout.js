@@ -30,41 +30,65 @@ function calAmount(shipCost)
 
 if (document.querySelector(".proceedOrder") != null) {
   let placeOrder = document.querySelector(".proceedOrder");
-  placeOrder.addEventListener("click", function (event) {
+  placeOrder.addEventListener("click", function (event)
+  {
     event.preventDefault();
+
+    console.log();
+
+    let f_name = document.getElementById("f_name").value;
+    let l_name = document.getElementById("l_name").value;
+    let l_email = document.getElementById("l_email").value;
+    let street_address = document.getElementById("street_address").value;
+    let city = document.getElementById("city").value;
+    let phone = document.getElementById("phone").value;
+    let order_note = document.getElementById("order_note").value;
+    let shippingType = "";
+    if (expressShipping.checked == true) {
+      shippingType = "express";
+    }
+    else {
+      shippingType = "normal";
+    }
+
+    let grandTotalCost = document.querySelector(".grand-total").querySelector("span").textContent.substring(1).replace(",", ".");
     $.ajax({
       type: 'POST',
       url: '/FrizzyBee/checkout',
-      data: {},
+      data: { addresss: street_address, totalPrice: grandTotalCost, paymentMethod: shippingType },
       success: function (response)
       {
-        console.log(response)
       },
       error: function ()
       {
         alert('Error checkout request.');
       }
     });
-    
-//    showLoading();
-//    showModalSuccess();
-  })
+
+        showLoading();
+        showModalSuccess();
+  });
 }
 
-function showModalSuccess() {
-  setTimeout(function () {
+function showModalSuccess()
+{
+  setTimeout(function ()
+  {
     $('#my-modal').modal('show');
-    setTimeout(function () {
+    setTimeout(function ()
+    {
       $('#my-modal').modal('hide');
       window.location.href = "./shop";
     }, 1000);
   }, 2000);
 }
 
-function showLoading() {
+function showLoading()
+{
   let loadPlaced = document.querySelector(".loadPlaced");
   loadPlaced.style.display = "";
-  setTimeout(function () {
+  setTimeout(function ()
+  {
     loadPlaced.style.display = "none";
   }, 2000);
 }
