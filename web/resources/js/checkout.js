@@ -64,9 +64,9 @@ if (document.querySelector(".proceedOrder") != null) {
         alert('Error checkout request.');
       }
     });
-
         showLoading();
         showModalSuccess();
+
   });
 }
 
