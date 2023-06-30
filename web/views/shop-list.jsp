@@ -95,7 +95,9 @@
 			<li><hr class="dropdown-divider"></li>
 			<li><a class="dropdown-item" href="logout">Logout</a></li>
                         <li><hr class="dropdown-divider"></li>
-                         <li><a class="dropdown-item" href="product-management?event=product-management">Product manage</a></li>
+                         <li><a class="dropdown-item" href="product-management?event=product-management">Product management</a></li>
+                         <li><a class="dropdown-item" href="product-management?event=send-to-add">Add product</a></li>
+                         <li><a class="dropdown-item" href="order-management?event=order-management">Order management</a></li>
                     </ul></li>
 		</ul></div>
               </div>

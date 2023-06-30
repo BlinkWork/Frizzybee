@@ -33,6 +33,9 @@ public class LogoutServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.removeAttribute("username");
+        if (session != null) {
+            session.invalidate(); // Hủy session
+        }
         String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
                 + request.getContextPath();
         response.sendRedirect(url + "/index.jsp");

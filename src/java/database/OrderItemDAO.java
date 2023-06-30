@@ -4,6 +4,7 @@ import java.util.*;
 import java.sql.*;
 import model.OrderItem;
 import java.sql.Date;
+import model.Order;
 import model.Product;
 
 public class OrderItemDAO extends MyDAO {
@@ -142,14 +143,29 @@ public class OrderItemDAO extends MyDAO {
     public static void main(String[] args) {
         OrderItemDAO dao = new OrderItemDAO();
         CategoryDAO ctdao = new CategoryDAO();
+        ProductDAO pdao = new ProductDAO();
         BrandDAO bdao = new BrandDAO();
-//        dao.insert(new OrderItem(0, 1, new Product(1, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10), 10, 10));
-//        dao.insert(new OrderItem(0, 1, new Product(1, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10), 10, 10));
-//        dao.update(new OrderItem(4, 1, new Product(1, "abc", "vao o", ctdao.getCategoryByName("t"), bdao.getBrandByName("nn"), 10, 10, "cc", 10), 10, 200));
-//dao.deleteByID("4");
-        List<OrderItem> t = dao.getOrderItems();
-        for (OrderItem orderItem : t) {
-            System.out.println(orderItem.getPrice());
+       
+        UserDAO userDAO = new UserDAO();
+        OrderDAO odao = new OrderDAO();
+//        odao.insert(new Order(0, userDAO.getUserByID("1"), Date.valueOf("2023-06-27"), "bbbb", "chuyen khoan", "unconfimred", 100));
+//        odao.insert(new Order(0, userDAO.getUserByID("2"), Date.valueOf("2023-06-27"), "bbbb", "chuyen khoan", "unconfimred", 100));
+//        odao.insert(new Order(0, userDAO.getUserByID("2"), Date.valueOf("2023-06-27"), "bbbb", "chuyen khoan", "unconfimred", 100));
+//        odao.insert(new Order(0, userDAO.getUserByID("2"), Date.valueOf("2023-06-27"), "bbbb", "chuyen khoan", "unconfimred", 100));
+//        odao.insert(new Order(0, userDAO.getUserByID("1"), Date.valueOf("2023-06-27"), "bbbb", "chuyen khoan", "unconfimred", 100));
+////        
+//        dao.insert(new OrderItem(0, 1, pdao.getProductByID("7"), 1, 1000));
+//        dao.insert(new OrderItem(0, 2, pdao.getProductByID("8"), 7, 1000));
+//        dao.insert(new OrderItem(0, 6, pdao.getProductByID("9"), 9, 1000));
+//        dao.insert(new OrderItem(0, 7, pdao.getProductByID("4"), 1, 1000));
+//        dao.insert(new OrderItem(0, 8, pdao.getProductByID("5"), 14, 1000));
+        
+        List<Order> t = odao.getOrders();
+        for (Order order : t) {
+            List<OrderItem> listOrderItem = dao.getOrderItemsByOrderID(order.getOrderID()+"");
+            for (OrderItem orderItem : listOrderItem) {
+                Product product = pdao.getProductByID(orderItem.getProduct().getProductID()+"");
+            }
         }
     }
 }
