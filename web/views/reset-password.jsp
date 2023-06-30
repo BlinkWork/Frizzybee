@@ -153,7 +153,7 @@
         <div class="login-register-form pt-70 pb-70">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6 offset-lg-s3">
+                    <div class="col-lg-6 offset-lg-3">
                         <div class="login-register-form-full">
                             <h3>Reset Password</h3>
                             <form action="resetpassword" method="post" >
