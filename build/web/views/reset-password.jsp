@@ -53,7 +53,7 @@
                                     <li><a href="checkout.jsp">Checkout</a></li>
                                     <li><a href="login">Login</a></li>
                                     <li><a href="register">Register</a></li>
-                                    <li><a href="reset-password.jsp">Reset Password</a></li>
+                                    <li><a href="resetpassword">Reset Password</a></li>
                                     <li><a href="privacy-policy.jsp">Privacy Policy</a></li>
                                     <li><a href="terms-condition.jsp">Terms & Condition</a></li>
                                     <li><a href="404.jsp">404 Error</a></li>
@@ -153,7 +153,7 @@
         <div class="login-register-form pt-70 pb-70">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6 offset-lg-s3">
+                    <div class="col-lg-6 offset-lg-3">
                         <div class="login-register-form-full">
                             <h3>Reset Password</h3>
                             <form action="resetpassword" method="post" >

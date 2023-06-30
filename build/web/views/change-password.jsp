@@ -53,7 +53,7 @@
                                     <li><a href="checkout.jsp">Checkout</a></li>
                                     <li><a href="login">Login</a></li>
                                     <li><a href="register">Register</a></li>
-                                    <li><a href="resetpassword">Reset Password</a></li>
+                                    <li><a href="reset-password">Reset Password</a></li>
                                     <li><a href="privacy-policy.jsp">Privacy Policy</a></li>
                                     <li><a href="terms-condition.jsp">Terms & Condition</a></li>
                                     <li><a href="404.jsp">404 Error</a></li>
@@ -138,10 +138,10 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="breadcrumb-content">
-                            <h2>Reset Password</h2>
+                            <h2>Change Password</h2>
                             <ul>
                                 <li><a href="index.jsp">Home</a></li>
-                                <li class="active">Reset Password</li>
+                                <li class="active">Change Password</li>
                             </ul>
                         </div>
                     </div>
@@ -155,17 +155,13 @@
                 <div class="row">
                     <div class="col-lg-6 offset-lg-3">
                         <div class="login-register-form-full">
-                            <h3>Reset Password</h3>
-                            <form action="resetpassword" method="post" >
-                                <input type="text" class="form-control" name="username" placeholder="Your Username" value="<%=(request.getAttribute("username") == null) ? "" : request.getAttribute("username")%>">
-                                <input type="email" class="form-control" name="email" placeholder="Your Email" value="<%=(request.getAttribute("email") == null) ? "" : request.getAttribute("email")%>">
-                                <button class="button-1" type="submit">Reset Now</button>
-                                <div class="success-reset"> 
-                                    <% String password = (String) request.getAttribute("password"); %>
-                                    <% if (password != null && !password.isEmpty()) { %>
-                                    <p style="color:gold;text-align: center;">Your new password : <%= password %></p>
-                                    <% } %>
-                                </div>
+                            <h3>Change Password</h3>
+                            <form action="changepassword" method="post" >
+
+                                <input type="password" class="form-control" name="curr-password" placeholder="Your current password" value="">
+                                <input type="password" class="form-control" name="new-password" placeholder="Your new password" value="">
+                                <input type="password" class="form-control" name="conf-password" placeholder="Confirm new password" value="">
+                                <button class="button-1" type="submit">Change password</button>
                                 <div class = error-box> 
                                     <% String errorMessage = (String) request.getAttribute("errorMessage"); %>
                                     <% if (errorMessage != null && !errorMessage.isEmpty()) { %>
@@ -178,8 +174,6 @@
                 </div>
             </div>
         </div>
-
-        <%--<%@include file="../views/components/footer_component.jsp" %>--%>
 
 
 

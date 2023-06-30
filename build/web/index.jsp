@@ -99,9 +99,12 @@
                                       <ul class="dropdown-menu" style="margin-top: 50px !important;">
                                             <li><a class="dropdown-item userName" href="#"><%=curUser.getName()%></a></li>
                                             <li><a class="dropdown-item" href="#">My Cart</a></li>
-                                            <li><a class="dropdown-item" href="#">Update information</a></li>
-                                            <li><a class="dropdown-item" href="#">Change password</a></li>
-                                            <%if(curUser.getRole().equals("seller") || curUser.getRole().equals("admin")){%>
+
+                                            <li><a class="dropdown-item" href="updateinformation">Update my information</a></li>
+                                            <li><a class="dropdown-item" href="changepassword">Change password</a></li>
+
+                                                <%if(curUser.getRole().equals("seller") || curUser.getRole().equals("admin")){%>
+                                            <li><hr class="dropdown-divider"></li>
                                             <li><a class="dropdown-item" href="product-management?event=product-management">Product manage</a></li>
                                                 <%}%>
                                             <li><hr class="dropdown-divider"></li>

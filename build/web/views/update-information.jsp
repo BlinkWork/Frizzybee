@@ -53,7 +53,7 @@
                                     <li><a href="checkout.jsp">Checkout</a></li>
                                     <li><a href="login">Login</a></li>
                                     <li><a href="register">Register</a></li>
-                                    <li><a href="resetpassword">Reset Password</a></li>
+                                    <li><a href="reset-password">Reset Password</a></li>
                                     <li><a href="privacy-policy.jsp">Privacy Policy</a></li>
                                     <li><a href="terms-condition.jsp">Terms & Condition</a></li>
                                     <li><a href="404.jsp">404 Error</a></li>
@@ -138,10 +138,10 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="breadcrumb-content">
-                            <h2>Reset Password</h2>
+                            <h2>Change Information</h2>
                             <ul>
                                 <li><a href="index.jsp">Home</a></li>
-                                <li class="active">Reset Password</li>
+                                <li class="active">Change Information</li>
                             </ul>
                         </div>
                     </div>
@@ -155,17 +155,19 @@
                 <div class="row">
                     <div class="col-lg-6 offset-lg-3">
                         <div class="login-register-form-full">
-                            <h3>Reset Password</h3>
-                            <form action="resetpassword" method="post" >
-                                <input type="text" class="form-control" name="username" placeholder="Your Username" value="<%=(request.getAttribute("username") == null) ? "" : request.getAttribute("username")%>">
-                                <input type="email" class="form-control" name="email" placeholder="Your Email" value="<%=(request.getAttribute("email") == null) ? "" : request.getAttribute("email")%>">
-                                <button class="button-1" type="submit">Reset Now</button>
-                                <div class="success-reset"> 
-                                    <% String password = (String) request.getAttribute("password"); %>
-                                    <% if (password != null && !password.isEmpty()) { %>
-                                    <p style="color:gold;text-align: center;">Your new password : <%= password %></p>
-                                    <% } %>
-                                </div>
+                            <h3>Change Information</h3>
+                            <form action="updateinformation" method="post" >
+
+                                <input type="text" class="form-control" name="name" placeholder="Your Name" value="<%=(request.getAttribute("name") != null) ? request.getAttribute("name") : ""%>">
+                                <input type="text" class="form-control" name="username" placeholder="Username" value="<%=(request.getAttribute("username") != null) ? request.getAttribute("username") : ""%>">
+                                <input type="email" class="form-control" name="email" placeholder="Your Email" value="<%=(request.getAttribute("email") != null) ? request.getAttribute("email") : ""%>">
+                                <input type="text" class="form-control" name="address" placeholder="Your Address" value="<%=(request.getAttribute("address") != null) ? request.getAttribute("address") : ""%>">
+                                <input type="Date" class="form-control" name="dob" placeholder="Date of birth" value="<%=(request.getAttribute("dob") != null) ? request.getAttribute("dob") : ""%>">
+                                <select name="gender" class="form-control" >
+                                    <option value="male" <%= "male".equals(request.getParameter("gender")) ? "selected" : "" %>>Male</option>
+                                    <option value="female" <%= "female".equals(request.getParameter("gender")) ? "selected" : "" %>>Female</option>
+                                </select>
+                                <button class="button-1" type="submit">Change information</button>
                                 <div class = error-box> 
                                     <% String errorMessage = (String) request.getAttribute("errorMessage"); %>
                                     <% if (errorMessage != null && !errorMessage.isEmpty()) { %>
@@ -178,8 +180,6 @@
                 </div>
             </div>
         </div>
-
-        <%--<%@include file="../views/components/footer_component.jsp" %>--%>
 
 
 
