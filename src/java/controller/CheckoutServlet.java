@@ -79,7 +79,6 @@ public class CheckoutServlet extends HttpServlet {
             UserDAO udao = new UserDAO();
             String user_id = String.valueOf(udao.getUserByUsername(userName).getId());
             addToOrder(request, response, user_id);
-
             removeCartItems(request, response, user_id);
             session.setAttribute("cartItems", null);
 
@@ -95,9 +94,10 @@ public class CheckoutServlet extends HttpServlet {
             List<Cart> cartItemList = parseCarts(cartItems);
             UserDAO udao = new UserDAO();
             User user = udao.getUserByID(cartItemList.get(0).getUser_id());
+            cdao.deleteAllCartsByUserId(Integer.parseInt(cartItemList.get(0).getUser_id()));
 
             for (Cart cartItem : cartItemList) {
-                cdao.deleteAllCartsByUserId(Integer.parseInt(cartItem.getUser_id()));
+                decreaseProductQuantity(request, response, cartItem);
                 break;
             }
         }
@@ -151,6 +151,15 @@ public class CheckoutServlet extends HttpServlet {
             }
         }
 
+    }
+
+    private void decreaseProductQuantity(HttpServletRequest request, HttpServletResponse response, Cart cartItem) {
+        ProductDAO dao = new ProductDAO();
+        Product product = dao.getProductByID(cartItem.getProduct_id());
+        if(product != null){           
+            product.setQuantity(product.getQuantity() - cartItem.getQuantity());
+            dao.update(product);
+        }
     }
 
 }

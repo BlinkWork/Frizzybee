@@ -306,6 +306,45 @@ public class ProductDAO extends MyDAO {
         return (t);
     }
 
+    public List<Product> getNLatestProducts(int n) {
+        List<Product> t = new ArrayList<>();
+        xSql = "SELECT TOP " + n + " * FROM [dbo].[Product] ORDER BY product_id DESC";
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            int productID;
+            String productName;
+            String description;
+            Category category;
+            Brand brand;
+            double price;
+            int quantity;
+            String imageURL;
+            int discount;
+            Product x;
+            CategoryDAO categoryDAO = new CategoryDAO();
+            BrandDAO brandDAO = new BrandDAO();
+            while (rs.next()) {
+                productID = rs.getInt("product_id");
+                productName = rs.getString("product_name");
+                description = rs.getString("product_description");
+                category = categoryDAO.getCategoryByID(rs.getInt("category_id") + "");
+                brand = brandDAO.getBrandByID(rs.getInt("brand_id") + "");
+                price = rs.getDouble("price");
+                quantity = rs.getInt("quantity");
+                imageURL = rs.getString("image");
+                discount = rs.getInt("discount");
+                x = new Product(productID, productName, description, category, brand, price, quantity, imageURL, discount);
+                t.add(x);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
+    }
+
     public int getRecordNum(String scope) {
         Product x = null;
         int rowCount = 1;
@@ -314,7 +353,7 @@ public class ProductDAO extends MyDAO {
         if (scope.trim().isEmpty() == false) {
             xSql += " where " + scope;
         }
-       
+
         try {
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
@@ -346,7 +385,7 @@ public class ProductDAO extends MyDAO {
         }
         return rowCount;
     }
-    
+
     public int getPageNumBySeller(int sellerID) {
         Product x = null;
         int rowCount = 1;
@@ -366,21 +405,21 @@ public class ProductDAO extends MyDAO {
         return rowCount;
     }
 
-    public static void main(String[] args) {
-        ProductDAO dao = new ProductDAO();
-        CategoryDAO ctdao = new CategoryDAO();
-
-        List<Product> temp = dao.getProductsByPageBySeller(0, 9, 1);
-//        for (Product p : temp) {
-//            System.out.println(p.getProductName());
-//        }
-
-        System.out.println(dao.getPageNumBySeller(2));
-        BrandDAO bdao = new BrandDAO();
-//    System.out.println(dao.getProductByID("2").getProductName());
-//    ctdao.insert(new Category(0, "t"));
-//    bdao.insert(new Brand(0, "nn"));
-    }
+//    public static void main(String[] args) {
+//        ProductDAO dao = new ProductDAO();
+//        CategoryDAO ctdao = new CategoryDAO();
+//
+//        List<Product> temp = dao.getProductsByPageBySeller(0, 9, 1);
+////        for (Product p : temp) {
+////            System.out.println(p.getProductName());
+////        }
+//
+//        System.out.println(dao.getPageNumBySeller(2));
+//        BrandDAO bdao = new BrandDAO();
+////    System.out.println(dao.getProductByID("2").getProductName());
+////    ctdao.insert(new Category(0, "t"));
+////    bdao.insert(new Brand(0, "nn"));
+//    }
 
     public List<Product> getProductsByPage(int offSetPage, int numberOfPage) {
         List<Product> t = new ArrayList<>();
@@ -611,5 +650,13 @@ public class ProductDAO extends MyDAO {
             e.printStackTrace();
         }
         return rowNames.toArray(new String[0]);
+    }
+    
+    public static void main(String[] args) {
+        ProductDAO dao = new ProductDAO();
+        List<Product>  list = dao.getProducts();
+        for (Product product : list) {
+            System.out.println(product.getProductName() + " " + product.getQuantity());
+        }
     }
 }

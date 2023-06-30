@@ -112,7 +112,7 @@ public class ShowListServlet extends HttpServlet {
     }
     
     public void getLatestProducts(ProductDAO dao, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Product> latestProducts = dao.getLatest3Products();
+        List<Product> latestProducts = dao.getNLatestProducts(3);
         request.setAttribute("latestProducts", latestProducts);
     }
     

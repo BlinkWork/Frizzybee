@@ -32,6 +32,23 @@
         <link rel="stylesheet" href="./resources/css/style.css">
         <link rel="stylesheet" href="./resources/css/responsive.css">
 
+        <style>
+          .user-image .show {
+            margin-top: 30px !important;  
+          }
+          .user-image ul.show a{
+            color: black;
+          }
+          .user-image ul.show a:hover{
+            color: rgb(234, 136, 13);
+          }
+          
+          .user-image li{
+            padding: 0 10px;
+          }
+          
+        </style>
+        
     </head>
 
     <body>
@@ -75,23 +92,21 @@
                                 <a href="./views/wishlist.jsp"><i class="far fa-heart"></i> Wishlist</a>
                                 <%if(curUser!=null){%>
                                 <div class="d-flex align-items-center justify-content-center" style="float: right" />
-                                <img src="<%=curUser.getAvatarURL()%>" alt="user" width="20px" style="object-fit: contain;">
-                                <p><%=curUser.getName()%></p>
-
+                               
                                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-infor ">
-                                    <li class="nav-item dropdown dropstart"><a
-                                            class="nav-link dropdown-toggle" href="#" role="button"
-                                            data-bs-toggle="dropdown" aria-expanded="false"> <img alt="cài đặt" src="https://cdn-icons-png.flaticon.com/512/3524/3524659.png" width="15px"></a>
-                                        <ul class="dropdown-menu">
+                                    <li class="nav-item dropdown dropstart user-image">
+                                      <a data-bs-toggle="dropdown" aria-expanded="false"> <img alt="setting" src="<%=curUser.getAvatarURL()%>" width="30px" style="border: 2px solid #cccccc5e; border-radius: 50%;"></a>
+                                      <ul class="dropdown-menu" style="margin-top: 50px !important;">
+                                            <li><a class="dropdown-item userName" href="#"><%=curUser.getName()%></a></li>
                                             <li><a class="dropdown-item" href="#">My Cart</a></li>
-                                            <li><a class="dropdown-item" href="#">Update my information</a></li>
+                                            <li><a class="dropdown-item" href="#">Update information</a></li>
                                             <li><a class="dropdown-item" href="#">Change password</a></li>
-                                            <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item" href="logout">Logout</a></li>
-                                                <%if(curUser.getRole().equals("seller") || curUser.getRole().equals("admin")){%>
-                                            <li><hr class="dropdown-divider"></li>
+                                            <%if(curUser.getRole().equals("seller") || curUser.getRole().equals("admin")){%>
                                             <li><a class="dropdown-item" href="product-management?event=product-management">Product manage</a></li>
                                                 <%}%>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="logout">Logout</a></li>
+                                                
                                         </ul></li>
                                 </ul>
                             </div>
@@ -304,19 +319,8 @@
         <div class="shipping-area container">
             <div class="row">
                 <!-- Single -->
-                <div class="col-lg-3 col-md-6 mb-25">
-                    <div class="shipping-item">
-                        <div class="icon">
-                            <img src="./resources/img/pay-1.png" alt="img">
-                        </div>
-                        <div class="content">
-                            <h4>Free Shipping</h4>
-                            <p>On all orders over $75.00</p>
-                        </div>
-                    </div>
-                </div>
                 <!-- Single -->
-                <div class="col-lg-3 col-md-6 mb-25">
+                <div class="col-lg-4 col-md-6 mb-25">
                     <div class="shipping-item">
                         <div class="icon">
                             <img src="./resources/img/pay-2.png" alt="img">
@@ -328,7 +332,7 @@
                     </div>
                 </div>
                 <!-- Single -->
-                <div class="col-lg-3 col-md-6 mb-25">
+                <div class="col-lg-4 col-md-6 mb-25">
                     <div class="shipping-item">
                         <div class="icon">
                             <img src="./resources/img/pay-3.png" alt="img">
@@ -340,7 +344,7 @@
                     </div>
                 </div>
                 <!-- Single -->
-                <div class="col-lg-3 col-md-6 mb-25">
+                <div class="col-lg-4 col-md-6 mb-25">
                     <div class="shipping-item">
                         <div class="icon">
                             <img src="./resources/img/pay-4.png" alt="img">
@@ -421,8 +425,8 @@
                                         <div class="sale-badge"><span>sale</span></div>
                                         <div class="product-thumbnail">
                                             <a href="product-details.jsp">
-                                                <img src="./resources/img/product/4.jpg" alt="product">
-                                                <img src="./resources/img/product/5.jpg" alt="product">
+                                              <img src="./resources/img/product/1.jpg" alt="product">
+                                              <img src="./resources/img/product/5.jpg" alt="product">
                                             </a>
                                         </div>
                                         <div class="product-content">
@@ -1027,413 +1031,7 @@
         </section>
         <!-- Start Deal Product -->
 
-        <!-- Start Product Widget List Area -->
-        <section class="pt-50 pb-60">
-            <div class="container">
-                <div class="row">
-                    <!-- Single -->
-                    <div class="col-lg-3 col-md-6">
-                        <h3 class="deal-title">Best Selling</h3>
-                        <div class="product-widgets-single">
-                            <!-- Single -->
-                            <div class="p-widgets-single mb-20">
-                                <div class="row">
-                                    <div class="col-5">
-                                        <div class="thumbnail">
-                                            <a href="product-details.jsp">
-                                                <img src="./resources/img/product/4.jpg" alt="img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-7 align-self-center">
-                                        <div class="content">
-                                            <h4><a href="product-details.jsp">Funda Para Ebook</a></h4>
-                                            <div class="ratting">
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                            </div>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single -->
-                            <div class="p-widgets-single mb-20">
-                                <div class="row">
-                                    <div class="col-5">
-                                        <div class="thumbnail">
-                                            <a href="product-details.jsp">
-                                                <img src="./resources/img/product/5.jpg" alt="img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-7 align-self-center">
-                                        <div class="content">
-                                            <h4><a href="product-details.jsp">Funda Para Ebook</a></h4>
-                                            <div class="ratting">
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                            </div>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single -->
-                            <div class="p-widgets-single mb-20">
-                                <div class="row">
-                                    <div class="col-5">
-                                        <div class="thumbnail">
-                                            <a href="product-details.jsp">
-                                                <img src="./resources/img/product/4.jpg" alt="img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-7 align-self-center">
-                                        <div class="content">
-                                            <h4><a href="product-details.jsp">Funda Para Ebook</a></h4>
-                                            <div class="ratting">
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                            </div>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single -->
-                            <div class="p-widgets-single mb-20">
-                                <div class="row">
-                                    <div class="col-5">
-                                        <div class="thumbnail">
-                                            <a href="product-details.jsp">
-                                                <img src="./resources/img/product/5.jpg" alt="img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-7 align-self-center">
-                                        <div class="content">
-                                            <h4><a href="product-details.jsp">Funda Para Ebook</a></h4>
-                                            <div class="ratting">
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                            </div>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Single -->
-                    <div class="col-lg-3 col-md-6">
-                        <h3 class="deal-title">Sale Products</h3>
-                        <div class="product-widgets-single">
-                            <!-- Single -->
-                            <div class="p-widgets-single mb-20">
-                                <div class="row">
-                                    <div class="col-5">
-                                        <div class="thumbnail">
-                                            <a href="product-details.jsp">
-                                                <img src="./resources/img/product/1.jpg" alt="img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-7 align-self-center">
-                                        <div class="content">
-                                            <h4><a href="product-details.jsp">Funda Para Ebook</a></h4>
-                                            <div class="ratting">
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                            </div>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single -->
-                            <div class="p-widgets-single mb-20">
-                                <div class="row">
-                                    <div class="col-5">
-                                        <div class="thumbnail">
-                                            <a href="product-details.jsp">
-                                                <img src="./resources/img/product/2.jpg" alt="img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-7 align-self-center">
-                                        <div class="content">
-                                            <h4><a href="product-details.jsp">Funda Para Ebook</a></h4>
-                                            <div class="ratting">
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                            </div>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single -->
-                            <div class="p-widgets-single mb-20">
-                                <div class="row">
-                                    <div class="col-5">
-                                        <div class="thumbnail">
-                                            <a href="product-details.jsp">
-                                                <img src="./resources/img/product/3.jpg" alt="img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-7 align-self-center">
-                                        <div class="content">
-                                            <h4><a href="product-details.jsp">Funda Para Ebook</a></h4>
-                                            <div class="ratting">
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                            </div>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single -->
-                            <div class="p-widgets-single mb-20">
-                                <div class="row">
-                                    <div class="col-5">
-                                        <div class="thumbnail">
-                                            <a href="product-details.jsp">
-                                                <img src="./resources/img/product/4.jpg" alt="img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-7 align-self-center">
-                                        <div class="content">
-                                            <h4><a href="product-details.jsp">Funda Para Ebook</a></h4>
-                                            <div class="ratting">
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                            </div>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Single -->
-                    <div class="col-lg-3 col-md-6">
-                        <h3 class="deal-title">Latest Products</h3>
-                        <div class="product-widgets-single">
-                            <!-- Single -->
-                            <div class="p-widgets-single mb-20">
-                                <div class="row">
-                                    <div class="col-5">
-                                        <div class="thumbnail">
-                                            <a href="product-details.jsp">
-                                                <img src="./resources/img/product/3.jpg" alt="img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-7 align-self-center">
-                                        <div class="content">
-                                            <h4><a href="product-details.jsp">Funda Para Ebook</a></h4>
-                                            <div class="ratting">
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                            </div>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single -->
-                            <div class="p-widgets-single mb-20">
-                                <div class="row">
-                                    <div class="col-5">
-                                        <div class="thumbnail">
-                                            <a href="product-details.jsp">
-                                                <img src="./resources/img/product/2.jpg" alt="img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-7 align-self-center">
-                                        <div class="content">
-                                            <h4><a href="product-details.jsp">Funda Para Ebook</a></h4>
-                                            <div class="ratting">
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                            </div>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single -->
-                            <div class="p-widgets-single mb-20">
-                                <div class="row">
-                                    <div class="col-5">
-                                        <div class="thumbnail">
-                                            <a href="product-details.jsp">
-                                                <img src="./resources/img/product/1.jpg" alt="img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-7 align-self-center">
-                                        <div class="content">
-                                            <h4><a href="product-details.jsp">Funda Para Ebook</a></h4>
-                                            <div class="ratting">
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                            </div>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single -->
-                            <div class="p-widgets-single mb-20">
-                                <div class="row">
-                                    <div class="col-5">
-                                        <div class="thumbnail">
-                                            <a href="product-details.jsp">
-                                                <img src="./resources/img/product/6.jpg" alt="img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-7 align-self-center">
-                                        <div class="content">
-                                            <h4><a href="product-details.jsp">Funda Para Ebook</a></h4>
-                                            <div class="ratting">
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                            </div>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Single -->
-                    <div class="col-lg-3 col-md-6">
-                        <h3 class="deal-title">Weekly Discount</h3>
-                        <div class="weekly-discount-full">
-                            <!-- single -->
-                            <div class="weekly-discount-single mb-30">
-                                <a href="#"><img src="./resources/img/diccount1.jpg" alt="img"></a>
-                            </div>
-                            <!-- single -->
-                            <div class="weekly-discount-single">
-                                <a href="#"><img src="./resources/img/diccount2.jpg" alt="img"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- End Product Widget List Area -->
-
-        <!-- Start Instagram Feed -->
-        <div class="instagram-feed">
-            <div class="instagram-feed-full owl-carousel">
-                <!-- Single -->
-                <div class="instagram-single">
-                    <img src="./resources/img/instagram/1.jpg" alt="instagram">
-                    <div class="instagram-single-overly">
-                        <i class="fab fa-instagram"></i>
-                    </div>
-                </div>
-                <!-- Single -->
-                <div class="instagram-single">
-                    <img src="./resources/img/instagram/2.jpg" alt="instagram">
-                    <div class="instagram-single-overly">
-                        <i class="fab fa-instagram"></i>
-                    </div>
-                </div>
-                <!-- Single -->
-                <div class="instagram-single">
-                    <img src="./resources/img/instagram/3.jpg" alt="instagram">
-                    <div class="instagram-single-overly">
-                        <i class="fab fa-instagram"></i>
-                    </div>
-                </div>
-                <!-- Single -->
-                <div class="instagram-single">
-                    <img src="./resources/img/instagram/4.jpg" alt="instagram">
-                    <div class="instagram-single-overly">
-                        <i class="fab fa-instagram"></i>
-                    </div>
-                </div>
-                <!-- Single -->
-                <div class="instagram-single">
-                    <img src="./resources/img/instagram/5.jpg" alt="instagram">
-                    <div class="instagram-single-overly">
-                        <i class="fab fa-instagram"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Instagram Feed -->
-
+  
         <!-- Start Footer Area -->
         <footer class="footer">
             <!-- Footer Top -->

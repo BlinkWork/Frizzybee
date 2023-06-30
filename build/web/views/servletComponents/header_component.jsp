@@ -30,7 +30,22 @@
         <link rel="stylesheet" href="./resources/css/normalize.css">
         <link rel="stylesheet" href="./resources/css/style.css">
         <link rel="stylesheet" href="./resources/css/responsive.css">
-
+        <style>
+          .user-image .show {
+            margin-top: 30px !important;  
+          }
+          .user-image ul.show a{
+            color: black;
+          }
+          .user-image ul.show a:hover{
+            color: rgb(234, 136, 13);
+          }
+          
+          .user-image li{
+            padding: 0 10px;
+          }
+          
+        </style>
     </head>
 
     <body>
@@ -75,23 +90,20 @@
                                 <a href="./views/wishlist.jsp"><i class="far fa-heart"></i> Wishlist</a>
                                 <%if(curUser!=null){%>
                                 <div class="d-flex align-items-center justify-content-center" style="float: right" />
-                                <img src="<%=curUser.getAvatarURL()%>" alt="user" width="20px" style="object-fit: contain;">
-                                <p><%=curUser.getName()%></p>
-
+                                
                                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-infor ">
-                                    <li class="nav-item dropdown dropstart"><a
-                                            class="nav-link dropdown-toggle" href="#" role="button"
-                                            data-bs-toggle="dropdown" aria-expanded="false"> <img alt="cài đặt" src="https://cdn-icons-png.flaticon.com/512/3524/3524659.png" width="15px"></a>
-                                        <ul class="dropdown-menu">
+                                    <li class="nav-item dropdown dropstart user-image"><a data-bs-toggle="dropdown" aria-expanded="false"> <img alt="setting" src="<%=curUser.getAvatarURL()%>" width="30px" style="border: 2px solid #cccccc5e; border-radius: 50%;"></a>
+                                      <ul class="dropdown-menu" style="margin-top: 50px !important;">
+                                            <li><a class="dropdown-item userName" href="#"><%=curUser.getName()%></a></li>
                                             <li><a class="dropdown-item" href="#">My Cart</a></li>
-                                            <li><a class="dropdown-item" href="#">Update my information</a></li>
+                                            <li><a class="dropdown-item" href="#">Update information</a></li>
                                             <li><a class="dropdown-item" href="#">Change password</a></li>
-                                            <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item" href="logout">Logout</a></li>
-                                                <%if(curUser.getRole().equals("seller") || curUser.getRole().equals("admin")){%>
-                                            <li><hr class="dropdown-divider"></li>
+                                            <%if(curUser.getRole().equals("seller") || curUser.getRole().equals("admin")){%>
                                             <li><a class="dropdown-item" href="product-management?event=product-management">Product manage</a></li>
                                                 <%}%>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="logout">Logout</a></li>
+                                                
                                         </ul></li>
                                 </ul>
                             </div>
