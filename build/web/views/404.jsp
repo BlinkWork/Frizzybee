@@ -31,7 +31,7 @@
             <div class="breadcrumb-content">
               <h2>404 Error Page</h2>
               <ul>
-                <li><a href="index.jsp">Home</a></li>
+                <li><a href="./">Home</a></li>
                 <li class="active">Error 404</li>
               </ul>
             </div>
@@ -49,7 +49,7 @@
               <h3>404</h3>
               <h4>Sorry! The Page Not Found</h4>
               <p>The Link You Folowed Probably Broken, or the page has been removed.</p>
-              <a class="button-1" href="index.jsp">Go to Home</a>
+              <a class="button-1" href="./">Go to Home</a>
             </div>
           </div>
         </div>

@@ -102,7 +102,7 @@
                       You must login before add something to cart !!!
                     </div>
                     <div class="modal-footer">
-                      <button style="display: none" type="button" id="login--function" class="btn btn-warning warning-login">Login</button>
+                      <button type="button" id="login--function" class="btn btn-warning warning-login">Login</button>
                     </div>
                   </div>
                 </div>

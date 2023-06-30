@@ -8,6 +8,8 @@
 <%@page import = "model.*" %>
 <%@page import = "database.*" %>
 <%@page import = "java.util.*" %>
+<%@page import = "controller.*" %>
+<%@page import = "java.util.*" %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
@@ -74,93 +76,107 @@
                                 <%if(curUser!=null){%>
                                 <div class="d-flex align-items-center justify-content-center" style="float: right" />
                                 <img src="<%=curUser.getAvatarURL()%>" alt="user" width="20px" style="object-fit: contain;">
-					<p><%=curUser.getName()%></p>
-					
-					<ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-infor ">
-						<li class="nav-item dropdown dropstart"><a
-							class="nav-link dropdown-toggle" href="#" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false"> <img alt="cài đặt" src="https://cdn-icons-png.flaticon.com/512/3524/3524659.png" width="15px"></a>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="#">My Cart</a></li>
-								<li><a class="dropdown-item" href="#">Update my information</a></li>
-								<li><a class="dropdown-item" href="#">Change password</a></li>
-								<li><hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="logout">Logout</a></li>
-                                                                <%if(curUser.getRole().equals("seller") || curUser.getRole().equals("admin")){%>
-                                                                <li><hr class="dropdown-divider"></li>
-                                                                <li><a class="dropdown-item" href="product-management?event=product-management">Product manage</a></li>
-                                                                <%}%>
-							</ul></li>
-					</ul>
-                                </div>
-                                <%}else{%>
-                                <a href="login"><i class="fas fa-user"></i> Login / Register</a>
-                                <%}%>
+                                <p><%=curUser.getName()%></p>
+
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-infor ">
+                                    <li class="nav-item dropdown dropstart"><a
+                                            class="nav-link dropdown-toggle" href="#" role="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false"> <img alt="cài đặt" src="https://cdn-icons-png.flaticon.com/512/3524/3524659.png" width="15px"></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">My Cart</a></li>
+                                            <li><a class="dropdown-item" href="#">Update my information</a></li>
+                                            <li><a class="dropdown-item" href="#">Change password</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="logout">Logout</a></li>
+                                                <%if(curUser.getRole().equals("seller") || curUser.getRole().equals("admin")){%>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="product-management?event=product-management">Product manage</a></li>
+                                                <%}%>
+                                        </ul></li>
+                                </ul>
                             </div>
+                            <%}else{%>
+                            <a href="login"><i class="fas fa-user"></i> Login / Register</a>
+                            <%}%>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Header Middle -->
-            <div class="header-middle pt-30 pb-30">
-                <div class="container">
-                    <div class="row">
-                        <!-- Logo -->
-                        <div class="col-lg-2">
-                            <div class="logo">
-                                <h2><a href="./index.jsp"><img src="./resources/img/logo.png"></a></h2>
-                            </div>
+        </div>
+        <!-- Header Middle -->
+        <div class="header-middle pt-30 pb-30">
+            <div class="container">
+                <div class="row">
+                    <!-- Logo -->
+                    <div class="col-lg-2">
+                        <div class="logo">
+                            <h2><a href="./"><img src="./resources/img/logo.png"></a></h2>
                         </div>
-                        <!-- Search Bar -->
-                        <div class="col-lg-8">
-                            <div class="header-search-form">
-                                <form action="#">
-                                    <select class="form-select">
-                                        <option selected>All Categories</option>
-                                        <option value="1">Mobile</option>
-                                        <option value="2">LifeStyle</option>
-                                        <option value="3">Leptop</option>
-                                        <option value="4">Cell Phones</option>
-                                        <option value="5">Game & Consoles</option>
-                                        <option value="6">Smart Watchs</option>
-                                        <option value="7">Smartphone</option>
-                                    </select>
-                                    <input type="search" name="search" placeholder="Search keyword here..">
-                                    <button type="submit"><i class="fas fa-search"></i></button>
-                                </form>
-                            </div>
+                    </div>
+                    <!-- Search Bar -->
+                    <div class="col-lg-8">
+                        <div class="header-search-form">
+                            <form action="#">
+                                <select class="form-select">
+                                    <option selected>All Categories</option>
+                                    <option value="1">Mobile</option>
+                                    <option value="2">LifeStyle</option>
+                                    <option value="3">Leptop</option>
+                                    <option value="4">Cell Phones</option>
+                                    <option value="5">Game & Consoles</option>
+                                    <option value="6">Smart Watchs</option>
+                                    <option value="7">Smartphone</option>
+                                </select>
+                                <input type="search" name="search" placeholder="Search keyword here...">
+                                <button type="submit"><i class="fas fa-search"></i></button>
+                            </form>
                         </div>
-                        <!-- MiniCart -->
-                        <div class="col-lg-2">
-                            <div class="desktop-mini-cart">
-                                <div class="mini-cart">
-                                    <div class="mini-cart-icon">
-                                        <i class="fas fa-shopping-cart"></i>
-                                        <span class="counter">02</span>
-                                        <span class="counter-cart"><small>Your Cart</small>$10.00</span>
-                                        <!-- Mini Cart Content -->
-                                        <div class="minicart-content-wrapper">
-                                            <ul class="cart-list-full">
-                                                <!-- Single -->
-                                                <li class="cart-list-single">
-                                                    <img src="./resources/img/product/1.jpg" alt="img">
-                                                    <h5><a href="#">simple product</a></h5>
-                                                    <span class="price">$120</span>
-                                                    <div class="close"><i class="fas fa-times"></i></div>
-                                                </li>
-                                                <!-- Single -->
-                                                <li class="cart-list-single">
-                                                    <img src="./resources/img/product/2.jpg" alt="img">
-                                                    <h5><a href="#">simple product</a></h5>
-                                                    <span class="price">$120</span>
-                                                    <div class="close"><i class="fas fa-times"></i></div>
-                                                </li>
-                                            </ul>
-                                            <h2 class="subtotal">Subtotal : <span>$220</span></h2>
-                                            <div class="minicart-btn">
-                                                <a class="button-1" href="cart.jsp">View Cart</a>
-                                                <a class="button-2" href="#">Checkout</a>
-                                            </div>
+                    </div>
+                    
+                    <%
+                        CartServlet cartTest = new CartServlet();
+                        HttpSession sessions = request.getSession();
+                        String userName = (String) sessions.getAttribute("username");
+                        List<Cart> listCartId = null;
+
+                        if (userName != null) {
+                          UserDAO udao = new UserDAO();
+                          String user_id = String.valueOf(udao.getUserByUsername(userName).getId());
+                          String cartItems = cartTest.getCartSession(request, response, user_id);
+                            if (cartItems != null) {
+                            listCartId = cartTest.parseCarts(cartItems);
+                          }
+                        }
+                        
+                    %>
+                    
+                    <!-- Mini Cart -->
+                    <div class="col-lg-2">
+                        <div class="desktop-mini-cart">
+                            <div class="mini-cart">
+                                <div class="mini-cart-icon">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <span class="counter"> 
+                                      <%
+                                        if(listCartId != null){
+                                          if(listCartId.size() > 0 ){
+                                              out.println(listCartId.size());
+                                              }
+                                          
+                                        }
+                                      %>
+                                    </span>
+                                    <span class="counter-cart"><small>Your Cart</small>$10.00</span>
+                                    <!-- Mini Cart Content -->
+                                    <div class="minicart-content-wrapper">
+                                        <ul class="cart-list-full">
+                                            <!-- Single -->
+                                            
+                                        </ul>
+                                        <h2 class="subtotal">Subtotal : <span>$220</span></h2>
+                                        <div class="minicart-btn">
+                                            <a class="button-1" href="cart.jsp">View Cart</a>
+                                            <a class="button-2" href="#">Checkout</a>
                                         </div>
                                     </div>
                                 </div>
@@ -169,184 +185,73 @@
                     </div>
                 </div>
             </div>
-            <!-- Header Bottom -->
-            <div class="header-bottm">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="logo-2">
-                                <h2><a href="./index.jsp"><img src="./resources/img/logo.png"></a></h2>
-                            </div>
-                            <div class="canvas_open">
-                                <a href="javascript:void(0)"><i class="fas fa-bars"></i></a>
-                            </div>
-                            <div class="mobile-mini-cart">
-                                <div class="mini-cart">
-                                    <div class="mini-cart-icon">
-                                        <i class="fas fa-shopping-cart"></i>
-                                        <span class="counter">02</span>
-                                        <span class="counter-cart"><small>Your Cart</small>$10.00</span>
-                                        <!-- Mini Cart Content -->
-                                        <div class="minicart-content-wrapper">
-                                            <ul class="cart-list-full">
-                                                <!-- Single -->
-                                                <li class="cart-list-single">
-                                                    <img src="./resources/img/product/1.jpg" alt="img">
-                                                    <h5><a href="#">simple product</a></h5>
-                                                    <span class="price">$120</span>
-                                                    <div class="close"><i class="fas fa-times"></i></div>
-                                                </li>
-                                                <!-- Single -->
-                                                <li class="cart-list-single">
-                                                    <img src="./resources/img/product/2.jpg" alt="img">
-                                                    <h5><a href="#">simple product</a></h5>
-                                                    <span class="price">$120</span>
-                                                    <div class="close"><i class="fas fa-times"></i></div>
-                                                </li>
-                                            </ul>
-                                            <h2 class="subtotal">Subtotal : <span>$220</span></h2>
-                                            <div class="minicart-btn">
-                                                <a class="button-1" href="cart.jsp">View Cart</a>
-                                                <a class="button-2" href="#">Checkout</a>
-                                            </div>
+        </div>
+        <!-- Header Bottom -->
+        <div class="header-bottm">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="logo-2">
+                            <h2><a href="./"><img src="./resources/img/logo.png"></a></h2>
+                        </div>
+                        <div class="canvas_open">
+                            <a href="javascript:void(0)"><i class="fas fa-bars"></i></a>
+                        </div>
+                        <div class="mobile-mini-cart">
+                            <div class="mini-cart">
+                                <div class="mini-cart-icon">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <span class="counter"></span>
+                                    <span class="counter-cart"><small>Your Cart</small>$10.00</span>
+                                    <!-- Mini Cart Content -->
+                                    <div class="minicart-content-wrapper">
+                                        <ul class="cart-list-full">
+                                            <!-- Single -->
+                                            <li class="cart-list-single">
+                                                <img src="./resources/img/product/1.jpg" alt="img">
+                                                <h5><a href="#">simple product</a></h5>
+                                                <span class="price">$120</span>
+                                                <div class="close"><i class="fas fa-times"></i></div>
+                                            </li>
+                                            <!-- Single -->
+                                            <li class="cart-list-single">
+                                                <img src="./resources/img/product/2.jpg" alt="img">
+                                                <h5><a href="#">simple product</a></h5>
+                                                <span class="price">$120</span>
+                                                <div class="close"><i class="fas fa-times"></i></div>
+                                            </li>
+                                        </ul>
+                                        <h2 class="subtotal">Subtotal : <span>$220</span></h2>
+                                        <div class="minicart-btn">
+                                            <a class="button-1" href="cart.jsp">View Cart</a>
+                                            <a class="button-2" href="#">Checkout</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="menu">
-                                <nav>
-                                    <ul>
-                                        <li><a href="#">Home</a></li>
-                                        <li><a href="./views/about.jsp">About</a></li>
-                                        <li><a href="./shop">Shop</a></li>
-                                        <li><a href="./views/privacy-policy.jsp">Privacy Policy</a></li>
-                                        <li><a href="./views/faq.jsp">Faq</a></li>
-                                        <li><a href="./views/contact.jsp">Contact</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
+                        </div>
+                        <div class="menu">
+                            <nav>
+                                <ul>
+                                    <li><a href="./">Home</a></li>
+                                    <li><a href="./about">About</a></li>
+                                    <li><a href="./shop">Shop</a></li>
+                                    <li><a href="./privacy-policy">Privacy Policy</a></li>
+                                    <li><a href="./faq">FAQ</a></li>
+                                    <li><a href="./contact">Contact</a></li>
+                                </ul>
+                            </nav>
                         </div>
                     </div>
                 </div>
             </div>
-        </header>
-        <!-- Header -->
+        </div>
+    </header>
+    <!-- Header -->
 
         <div class="scroll-area">
             <i class="fa fa-angle-up"></i>
         </div>
-
-        <!-- Start Mobile Menu Area -->
-        <div class="mobile-menu-area">
-
-            <!--offcanvas menu area start-->
-            <div class="off_canvars_overlay">
-
-            </div>
-            <div class="offcanvas_menu">
-                <div class="offcanvas_menu_wrapper">
-                    <div class="canvas_close">
-                        <a href="javascript:void(0)"><i class="fas fa-times"></i></a>
-                    </div>
-                    <div class="mobile-logo">
-                        <h2><a href="./index.jsp"><img src="./resources/img/logo.png"></a></h2>
-                    </div>
-                    <div id="menu" class="text-left ">
-                        <ul class="offcanvas_main_menu">
-                            <li class="menu-item-has-children">
-                                <a href="./index.jsp">Home</a>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="about.jsp">about Us</a>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="#">Page</a>
-                                <ul class="sub-menu">
-                                    <li><a href="cart.jsp">Cart</a></li>
-                                    <li><a href="wishlist.jsp"> Wishlist</a></li>
-                                    <li><a href="checkout.jsp">Checkout</a></li>
-                                    <li><a href="login">Login</a></li>
-                                    <li><a href="register">Register</a></li>
-                                    <li><a href="reset-password.jsp">Reset Password</a></li>
-                                    <li><a href="privacy-policy.jsp">Privacy Policy</a></li>
-                                    <li><a href="terms-condition.jsp">Terms & Condition</a></li>
-                                    <li><a href="404.jsp">404 Error</a></li>
-                                    <li><a href="faq.jsp">Faq</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="#">Shop</a>
-                                <ul class="sub-menu">
-                                    <li><a href="./shop">Shop</a></li>
-                                    <li><a href="shop2-columns.jsp">Shop 2 Columns</a></li>
-                                    <li><a href="shop-grid.jsp">Shop Grid</a></li>
-                                    <li><a href="shop-left-sidebar.jsp">Shop Left Sidebar</a></li>
-                                    <li><a href="shop-list.jsp">Shop List</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="#">Elements</a>
-                                <ul class="sub-menu">
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Elements</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="element-infobox.jsp">Element Info Box</a></li>
-                                            <li><a href="element-breadcrumb.jsp">Element Breadcrum</a></li>
-                                            <li><a href="element-heading.jsp">Element Headding</a></li>
-                                            <li><a href="element-post.jsp">Element Post Element</a></li>
-                                            <li><a href="element-pricing.jsp">Element Pricing</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Elements</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="element-product-category.jsp">Element Product Category</a></li>
-                                            <li><a href="element-product-style.jsp">Element Product Style</a></li>
-                                            <li><a href="element-product-tab.jsp">Element Product Tab</a></li>
-                                            <li><a href="element-team-style.jsp">Element Team</a></li>
-                                            <li><a href="element-testimonial.jsp">Element Testimonial</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Elements</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="./shop">Element Shop</a></li>
-                                            <li><a href="shop2-columns.jsp">Element Shop 2 Columns</a></li>
-                                            <li><a href="shop-grid.jsp">Element Shop Grid</a></li>
-                                            <li><a href="shop-left-sidebar.jsp">Element Shop Left Sidebar</a></li>
-                                            <li><a href="shop-list.jsp">Element Shop List</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Elements</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="product-details.jsp">Element Shop Single</a></li>
-                                            <li><a href="cart.jsp">Element Cart Page</a></li>
-                                            <li><a href="checkout.jsp">Element CheckOut Page</a></li>
-                                            <li><a href="wishlist.jsp">Element Wishlist</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="#">Blog</a>
-                                <ul class="sub-menu">
-                                    <li><a href="blog.jsp">Blog</a></li>
-                                    <li><a href="blog-grid.jsp">Blog Grid</a></li>
-                                    <li><a href="single.jsp">Blog Single</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="contact.jsp"> Contact Us</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--offcanvas menu area end-->
-        <!-- End Mobile Menu Area -->
-
 
         <!-- Start Hero Area -->
         <section class="hero-area">
@@ -1629,6 +1534,7 @@
         <script src="./resources/js/wow.min.js"></script>
         <script src="./resources/js/script.js"></script>
         <script src="./resources/js/mobile-menu.js"></script>
+        <script src="./resources/js/index.js"></script>
     </body>
 
 </html>
