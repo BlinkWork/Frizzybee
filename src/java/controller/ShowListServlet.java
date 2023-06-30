@@ -111,7 +111,7 @@ public class ShowListServlet extends HttpServlet {
         request.setAttribute("listProduct", listProduct);
     }
     
-    private void getLatestProducts(ProductDAO dao, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void getLatestProducts(ProductDAO dao, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> latestProducts = dao.getLatest3Products();
         request.setAttribute("latestProducts", latestProducts);
     }

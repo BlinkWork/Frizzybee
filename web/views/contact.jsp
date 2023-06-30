@@ -222,5 +222,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC3Ip9iVC0nIxC6V14CKLQ1HZNF_65qEQ "></script>
     <script src="./resources/js/script.js"></script>
     <script src="./resources/js/mobile-menu.js"></script>
+    <script src="./resources/js/index.js"></script>
+
   </body>
 </html>

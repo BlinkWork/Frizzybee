@@ -64,7 +64,7 @@ public class CheckoutServlet extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("./views/checkout.jsp");
             rd.forward(request, response);
         } else {
-            response.sendRedirect("./views/404.jsp");
+            response.sendRedirect("./404");
         }
 
     }

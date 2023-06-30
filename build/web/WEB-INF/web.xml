@@ -51,4 +51,12 @@
     <servlet-name>AboutServlet</servlet-name>
     <url-pattern>/contact</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>ErrorServlet</servlet-name>
+    <jsp-file>/views/404.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ErrorServlet</servlet-name>
+    <url-pattern>/404</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -43,7 +43,7 @@ public class CartServlet extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("./views/cart.jsp");
             rd.forward(request, response);
         } else {
-            response.sendRedirect("./views/404.jsp");
+            response.sendRedirect("./404");
         }
     }
 

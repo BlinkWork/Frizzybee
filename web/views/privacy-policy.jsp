@@ -199,5 +199,6 @@
     <script src="./resources/js/wow.min.js"></script>
     <script src="./resources/js/script.js"></script>
     <script src="./resources/js/mobile-menu.js"></script>
+    <script src="./resources/js/index.js"></script>
   </body>
 </html>
