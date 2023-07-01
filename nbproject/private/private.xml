@@ -5,6 +5,7 @@
         <group>
             <file>file:/D:/vieux/PROJECT/prjClone/Frizzybee/src/java/model/Product.java</file>
             <file>file:/D:/vieux/PROJECT/prjClone/Frizzybee/src/java/controller/IndexServlet.java</file>
+            <file>file:/D:/vieux/PROJECT/prjClone/Frizzybee/src/java/controller/ProductUpdateServlet.java</file>
             <file>file:/D:/vieux/PROJECT/prjClone/Frizzybee/web/index.jsp</file>
             <file>file:/D:/vieux/PROJECT/prjClone/Frizzybee/src/java/database/ProductDAO.java</file>
         </group>
