@@ -66,7 +66,11 @@ public class ProductManageServlet extends HttpServlet {
         String username = (String) session.getAttribute("username");
         UserDAO userDAO = new UserDAO();
         User curUser = userDAO.getUserByUsername(username);
-        List<Product> listProduct = dao.getProductsByPageBySeller(pageid, total, curUser.getId());
+        List<Product> listProduct = null;
+        if (curUser != null) {
+            listProduct = dao.getProductsByPageBySeller(pageid, total, curUser.getId());
+
+        }
         request.setAttribute("listProduct", listProduct);
         RequestDispatcher rs = request.getRequestDispatcher("./views/shop-list.jsp");
         rs.forward(request, response);
@@ -84,16 +88,32 @@ public class ProductManageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String userName = (String) session.getAttribute("username");
+        if (userName != null) {
+            UserDAO udao = new UserDAO();
+            String role = udao.getUserByUsername(userName).getRole();
+            if (role.equals("admin") == false) {
+                response.sendRedirect("./404");
+                return;
+            }
+        } else {
+            response.sendRedirect("./404");
+            return;
+
+        }
         String event = request.getParameter("event");
+        getLatestProduct(request, response);
         if (event.equals("product-management")) {
             renderProduct(request, response);
         } else if (event.equals("product-detail")) {
             renderProductDetails(request, response);
-        }else if (event.equals("send-to-add")) {
+        } else if (event.equals("send-to-add")) {
             request.getRequestDispatcher("./views/add-product.jsp").forward(request, response);
-        }else if(event.equals("sort-product")){
+        } else if (event.equals("sort-product")) {
             renderSortProductList(request, response);
         }
+
     }
 
     /**
@@ -196,12 +216,12 @@ public class ProductManageServlet extends HttpServlet {
             if (!uploadDir.exists()) {
                 uploadDir.mkdir();
             }
-            String url = uploadPath+ File.separator + fileName;
-            imageURL = "./uploads/"+ fileName;
+            String url = uploadPath + File.separator + fileName;
+            imageURL = "./uploads/" + fileName;
             filePart.write(url);
         } catch (IOException e) {
             if (newImg.length() > 0) {
-            imageURL = newImg;
+                imageURL = newImg;
             }
         }
         //validate input
@@ -222,7 +242,7 @@ public class ProductManageServlet extends HttpServlet {
                 brandDAO.insert(new Brand(brand));
             }
         }
-        if(category.isEmpty()) {
+        if (category.isEmpty()) {
             check = false;
             request.setAttribute("categoryErr", "*Category can not be left blank!");
         }
@@ -280,16 +300,16 @@ public class ProductManageServlet extends HttpServlet {
             response.sendRedirect("product-management?event=product-management");
         }
     }
-    
+
     protected void createProduct(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         String username = (String) session.getAttribute("username");
-        System.out.println("username: "+username);
+        System.out.println("username: " + username);
         UserDAO userDAO = new UserDAO();
         User curUser = userDAO.getUserByUsername(username);
-        System.out.println("ID: "+  curUser.getId());
-        int sellerID=  curUser.getId();
+        System.out.println("ID: " + curUser.getId());
+        int sellerID = curUser.getId();
         String productName = request.getParameter("productName");
         String description = request.getParameter("description");
         String category = request.getParameter("category");
@@ -316,18 +336,18 @@ public class ProductManageServlet extends HttpServlet {
             if (!uploadDir.exists()) {
                 uploadDir.mkdir();
             }
-            String url = uploadPath+ File.separator + fileName;
-            imageURL = "./uploads/"+ fileName;
+            String url = uploadPath + File.separator + fileName;
+            imageURL = "./uploads/" + fileName;
             filePart.write(url);
         } catch (IOException e) {
             if (newImg.length() > 0) {
-            imageURL = newImg;
+                imageURL = newImg;
             }
         }
 
         //validate input
         boolean check = true;
-        System.out.println("first:  "+check);
+        System.out.println("first:  " + check);
         if (productName.isEmpty()) {
             check = false;
             request.setAttribute("productNameErr", "*Product name can not be left blank!");
@@ -386,7 +406,7 @@ public class ProductManageServlet extends HttpServlet {
             System.out.println(check);
             request.getRequestDispatcher("./views/add-product.jsp").forward(request, response);
         } else {
-            Product product = new Product(productName, sellerID, description,categoryDAO.getCategoryByName(category), brandDAO.getBrandByName(brand), price, quantity, imageURL, discount);
+            Product product = new Product(productName, sellerID, description, categoryDAO.getCategoryByName(category), brandDAO.getBrandByName(brand), price, quantity, imageURL, discount);
             productDAO.insert(product);
             System.out.println("oke oke");
             response.sendRedirect("product-management?event=product-management");
@@ -395,6 +415,12 @@ public class ProductManageServlet extends HttpServlet {
 
     private void renderSortProductList(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
+    }
+
+    private void getLatestProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ProductDAO dao = new ProductDAO();
+        ShowListServlet sl = new ShowListServlet();
+        sl.getLatestProducts(dao, request, response);
     }
 }
