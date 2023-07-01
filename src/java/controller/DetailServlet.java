@@ -4,6 +4,8 @@
  */
 package controller;
 
+import static controller.CartServlet.encodeCarts;
+import static controller.CartServlet.parseCarts;
 import database.ProductDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -14,6 +16,9 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.List;
+import model.Cart;
 import model.Product;
 
 /**

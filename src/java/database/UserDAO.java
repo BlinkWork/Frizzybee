@@ -221,11 +221,11 @@ public class UserDAO extends MyDAO {
                     break;
                 case "seller":
                     ps.setBoolean(9, true);
-                    ps.setBoolean(10, false);
+                    ps.setBoolean(10, true);
                     break;
                 default:
-                    ps.setBoolean(9, false);
-                    ps.setBoolean(10, false);
+                    ps.setBoolean(9, true);
+                    ps.setBoolean(10, true);
                     break;
             }
             ps.executeUpdate();
@@ -278,11 +278,11 @@ public class UserDAO extends MyDAO {
                     break;
                 case "seller":
                     ps.setBoolean(9, true);
-                    ps.setBoolean(10, false);
+                    ps.setBoolean(10, true);
                     break;
                 default:
-                    ps.setBoolean(9, false);
-                    ps.setBoolean(10, false);
+                    ps.setBoolean(9, true);
+                    ps.setBoolean(10, true);
                     break;
             }
             ps.setInt(11, x.getId());
@@ -294,69 +294,14 @@ public class UserDAO extends MyDAO {
         }
     }
 
-    public int countNumberUser() {
-        int number = 0;
-        xSql = "select count(*) as numberUser from [dbo].[User] where isAdmin = 'FALSE'";
-        try {
-            ps = con.prepareStatement(xSql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                number = rs.getInt("numberUser");
-            }
-            rs.close();
-            ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return number;
-    }
-
-    public String[] getColNames(String xTable) {
-        List<String> columnNames = new ArrayList<>();
-        String sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = ?";
-        try ( PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(1, xTable);
-            try ( ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    String columnName = rs.getString("COLUMN_NAME");
-                    columnNames.add(columnName);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return columnNames.toArray(new String[0]);
-    }
-
-    public String getUserInformation(String username, String proper) {
-        xSql = "select " + proper + " from [dbo].[User] where username = '" + username + "'";
-        String result = "";
-        try {
-            ps = con.prepareStatement(xSql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                result = rs.getString(proper);
-                if (proper.equals("isAdmin") || proper.equals("isSeller")) {
-                    result = (result.equals("1") ? "true" : "false");
-                }
-            }
-            rs.close();
-            ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
     public static void main(String[] args) {
         UserDAO dao = new UserDAO();
 //    dao.insert(new User(1, "Lê Minh Thang", "cccc", "lethangd", "123456", "M", Date.valueOf("2003-08-05"), "lethangd@gmail.com", "Phu Ly", "admin"));
 
-        List<User> temp = dao.getUsers();
-        for (User te : temp) {
-            System.out.println(te.getId());
-
-        }       
-        
+//    List<User> temp = dao.getUsers();
+//    for (User te : temp) {
+//      System.out.println(te.getName());
+//    }
+        System.out.println(dao.getUserByUsername("nguyendat").getId());
     }
 }

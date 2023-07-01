@@ -7,7 +7,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import = "model.*" %>
 <%@page import = "database.*" %>
-<%@page import = "controller.*" %>
 <%@page import = "java.util.*" %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -30,22 +29,7 @@
         <link rel="stylesheet" href="./resources/css/normalize.css">
         <link rel="stylesheet" href="./resources/css/style.css">
         <link rel="stylesheet" href="./resources/css/responsive.css">
-        <style>
-          .user-image .show {
-            margin-top: 30px !important;  
-          }
-          .user-image ul.show a{
-            color: black;
-          }
-          .user-image ul.show a:hover{
-            color: rgb(234, 136, 13);
-          }
-          
-          .user-image li{
-            padding: 0 10px;
-          }
-          
-        </style>
+
     </head>
 
     <body>
@@ -90,20 +74,23 @@
                                 <a href="./views/wishlist.jsp"><i class="far fa-heart"></i> Wishlist</a>
                                 <%if(curUser!=null){%>
                                 <div class="d-flex align-items-center justify-content-center" style="float: right" />
-                                
+                                <img src="<%=curUser.getAvatarURL()%>" alt="user" width="20px" style="object-fit: contain;">
+                                <p><%=curUser.getName()%></p>
+
                                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-infor ">
-                                    <li class="nav-item dropdown dropstart user-image"><a data-bs-toggle="dropdown" aria-expanded="false"> <img alt="setting" src="<%=curUser.getAvatarURL()%>" width="30px" style="border: 2px solid #cccccc5e; border-radius: 50%;"></a>
-                                      <ul class="dropdown-menu" style="margin-top: 50px !important;">
-                                            <li><a class="dropdown-item userName" href="#"><%=curUser.getName()%></a></li>
+                                    <li class="nav-item dropdown dropstart"><a
+                                            class="nav-link dropdown-toggle" href="#" role="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false"> <img alt="cài đặt" src="https://cdn-icons-png.flaticon.com/512/3524/3524659.png" width="15px"></a>
+                                        <ul class="dropdown-menu">
                                             <li><a class="dropdown-item" href="#">My Cart</a></li>
-                                            <li><a class="dropdown-item" href="#">Update information</a></li>
+                                            <li><a class="dropdown-item" href="#">Update my information</a></li>
                                             <li><a class="dropdown-item" href="#">Change password</a></li>
-                                            <%if(curUser.getRole().equals("seller") || curUser.getRole().equals("admin")){%>
-                                            <li><a class="dropdown-item" href="product-management?event=product-management">Product manage</a></li>
-                                                <%}%>
                                             <li><hr class="dropdown-divider"></li>
                                             <li><a class="dropdown-item" href="logout">Logout</a></li>
-                                                
+                                                <%if(curUser.getRole().equals("seller") || curUser.getRole().equals("admin")){%>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="product-management?event=product-management">Product manage</a></li>
+                                                <%}%>
                                         </ul></li>
                                 </ul>
                             </div>
@@ -122,7 +109,7 @@
                     <!-- Logo -->
                     <div class="col-lg-2">
                         <div class="logo">
-                            <h2><a href="./"><img src="./resources/img/logo.png"></a></h2>
+                            <h2><a href="./index.jsp"><img src="./resources/img/logo.png"></a></h2>
                         </div>
                     </div>
                     <!-- Search Bar -->
@@ -144,46 +131,31 @@
                             </form>
                         </div>
                     </div>
-                    
-                    <%
-                        CartServlet cartTest = new CartServlet();
-                        HttpSession sessions = request.getSession();
-                        String userName = (String) sessions.getAttribute("username");
-                        List<Cart> listCartId = null;
-
-                        if (userName != null) {
-                          UserDAO udao = new UserDAO();
-                          String user_id = String.valueOf(udao.getUserByUsername(userName).getId());
-                          String cartItems = cartTest.getCartSession(request, response, user_id);
-                            if (cartItems != null) {
-                            listCartId = cartTest.parseCarts(cartItems);
-                          }
-                        }
-                        
-                    %>
-                    
-                    <!-- Mini Cart -->
+                    <!-- MiniCart -->
                     <div class="col-lg-2">
                         <div class="desktop-mini-cart">
                             <div class="mini-cart">
                                 <div class="mini-cart-icon">
                                     <i class="fas fa-shopping-cart"></i>
-                                    <span class="counter"> 
-                                      <%
-                                        if(listCartId != null){
-                                          if(listCartId.size() > 0 ){
-                                              out.println(listCartId.size());
-                                              }
-                                          
-                                        }
-                                      %>
-                                    </span>
+                                    <span class="counter">02</span>
                                     <span class="counter-cart"><small>Your Cart</small>$10.00</span>
                                     <!-- Mini Cart Content -->
                                     <div class="minicart-content-wrapper">
                                         <ul class="cart-list-full">
                                             <!-- Single -->
-                                            
+                                            <li class="cart-list-single">
+                                                <img src="./resources/img/product/1.jpg" alt="img">
+                                                <h5><a href="#">simple product</a></h5>
+                                                <span class="price">$120</span>
+                                                <div class="close"><i class="fas fa-times"></i></div>
+                                            </li>
+                                            <!-- Single -->
+                                            <li class="cart-list-single">
+                                                <img src="./resources/img/product/2.jpg" alt="img">
+                                                <h5><a href="#">simple product</a></h5>
+                                                <span class="price">$120</span>
+                                                <div class="close"><i class="fas fa-times"></i></div>
+                                            </li>
                                         </ul>
                                         <h2 class="subtotal">Subtotal : <span>$220</span></h2>
                                         <div class="minicart-btn">
@@ -204,7 +176,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="logo-2">
-                            <h2><a href="./"><img src="./resources/img/logo.png"></a></h2>
+                            <h2><a href="./index.jsp"><img src="./resources/img/logo.png"></a></h2>
                         </div>
                         <div class="canvas_open">
                             <a href="javascript:void(0)"><i class="fas fa-bars"></i></a>
@@ -213,7 +185,7 @@
                             <div class="mini-cart">
                                 <div class="mini-cart-icon">
                                     <i class="fas fa-shopping-cart"></i>
-                                    <span class="counter"></span>
+                                    <span class="counter">02</span>
                                     <span class="counter-cart"><small>Your Cart</small>$10.00</span>
                                     <!-- Mini Cart Content -->
                                     <div class="minicart-content-wrapper">
@@ -245,12 +217,12 @@
                         <div class="menu">
                             <nav>
                                 <ul>
-                                    <li><a href="./">Home</a></li>
-                                    <li><a href="./about">About</a></li>
-                                    <li><a href="./shop">Shop</a></li>
-                                    <li><a href="./privacy-policy">Privacy Policy</a></li>
-                                    <li><a href="./faq">Faq</a></li>
-                                    <li><a href="./contact">Contact</a></li>
+                                    <li><a href="./index.jsp">Home</a></li>
+                                    <li><a href="./views/about.jsp">About</a></li>
+                                    <li><a href="#">Shop</a></li>
+                                    <li><a href="./views/privacy-policy.jsp">Privacy Policy</a></li>
+                                    <li><a href="./views/faq.jsp">Faq</a></li>
+                                    <li><a href="./views/contact.jsp">Contact</a></li>
                                 </ul>
                             </nav>
                         </div>
