@@ -14,7 +14,6 @@ public class Order {
     private int orderID ;
     private User user ;
     private Date orderDate;
-    private Date receivedDate;
     private String address;
     private String paymentMethod;
     private String status;
@@ -33,24 +32,6 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
-    public Order(int orderID, User user, Date orderDate, Date receivedDate, String address, String paymentMethod, String status, double totalPrice) {
-        this.orderID = orderID;
-        this.user = user;
-        this.orderDate = orderDate;
-        this.receivedDate = receivedDate;
-        this.address = address;
-        this.paymentMethod = paymentMethod;
-        this.status = status;
-        this.totalPrice = totalPrice;
-    }
-
-    public void setReceivedDate(Date receivedDate) {
-        this.receivedDate = receivedDate;
-    }
-
-    public Date getReceivedDate() {
-        return receivedDate;
-    }
 
     public int getOrderID() {
         return orderID;
