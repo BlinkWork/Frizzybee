@@ -92,6 +92,7 @@
                                 <a href="./views/wishlist.jsp"><i class="far fa-heart"></i> Wishlist</a>
                                 <%if(curUser!=null){%>
                                 <div class="d-flex align-items-center justify-content-center" style="float: right" />
+<<<<<<< HEAD
                                
                                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-infor ">
                                     <li class="nav-item dropdown dropstart user-image">
@@ -103,15 +104,29 @@
                                             <li><a class="dropdown-item" href="updateinformation">Update my information</a></li>
                                             <li><a class="dropdown-item" href="changepassword">Change password</a></li>
 
-                                                <%if(curUser.getRole().equals("seller") || curUser.getRole().equals("admin")){%>
+                                          <%if(curUser.getRole().equals("seller") || curUser.getRole().equals("admin")){%>
                                             <li><hr class="dropdown-divider"></li>
                                             <li><a class="dropdown-item" href="product-management?event=product-management">Product manage</a></li>
-                                                <%}%>
+                                            <li><a class="dropdown-item" href="product-management?event=send-to-add">Add product</a></li>
+                                            <li><a class="dropdown-item" href="order-management?event=order-management">Order management</a></li>
+
+                                          <%}%>
                                             <li><hr class="dropdown-divider"></li>
                                             <li><a class="dropdown-item" href="logout">Logout</a></li>
                                                 
                                         </ul></li>
                                 </ul>
+
+                                            
+                                            <ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-infor ">
+						<li class="nav-item dropdown dropstart"><a
+							class="nav-link dropdown-toggle" href="#" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"> <img alt="cài đặt" src="https://cdn-icons-png.flaticon.com/512/3524/3524659.png" width="15px"></a>
+							<ul class="dropdown-menu">
+
+                              
+							</ul></li>
+					</ul>
                             </div>
                             <%}else{%>
                             <a href="login"><i class="fas fa-user"></i> Login / Register</a>

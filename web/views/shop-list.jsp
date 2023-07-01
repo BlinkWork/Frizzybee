@@ -27,7 +27,7 @@
   </head>
   <body>
     
-        <%@include file="../views/servletComponents/header_component.jsp" %>
+         <%@include file="../views/servletComponents/header_component.jsp" %>
 
         <%
         List<Product> listProduct = (List<Product>) request.getAttribute("listProduct");
@@ -48,7 +48,7 @@
       </div>
     </div>
         <%}%>
-
+        
     <!-- Start BreadCrumb Area -->
     <div class="breadcrumb-area pt-100 pb-100" style="background-image: url('./resources/img/breadcrumb.jpg');">
       <div class="container">
