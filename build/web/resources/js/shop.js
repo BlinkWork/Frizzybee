@@ -111,11 +111,8 @@ function addCartEvent() {
       data: {id: idAdd, quantity: 1, action: add},
       success: function (response) {
         showMiniCart("add");
-        if (response == "user not found") {
-          $('#modal--warning--login').modal('show');
-        } else {
+        $('#modal--warning--login').modal('show');
 
-        }
       },
       error: function () {
         alert('Error add request.');

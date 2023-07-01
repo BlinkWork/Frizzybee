@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>BulkShop - Electronics Shop HTML Template | Product Details</title>
     <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="16x16">
-    <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="18x18">
+    <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="18x18">mo
     <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="20x20">
 
     <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
@@ -141,19 +141,42 @@
               <!-- Modal -->
               <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="myModalLabel">Add to cart successfully</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      Your item has been added to the cart.
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" id="back--shop" class="btn btn-primary">Continue to Buy</button>
-                      <button type="button" id="view--cart" class="btn btn-warning" style="color: white;">View Cart</button>
-                    </div>
-                  </div>
+                  <%
+                      
+                      if(userName == null || userName.trim().isEmpty()){
+                        out.println(""
+                        + "<div class='modal-content'>"
+                        + "<div class='modal-header'>"
+                        + "<h5 class='modal-title' id='myModalLabel'>Warning</h5>"
+                        + "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>"
+                        + "</div>"
+                        + "<div class='modal-body warning-login'>"
+                        + "You must login before add something to cart !!!"
+                        + "</div>"
+                        + "<div class='modal-footer'>"
+                        + "<button type='button' id='login--function' class='btn btn-warning warning-login'>Login</button>"
+                        + "</div>"
+                        + "</div>"
+                        + "");
+                      }
+                      else{
+                        out.println(""
+                        + "<div class='modal-content'>"
+                            + "<div class='modal-header'>"
+                            + "<h5 class='modal-title' id='myModalLabel'>Add to cart successfully</h5>"
+                            + "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>"
+                            + "</div>"
+                            + "<div class='modal-body'>"
+                            + "Your item has been added to the cart."
+                            + "</div>"
+                            + "<div class='modal-footer'>"
+                            + "<button type='button' id='back--shop' class='btn btn-primary'>Continue to Buy</button>"
+                            + "<button type='button' id='view--cart' class='btn btn-warning' style='color: white;'>View Cart</button>"
+                            + "</div>"
+                            + "</div>"
+                        + "");
+                      }
+                  %>
                 </div>
               </div>
 
