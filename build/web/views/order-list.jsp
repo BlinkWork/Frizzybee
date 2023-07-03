@@ -360,7 +360,7 @@
                             <div class="row" style="background-color: rgb(245, 246, 250); border: 1px solid rgb(213, 213, 213);">
                                 <div class="col-md-11 row fw-normal">
                                     <div class="col-md-4 p-3 text-center">Total:</div>
-                                    <div class="col-md-1 p-3 text-center">Price</div>
+                                    <div class="col-md-1 p-3 ps-0 text-center">Price</div>
                                 </div>
                             </div>
                         </div>

@@ -166,11 +166,14 @@ public class OrderManageServlet extends HttpServlet {
                     + "                                <div class=\"row\">\n"
                             + "<div class=\"col-md-11\">");
             List<OrderItem> listOrderItem = oidao.getOrderItemsByOrderID(order.getOrderID() + "");
+            double totalPrice = 0;
             for (OrderItem orderItem : listOrderItem) {
                 Product product = orderItem.getProduct();
+                double totalPriceOrderItem = orderItem.getQuantity() * (product.getPrice()-product.getDiscount()*product.getPrice()/100) ;
+                totalPrice+=totalPriceOrderItem;
                 out.print(
                         "                                    <div\n"
-                        + "                                        class=\"col-md-11 row fw-normal align-items-center align-items-stretch\" style=\"background-color: rgb(255, 255, 255); \" >\n"
+                        + "                                        class=\"col-md-12 row fw-normal align-items-center align-items-stretch\" style=\"background-color: rgb(255, 255, 255); \" >\n"
                         + "                                        <div class=\"col-md-4 row border-end\">\n"
                         + "                                            <div class=\"col-md-10 d-flex ps-4\" >\n"
                         + "                                                <img src=\"<" + product.getImageURL() + "\" alt=\"alt\" width=\"50px\"/>\n"
@@ -178,7 +181,7 @@ public class OrderManageServlet extends HttpServlet {
                         + "                                            </div>\n"
                         + "                                            <div class=\"col-md-2 text-end align-self-center\"><p class=\"overflow-hidden\">x" + orderItem.getQuantity() + "</p></div>\n"
                         + "                                        </div>\n"
-                        + "                                        <div class=\"col-md-1 text-center d-flex flex-column justify-content-center border-end\"><p class=\"overflow-hidden\">$" + orderItem.getQuantity() * product.getPrice() + "</p></div>\n"
+                        + "                                        <div class=\"col-md-1 text-center d-flex flex-column justify-content-center border-end\"><p class=\"overflow-hidden\">$" + totalPriceOrderItem + "</p></div>\n"
                         + "                                        <div class=\"col-md-2 text-center d-flex flex-column justify-content-center border-end\"><p class=\"overflow-hidden\">" + order.getPaymentMethod() + "</p></div>\n"
                         + "                                        <div class=\"col-md-2 text-center d-flex flex-column justify-content-center border-end\"><p class=\"overflow-hidden\">" + order.getOrderDate() + "</p></div>\n"
                         + "                                        <div class=\"col-md-2 text-center d-flex flex-column justify-content-center border-end\"><p class=\"overflow-hidden\" id=\"received-date" + order.getOrderID() + "\">");
@@ -198,8 +201,10 @@ public class OrderManageServlet extends HttpServlet {
                     + "                                </div>\n"
                     + "                                <div class=\"row\" style=\"background-color: rgb(245, 246, 250); border: 1px solid rgb(213, 213, 213);\">\n"
                     + "                                    <div class=\"col-md-11 row fw-normal\">\n"
+                    + "                                    <div class=\"col-md-12 row\">\n"
                     + "                                        <div class=\"col-md-4 p-3 text-center\">Total:</div>\n"
-                    + "                                        <div class=\"col-md-1 p-3 text-center\">Price</div>\n"
+                    + "                                        <div class=\"col-md-1 p-3 ps-0  text-center\">$"+totalPrice+"</div>\n"
+                    + "                                    </div>\n"
                     + "                                    </div>\n"
                     + "                                </div>\n"
                     + "                            </div>\n"
