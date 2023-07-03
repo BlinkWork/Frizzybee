@@ -23,6 +23,22 @@
         <link rel="stylesheet" href="./resources/css/style.css">
         <link rel="stylesheet" href="./resources/css/responsive.css">
         <link rel="stylesheet" href="./resources/css/tabs.css">
+        <style>
+          .user-image .show {
+            margin-top: 30px !important;  
+          }
+          .user-image ul.show a{
+            color: black;
+          }
+          .user-image ul.show a:hover{
+            color: rgb(234, 136, 13);
+          }
+          
+          .user-image li{
+            padding: 0 10px;
+          }
+          
+        </style>
     </head>
     <body>
         <%
@@ -79,29 +95,33 @@
                         </div>
                         <div class="col-lg-7">
                             <div class="top-list">
-                                <a href="#"><i class="fas fa-mobile-alt"></i> +0834398268</a>
-                                <a href="./wishlist.jsp"><i class="far fa-heart"></i> Wishlist</a>
+                                <a href="#"><i class="fas fa-mobile-alt"></i>0834398268</a>
+                                <a href="./views/wishlist.jsp"><i class="far fa-heart"></i> Wishlist</a>
+                                <%if(curUser!=null){%>
                                 <div class="d-flex align-items-center justify-content-center" style="float: right" />
-                                <img src="<%=curUser.getAvatarURL()%>" alt="user" width="20px" style="object-fit: contain;">
-                                <p><%=curUser.getName()%></p>
+                                
                                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-infor ">
-                                    <li class="nav-item dropdown dropstart"><a
-                                            class="dropdown-toggle" href="#" role="button"
-                                            data-bs-toggle="dropdown" aria-expanded="false"> <img alt="cài ??t" src="https://cdn-icons-png.flaticon.com/512/3524/3524659.png" width="15px"></a>
-                                        <ul class="dropdown-menu">
+                                    <li class="nav-item dropdown dropstart user-image"><a data-bs-toggle="dropdown" aria-expanded="false"> <img alt="setting" src="<%=curUser.getAvatarURL()%>" width="30px" style="border: 2px solid #cccccc5e; border-radius: 50%;"></a>
+                                      <ul class="dropdown-menu" style="margin-top: 50px !important;">
+                                            <li><a class="dropdown-item userName" href="#"><%=curUser.getName()%></a></li>
                                             <li><a class="dropdown-item" href="#">My Cart</a></li>
-                                            <li><a class="dropdown-item" href="#">Update my information</a></li>
+                                            <li><a class="dropdown-item" href="#">Update information</a></li>
                                             <li><a class="dropdown-item" href="#">Change password</a></li>
-                                            <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item" href="logout">Logout</a></li>
-                                                <%if(curUser.getRole().equals("seller") || curUser.getRole().equals("admin")){%>
+                                            <%if(curUser.getRole().equals("seller") || curUser.getRole().equals("admin")){%>
                                             <li><hr class="dropdown-divider"></li>
                                             <li><a class="dropdown-item" href="product-management?event=product-management">Product management</a></li>
                                             <li><a class="dropdown-item" href="product-management?event=send-to-add">Add product</a></li>
                                             <li><a class="dropdown-item" href="order-management?event=order-management">Order management</a></li>
                                                 <%}%>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="logout">Logout</a></li>
+                                                
                                         </ul></li>
-                                </ul></div>
+                                </ul>
+                            </div>
+                            <%}else{%>
+                            <a href="login"><i class="fas fa-user"></i> Login / Register</a>
+                            <%}%>
                         </div>
                     </div>
                 </div>
@@ -222,12 +242,12 @@
                         <div class="menu">
                             <nav>
                                 <ul>
-                                    <li><a href="../index.jsp">Home</a></li>
-                                    <li><a href="./about.jsp">About</a></li>
-                                    <li><a href="../shop">Shop</a></li>
-                                    <li><a href="./privacy-policy.jsp">Privacy Policy</a></li>
-                                    <li><a href="./faq.jsp">Faq</a></li>
-                                    <li><a href="./contact.jsp">Contact</a></li>
+                                    <li><a href="./">Home</a></li>
+                                    <li><a href="./about">About</a></li>
+                                    <li><a href="./shop">Shop</a></li>
+                                    <li><a href="./privacy-policy">Privacy Policy</a></li>
+                                    <li><a href="./faq">Faq</a></li>
+                                    <li><a href="./contact">Contact</a></li>
                                 </ul>
                             </nav>
                         </div>
