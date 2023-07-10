@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>BulkShop - Electronics Shop HTML Template | Product Details</title>
     <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="16x16">
-    <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="18x18">mo
+    <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="18x18">
     <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="20x20">
 
     <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
@@ -46,6 +46,9 @@
     <!-- Start Shop Area -->
     <section class="shop-area pt-70 pb-70">
       <div class="container">
+          <%
+            Product product = (Product)request.getAttribute("productDetail");
+          %>
         <!-- Product Details -->
         <div class="row">
           <div class="col-md-5 col-lg-6">
@@ -53,57 +56,15 @@
               <div class="tab-content product-details-large">
                 <div class="tab-pane fade show active" id="detailstab1" role="tabpanel" >
                   <div class="modal_tab_img">
-                    <a href="#"><img src="./resources/img/product/1.jpg" alt="img"></a>
-                  </div>
-                </div>
-                <div class="tab-pane fade" id="detailstab2" role="tabpanel">
-                  <div class="modal_tab_img">
-                    <a href="#"><img src="./resources/img/product/2.jpg" alt="img"></a>
-                  </div>
-                </div>
-                <div class="tab-pane fade" id="detailstab3" role="tabpanel">
-                  <div class="modal_tab_img">
-                    <a href="#"><img src="./resources/img/product/3.jpg" alt="img"></a>
-                  </div>
-                </div>
-                <div class="tab-pane fade" id="detailstab4" role="tabpanel">
-                  <div class="modal_tab_img">
-                    <a href="#"><img src="./resources/img/product/4.jpg" alt="img"></a>
-                  </div>
-                </div>
-                <div class="tab-pane fade" id="detailstab5" role="tabpanel">
-                  <div class="modal_tab_img">
-                    <a href="#"><img src="./resources/img/product/5.jpg" alt="img"></a>
+                    <a href="#"><img src="<%=product.getImageURL()%>" alt="img"></a>
                   </div>
                 </div>
               </div>
-              <div class="modal_tab_button">
-                <ul class="nav product_navactive owl-carousel" role="tablist">
-                  <li >
-                    <a class="nav-link active" data-toggle="tab" href="#detailstab1" role="tab" aria-controls="detailstab1" aria-selected="false"><img src="./resources/img/product/1.jpg" alt="img"></a>
-                  </li>
-                  <li>
-                    <a class="nav-link" data-toggle="tab" href="#detailstab2" role="tab" aria-controls="detailstab2" aria-selected="false"><img src="./resources/img/product/2.jpg" alt="img"></a>
-                  </li>
-                  <li>
-                    <a class="nav-link button_three" data-toggle="tab" href="#detailstab3" role="tab" aria-controls="detailstab3" aria-selected="false"><img src="./resources/img/product/3.jpg" alt="img"></a>
-                  </li>
-                  <li>
-                    <a class="nav-link" data-toggle="tab" href="#detailstab4" role="tab" aria-controls="detailstab4" aria-selected="false"><img src="./resources/img/product/4.jpg" alt="img"></a>
-                  </li>
-                  <li>
-                    <a class="nav-link" data-toggle="tab" href="#detailstab5" role="tab" aria-controls="detailstab5" aria-selected="false"><img src="./resources/img/product/5.jpg" alt="img"></a>
-                  </li>
 
-                </ul>
-              </div>
             </div>
           </div>
 
-          <%
-            Product product = (Product)request.getAttribute("productDetail");
-          %>
-
+         
           <%
             DecimalFormat df = new DecimalFormat("#.##");
 
@@ -112,13 +73,12 @@
 
             double priceBefore = product.getPrice();
             String formattedPriceBefore = df.format(priceBefore);
+            System.out.println(formattedPriceBefore);
           %>          
           <div class="col-md-7 col-lg-6">
             <div class="product-details-img-full">
               <h2><%=product.getProductName()%></h2>
-              <div class="pricing">
-                <span>${formattedPrice} <del>${formattedPriceBefore}</del></span>
-              </div>
+
               <div class="ratting">
                 <span><i class="fas fa-star"></i></span>
                 <span><i class="fas fa-star"></i></span>
@@ -127,17 +87,11 @@
                 <span><i class="fas fa-star"></i></span>
               </div>
 
-              <div class="variants_size">
-                <h5>size</h5>
-                <select class="form-select">
-                  <option selected="">X</option>
-                  <option value="1">L</option>
-                  <option value="2">M</option>
-                  <option value="3">XL</option>
-                  <option value="3">XXL</option>
-                </select>
+              <div class="pricing" style="margin: 20px 0;">
+                <span style="font-size: 40px"><%=formattedPrice%>$<del><%=formattedPriceBefore%>$</del></span>
               </div>
-
+              
+              
               <!-- Modal -->
               <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -311,136 +265,6 @@
       </div>
     </section>
     <!-- End Shop Area -->
-    <!-- Start Our Latest Product -->
-    <section class="latest-product pt-70 pb-70 section-bg">
-      <div class="container">
-        <!-- Section Title -->
-        <div class="row">
-          <div class="col-12">
-            <div class="section-headding-1 mb-50">
-              <h2><span>Releted Products</span></h2>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <div class="latest-product-full owl-carousel">
-              <!-- Single -->
-              <div class="product-single">
-                <div class="product-thumbnail">
-                  <a href="product-details.jsp"><img src="./resources/img/product/8.jpg" alt="product"></a>
-                  <div class="product-thumbnail-overly">
-                    <ul>
-                      <li><a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a></li>
-                      <li><a href="wishlist.jsp"><i class="far fa-heart"></i></a></li>
-                      <li><a href="#"><i class="far fa-eye"></i></a></li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="product-content">
-                  <h4><a href="product-details.jsp">Funda Para Ebook 7" 128GB full HD</a></h4>
-                  <div class="pricing">
-                    <span>$200 <del>$210</del></span>
-                  </div>
-                </div>
-              </div>
-              <div class="product-single">
-                <div class="product-thumbnail">
-                  <a href="product-details.jsp"><img src="./resources/img/product/1.jpg" alt="product"></a>
-                  <div class="product-thumbnail-overly">
-                    <ul>
-                      <li><a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a></li>
-                      <li><a href="wishlist.jsp"><i class="far fa-heart"></i></a></li>
-                      <li><a href="#"><i class="far fa-eye"></i></a></li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="product-content">
-                  <h4><a href="product-details.jsp">Funda Para Ebook 7" 128GB full HD</a></h4>
-                  <div class="pricing">
-                    <span>$200 <del>$210</del></span>
-                  </div>
-                </div>
-              </div>
-              <div class="product-single">
-                <div class="product-thumbnail">
-                  <a href="product-details.jsp"><img src="./resources/img/product/3.jpg" alt="product"></a>
-                  <div class="product-thumbnail-overly">
-                    <ul>
-                      <li><a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a></li>
-                      <li><a href="wishlist.jsp"><i class="far fa-heart"></i></a></li>
-                      <li><a href="#"><i class="far fa-eye"></i></a></li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="product-content">
-                  <h4><a href="#">Funda Para Ebook 7" 128GB full HD</a></h4>
-                  <div class="pricing">
-                    <span>$200 <del>$210</del></span>
-                  </div>
-                </div>
-              </div>
-              <div class="product-single">
-                <div class="product-thumbnail">
-                  <a href="product-details.jsp"><img src="./resources/img/product/4.jpg" alt="product"></a>
-                  <div class="product-thumbnail-overly">
-                    <ul>
-                      <li><a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a></li>
-                      <li><a href="wishlist.jsp"><i class="far fa-heart"></i></a></li>
-                      <li><a href="#"><i class="far fa-eye"></i></a></li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="product-content">
-                  <h4><a href="#">Funda Para Ebook 7" 128GB full HD</a></h4>
-                  <div class="pricing">
-                    <span>$200 <del>$210</del></span>
-                  </div>
-                </div>
-              </div>
-              <div class="product-single">
-                <div class="product-thumbnail">
-                  <a href="product-details.jsp"><img src="./resources/img/product/5.jpg" alt="product"></a>
-                  <div class="product-thumbnail-overly">
-                    <ul>
-                      <li><a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a></li>
-                      <li><a href="wishlist.jsp"><i class="far fa-heart"></i></a></li>
-                      <li><a href="#"><i class="far fa-eye"></i></a></li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="product-content">
-                  <h4><a href="#">Funda Para Ebook 7" 128GB full HD</a></h4>
-                  <div class="pricing">
-                    <span>$200 <del>$210</del></span>
-                  </div>
-                </div>
-              </div>
-              <div class="product-single">
-                <div class="product-thumbnail">
-                  <a href="product-details.jsp"><img src="./resources/img/product/6.jpg" alt="product"></a>
-                  <div class="product-thumbnail-overly">
-                    <ul>
-                      <li><a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a></li>
-                      <li><a href="wishlist.jsp"><i class="far fa-heart"></i></a></li>
-                      <li><a href="#"><i class="far fa-eye"></i></a></li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="product-content">
-                  <h4><a href="#">Funda Para Ebook 7" 128GB full HD</a></h4>
-                  <div class="pricing">
-                    <span>$200 <del>$210</del></span>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- End Our Latest Product -->
 
     <%@include file="../views/servletComponents/footer_component.jsp" %>
 
