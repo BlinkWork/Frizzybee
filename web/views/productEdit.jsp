@@ -57,6 +57,13 @@
                 border-radius: 4px;
             }
 
+            input[type="file"] {
+                flex: 1;
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
             .product_description {
                 display: flex;
                 flex-direction: column;
@@ -74,7 +81,7 @@
                 overflow-y: scroll;
                 resize: none;
             }
-            
+
             .form-selected {
                 flex: 1;
                 padding: 8px;
@@ -131,34 +138,56 @@
         <jsp:include page="adminnavbar.jsp" />
 
         <h2>Update a product</h2>
-        <form action="updateProduct" method="POST">
+        <form action="updateProduct" method="POST" enctype="multipart/form-data">
             <% for (String col : cols) {
                 if (col.equals("product_id")) { %>
             <div class="form-group">
                 <label><%=col%></label>
-                <input type="text" name="<%=col%>" value="<%=product.getProductID()%>" readonly />
+                <input type="text" name="<%=col%>" id="<%=col%>" value="<%=product.getProductID()%>" readonly />
             </div>
             <%} else if (col.equals("product_description")) { %> 
             <div class="product_description">
                 <label><%=col%></label>
-                <textarea name="<%=col%>" rows="10" cols="20" style="overflow-y:scroll;"><%= p.getProductInformation(Integer.toString(product.getProductID()), col) %></textarea>
+                <textarea name="<%=col%>" id="<%=col%>" rows="10" cols="20" style="overflow-y:scroll;"><%= p.getProductInformation(Integer.toString(product.getProductID()), col) %></textarea>
             </div>
-            <%} else if (col.equals("category_id") || col.equals("brand_id")) { %> 
+            <%} else if (col.equals("category_id")) { %> 
             <div class="form-group">
                 <label><%=col%></label>
                 <select class="form-selected" name="<%=col%>">
-                    <% for (String rowData : p.getRowNames(col)) { 
+                    <% for (String rowData : p.getRowNames(col, "category")) { 
                         boolean isSelected = rowData.equals(p.getProductInformation(Integer.toString(product.getProductID()), col));
                     %>
                     <option value="<%=rowData%>" <%=isSelected ? "selected" : ""%>><%=rowData%></option>
                     <% } %>
                 </select>            
             </div>
+            <% } else if (col.equals("brand_id")) { %>
+            <div class="form-group">
+                <label><%=col%></label>
+                <select class="form-selected" name="<%=col%>">
+                    <% for (String rowData : p.getRowNames(col, "brand")) { 
+                        boolean isSelected = rowData.equals(p.getProductInformation(Integer.toString(product.getProductID()), col));
+                    %>
+                    <option value="<%=rowData%>" <%=isSelected ? "selected" : ""%>><%=rowData%></option>
+                    <% } %>
+                </select>            
+            </div>
+            <% } else if (col.equals("image")) { %>
+            <div class="form-group">
+                <label><%=col%></label>
+                <input type="radio" name="remain" value="true" checked/>Remain
+                <input type="radio" name="remain" value="false"  />Change
+                <input type="text" name="imagePath" id="imagePath" value="<%=p.getProductInformation(Integer.toString(product.getProductID()), col) %>" hidden/>
+            </div>
+            <div class="form-group" id="imageUploadContainer" style="display:none;">
+                <label>Upload Image:</label>
+                <input type="file" id="image" name="image" accept="image/*" multiple="false"/>
+            </div>
             <% } else { %>
             <div class="form-group">
                 <label><%=col%></label>
-                <input type="text" name="<%=col%>" value="<%= p.getProductInformation(Integer.toString(product.getProductID()), col) %>"/>
-            </div>
+                <input type="text" id="<%=col%>" name="<%=col%>" value="<%= p.getProductInformation(Integer.toString(product.getProductID()), col) %>"/>
+            </div> 
             <% }
         }
             %>
@@ -168,5 +197,18 @@
             </div>
             <input type="submit" value="Update">
         </form>  
+        <script>
+            const remainRadio = document.querySelector('input[value="true"]');
+            const changeRadio = document.querySelector('input[value="false"]');
+            const imageUploadContainer = document.getElementById('imageUploadContainer');
+
+            remainRadio.addEventListener('change', function () {
+                imageUploadContainer.style.display = 'none';
+            });
+
+            changeRadio.addEventListener('change', function () {
+                imageUploadContainer.style.display = 'block';
+            });
+        </script>
     </body>
 </html>
