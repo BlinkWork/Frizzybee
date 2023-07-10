@@ -40,14 +40,14 @@
             <!-- SIngle -->
             <div class="col-lg-3 col-md-6 mb-30">
               <div class="footer-widgets-single">
-                <h2><img src="./resources/img/logo_1.png" style="width: 75px"></h2>
+                <h2><img src="./resources/img/logo.png" style="width: 75px"></h2>
                 <p> Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do eiusmod tempor incididunt ut labore et
                   dolore magna aliqut enim ad minim veniamquis </p>
               </div>
             </div>
             <!-- SIngle -->
             <div class="col-lg-3 col-md-6 mb-30">
-              <div class="footer-widgets-single">
+              <div class="footer-widgets-single" style="opacity: 0">
                 <h3>My account</h3>
                 <ul>
                   <li><a href="./views/register.jsp">Sign In</a></li>
@@ -59,7 +59,7 @@
               </div>
             </div>
             <!-- SIngle -->
-            <div class="col-lg-3 col-md-6 mb-30">
+            <div class="col-lg-3 col-md-6 mb-30" style="opacity: 0">
               <div class="footer-widgets-single">
                 <h3>Categories</h3>
                 <ul>
@@ -73,7 +73,7 @@
               </div>
             </div>
             <!-- SIngle -->
-            <div class="col-lg-3 col-md-6 mb-30">
+            <div class="col-lg-3 col-md-6 mb-30" >
               <div class="footer-widgets-single">
                 <h3>Newsletter</h3>
                 <p> Get notified of new products, limited releases, and more. </p>
