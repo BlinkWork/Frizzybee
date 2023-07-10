@@ -390,20 +390,25 @@
                 </div>
                 <!-- Pagination -->
                 <div class="row">
-                    <div class="col-12 mb-30">
-                        <div class="page-pagination text-center">
-                            <ul>
-                                <%int pageNum = (listOrder.size()%5==0)?listOrder.size()/5:listOrder.size()/5+1;
-                                int pageID = (int) request.getAttribute("pageid");
-                                %>
-                                <li><a style="background: rgb(234, 136, 13); color: rgb(255, 255, 255);" class="pagination-link" href="#" data-page-num="1">1</a></li>
-                                <%
-                                for(int i=2;i<=pageNum;i++){
-                                %>
-                                <li><a  class="pagination-link" href="#" data-page-num="<%=i%>"><%=i%></a></li><%}%>
-                            </ul>
-                        </div>
-                    </div>
+                  <%
+                    if(listOrder.size() > 0){%>
+                     <div class="col-12 mb-30">
+                       <div class="page-pagination text-center">
+                           <ul>
+                               <%int pageNum = (listOrder.size()%5==0)?listOrder.size()/5:listOrder.size()/5+1;
+                               int pageID = (int) request.getAttribute("pageid");
+                               %>
+                               <li><a style="background: rgb(234, 136, 13); color: rgb(255, 255, 255);" class="pagination-link" href="#" data-page-num="1">1</a></li>
+                               <%
+
+                               for(int i=2;i<=pageNum;i++){
+                               %>
+                               <li><a  class="pagination-link" href="#" data-page-num="<%=i%>"><%=i%></a></li>
+                               <%}%>
+                           </ul>
+                       </div>
+                     </div>
+                  <%}%>
                 </div>
             </div>
 

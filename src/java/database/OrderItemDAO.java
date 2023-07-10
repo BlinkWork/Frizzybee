@@ -8,7 +8,7 @@ import model.Order;
 import model.Product;
 
 public class OrderItemDAO extends MyDAO {
-
+    
     public List<OrderItem> getOrderItems() {
         List<OrderItem> t = new ArrayList<>();
         xSql = "SELECT *  FROM [dbo].[OrderItem]";
@@ -28,7 +28,7 @@ public class OrderItemDAO extends MyDAO {
                 product = productDAO.getProductByID(rs.getInt("product_id") + "");
                 quantity = rs.getInt("Quantity");
                 price = rs.getDouble("Price");
-
+                
                 x = new OrderItem(orderItemID, orderID, product, quantity, price);
                 t.add(x);
             }
@@ -39,7 +39,7 @@ public class OrderItemDAO extends MyDAO {
         }
         return (t);
     }
-
+    
     public OrderItem getOrderItemByID(String ID) {
         xSql = "select * from [dbo].[OrderItem] where OrderItemID = ?";
         OrderItem x = null;
@@ -54,7 +54,7 @@ public class OrderItemDAO extends MyDAO {
                 Product product = productDAO.getProductByID(rs.getInt("product_id") + "");
                 int quantity = rs.getInt("Quantity");
                 double price = rs.getDouble("Price");
-
+                
                 x = new OrderItem(orderItemID, orderID, product, quantity, price);
             }
             rs.close();
@@ -64,7 +64,7 @@ public class OrderItemDAO extends MyDAO {
         }
         return (x);
     }
-
+    
     public List<OrderItem> getOrderItemsByOrderID(String orderId) {
         List<OrderItem> t = new ArrayList<>();
         xSql = "select * from [dbo].[OrderItem] where OrderID = ?";
@@ -73,7 +73,7 @@ public class OrderItemDAO extends MyDAO {
             ps.setString(1, orderId);
             rs = ps.executeQuery();
             ProductDAO productDAO = new ProductDAO();
-
+            
             while (rs.next()) {
                 int orderItemID = rs.getInt("OrderItemID");
                 int orderID = rs.getInt("OrderID");
@@ -90,7 +90,7 @@ public class OrderItemDAO extends MyDAO {
         }
         return (t);
     }
-
+    
     public void insert(OrderItem x) {
         xSql = "INSERT INTO [dbo].[OrderItem]([OrderID] ,[product_id],[Quantity],[Price])\n"
                 + "     VALUES(?,?,?,?)";
@@ -106,7 +106,7 @@ public class OrderItemDAO extends MyDAO {
             e.printStackTrace();
         }
     }
-
+    
     public void deleteByID(String ID) {
         xSql = "delete from [dbo].[OrderItem] where [OrderItemID]=?";
         try {
@@ -119,7 +119,7 @@ public class OrderItemDAO extends MyDAO {
             e.printStackTrace();
         }
     }
-
+    
     public void update(OrderItem x) {
         xSql = "UPDATE [dbo].[OrderItem]\n"
                 + "   SET [OrderID] = ?,[product_id] = ?,[Quantity] = ?,[Price] = ?\n"
@@ -131,7 +131,7 @@ public class OrderItemDAO extends MyDAO {
             ps.setInt(3, x.getQuantity());
             ps.setDouble(4, x.getPrice());
             ps.setInt(5, x.getOrderItemID());
-
+            
             ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
@@ -139,13 +139,13 @@ public class OrderItemDAO extends MyDAO {
             System.out.println(e);
         }
     }
-
+    
     public static void main(String[] args) {
         OrderItemDAO dao = new OrderItemDAO();
         CategoryDAO ctdao = new CategoryDAO();
         ProductDAO pdao = new ProductDAO();
         BrandDAO bdao = new BrandDAO();
-
+        
         UserDAO userDAO = new UserDAO();
         OrderDAO odao = new OrderDAO();
 //        odao.insert(new Order(0, userDAO.getUserByID("1"), Date.valueOf("2023-06-27"), "bbbb", "chuyen khoan", "unconfimred", 100));
@@ -164,8 +164,11 @@ public class OrderItemDAO extends MyDAO {
         for (Order order : t) {
             List<OrderItem> listOrderItem = dao.getOrderItemsByOrderID(order.getOrderID() + "");
             for (OrderItem orderItem : listOrderItem) {
-                Product product = pdao.getProductByID(orderItem.getProduct().getProductID() + "");
+//                Product product = pdao.getProductByID(orderItem.getProduct().getProductID() + "");
+                dao.deleteByID(String.valueOf(orderItem.getOrderID()));
+//                System.out.println(orderItem.getOrderID());
             }
         }
+        
     }
 }

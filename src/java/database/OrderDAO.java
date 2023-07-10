@@ -90,7 +90,7 @@ public class OrderDAO extends MyDAO {
                 String status = rs.getString("Status");
                 double totalPrice = rs.getDouble("total_price");
 
-                Order x = new Order(orderID, user, orderDate, receivedDate, address, paymentMethod, status, totalPrice);     
+                Order x = new Order(orderID, user, orderDate, receivedDate, address, paymentMethod, status, totalPrice);
                 t.add(x);
             }
             rs.close();
@@ -105,16 +105,16 @@ public class OrderDAO extends MyDAO {
         List<Order> t = new ArrayList<>();
         xSql = "SELECT *\n"
                 + "FROM (\n"
-                + "    SELECT *, ROW_NUMBER() OVER (ORDER BY OrderDate "+sort+") AS RowNum\n"
+                + "    SELECT *, ROW_NUMBER() OVER (ORDER BY OrderDate " + sort + ") AS RowNum\n"
                 + "    FROM [Order]\n"
                 + ") AS o\n"
                 + "INNER JOIN [User] AS u ON o.user_id = u.[id]\n"
                 + "WHERE u.[name] LIKE ? \n"
                 + "AND o.RowNum BETWEEN ? AND ?\n"
-                + "ORDER BY o.OrderDate "+sort+";";
+                + "ORDER BY o.OrderDate " + sort + ";";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setString(1, "%"+username+"%");
+            ps.setString(1, "%" + username + "%");
             ps.setInt(2, offSetPage);
             ps.setInt(3, numberOfPage);
             rs = ps.executeQuery();
@@ -144,18 +144,18 @@ public class OrderDAO extends MyDAO {
         List<Order> t = new ArrayList<>();
         xSql = "SELECT *\n"
                 + "FROM (\n"
-                + "    SELECT *, ROW_NUMBER() OVER (ORDER BY OrderDate "+sort+") AS RowNum\n"
+                + "    SELECT *, ROW_NUMBER() OVER (ORDER BY OrderDate " + sort + ") AS RowNum\n"
                 + "    FROM [Order]\n"
                 + "    WHERE [Status] = ?\n"
                 + ") AS o\n"
                 + "INNER JOIN [User] AS u ON o.user_id = u.[id]\n"
                 + "WHERE u.[name] LIKE ? \n"
                 + "AND o.RowNum BETWEEN ? AND ?\n"
-                + "ORDER BY o.OrderDate "+sort+";";
+                + "ORDER BY o.OrderDate " + sort + ";";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, xStatus);
-            ps.setString(2, "%"+username+"%");
+            ps.setString(2, "%" + username + "%");
             ps.setInt(3, offSetPage);
             ps.setInt(4, numberOfPage);
             rs = ps.executeQuery();
@@ -271,11 +271,15 @@ public class OrderDAO extends MyDAO {
 
 //        dao.update(new Order(2, new User(1, "Lê Minh Thang", "cccc", "lethangd", "123456", "M", Date.valueOf("2003-08-05"), "lethangd@gmail.com", "Phu Ly", "admin"), Date.valueOf("2003-08-05"), "bbbb", "chuyen khoan", "done", 100));
 //        dao.deleteByID("2");
-
         List<Order> t = dao.getOrders();
+        int i = 1;
+//        dao.deleteByID("1");
         for (Order order : t) {
 //            order.setReceivedDate(currentDate);
-            System.out.println(order.getOrderDate());
+            System.out.println(order.getOrderID());
+            i = order.getOrderID();
         }
+        dao.deleteByID(String.valueOf(i));
+
     }
 }

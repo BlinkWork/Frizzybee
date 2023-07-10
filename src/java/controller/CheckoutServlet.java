@@ -144,7 +144,7 @@ public class CheckoutServlet extends HttpServlet {
             OrderDAO odao = new OrderDAO();
 
             try {
-                order = new Order(1, user, currentDate, address, paymentMethod, "not", Double.parseDouble(totalPrice));
+                order = new Order(1, user, currentDate, address, paymentMethod, "unconfimred", Double.parseDouble(totalPrice));
                 int order_id = odao.insert(order);
                 addToOrderItem(request, response, user_id, order_id);
             } catch (Exception e) {
