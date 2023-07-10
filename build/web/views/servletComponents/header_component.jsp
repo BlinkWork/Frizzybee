@@ -170,30 +170,7 @@
                         <div class="desktop-mini-cart">
                             <div class="mini-cart">
                                 <div class="mini-cart-icon">
-                                    <i class="fas fa-shopping-cart"></i>
-                                    <span class="counter"> 
-                                      <%
-                                        if(listCartId != null){
-                                          if(listCartId.size() > 0 ){
-                                              out.println(listCartId.size());
-                                              }
-                                          
-                                        }
-                                      %>
-                                    </span>
-                                    <span class="counter-cart"><small>Your Cart</small>$10.00</span>
-                                    <!-- Mini Cart Content -->
-                                    <div class="minicart-content-wrapper">
-                                        <ul class="cart-list-full">
-                                            <!-- Single -->
-                                            
-                                        </ul>
-                                        <h2 class="subtotal">Subtotal : <span>$220</span></h2>
-                                        <div class="minicart-btn">
-                                            <a class="button-1" href="cart.jsp">View Cart</a>
-                                            <a class="button-2" href="#">Checkout</a>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
