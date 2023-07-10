@@ -4,23 +4,24 @@
 <html class="no-js" lang="en">
 
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>FrizzeBee - Electronics Shop</title>
         <link rel="icon" href="./resources/img/logo.png" type="image/gif" sizes="16x16">
         <link rel="icon" href="./resources/img/logo.png" type="image/gif" sizes="18x18">
         <link rel="icon" href="./resources/img/logo.png" type="image/gif" sizes="20x20">
 
-    <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./resources/css/fontawesome.all.min.css">
-    <link rel="stylesheet" href="./resources/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="./resources/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="./resources/css/animate.css">
-    <link rel="stylesheet" href="./resources/css/magnific-popup.css">
-    <link rel="stylesheet" href="./resources/css/normalize.css">
-    <link rel="stylesheet" href="./resources/css/style.css">
-    <link rel="stylesheet" href="./resources/css/responsive.css">
+        <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./resources/css/fontawesome.all.min.css">
+        <link rel="stylesheet" href="./resources/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="./resources/css/owl.theme.default.min.css">
+        <link rel="stylesheet" href="./resources/css/animate.css">
+        <link rel="stylesheet" href="./resources/css/magnific-popup.css">
+        <link rel="stylesheet" href="./resources/css/normalize.css">
+        <link rel="stylesheet" href="./resources/css/style.css">
+        <link rel="stylesheet" href="./resources/css/responsive.css">
+
 
   </head>
 

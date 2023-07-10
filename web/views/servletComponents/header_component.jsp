@@ -30,6 +30,7 @@
         <link rel="stylesheet" href="./resources/css/normalize.css">
         <link rel="stylesheet" href="./resources/css/style.css">
         <link rel="stylesheet" href="./resources/css/responsive.css">
+
         <style>
           .user-image .show {
             margin-top: 30px !important;  
@@ -125,7 +126,7 @@
                     <!-- Logo -->
                     <div class="col-lg-2">
                         <div class="logo">
-                            <h2><a href="./"><img src="./resources/img/logo.png"></a></h2>
+                            <h2><a href="./"><img src="./resources/img/logo.png" style="width: 77px"></a></h2>
                         </div>
                     </div>
                     <!-- Search Bar -->
@@ -182,7 +183,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="logo-2">
-                            <h2><a href="./"><img src="./resources/img/logo.png"></a></h2>
+                            <h2><a href="./"><img src="./resources/img/logo.png" style="width: 77px"></a></h2>
                         </div>
                         <div class="canvas_open">
                             <a href="javascript:void(0)"><i class="fas fa-bars"></i></a>

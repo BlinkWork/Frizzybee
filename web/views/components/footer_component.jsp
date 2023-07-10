@@ -40,7 +40,7 @@
             <!-- SIngle -->
             <div class="col-lg-3 col-md-6 mb-30">
               <div class="footer-widgets-single">
-                <h2><img src="../resources/img/logo.png" style="width: 75px"></h2>
+                <h2><img src="../resources/img/logo.png" style="width: 100px"></h2>
                 <p> Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do eiusmod tempor incididunt ut labore et
                   dolore magna aliqut enim ad minim veniamquis </p>
               </div>
