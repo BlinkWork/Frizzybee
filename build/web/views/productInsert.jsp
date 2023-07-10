@@ -57,6 +57,13 @@
                 border-radius: 4px;
             }
 
+            input[type="file"] {
+                flex: 1;
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
             .product_description {
                 display: flex;
                 flex-direction: column;
@@ -129,34 +136,63 @@
         <jsp:include page="adminnavbar.jsp" />
 
         <h2>Insert a product</h2>
-        <form action="insertProduct" method="post">
+        <form action="insertProduct" method="post" enctype="multipart/form-data">
             <% for (String col : cols) {
-                 if (col.equals("product_description")) { %> 
-            <div class="product_description">
-                <label><%=col%></label>
-                <textarea name="<%=col%>" rows="10" cols="20" style="overflow-y:scroll;"><%=request.getAttribute(col) == null ? "" : request.getAttribute(col)%></textarea>
-            </div>
-            <%} else if (col.equals("category_id") || col.equals("brand_id")) { %> 
+            if (col.equals("product_id")) {} 
+            else if (col.equals("seller_id")) { %>
             <div class="form-group">
                 <label><%=col%></label>
                 <select class="form-selected" name="<%=col%>">
-                    <% for (String rowData : p.getRowNames(col)) {  
+                    <% for (String rowData : p.getSellerId()) { 
                     boolean isSelected = rowData.equals(request.getAttribute(col)); %>
+                    %>
                     <option value="<%=rowData%>" <%=isSelected ? "selected" : ""%>><%=rowData%></option>
                     <% } %>
                 </select>            
             </div>
+            <%} else if (col.equals("product_description")) { %> 
+            <div class="product_description">
+                <label><%=col%></label>
+                <textarea id="<%=col%>" name="<%=col%>" rows="10" cols="20" style="overflow-y:scroll;"><%=request.getAttribute(col) == null ? "" : request.getAttribute(col)%></textarea>
+            </div>
+            <%} else if (col.equals("category_id")) { %> 
+            <div class="form-group">
+                <label><%=col%></label>
+                <select class="form-selected" name="<%=col%>">
+                    <% for (String rowData : p.getRowNames(col, "category")) { 
+                    boolean isSelected = rowData.equals(request.getAttribute(col)); %>
+                    %>
+                    <option value="<%=rowData%>" <%=isSelected ? "selected" : ""%>><%=rowData%></option>
+                    <% } %>
+                </select>            
+            </div>
+            <% } else if (col.equals("brand_id")) { %>
+            <div class="form-group">
+                <label><%=col%></label>
+                <select class="form-selected" name="<%=col%>">
+                    <% for (String rowData : p.getRowNames(col, "brand")) { 
+                    boolean isSelected = rowData.equals(request.getAttribute(col)); %>
+                    %>
+                    <option value="<%=rowData%>" <%=isSelected ? "selected" : ""%>><%=rowData%></option>
+                    <% } %>
+                </select>            
+            </div>
+            <% } else if (col.equals("image")) { %>
+            <div class="form-group">
+                <label><%=col%></label>
+                <input type="file" id="<%=col%>" name="<%=col%>" accept="image/*" multiple="false">
+            </div>
             <% } else { %>
             <div class="form-group">
                 <label><%=col%></label>
-                <input type="text" name="<%=col%>" value="<%=request.getAttribute(col) == null ? "" : request.getAttribute(col)%>"/>
+                <input type="text" id="<%=col%>" name="<%=col%>" value="<%=request.getAttribute(col) == null ? "" : request.getAttribute(col)%>"/>
             </div>
             <% }
         }
             %>
 
             <div class="error" style="color:red;">
-                <p> <%=((error == null) ? "" : error)%>
+                <p> <%=((error == null) ? "" : error)%> </p>
             </div>
             <input type ="submit" value="Insert">
         </form>  

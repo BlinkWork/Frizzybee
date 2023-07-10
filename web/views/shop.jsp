@@ -123,7 +123,7 @@
                             + "Your item has been added to the cart."
                             + "</div>"
                             + "<div class='modal-footer'>"
-                            + "<button type='button' id='back--shop' class='btn btn-primary'>Continue to Buy</button>"
+                            + "<button type='button' data-bs-dismiss='modal' class='btn btn-primary'>Continue to Buy</button>"
                             + "<button type='button' id='view--cart' class='btn btn-warning' style='color: white;'>View Cart</button>"
                             + "</div>"
                             + "</div>"
