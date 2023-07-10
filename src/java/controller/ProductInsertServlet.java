@@ -1,175 +1,197 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+package controller;
 
-<%@page import="database.*" %>
-<%@page import="model.*" %>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Admin Panel</title>
-        <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="16x16">
-        <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="18x18">
-        <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="20x20">
+import database.BrandDAO;
+import database.CategoryDAO;
+import database.ProductDAO;
+import java.io.IOException;
+import java.io.PrintWriter;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.util.Base64;
+import model.Product;
 
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                margin: 0;
-                padding: 20px;
-            }
+/**
+ *
+ * @author hbich
+ */
+@WebServlet(name = "ProductInsertServlet", urlPatterns = {"/insertProduct"})
+@MultipartConfig
 
-            h1 {
-                text-align: center;
-                color: #333;
-            }
+public class ProductInsertServlet extends HttpServlet {
 
-            h2 {
-                text-align: center;
-                color: #333;
-            }
-
-            form {
-                max-width: 400px;
-                margin: 20px auto;
-                padding: 20px;
-                background-color: #fff;
-                border-radius: 5px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            }
-
-            .form-group {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                margin-bottom: 10px;
-            }
-
-            label {
-                color: #333;
-                font-weight: bold;
-                margin-right: 10px;
-            }
-
-            input[type="text"] {
-                flex: 1;
-                padding: 8px;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-            }
-
-            input[type="file"] {
-                flex: 1;
-                padding: 8px;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-            }
-
-            .product_description {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                margin-bottom: 10px;
-            }
-
-            .product_description label {
-                display: block;
-                padding-bottom: 10px;
-            }
-
-            .product_description textarea {
-                width: 98.5%;
-                overflow-y: scroll;
-                resize: none;
-            }
-
-            .form-selected {
-                flex: 1;
-                padding: 8px;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-            }
-            input[type="Date"] {
-                flex: 1;
-                padding: 8px;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-            }
-
-            input[type="submit"] {
-                display: block;
-                width: 100%;
-                padding: 8px;
-                margin-top: 10px;
-                background-color: #4caf50;
-                color: #fff;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-            }
-
-            button {
-                display: block;
-                margin: 10px auto;
-                padding: 8px 16px;
-                background-color: #ccc;
-                color: #333;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-            }
-
-            button:hover, input[type="submit"]:hover {
-                background-color: #333;
-                color: #fff;
-            }
-        </style>
-    </head>
-
-    <body>
-        <%
-            UserDAO u = new UserDAO();
-            String[] cols = (String[]) u.getColNames("User");
-            String error = (String) request.getAttribute("error");
-        %>  
-        <h1>Admin Panel</h1>
-
-        <jsp:include page="adminnavbar.jsp" />
-
-        <h2>Insert a user</h2>
-        <form action="insertUser" method="post" enctype="multipart/form-data">
-            <% for (String col : cols) {
-            if (col.equals("id")) {}
-            else if (col.equals("isAdmin") || col.equals("isSeller")) { %> 
-            <div class="form-group">
-                <label><%=col%></label>
-                <select class="form-selected" name="<%=col%>">
-                    <option value="true" <%= "true".equals(request.getParameter(col)) ? "selected" : "" %>>True</option>
-                    <option value="false" <%= "false".equals(request.getParameter(col)) ? "selected" : "" %>>False</option>
-                </select>            
-            </div>
-            <% } else if (col.equals("birthday")) {%>
-            <div class="form-group">    
-                <label><%=col%></label>
-                <input type="Date" name="<%=col%>" value="<%= request.getAttribute("birthday") %>"/>
-            </div>    
-            <% } else if (col.equals("avatar")) { %>
-            <div class="form-group">
-                <label><%=col%></label>
-                <input type="file" id="<%=col%>" name="<%=col%>" accept="image/*" multiple="false">
-            </div>
-            <% } else { %>
-            <div class="form-group">
-                <label><%=col%></label>
-                <input type="text" id="<%=col%>" name="<%=col%>" value="<%=request.getAttribute(col) == null ? "" : request.getAttribute(col)%>"/>
-            </div>
-            <% }
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        String seller_id = (String) request.getParameter("seller_id").trim();
+        String name = (String) request.getParameter("product_name").trim();
+        String description = (String) request.getParameter("product_description").trim();
+        String category_id = (String) request.getParameter("category_id").trim();
+        String brand_id = (String) request.getParameter("brand_id").trim();
+        Double price = 0.0;
+        int quantity = 0;
+        Part filePart = null;
+        String imageBase64;
+        int discount = 0;
+        ProductDAO p = new ProductDAO();
+        if (seller_id == "") {
+            request.setAttribute("product_name",name);
+            request.setAttribute("product_description",description);
+            request.setAttribute("category_id",category_id);
+            request.setAttribute("brand_id",brand_id);
+            request.setAttribute("price",price);
+            request.setAttribute("quantity",quantity);
+            request.setAttribute("discount",discount);
+            request.setAttribute("error", "You must enter an name");
+            request.getRequestDispatcher("views/productInsert.jsp").forward(request, response);
+            return;
         }
-            %>
+        if (name == "") {
+            request.setAttribute("seller_id",seller_id);
+            request.setAttribute("product_description",description);
+            request.setAttribute("category_id",category_id);
+            request.setAttribute("brand_id",brand_id);
+            request.setAttribute("price",price);
+            request.setAttribute("quantity",quantity);
+            request.setAttribute("discount",discount);
+            request.setAttribute("error", "You must enter an name");
+            request.getRequestDispatcher("views/productInsert.jsp").forward(request, response);
+            return;
+        }
+        if (description == "") {
+            request.setAttribute("seller_id",seller_id);
+            request.setAttribute("product_name",name);
+            request.setAttribute("category_id",category_id);
+            request.setAttribute("brand_id",brand_id);
+            request.setAttribute("price",price);
+            request.setAttribute("quantity",quantity);
+            request.setAttribute("discount",discount);
+            request.setAttribute("error", "You must enter an description");
+            request.getRequestDispatcher("views/productInsert.jsp").forward(request, response);
+            return;
+        }
+        if (category_id == "") {
+            request.setAttribute("seller_id",seller_id);
+            request.setAttribute("product_description",description);
+            request.setAttribute("product_name",name);
+            request.setAttribute("brand_id",brand_id);
+            request.setAttribute("price",price);
+            request.setAttribute("quantity",quantity);
+            request.setAttribute("discount",discount);
+            request.setAttribute("error", "You must select an category id");
+            request.getRequestDispatcher("views/productInsert.jsp").forward(request, response);
+            return;
+        }
+        if (brand_id == "") {
+            request.setAttribute("seller_id",seller_id);
+            request.setAttribute("product_description",description);
+            request.setAttribute("product_name",name);
+            request.setAttribute("category_id",category_id);
+            request.setAttribute("price",price);
+            request.setAttribute("quantity",quantity);
+            request.setAttribute("discount",discount);
+            request.setAttribute("error", "You must select an brand id");
+            request.getRequestDispatcher("views/productInsert.jsp").forward(request, response);
+            return;
+        }
+        try {
+            price = Double.parseDouble(request.getParameter("price"));
+        } catch (Exception e) {
+            request.setAttribute("seller_id",seller_id);
+            request.setAttribute("product_description",description);
+            request.setAttribute("product_name",name);
+            request.setAttribute("category_id",category_id);
+            request.setAttribute("brand_id",brand_id);
+            request.setAttribute("quantity",quantity);
+            request.setAttribute("discount",discount);
+            request.setAttribute("error", "You must enter an valid price");
+            request.getRequestDispatcher("views/productInsert.jsp").forward(request, response);
+            return;
+        }
+        try {
+            quantity = Integer.parseInt(request.getParameter("quantity").trim());
+        } catch (Exception e) {
+            request.setAttribute("seller_id",seller_id);
+            request.setAttribute("product_description",description);
+            request.setAttribute("product_name",name);
+            request.setAttribute("category_id",category_id);
+            request.setAttribute("brand_id",brand_id);
+            request.setAttribute("price",price);
+            request.setAttribute("discount",discount);
+            request.setAttribute("error", "You must enter an valid quantity");
+            request.getRequestDispatcher("views/productInsert.jsp").forward(request, response);
+            return;
+        }
+        try {
+            filePart = request.getPart("image");
+            byte[] imageData = convertToByteArray(filePart);
+            imageBase64 = Base64.getEncoder().encodeToString(imageData);
+            if (imageBase64.equals("") || imageBase64.equals(null)) throw new Exception();
+            imageBase64 = "data:image/jpeg;base64," + imageBase64;
+        } catch (Exception e) {
+            request.setAttribute("seller_id",seller_id);
+            request.setAttribute("product_description",description);
+            request.setAttribute("product_name",name);
+            request.setAttribute("category_id",category_id);
+            request.setAttribute("brand_id",brand_id);
+            request.setAttribute("price",price);
+            request.setAttribute("quantity",quantity);
+            request.setAttribute("discount",discount);
+            request.setAttribute("error", "You must upload an valid image");
+            request.getRequestDispatcher("views/productInsert.jsp").forward(request, response);
+            return;
+        }
+        try {
+            discount = Integer.parseInt(request.getParameter("discount").trim());
+        } catch (Exception e) {
+            request.setAttribute("seller_id",seller_id);
+            request.setAttribute("product_description",description);
+            request.setAttribute("product_name",name);
+            request.setAttribute("category_id",category_id);
+            request.setAttribute("brand_id",brand_id);
+            request.setAttribute("price",price);
+            request.setAttribute("quantity",quantity);
+            request.setAttribute("error", "You must enter an valid discount");
+            request.getRequestDispatcher("views/productInsert.jsp").forward(request, response);
+            return;
+        }
+        CategoryDAO c = new CategoryDAO();
+        BrandDAO b = new BrandDAO();
+        Product product = new Product();
+        product.setSellerID(Integer.parseInt(seller_id));
+        product.setProductName(name);
+        product.setDescription(description);
+        product.setCategory(c.getCategoryByID(category_id));
+        product.setBrand(b.getBrandByID(brand_id));
+        product.setPrice(price);
+        product.setQuantity(quantity);
+        product.setImageURL(imageBase64);
+        product.setDiscount(discount);
+        p.insert(product);
+        response.sendRedirect("productmanagement");
+    }
+    
+    private byte[] convertToByteArray(Part filePart) throws IOException {
+        InputStream inputStream = filePart.getInputStream();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
-            <div class="error" style="color:red;">
-                <p> <%=((error == null) ? "" : error)%> </p>
-            </div>
-            <input type ="submit" value="Insert">
-        </form>  
-    </body>
-</html>
+        byte[] buffer = new byte[4096];
+        int bytesRead;
+        while ((bytesRead = inputStream.read(buffer)) != -1) {
+            outputStream.write(buffer, 0, bytesRead);
+        }
+
+        byte[] imageData = outputStream.toByteArray();
+        outputStream.close();
+
+        return imageData;
+    }
+}
