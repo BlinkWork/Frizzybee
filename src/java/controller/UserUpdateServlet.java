@@ -71,6 +71,7 @@ public class UserUpdateServlet extends HttpServlet {
                 filePart = request.getPart("image");
                 byte[] imageData = convertToByteArray(filePart);
                 imageBase64 = Base64.getEncoder().encodeToString(imageData);
+                if (imageBase64.equals("") || imageBase64.equals(null)) throw new Exception();
                 imageBase64 = "data:image/jpeg;base64," + imageBase64;
             } catch (Exception e) {
                 request.setAttribute("error", "You must upload an valid image");
