@@ -92,7 +92,7 @@
                                 <div class="d-flex align-items-center justify-content-center" style="float: right" />
                                 
                                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-infor ">
-                                    <li class="nav-item dropdown dropstart user-image"><a data-bs-toggle="dropdown" aria-expanded="false"> <img alt="setting" src="<%=curUser.getAvatarURL()%>" width="30px" style="border: 2px solid #cccccc5e; border-radius: 50%;"></a>
+                                    <li class="nav-item dropdown dropstart user-image"><a data-bs-toggle="dropdown" aria-expanded="false"> <img alt="setting" src="<%=curUser.getAvatarURL()%>"  style="width:30px; border: 2px solid #cccccc5e; border-radius: 50%;"></a>
                                       <ul class="dropdown-menu" style="margin-top: 50px !important;">
                                             <li><a class="dropdown-item userName" href="#"><%=curUser.getName()%></a></li>
                                             <li><a class="dropdown-item" href="#">My Cart</a></li>

@@ -91,36 +91,26 @@
                                 <a href="#"><i class="fas fa-mobile-alt"></i>0834398268</a>
                                 <a href="./views/wishlist.jsp"><i class="far fa-heart"></i> Wishlist</a>
                                 <%if(curUser!=null){%>
-                                 <div class="d-flex align-items-center justify-content-center" style="float: right" />
-
-                            <ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-infor ">
-                                <li class="nav-item dropdown dropstart user-image">
-                                    <a data-bs-toggle="dropdown" aria-expanded="false"> 
-                                      <img alt="setting" src="<%=curUser.getAvatarURL()%>"  style="width:30px; border: 2px solid #cccccc5e; border-radius: 50%;"></a>
+                                <div class="d-flex align-items-center justify-content-center" style="float: right" />
+                                
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-infor ">
+                                    <li class="nav-item dropdown dropstart user-image"><a data-bs-toggle="dropdown" aria-expanded="false"> <img alt="setting" src="<%=curUser.getAvatarURL()%>"  style="width:30px; border: 2px solid #cccccc5e; border-radius: 50%;"></a>
                                       <ul class="dropdown-menu" style="margin-top: 50px !important;">
-                                          <li><a class="dropdown-item userName" href="#"><%=curUser.getName()%></a></li>
-                                          <li><a class="dropdown-item" href="#">My Cart</a></li>
-
-                                          <li><a class="dropdown-item" href="updateinformation">Update my information</a></li>
-                                          <li><a class="dropdown-item" href="changepassword">Change password</a></li>
-
-                                          <%if(curUser.getRole().equals("seller")){%>
-                                          <li><hr class="dropdown-divider"></li>
-                                          <li><a class="dropdown-item" href="product-management?event=product-management">Product manage</a></li>
-                                          <li><a class="dropdown-item" href="product-management?event=send-to-add">Add product</a></li>
-                                          <li><a class="dropdown-item" href="order-management?event=order-management">Order management</a></li>
-
-                                          <%} else if (curUser.getRole().equals("admin")) {%>
-                                          <li><hr class="dropdown-divider"></li>
-                                          <li><a class="dropdown-item" href="adminpanel">Admin panel</a></li>
-
-                                          <%} %>
-                                          <li><hr class="dropdown-divider"></li>
-                                          <li><a class="dropdown-item" href="logout">Logout</a></li>
-
-                                      </ul>
-                                </li>
-
+                                            <li><a class="dropdown-item userName" href="#"><%=curUser.getName()%></a></li>
+                                            <li><a class="dropdown-item" href="#">My Cart</a></li>
+                                            <li><a class="dropdown-item" href="#">Update information</a></li>
+                                            <li><a class="dropdown-item" href="#">Change password</a></li>
+                                            <%if(curUser.getRole().equals("seller") || curUser.getRole().equals("admin")){%>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="product-management?event=product-management">Product management</a></li>
+                                            <li><a class="dropdown-item" href="product-management?event=send-to-add">Add product</a></li>
+                                            <li><a class="dropdown-item" href="order-management?event=order-management">Order management</a></li>
+                                                <%}%>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="logout">Logout</a></li>
+                                                
+                                        </ul></li>
+                                </ul>
                             </div>
                             <%}else{%>
                             <a href="login"><i class="fas fa-user"></i> Login / Register</a>
@@ -159,7 +149,7 @@
                             </form>
                         </div>
                     </div>
-
+                    
                     <%
                         CartServlet cartTest = new CartServlet();
                         HttpSession sessions = request.getSession();
@@ -176,7 +166,7 @@
                         }
                         
                     %>
-
+                    
                     <!-- Mini Cart -->
                     <div class="col-lg-2">
                         <div class="desktop-mini-cart">
@@ -184,21 +174,21 @@
                                 <div class="mini-cart-icon">
                                     <i class="fas fa-shopping-cart"></i>
                                     <span class="counter"> 
-                                        <%
-                                          if(listCartId != null){
-                                            if(listCartId.size() > 0 ){
-                                                out.println(listCartId.size());
-                                                }
+                                      <%
+                                        if(listCartId != null){
+                                          if(listCartId.size() > 0 ){
+                                              out.println(listCartId.size());
+                                              }
                                           
-                                          }
-                                        %>
+                                        }
+                                      %>
                                     </span>
                                     <span class="counter-cart"><small>Your Cart</small>$10.00</span>
                                     <!-- Mini Cart Content -->
                                     <div class="minicart-content-wrapper">
                                         <ul class="cart-list-full">
                                             <!-- Single -->
-
+                                            
                                         </ul>
                                         <h2 class="subtotal">Subtotal : <span>$220</span></h2>
                                         <div class="minicart-btn">
@@ -264,7 +254,7 @@
                                     <li><a href="./about">About</a></li>
                                     <li><a href="./shop">Shop</a></li>
                                     <li><a href="./privacy-policy">Privacy Policy</a></li>
-                                    <li><a href="./faq">FAQ</a></li>
+                                    <li><a href="./faq">Faq</a></li>
                                     <li><a href="./contact">Contact</a></li>
                                 </ul>
                             </nav>

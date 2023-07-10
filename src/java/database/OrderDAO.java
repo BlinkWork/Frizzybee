@@ -272,10 +272,10 @@ public class OrderDAO extends MyDAO {
 //        dao.update(new Order(2, new User(1, "Lê Minh Thang", "cccc", "lethangd", "123456", "M", Date.valueOf("2003-08-05"), "lethangd@gmail.com", "Phu Ly", "admin"), Date.valueOf("2003-08-05"), "bbbb", "chuyen khoan", "done", 100));
 //        dao.deleteByID("2");
 
-        List<Order> t = dao.getOrdersByPage(0, 5, "", "DESC");
+        List<Order> t = dao.getOrders();
         for (Order order : t) {
 //            order.setReceivedDate(currentDate);
-            System.out.println(order.getAddress());
+            System.out.println(order.getOrderDate());
         }
     }
 }

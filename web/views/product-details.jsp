@@ -73,7 +73,6 @@
 
             double priceBefore = product.getPrice();
             String formattedPriceBefore = df.format(priceBefore);
-            System.out.println(formattedPriceBefore);
           %>          
           <div class="col-md-7 col-lg-6">
             <div class="product-details-img-full">

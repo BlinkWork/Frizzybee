@@ -141,7 +141,7 @@ public class MiniCartServlet extends HttpServlet {
                         + "<h2 class=\"subtotal\">Subtotal : <span>" + df.format(totalPrice) + "</span></h2>\n"
                         + "<div class=\"minicart-btn\">\n"
                         + "<a class=\"button-1\" href=\"./cart\">View Cart</a>\n"
-                        + "<a class=\"button-2\" href=\"#\">Checkout</a>\n"
+                        + "<a class=\"button-2\" href=\"./checkout\">Checkout</a>\n"
                         + "</div>\n"
                         + "</div>";
             }
