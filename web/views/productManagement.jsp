@@ -81,7 +81,7 @@
         <tr> 
             <% for (String infor : cols) {
             if (infor.equals("image")) { %>
-            <td> <img style="width:100%;" src="<%=p.getProductInformation(Integer.toString(product.getProductID()), infor)%>" alt="image_product"/> </td>
+            <td> <img style="width: 128px;" src="<%=p.getProductInformation(Integer.toString(product.getProductID()), infor)%>" alt="image_product"/> </td>
             <% } else {%>
             <td><%= p.getProductInformation(Integer.toString(product.getProductID()), infor) %></td>
 

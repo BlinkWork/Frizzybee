@@ -76,7 +76,9 @@
                 <% for (String s : cols) { %>
                 <th><%= s %></th>
                     <% } %>
-                <th></th>
+                <form action="insertUser" method="get">
+                    <td> <input type="submit" value="Insert" /></td>
+                </form>
                 <th></th>
             </tr>
             <% for (User user : u.getUsers()) { %>

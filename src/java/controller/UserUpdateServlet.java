@@ -4,11 +4,16 @@ import database.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.sql.Date;
+import java.util.Base64;
 import model.User;
 
 /**
@@ -16,6 +21,7 @@ import model.User;
  * @author hbich
  */
 @WebServlet(name = "UserUpdateServlet", urlPatterns = {"/updateUser"})
+@MultipartConfig
 public class UserUpdateServlet extends HttpServlet {
 
     @Override
@@ -25,11 +31,13 @@ public class UserUpdateServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         String id = (String) request.getParameter("id").trim();
         String name = (String) request.getParameter("name").trim();
-        String avatar = (String) request.getParameter("avatar").trim();
         String username = (String) request.getParameter("username").trim();
         String password = (String) request.getParameter("password").trim();
         String sex = (String) request.getParameter("sex").trim();
         Date birthday = null;
+        Part filePart = null;
+        String remain = request.getParameter("remain").trim();
+        String imageBase64 = null;
         String email = (String) request.getParameter("email").trim();
         String address = (String) request.getParameter("address").trim();
         String isSeller = (String) request.getParameter("isSeller").trim();
@@ -44,24 +52,35 @@ public class UserUpdateServlet extends HttpServlet {
             role = "default";
         }
 
-        if (username == "") {
-            request.setAttribute("error", "You must enter an username");
-            request.setAttribute("user", u.getUserByID(id));
-            request.getRequestDispatcher("views/userEdit.jsp").forward(request, response);
-            return;
-        }
         if (name == "") {
             request.setAttribute("error", "You must enter an name");
             request.setAttribute("user", u.getUserByID(id));
             request.getRequestDispatcher("views/userEdit.jsp").forward(request, response);
             return;
         }
-        if (avatar == "") {
-            request.setAttribute("error", "You must enter an avatar url");
+        if (username == "") {
+            request.setAttribute("error", "You must enter an username");
             request.setAttribute("user", u.getUserByID(id));
             request.getRequestDispatcher("views/userEdit.jsp").forward(request, response);
             return;
         }
+        if (remain.equals("true")) {
+            imageBase64 = (String) request.getParameter("imagePath");
+        } else {
+            try {
+                filePart = request.getPart("image");
+                byte[] imageData = convertToByteArray(filePart);
+                imageBase64 = Base64.getEncoder().encodeToString(imageData);
+                if (imageBase64.equals("") || imageBase64.equals(null)) throw new Exception();
+                imageBase64 = "data:image/jpeg;base64," + imageBase64;
+            } catch (Exception e) {
+                request.setAttribute("error", "You must upload an valid image");
+                request.setAttribute("user", u.getUserByID(id));
+                request.getRequestDispatcher("views/userEdit.jsp").forward(request, response);
+                return;
+            }
+        }
+
         if (password == "") {
             request.setAttribute("error", "You must enter an password");
             request.setAttribute("user", u.getUserByID(id));
@@ -106,14 +125,33 @@ public class UserUpdateServlet extends HttpServlet {
             request.getRequestDispatcher("views/userEdit.jsp").forward(request, response);
             return;
         }
-        if (!u.getUserByID(id).getUsername().equals(username) && u.checkDuplicateUsername(username)){
+        if (!u.getUserByID(id).getUsername().equals(username) && u.checkDuplicateUsername(username)) {
             request.setAttribute("error", "Username already existed");
             request.setAttribute("user", u.getUserByID(id));
             request.getRequestDispatcher("views/userEdit.jsp").forward(request, response);
             return;
         }
-        User user = new User(Integer.parseInt(id), name, avatar, username, util.DataEncrypt.toSHA1(password), sex, birthday, email, address, role);
+        if (!u.getUserByID(id).getPassword().equals(password)) {
+            password = util.DataEncrypt.toSHA1(password);
+        }
+        User user = new User(Integer.parseInt(id), name, imageBase64, username, password, sex, birthday, email, address, role);
         u.update(user);
         response.sendRedirect("usermanagement");
+    }
+
+    private byte[] convertToByteArray(Part filePart) throws IOException {
+        InputStream inputStream = filePart.getInputStream();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+        byte[] buffer = new byte[4096];
+        int bytesRead;
+        while ((bytesRead = inputStream.read(buffer)) != -1) {
+            outputStream.write(buffer, 0, bytesRead);
+        }
+
+        byte[] imageData = outputStream.toByteArray();
+        outputStream.close();
+
+        return imageData;
     }
 }
