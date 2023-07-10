@@ -58,6 +58,13 @@
                 border-radius: 4px;
             }
 
+            input[type="file"] {
+                flex: 1;
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
             input[type="Date"] {
                 flex: 1;
                 padding: 8px;
@@ -114,7 +121,7 @@
         <jsp:include page="adminnavbar.jsp" />
 
         <h2>Update a user</h2>
-        <form action="updateUser" method="POST">
+        <form action="updateUser" method="POST"  enctype="multipart/form-data">
             <% for (String col : cols) {
     if (col.equals("id")) { %>
             <div class="form-group">
@@ -135,6 +142,17 @@
                     <option value="false" <%= "false".equals(u.getUserInformation(user.getUsername(), col)) ? "selected" : "" %>>false</option>
                 </select>
             </div>
+            <% } else if (col.equals("avatar")) { %>
+            <div class="form-group">
+                <label><%=col%></label>
+                <input type="radio" name="remain" value="true" checked/>Remain
+                <input type="radio" name="remain" value="false"  />Change
+                <input type="text" name="imagePath" id="imagePath" value="<%=u.getUserInformation(user.getUsername(), col) %>" hidden/>
+            </div>
+            <div class="form-group" id="imageUploadContainer" style="display:none;">
+                <label>Upload Image:</label>
+                <input type="file" id="image" name="image" accept="image/*" multiple="false"/>
+            </div>    
             <%} else { %>
             <div class="form-group">
                 <label><%=col%></label>
@@ -149,5 +167,18 @@
             </div>
             <input type="submit" value="Update">
         </form>  
+        <script>
+            const remainRadio = document.querySelector('input[value="true"]');
+            const changeRadio = document.querySelector('input[value="false"]');
+            const imageUploadContainer = document.getElementById('imageUploadContainer');
+
+            remainRadio.addEventListener('change', function () {
+                imageUploadContainer.style.display = 'none';
+            });
+
+            changeRadio.addEventListener('change', function () {
+                imageUploadContainer.style.display = 'block';
+            });
+        </script>
     </body>
 </html>
