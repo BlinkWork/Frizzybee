@@ -6,6 +6,7 @@ let searchValue = "";
 
 
 document.getElementById("clearSelection").addEventListener("click", function () {
+  history.pushState({}, null, '/FrizzyBee/shop');
   currentPage = 1;
   tag = "";
   sortOption = 1;
@@ -34,6 +35,7 @@ function addEventPageNumber() {
 let tagLinks = document.querySelectorAll('.category-tags a');
 for (let i = 0; i < tagLinks.length; i++) {
   tagLinks[i].addEventListener('click', function (event) {
+    history.pushState({}, null, '/FrizzyBee/shop');
     event.preventDefault();
     tag = tagLinks[i].textContent;
     showListProduct(1);
@@ -48,6 +50,7 @@ selector.addEventListener('change', function (event) {
 
 let searchBtn = document.getElementById("form-searching");
 searchBtn.addEventListener('submit', function (event) {
+  history.pushState({}, null, '/FrizzyBee/shop');
   event.preventDefault();
   let searchInput = searchBtn.querySelector('input[name="search"]');
   searchValue = searchInput.value;
@@ -67,18 +70,12 @@ function showListProduct(pageBack) {
   let action = "show";
 
   let searchParams = new URLSearchParams(window.location.search);
-  console.log(searchParams);
   if(tag == ""){
     taging = searchParams.get('tag'); 
   }
   if(searchValue == ""){
-    searchValue = searchParams.get('search'); 
+    searching = searchParams.get('search'); 
   }
-
-  console.log(sorting);
-  console.log(taging);
-  console.log(searching);
-  console.log(action);
 
   $.ajax({
     type: 'POST',

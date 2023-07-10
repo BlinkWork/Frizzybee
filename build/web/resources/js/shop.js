@@ -3,6 +3,8 @@ let tag = "";
 let sortOption = 1;
 let searchValue = "";
 
+
+
 document.getElementById("clearSelection").addEventListener("click", function () {
   currentPage = 1;
   tag = "";
@@ -63,6 +65,20 @@ function showListProduct(pageBack) {
   let taging = tag;
   let searching = searchValue;
   let action = "show";
+
+  let searchParams = new URLSearchParams(window.location.search);
+  console.log(searchParams);
+  if(tag == ""){
+    taging = searchParams.get('tag'); 
+  }
+  if(searchValue == ""){
+    searchValue = searchParams.get('search'); 
+  }
+
+  console.log(sorting);
+  console.log(taging);
+  console.log(searching);
+  console.log(action);
 
   $.ajax({
     type: 'POST',

@@ -24,11 +24,10 @@ import model.Product;
  */
 @WebServlet(name = "shop", urlPatterns = {"/shop"})
 public class ShowListServlet extends HttpServlet {
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         String query = "select * from [dbo].[Product]";
         if (getScope(request, response).trim().isEmpty() == false) {
             query = query + " where " + getScope(request, response);
@@ -40,14 +39,14 @@ public class ShowListServlet extends HttpServlet {
         RequestDispatcher rs = request.getRequestDispatcher("./views/shop.jsp");
         rs.forward(request, response);
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ProductDAO dao = new ProductDAO();
-        
+
         String action = request.getParameter("action");
-        
+
         if (action.equals("show")) {
             String query = "select * from [dbo].[Product]";
             if (getScope(request, response).trim().isEmpty() == false) {
@@ -61,8 +60,8 @@ public class ShowListServlet extends HttpServlet {
             renderPageNumber(request, response);
         }
     }
-    
-    private void paging(ProductDAO dao, HttpServletRequest request, HttpServletResponse response, String query) throws ServletException, IOException {
+
+    public void paging(ProductDAO dao, HttpServletRequest request, HttpServletResponse response, String query) throws ServletException, IOException {
         String spageid = request.getParameter("page");
         int pageid;
         if (spageid == null) {
@@ -70,7 +69,7 @@ public class ShowListServlet extends HttpServlet {
         } else {
             pageid = Integer.parseInt(spageid);
         }
-        
+
         int total = 9;
         if (pageid == 1) {
             pageid = pageid - 1;
@@ -78,15 +77,15 @@ public class ShowListServlet extends HttpServlet {
             pageid = pageid - 1;
             pageid = pageid * total + 1;
         }
-        
+
         String selection = request.getParameter("sortOption");
         if (selection == null) {
             selection = "1";
         }
-        
+
         String kind = "";
         String order = "";
-        
+
         switch (selection) {
             case "1":
                 kind = "product_name";
@@ -110,24 +109,29 @@ public class ShowListServlet extends HttpServlet {
         List<Product> listProduct = dao.getProductsByPage(pageid, total, query, kind, order);
         request.setAttribute("listProduct", listProduct);
     }
-    
+
     public void getLatestProducts(ProductDAO dao, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> latestProducts = dao.getNLatestProducts(3);
         request.setAttribute("latestProducts", latestProducts);
     }
-    
-    private void getPageNumber(String scope, ProductDAO dao, HttpServletRequest request, HttpServletResponse response) {
+
+    public void getPageNumber(String scope, ProductDAO dao, HttpServletRequest request, HttpServletResponse response) {
         int numberRecord = dao.getRecordNum(getScope(request, response)) - 1;
-        
+
         request.setAttribute("recordNumbers", numberRecord);
         int number = numberRecord % 9 == 0 ? numberRecord / 9 : numberRecord / 9 + 1;
         request.setAttribute("pageNumbers", number);
     }
-    
+
     private String getScope(HttpServletRequest request, HttpServletResponse response) {
         String searchText = request.getParameter("search");
         String categoryText = request.getParameter("tag");
-        
+        if (categoryText != null) {
+            if (categoryText.equals("All Categories")) {
+                categoryText = null;
+            }
+        }
+
         String scope = "";
         if ((searchText != null && searchText.trim().isEmpty() == false) || (categoryText != null && categoryText.trim().isEmpty() == false)) {
             String scope1 = "";
@@ -142,7 +146,7 @@ public class ShowListServlet extends HttpServlet {
             }
             if ((searchText != null && searchText.trim().isEmpty() == false) && (categoryText != null && categoryText.trim().isEmpty() == false)) {
                 scope = scope1 + " and " + scope2;
-                
+
             } else {
                 if (searchText != null && searchText.trim().isEmpty() == false) {
                     scope = scope1;
@@ -154,13 +158,13 @@ public class ShowListServlet extends HttpServlet {
         }
         return scope;
     }
-    
+
     private String printHTML(Product product) {
         DecimalFormat df = new DecimalFormat("#.##");
-        
+
         double price = product.getPrice() * (100 - product.getDiscount()) / 100;
         String formattedPrice = df.format(price);
-        
+
         double priceBefore = product.getPrice();
         String formattedPriceBefore = df.format(priceBefore);
         String data_item
@@ -186,7 +190,7 @@ public class ShowListServlet extends HttpServlet {
                 + "</div>";
         return data_item;
     }
-    
+
     private void renderDataList(HttpServletRequest request, HttpServletResponse response) throws IOException {
         List<Product> listProduct = (List<Product>) request.getAttribute("listProduct");
         String data = "";
@@ -208,7 +212,7 @@ public class ShowListServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(data);
     }
-    
+
     private void renderPageNumber(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int number = (Integer) request.getAttribute("pageNumbers");
         int page = Integer.parseInt(request.getParameter("page"));
@@ -218,12 +222,12 @@ public class ShowListServlet extends HttpServlet {
                 data += "<li class='page-item'><a href=''><span>" + i + "</span></a></li>";
             } else {
                 data += "<li class='page-item'><a href=''>" + i + "</a></li>";
-                
+
             }
         }
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(data);
     }
-    
+
 }
