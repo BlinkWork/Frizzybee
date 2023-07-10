@@ -634,14 +634,32 @@ public class ProductDAO extends MyDAO {
         return columnNames.toArray(new String[0]);
     }
 
-    public String[] getRowNames(String xColumns) {
-        xSql = "SELECT DISTINCT " + xColumns + " from [dbo].[Product]";
+    public String[] getRowNames(String xColumns, String xTable) {
+        xSql = "SELECT DISTINCT " + xColumns + " from [dbo].[" + xTable +"]";
         List<String> rowNames = new ArrayList<>();
         try {
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
             while (rs.next()) {
                 String rowName = rs.getString(xColumns);
+                rowNames.add(rowName);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rowNames.toArray(new String[0]);
+    }
+    
+    public String[] getSellerId() {
+        xSql = "SELECT DISTINCT id from [dbo].[User] where isSeller = 1";
+        List<String> rowNames = new ArrayList<>();
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String rowName = rs.getString("id");
                 rowNames.add(rowName);
             }
             rs.close();
