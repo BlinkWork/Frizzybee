@@ -26,15 +26,7 @@
     <servlet-name>AboutServlet</servlet-name>
     <url-pattern>/about</url-pattern>
   </servlet-mapping>
-  <servlet>
-    
-    <servlet-name>FaqServlet</servlet-name>
-    <jsp-file>/views/faq.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>FaqServlet</servlet-name>
-    <url-pattern>/faq</url-pattern>
-  </servlet-mapping>
+
   <servlet>
     <servlet-name>PrivacyPolicyServlet</servlet-name>
     <jsp-file>/views/privacy-policy.jsp</jsp-file>

@@ -229,7 +229,6 @@
                                     <li><a href="./about">About</a></li>
                                     <li><a href="./shop">Shop</a></li>
                                     <li><a href="./privacy-policy">Privacy Policy</a></li>
-                                    <li><a href="./faq">Faq</a></li>
                                     <li><a href="./contact">Contact</a></li>
                                 </ul>
                             </nav>

@@ -81,10 +81,13 @@
             </tr>
             <% for (User user : u.getUsers()) { %>
             <tr> 
-                <% for (String infor : cols) { %>
+                <% for (String infor : cols) { 
+                    if (infor.equals("avatar")) { 
+                %>
+                <td> <img style="width:100%;" src="<%=u.getUserInformation(user.getUsername(), infor)%>" alt="avatar"/> </td>
+                <% } else { %>
                 <td><%= u.getUserInformation(user.getUsername(), infor) %></td>
-
-                <% } %>
+                <% } }%>
 
             <form action="editUser" method="get">
                 <input type="hidden" name="userId" value="<%=user.getId()%>">
