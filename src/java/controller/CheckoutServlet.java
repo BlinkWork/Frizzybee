@@ -65,6 +65,7 @@ public class CheckoutServlet extends HttpServlet {
             rd.forward(request, response);
         } else {
             response.sendRedirect("./404");
+            
         }
 
     }

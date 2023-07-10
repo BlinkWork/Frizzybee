@@ -34,8 +34,6 @@ if (document.querySelector(".proceedOrder") != null) {
   {
     event.preventDefault();
 
-    console.log();
-
     let f_name = document.getElementById("f_name").value;
     let l_name = document.getElementById("l_name").value;
     let l_email = document.getElementById("l_email").value;
@@ -44,28 +42,32 @@ if (document.querySelector(".proceedOrder") != null) {
     let phone = document.getElementById("phone").value;
     let order_note = document.getElementById("order_note").value;
     let shippingType = "";
+
     if (expressShipping.checked == true) {
       shippingType = "express";
-    }
-    else {
+    } else {
       shippingType = "normal";
     }
+    if (f_name.trim() != "" && l_name.trim() != "" && l_email.trim() != "" && street_address.trim() != "" && city.trim() != "" && phone.trim() != "" && order_note.trim() != "") {
+      showLoading();
+      let grandTotalCost = document.querySelector(".grand-total").querySelector("span").textContent.substring(1).replace(",", ".");
+      $.ajax({
+        type: 'POST',
+        url: '/FrizzyBee/checkout',
+        data: {addresss: street_address, totalPrice: grandTotalCost, paymentMethod: shippingType},
+        success: function ()
+        {
+          showModalSuccess();
+        },
+        error: function ()
+        {
+          showModalErrorFail();
+        }
+      });
+    } else {
+      showModalBlank();
 
-    let grandTotalCost = document.querySelector(".grand-total").querySelector("span").textContent.substring(1).replace(",", ".");
-    $.ajax({
-      type: 'POST',
-      url: '/FrizzyBee/checkout',
-      data: { addresss: street_address, totalPrice: grandTotalCost, paymentMethod: shippingType },
-      success: function (response)
-      {
-      },
-      error: function ()
-      {
-        alert('Error checkout request.');
-      }
-    });
-        showLoading();
-        showModalSuccess();
+    }
 
   });
 }
@@ -81,6 +83,31 @@ function showModalSuccess()
       window.location.href = "./shop";
     }, 1000);
   }, 2000);
+}
+
+function showModalErrorFail()
+{
+  setTimeout(function ()
+  {
+    $('#failed-order').modal('show');
+    setTimeout(function ()
+    {
+      $('#failed-order').modal('hide');
+      window.location.href = "./shop";
+    }, 1000);
+  }, 2000);
+}
+
+function showModalBlank()
+{
+  setTimeout(function ()
+  {
+    $('#blank-info').modal('show');
+    setTimeout(function ()
+    {
+      $('#blank-info').modal('hide');
+    }, 1000);
+  }, 0);
 }
 
 function showLoading()
