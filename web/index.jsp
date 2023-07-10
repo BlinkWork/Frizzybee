@@ -99,7 +99,7 @@
                                       <img alt="setting" src="<%=curUser.getAvatarURL()%>"  style="width:30px; border: 2px solid #cccccc5e; border-radius: 50%;"></a>
                                       <ul class="dropdown-menu" style="margin-top: 50px !important;">
                                           <li><a class="dropdown-item userName" href="#"><%=curUser.getName()%></a></li>
-                                          <li><a class="dropdown-item" href="#">My Cart</a></li>
+                                          <li><a class="dropdown-item" href="./cart">My Cart</a></li>
 
                                           <li><a class="dropdown-item" href="updateinformation">Update my information</a></li>
                                           <li><a class="dropdown-item" href="changepassword">Change password</a></li>
@@ -287,8 +287,19 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="hero-slider-single-content" style="float:right;">
-                                <h2>Leading Hand Tools <span>Manufacturer</span></h2>
-                                <p>Ostromi Is A Specialist Of Hand Tools Which Are</p>
+                                <h2>Summer Sale <span>Up to 50% Off!</span></h2>
+                                <p>
+                                  Summer is here, and so are the deals!
+                                </p>
+                                <p>
+                                  Get ready for the season with our Summer Sale and save up to 50% on select items. 
+                                </p>
+                                <p>
+                                  From swimwear to sunglasses, we've got everything you need to make a splash this summer. 
+                                </p>
+                                <p>
+                                  Don't miss out on these hot deals - shop now!
+                                </p>
                                 <a class="button-1" href="./shop">Shop Now</a>
                             </div>
                         </div>
@@ -300,8 +311,19 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="hero-slider-single-content">
-                                <h2>Leading Hand Tools <span>Manufacturer</span></h2>
-                                <p>Ostromi Is A Specialist Of Hand Tools Which Are</p>
+                                <h2>New Arrivals <span>Shop the Latest Trends</span></h2>
+                                <p>
+                                   Looking for the latest fashion trends?
+                                </p>
+                                <p>
+                                  Look no further than our New Arrivals collection!
+                                </p>
+                                <p>
+                                  From statement pieces to essential basics, we've got everything you need to stay on-trend this season.
+                                </p>
+                                <p>
+                                  Shop now and be the first to rock the latest looks.
+                                </p>
                                 <a class="button-1" href="./shop">Shop Now</a>
                             </div>
                         </div>
@@ -314,8 +336,19 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="hero-slider-single-content">
-                                <h2>Leading Hand Tools <span>Manufacturer</span></h2>
-                                <p>Ostromi Is A Specialist Of Hand Tools Which Are</p>
+                                <h2>Free Shipping on All Orders <span>Limited Time Only</span></h2>
+                                <p>
+                                  Get ready to shop 'til you drop! 
+                                </p>
+                                <p>
+                                  For a limited time only, we're offering free shipping on all orders.
+                                </p>
+                                <p>
+                                  Whether you're stocking up on essentials or treating yourself to something special, now is the perfect time to shop.
+                                </p>
+                                <p>
+                                  <strong>Don't wait </strong> - take advantage of this offer while it lasts!
+                                </p>
                                 <a class="button-1" href="./shop">Shop Now</a>
                             </div>
                         </div>

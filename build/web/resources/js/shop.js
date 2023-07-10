@@ -67,7 +67,6 @@ function showListProduct(pageBack) {
   let action = "show";
 
   let searchParams = new URLSearchParams(window.location.search);
-  console.log(searchParams);
   if(tag == ""){
     taging = searchParams.get('tag'); 
   }

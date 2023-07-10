@@ -95,7 +95,7 @@
                                     <li class="nav-item dropdown dropstart user-image"><a data-bs-toggle="dropdown" aria-expanded="false"> <img alt="setting" src="<%=curUser.getAvatarURL()%>"  style="width:30px; border: 2px solid #cccccc5e; border-radius: 50%;"></a>
                                       <ul class="dropdown-menu" style="margin-top: 50px !important;">
                                             <li><a class="dropdown-item userName" href="#"><%=curUser.getName()%></a></li>
-                                            <li><a class="dropdown-item" href="#">My Cart</a></li>
+                                            <li><a class="dropdown-item" href="./cart">My Cart</a></li>
                                             <li><a class="dropdown-item" href="#">Update information</a></li>
                                             <li><a class="dropdown-item" href="#">Change password</a></li>
                                             <%if(curUser.getRole().equals("seller") || curUser.getRole().equals("admin")){%>
@@ -129,7 +129,7 @@
                         </div>
                     </div>
                     <!-- Search Bar -->
-                    <div class="col-lg-8" style="opacity: 0">
+                    <div class="col-lg-8">
                         <div class="header-search-form">
                             <form action="shop">
                                 <select class="form-select" name="tag">

@@ -76,12 +76,9 @@
             <div class="row section-bg pt-20 pb-20 mb-30">
               <div class="col-lg-7 col-md-6 order-2 order-md-1">
                 <div class="top-bar-left">
-                  <div class="product-view-mode">
-                    <a href="shop-list.jsp"  class="active"><i class="fa fa-list"></i></a>
-                  </div>
-                  <div class="product-amount">
-                    <p>Showing 16 of 21 results</p>
-                  </div>
+                 <a href="product-management?event=send-to-add"><button type="button" class="btn btn-warning">ADD PRODUCT!</button>
+                </a>
+                  
                 </div>
               </div>
               <div class="col-lg-5 col-md-6 order-1 order-md-2">
@@ -95,10 +92,7 @@
                 </div>
               </div>
             </div>
-            <!-- Shop -->
-            <div class="col-lg-12 mb-30">
-                <a href="product-management?event=send-to-add"><button type="button" class="btn btn-warning">ADD PRODUCT!</button></a>
-            </div>
+
             <div class="row">
               <!-- Product Single -->
               <%for (Product product : listProduct) {%>
