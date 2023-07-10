@@ -9,9 +9,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Admin Panel</title>
-        <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="16x16">
-        <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="18x18">
-        <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="20x20">
+        <link rel="icon" href="./resources/img/logo.png" type="image/gif" sizes="16x16">
+        <link rel="icon" href="./resources/img/logo.png" type="image/gif" sizes="18x18">
+        <link rel="icon" href="./resources/img/logo.png" type="image/gif" sizes="20x20">
         <style>
             table {
                 border-collapse: collapse;

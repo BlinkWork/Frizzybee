@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>BulkShop - Electronics Shop HTML Template | Privacy Policy</title>
-    <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="16x16">
-    <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="18x18">
-    <link rel="icon" href="./resources/img/icon.png" type="image/gif" sizes="20x20">
+        <title>FrizzeBee - Electronics Shop</title>
+        <link rel="icon" href="./resources/img/logo.png" type="image/gif" sizes="16x16">
+        <link rel="icon" href="./resources/img/logo.png" type="image/gif" sizes="18x18">
+        <link rel="icon" href="./resources/img/logo.png" type="image/gif" sizes="20x20">
 
     <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="./resources/css/fontawesome.all.min.css">
