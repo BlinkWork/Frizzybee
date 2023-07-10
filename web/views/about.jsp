@@ -48,15 +48,21 @@
         <div class="row">
           <div class="col-lg-6">
             <div class="about-img">
-              <img src="./resources/img/ab.jpg" alt="about">
+              <img src="./resources/img/logo_1.png" style="width: 90%">
             </div>
           </div>
           <div class="col-lg-6">
             <div class="about-content">
-              <h3>The standard lorem ipsum passage</h3>
-              <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, ullam, commodi consequatur?</p>
-              <p class="active">Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eu nisi ac mi malesuada vestibulum. Phasellus tempor nunc eleifend cursus molestie. Mauris lectus arcu, pellentesque at sodales sit amet, condimentum id nunc. Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate.</p>
+              <h3>About Our Company</h3>
+              <p>At FrizzyBee Company, we are dedicated to providing high-quality software solutions that meet the needs of our
+                customers. We believe in delivering exceptional value and strive to exceed our customers' expectations in
+                everything we do.</p>
+              <p class="active">Our mission is to empower businesses to achieve their full potential through innovative technology
+                solutions. We are committed to delivering exceptional customer service, fostering teamwork and collaboration, and
+                maintaining the highest standards of integrity and ethics in all of our business practices.</p>
+              <p>Our team is made up of experienced professionals who are passionate about what they do. We work together to
+                deliver innovative solutions and exceptional customer service. Our focus on continuous improvement ensures that we
+                are always learning and evolving to meet the changing needs of our customers.</p>
             </div>
           </div>
         </div>
