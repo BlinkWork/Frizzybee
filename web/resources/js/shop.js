@@ -67,11 +67,11 @@ function showListProduct(pageBack) {
   let action = "show";
 
   let searchParams = new URLSearchParams(window.location.search);
-  if(tag == ""){
-    taging = searchParams.get('tag'); 
+  if (tag == "") {
+    taging = searchParams.get('tag');
   }
-  if(searchValue == ""){
-    searchValue = searchParams.get('search'); 
+  if (searchValue == "") {
+    searchValue = searchParams.get('search');
   }
 
   console.log(sorting);
@@ -100,7 +100,12 @@ function showListProduct(pageBack) {
     url: '/FrizzyBee/shop',
     data: {page: paging, sortOption: sorting, tag: taging, search: searching, action: action},
     success: function (res) {
-      document.querySelector(".page-pagination ul").innerHTML = res;
+      if (res != "") {
+        document.querySelector(".page-pagination ul").innerHTML = res;
+      }
+      else{
+        document.querySelector(".page-pagination ul").innerHTML = "No product has name like that!";
+      }
       addEventPageNumber();
     },
     error: function () {

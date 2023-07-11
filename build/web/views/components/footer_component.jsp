@@ -12,10 +12,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>BulkShop - Electronics Shop HTML Template | Home</title>
-    <link rel="icon" href="../resources/img/icon.png" type="image/gif" sizes="16x16">
-    <link rel="icon" href="../resources/img/icon.png" type="image/gif" sizes="18x18">
-    <link rel="icon" href="../resources/img/icon.png" type="image/gif" sizes="20x20">
+            <title>FrizzeBee - Electronics Shop</title>
+
+    <link rel="icon" href="../resources/img/logo.png" type="image/gif" sizes="16x16">
+    <link rel="icon" href="../resources/img/logo.png" type="image/gif" sizes="18x18">
+    <link rel="icon" href="../resources/img/logo.png" type="image/gif" sizes="20x20">
 
     <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="../resources/css/fontawesome.all.min.css">
@@ -33,60 +34,41 @@
 
     <!-- Start Footer Area -->
     <footer class="footer">
-      <!-- Footer Top -->
-      <div class="footer-top pt-50">
-        <div class="container">
-          <div class="row">
-            <!-- SIngle -->
-            <div class="col-lg-3 col-md-6 mb-30">
-              <div class="footer-widgets-single">
-                <h2><img src="../resources/img/logo.png" style="width: 100px"></h2>
-                <p> Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                  dolore magna aliqut enim ad minim veniamquis </p>
-              </div>
+        <!-- Footer Top -->
+        <div class="footer-top pt-50">
+            <div class="container">
+                <div class="row">
+                    <!-- SIngle -->
+                    <div class="col-lg-3 col-md-6 mb-30">
+                        <div class="footer-widgets-single">
+                            <h2><img src="./resources/img/logo.png" style="width: 200px"></h2>
+                            
+                        </div>
+                    </div>
+                    <!-- SIngle -->
+                    <div class="col-lg-5 col-md-6 mb-30">
+                        <div class="footer-widgets-single">
+                            <p> Introducing our advanced e-commerce web technology! Our platform offers customizable product pages, secure payment processing, and streamlined inventory management for a seamless shopping experience. Join the future of online retail today with our innovative web technology. </p>
+                        </div>
+                    </div>
+                    <!-- SIngle -->
+                    <div class="col-lg-1 col-md-6 mb-30" style="opacity: 0">
+
+                    </div>
+                    <!-- SIngle -->
+                    <div class="col-lg-3 col-md-6 mb-30">
+                        <div class="footer-widgets-single">
+                            <h3>Newsletter</h3>
+                            <p> Get notified of new products, limited releases, and more. </p>
+                            <form action="#">
+                                <input type="email" name="email" placeholder="Your Email">
+                                <button type="submit" class="button-1">Subscribe</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- SIngle -->
-            <div class="col-lg-3 col-md-6 mb-30">
-              <div class="footer-widgets-single" style="opacity: 0">
-                <h3>My account</h3>
-                <ul>
-                  <li><a href="#">Sign In</a></li>
-                  <li><a href="#">View Cart</a></li>
-                  <li><a href="#">My Wishlist</a></li>
-                  <li><a href="#">Terms & Conditions</a></li>
-                  <li><a href="#">Contact us</a></li>
-                  <li><a href="#">Track My Order</a></li>
-                </ul>
-              </div>
-            </div>
-            <!-- SIngle -->
-            <div class="col-lg-3 col-md-6 mb-30" style="opacity: 0">
-              <div class="footer-widgets-single">
-                <h3>Categories</h3>
-                <ul>
-                  <li><a href="#">Home Audio & Theater</a></li>
-                  <li><a href="#">TV & Video</a></li>
-                  <li><a href="#">Camera, Photo & Video</a></li>
-                  <li><a href="#">Cell Phones & Accessories</a></li>
-                  <li><a href="#">Headphones</a></li>
-                  <li><a href="#">Video Games</a></li>
-                </ul>
-              </div>
-            </div>
-            <!-- SIngle -->
-            <div class="col-lg-3 col-md-6 mb-30" >
-              <div class="footer-widgets-single">
-                <h3>Newsletter</h3>
-                <p> Get notified of new products, limited releases, and more. </p>
-                <form action="#">
-                  <input type="email" name="email" placeholder="Your Email">
-                  <button type="submit" class="button-1">Subscribe</button>
-                </form>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
       <!-- Footer Bottom -->
       <div class="footer-bottom pt-30 pb-30">
         <div class="container">

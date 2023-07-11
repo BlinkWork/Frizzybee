@@ -119,7 +119,10 @@ public class ShowListServlet extends HttpServlet {
         int numberRecord = dao.getRecordNum(getScope(request, response)) - 1;
 
         request.setAttribute("recordNumbers", numberRecord);
-        int number = numberRecord % 9 == 0 ? numberRecord / 9 : numberRecord / 9 + 1;
+        int number = 0;
+        if (numberRecord > 0) {
+            number = numberRecord % 9 == 0 ? numberRecord / 9 : numberRecord / 9 + 1;
+        }
         request.setAttribute("pageNumbers", number);
     }
 

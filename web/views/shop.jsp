@@ -198,17 +198,21 @@
                   <ul>
                     <!--<li class="page-item"><a href="#"><i class="fa fa-angle-left"></i></a></li>-->
                     <%
-                      int number = (Integer)request.getAttribute("pageNumbers");
-                      for(int i = 1; i <= number ; i++){
-                        if(i == 1){
-                          out.println(
-                            "<li class='page-item'><a href=''> <span>" + i + "</span></a></li>"
-                          );
-                        }
-                        else{
-                          out.println(
-                          "<li class='page-item'><a href=''>" + i + "</a></li>"
-                          );
+                      if(listProduct != null){
+                        if(listProduct.size() > 0){
+                          int number = (Integer)request.getAttribute("pageNumbers");
+                          for(int i = 1; i <= number ; i++){
+                            if(i == 1){
+                              out.println(
+                                "<li class='page-item'><a href=''> <span>" + i + "</span></a></li>"
+                              );
+                            }
+                            else{
+                              out.println(
+                              "<li class='page-item'><a href=''>" + i + "</a></li>"
+                              );
+                            }
+                          }
                         }
                       }
                     %>

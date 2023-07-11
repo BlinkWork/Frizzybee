@@ -440,38 +440,19 @@
                     <!-- SIngle -->
                     <div class="col-lg-3 col-md-6 mb-30">
                         <div class="footer-widgets-single">
-                            <h2><img src="./resources/img/logo.png" style="width: 100px"></h2>
-                            <p> Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                                dolore magna aliqut enim ad minim veniamquis </p>
+                            <h2><img src="./resources/img/logo.png" style="width: 200px"></h2>
+                            
                         </div>
                     </div>
                     <!-- SIngle -->
-                    <div class="col-lg-3 col-md-6 mb-30" style="opacity: 0">
+                    <div class="col-lg-5 col-md-6 mb-30">
                         <div class="footer-widgets-single">
-                            <h3>My account</h3>
-                            <ul>
-                                <li><a href="#">Sign In</a></li>
-                                <li><a href="#">View Cart</a></li>
-                                <li><a href="#">My Wishlist</a></li>
-                                <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="#">Contact us</a></li>
-                                <li><a href="#">Track My Order</a></li>
-                            </ul>
+                            <p> Introducing our advanced e-commerce web technology! Our platform offers customizable product pages, secure payment processing, and streamlined inventory management for a seamless shopping experience. Join the future of online retail today with our innovative web technology. </p>
                         </div>
                     </div>
                     <!-- SIngle -->
-                    <div class="col-lg-3 col-md-6 mb-30" style="opacity: 0">
-                        <div class="footer-widgets-single">
-                            <h3>Categories</h3>
-                            <ul>
-                                <li><a href="#">Home Audio & Theater</a></li>
-                                <li><a href="#">TV & Video</a></li>
-                                <li><a href="#">Camera, Photo & Video</a></li>
-                                <li><a href="#">Cell Phones & Accessories</a></li>
-                                <li><a href="#">Headphones</a></li>
-                                <li><a href="#">Video Games</a></li>
-                            </ul>
-                        </div>
+                    <div class="col-lg-1 col-md-6 mb-30" style="opacity: 0">
+
                     </div>
                     <!-- SIngle -->
                     <div class="col-lg-3 col-md-6 mb-30">
