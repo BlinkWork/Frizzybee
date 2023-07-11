@@ -73,7 +73,7 @@
                 <% for (String s : cols) { %>
                 <th><%= s %></th>
                     <% } %>
-                <form action="insertProductPanel" method="get">
+                <form action="insertProduct" method="get">
                     <td> <input type="submit" value="Insert" /> </td>
                 </form>
                 <th></th>
@@ -88,7 +88,7 @@
 
             <% } } %>
 
-        <form action="editProduct" method="get">
+        <form action="updateProduct" method="get">
             <input type="hidden" name="productId" value="<%=product.getProductID()%>">
             <td> <input type="submit" value="Edit" /> </td>
         </form>
