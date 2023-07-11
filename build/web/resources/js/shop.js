@@ -6,6 +6,7 @@ let searchValue = "";
 
 
 document.getElementById("clearSelection").addEventListener("click", function () {
+  history.pushState({}, null, '/FrizzyBee/shop');
   currentPage = 1;
   tag = "";
   sortOption = 1;
@@ -34,6 +35,7 @@ function addEventPageNumber() {
 let tagLinks = document.querySelectorAll('.category-tags a');
 for (let i = 0; i < tagLinks.length; i++) {
   tagLinks[i].addEventListener('click', function (event) {
+    history.pushState({}, null, '/FrizzyBee/shop');
     event.preventDefault();
     tag = tagLinks[i].textContent;
     showListProduct(1);
@@ -48,6 +50,7 @@ selector.addEventListener('change', function (event) {
 
 let searchBtn = document.getElementById("form-searching");
 searchBtn.addEventListener('submit', function (event) {
+  history.pushState({}, null, '/FrizzyBee/shop');
   event.preventDefault();
   let searchInput = searchBtn.querySelector('input[name="search"]');
   searchValue = searchInput.value;
@@ -67,17 +70,12 @@ function showListProduct(pageBack) {
   let action = "show";
 
   let searchParams = new URLSearchParams(window.location.search);
-  if (tag == "") {
-    taging = searchParams.get('tag');
+  if(tag == ""){
+    taging = searchParams.get('tag'); 
   }
-  if (searchValue == "") {
-    searchValue = searchParams.get('search');
+  if(searchValue == ""){
+    searching = searchParams.get('search'); 
   }
-
-  console.log(sorting);
-  console.log(taging);
-  console.log(searching);
-  console.log(action);
 
   $.ajax({
     type: 'POST',
@@ -100,12 +98,7 @@ function showListProduct(pageBack) {
     url: '/FrizzyBee/shop',
     data: {page: paging, sortOption: sorting, tag: taging, search: searching, action: action},
     success: function (res) {
-      if (res != "") {
-        document.querySelector(".page-pagination ul").innerHTML = res;
-      }
-      else{
-        document.querySelector(".page-pagination ul").innerHTML = "No product has name like that!";
-      }
+      document.querySelector(".page-pagination ul").innerHTML = res;
       addEventPageNumber();
     },
     error: function () {
@@ -132,6 +125,7 @@ function addCartEvent() {
       success: function (response) {
         showMiniCart("add");
         $('#modal--warning--login').modal('show');
+
       },
       error: function () {
         alert('Error add request.');
