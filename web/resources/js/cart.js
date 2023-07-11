@@ -222,7 +222,13 @@ function addSubTotalEvent()
     items.forEach(function (element)
     {
       let subtotalString = element.querySelector(".pro-subtotal").textContent;
-      let subtotal = subtotalString.split(",")[ 0 ] + "." + subtotalString.split(",")[ 1 ];
+      let subtotal;
+      if (total + subtotalString + "" == "NaN") {
+
+        subtotal = subtotalString.split(",")[ 0 ] + "." + subtotalString.split(",")[ 1 ];
+      } else {
+        subtotal = subtotalString;
+      }
       total += subtotal * 1;
     });
     document.getElementById("subTotal").innerHTML = "$" + total.toFixed(2);

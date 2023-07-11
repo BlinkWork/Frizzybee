@@ -20,11 +20,16 @@
     <link rel="stylesheet" href="./resources/css/normalize.css">
     <link rel="stylesheet" href="./resources/css/style.css">
     <link rel="stylesheet" href="./resources/css/responsive.css">
+    <link rel="stylesheet" href="./resources/css/jquery.rateyo.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+    
   </head>
   <body>
     <%@include file="../views/servletComponents/header_component.jsp" %>
 
+
+    
     <!-- Start BreadCrumb Area -->
     <div class="breadcrumb-area pt-100 pb-100" style="background-image: url('./resources/img/breadcrumb.jpg');">
       <div class="container">
@@ -43,6 +48,7 @@
     </div>
     <!-- End BreadCrumb Area -->
 
+    
     <!-- Start Shop Area -->
     <section class="shop-area pt-70 pb-70">
       <div class="container">
@@ -73,17 +79,27 @@
 
             double priceBefore = product.getPrice();
             String formattedPriceBefore = df.format(priceBefore);
+ 
+            double avgRate = (Double) request.getAttribute("avgRate");
+ 
+            String rateText = "";
+            int i = 1;
+            for (; i <= avgRate; i++) {
+                rateText += "<span><i class='fas fa-star'></i></span>";
+            }
+            for (; i <= 5; i++) {
+                rateText += "<i class='fas fa-star'></i>";
+            }
+
           %>          
           <div class="col-md-7 col-lg-6">
             <div class="product-details-img-full">
               <h2><%=product.getProductName()%></h2>
 
               <div class="ratting">
-                <span><i class="fas fa-star"></i></span>
-                <span><i class="fas fa-star"></i></span>
-                <span><i class="fas fa-star"></i></span>
-                <span><i class="fas fa-star"></i></span>
-                <span><i class="fas fa-star"></i></span>
+                <%
+                    out.println(rateText);
+                %>
               </div>
 
               <div class="pricing" style="margin: 20px 0;">
@@ -195,10 +211,11 @@
                   </tbody>
                 </table>
               </div>
+                
+                
               <div class="tab-pane fade" id="Review" role="tabpanel" aria-labelledby="Review-tab">
                 <div class="product-review">
                   <div class="product-review-list">
-                    <h3>2 Review For Blue Dress For Woman</h3>
                     <ul>
                       <!-- Single -->
                       <li class="review-single">
@@ -219,40 +236,19 @@
                         </div>
                       </li>
                       <!-- Single -->
-                      <li class="review-single">
-                        <img src="./resources/img/avata-admin.jpg" alt="avatar">
-                        <div class="review-info">
-                          <h5>Alea Brooks</h5>
-                          <small> Jun 01, 2021 </small>
-                        </div>
-                        <div class="ratting">
-                          <span><i class="fas fa-star"></i></span>
-                          <span><i class="fas fa-star"></i></span>
-                          <span><i class="fas fa-star"></i></span>
-                          <span><i class="fas fa-star"></i></span>
-                          <span><i class="fas fa-star"></i></span>
-                        </div>
-                        <div class="revie-con">
-                          <p>Lorem Ipsumin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate</p>
-                        </div>
-                      </li>
+ 
                     </ul>
                   </div>
                   <!-- Form -->
+
                   <div class="product-review-form">
                     <h3>Add a review</h3>
-                    <div class="ratting">
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                      <span><i class="fas fa-star"></i></span>
-                    </div>
+                   
+                    <div id="rateUser"></div>
+                    <div id="rating--score" hidden=" "></div>
                     <form action="#">
-                      <textarea name="review-message" class="form-control" placeholder="Your Review"></textarea>
-                      <input type="text" name="name" class="form-control" placeholder="Your Name">
-                      <input type="email" name="email" class="form-control" placeholder="Your Email">
-                      <button type="submit">Submit Review</button>
+                      <textarea id="text--comment" name="review-message" class="form-control" placeholder="Your Review"></textarea>
+                      <button id="submit--review" type="submit">Submit Review</button>
                     </form>
                   </div>
                 </div>
@@ -287,5 +283,88 @@
     <script src="./resources/js/script.js"></script>
     <script src="./resources/js/mobile-menu.js"></script>
     <script src="./resources/js/cart.js"></script>
+    <script src="./resources/js/jquery.rateyo.js"></script>
+
+    <script>
+      $(function () {
+
+        $("#rateUser").rateYo({
+          rating: 5.0,
+          onChange: function (rating, rateYoInstance) {
+            document.getElementById("rating--score").innerHTML = rating;
+          },
+        });
+
+      });
+      let paramTemp = new URLSearchParams(window.location.search);
+      let id = paramTemp.get('id');
+      showComment(id, "show");
+
+      document.getElementById("submit--review").addEventListener("click", function(event){
+        event.preventDefault();
+
+        let comment = document.getElementById("text--comment").value;
+        if(comment.trim() == ""){
+          alert("INPUT SOMETHING PLEASE")
+          return;
+        }
+        let rateScore = document.getElementById("rating--score").innerHTML;
+        let searchParams = new URLSearchParams(window.location.search);
+        let productId = searchParams.get('id');
+        let method = "add";
+        $.ajax({
+          type: 'POST',
+          url: '/FrizzyBee/review',
+          data: {comment: comment, rateScore: rateScore, productId: productId, method: method},
+          success: function ()
+          {
+            showComment(productId, "show");
+            document.getElementById("text--comment").value = "";
+            renderRate(productId, "rate");
+          },
+          error: function ()
+          {
+            $('#myModal').modal('show');
+          }
+        });
+        
+        
+        
+      });
+
+      function showComment(productId, method){
+        $.ajax({
+          type: 'POST',
+          url: '/FrizzyBee/review',
+          data: {productId: productId, method: method},
+          success: function (response)
+          {
+            document.querySelector(".product-review-list ul").innerHTML = response;
+          },
+          error: function ()
+          {
+            alert('Error show request.');
+          }
+        });
+      }
+
+      function renderRate(productId, method){
+        $.ajax({
+          type: 'POST',
+          url: '/FrizzyBee/review',
+          data: {productId: productId, method: method},
+          success: function (response)
+          {
+            document.querySelector(".product-details-img-full .ratting").innerHTML = response;
+          },
+          error: function ()
+          {
+            alert('Error render request.');
+          }
+        });
+      }
+
+    </script>
+
   </body>
 </html>

@@ -123,8 +123,8 @@ public class RatingDAO extends MyDAO {
 //        dao.insert(new Rating(0, 1, 1, 0, "dat ngu"));
 //        dao.insert(new Rating(0, 1, 1, 0, "dat ngu"));
 //dao.update(new Rating(5, 1, 1, 0, "dat del ngu"));
-        dao.deleteByID("5");
-        List<Rating> t = dao.getRatingByProductID("1");
+//        dao.deleteByID("5");
+        List<Rating> t = dao.getRatingByProductID("61");
         for (Rating rating : t) {
             System.out.println(rating.getComment());
         }

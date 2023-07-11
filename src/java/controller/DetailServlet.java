@@ -23,31 +23,34 @@ import model.Product;
 @WebServlet(name = "DetailServlet", urlPatterns = {"/productDetails"})
 public class DetailServlet extends HttpServlet {
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
-    String id = request.getParameter("id");
-    ProductDAO dao = new ProductDAO();
-    Product product = dao.getProductByID(id);
-    if (product != null) {
-      request.setAttribute("productDetail", product);
-      RequestDispatcher rd = request.getRequestDispatcher("./views/product-details.jsp");
-      rd.forward(request, response);
-    }
-
-  }
-
-  private String getCartCookie(HttpServletRequest request, HttpServletResponse response) {
-    Cookie[] cookies = request.getCookies();
-    String cartItems = null;
-    if (cookies != null) {
-      for (Cookie cookie : cookies) {
-        if (cookie.getName().equals("cartItems")) {
-          cartItems = cookie.getValue();
-          break;
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String id = request.getParameter("id");
+        ProductDAO dao = new ProductDAO();
+        Product product = dao.getProductByID(id);
+        if (product != null) {
+            request.setAttribute("productDetail", product);
+            ReviewServlet rvS = new ReviewServlet();
+            double avgRate = rvS.getAvgRating(id);
+            request.setAttribute("avgRate", avgRate);
+            RequestDispatcher rd = request.getRequestDispatcher("./views/product-details.jsp");
+            rd.forward(request, response);
         }
-      }
+
     }
-    return cartItems;
-  }
+
+    private String getCartCookie(HttpServletRequest request, HttpServletResponse response) {
+        Cookie[] cookies = request.getCookies();
+        String cartItems = null;
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("cartItems")) {
+                    cartItems = cookie.getValue();
+                    break;
+                }
+            }
+        }
+        return cartItems;
+    }
 }
