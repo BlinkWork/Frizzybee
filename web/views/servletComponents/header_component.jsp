@@ -51,11 +51,10 @@
 
     <body>
         <%
-          String URL = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()  + request.getContextPath();
-          String username = (String) session.getAttribute("username");
-          UserDAO userDao = new UserDAO();
-          ProductDAO productDao = new ProductDAO();
-          User curUser = userDao.getUserByUsername(username);
+        String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()  + request.getContextPath();
+        String username = (String) session.getAttribute("username");
+        UserDAO dao = new UserDAO();
+        User curUser = dao.getUserByUsername(username);
         %>
         <div id="preloader" class="preeloader">
             <div class="sk-circle">
@@ -90,25 +89,36 @@
                                 <a href="#"><i class="fas fa-mobile-alt"></i>0834398268</a>
                                 <a href="./views/wishlist.jsp"><i class="far fa-heart"></i> Wishlist</a>
                                 <%if(curUser!=null){%>
-                                <div class="d-flex align-items-center justify-content-center" style="float: right" />
-                                
-                                <ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-infor ">
-                                    <li class="nav-item dropdown dropstart user-image"><a data-bs-toggle="dropdown" aria-expanded="false"> <img alt="setting" src="<%=curUser.getAvatarURL()%>"  style="width:30px; border: 2px solid #cccccc5e; border-radius: 50%;"></a>
+                                    <div class="d-flex align-items-center justify-content-center" style="float: right" />
+
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-infor ">
+                                <li class="nav-item dropdown dropstart user-image">
+                                    <a data-bs-toggle="dropdown" aria-expanded="false"> 
+                                      <img alt="setting" src="<%=curUser.getAvatarURL()%>"  style="width:30px; border: 2px solid #cccccc5e; border-radius: 50%;"></a>
                                       <ul class="dropdown-menu" style="margin-top: 50px !important;">
-                                            <li><a class="dropdown-item userName" href="#"><%=curUser.getName()%></a></li>
-                                            <li><a class="dropdown-item" href="./cart">My Cart</a></li>
-                                            <li><a class="dropdown-item" href="#">Update information</a></li>
-                                            <li><a class="dropdown-item" href="#">Change password</a></li>
-                                            <%if(curUser.getRole().equals("seller") || curUser.getRole().equals("admin")){%>
-                                            <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item" href="product-management?event=product-management">Product management</a></li>
-                                            <li><a class="dropdown-item" href="product-management?event=send-to-add">Add product</a></li>
-                                            <li><a class="dropdown-item" href="order-management?event=order-management">Order management</a></li>
-                                                <%}%>
-                                            <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item" href="logout">Logout</a></li>
-                                                
-                                        </ul></li>
+                                          <li><a class="dropdown-item userName" href="#"><%=curUser.getName()%></a></li>
+                                          <li><a class="dropdown-item" href="./cart">My Cart</a></li>
+
+                                          <li><a class="dropdown-item" href="updateinformation">Update my information</a></li>
+                                          <li><a class="dropdown-item" href="changepassword">Change password</a></li>
+
+                                          <%if(curUser.getRole().equals("seller") || curUser.getRole().equals("admin")){%>
+                                          <li><hr class="dropdown-divider"></li>
+                                          <li><a class="dropdown-item" href="product-management?event=product-management">Product manage</a></li>
+                                          <li><a class="dropdown-item" href="product-management?event=send-to-add">Add product</a></li>
+                                          <li><a class="dropdown-item" href="order-management?event=order-management">Order management</a></li>
+
+                                          <%} 
+                                          if (curUser.getRole().equals("admin")) {%>
+                                          <li><hr class="dropdown-divider"></li>
+                                          <li><a class="dropdown-item" href="adminpanel">Admin panel</a></li>
+
+                                          <%} %>
+                                          <li><hr class="dropdown-divider"></li>
+                                          <li><a class="dropdown-item" href="logout">Logout</a></li>
+
+                                      </ul>
+                                </li>
                                 </ul>
                             </div>
                             <%}else{%>

@@ -186,7 +186,7 @@ public class ShowListServlet extends HttpServlet {
                 + "<div class='product-content'>"
                 + "<h4><a href='./productDetails?id=" + product.getProductID() + "'>" + product.getProductName() + "</a></h4>"
                 + "<div class='pricing'>"
-                + "<span class='priceDiscount' style='display: flex; flex-direction: column;'>" + formattedPrice + " <del>" + formattedPriceBefore + "</del></span>"
+                + "<span class='priceDiscount' style='display: flex; flex-direction: column;'>" + formattedPrice + "$<del>" + formattedPriceBefore + "$</del></span>"
                 + "</div>"
                 + "</div>"
                 + "</div>"

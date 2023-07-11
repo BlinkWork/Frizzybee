@@ -48,7 +48,7 @@
         <div class="row">
           <div class="col-lg-6">
             <div class="about-img">
-              <img src="./resources/img/logo_1.png" style="width: 90%">
+              <img src="./resources/img/logo.png" style="width: 90%">
             </div>
           </div>
           <div class="col-lg-6">

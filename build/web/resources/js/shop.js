@@ -6,7 +6,11 @@ let searchValue = "";
 
 
 document.getElementById("clearSelection").addEventListener("click", function () {
-  history.pushState({}, null, '/FrizzyBee/shop');
+
+  let temp = new URLSearchParams(window.location.search);
+  if (temp.length != 0) {
+    history.pushState({}, null, '/FrizzyBee/shop');
+  }
   currentPage = 1;
   tag = "";
   sortOption = 1;
@@ -70,11 +74,11 @@ function showListProduct(pageBack) {
   let action = "show";
 
   let searchParams = new URLSearchParams(window.location.search);
-  if(tag == ""){
-    taging = searchParams.get('tag'); 
+  if (tag == "") {
+    taging = searchParams.get('tag');
   }
-  if(searchValue == ""){
-    searching = searchParams.get('search'); 
+  if (searchValue == "") {
+    searching = searchParams.get('search');
   }
 
   $.ajax({

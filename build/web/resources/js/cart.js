@@ -165,6 +165,7 @@ function addEventUpdate()
             showMiniCart("show");
             showCart("show");
 
+
           },
           error: function ()
           {
