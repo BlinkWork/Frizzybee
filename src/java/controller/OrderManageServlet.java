@@ -184,9 +184,9 @@ public class OrderManageServlet extends HttpServlet {
                         + "                                        <div class=\"col-md-1 text-center d-flex flex-column justify-content-center border-end\"><p class=\"overflow-hidden\">$" + totalPriceOrderItem + "</p></div>\n"
                         + "                                        <div class=\"col-md-2 text-center d-flex flex-column justify-content-center border-end\"><p class=\"overflow-hidden\">" + order.getPaymentMethod() + "</p></div>\n"
                         + "                                        <div class=\"col-md-2 text-center d-flex flex-column justify-content-center border-end\"><p class=\"overflow-hidden\">" + order.getOrderDate() + "</p></div>\n"
-                        + "                                        <div class=\"col-md-2 text-center d-flex flex-column justify-content-center border-end\"><p class=\"overflow-hidden\" id=\"received-date" + order.getOrderID() + "\">");
+                        + "                                        <div class=\"col-md-2 text-center d-flex flex-column justify-content-center border-end\"><p class=\"overflow-hidden received-date" + order.getOrderID() + "\">");
                                 if(order.getReceivedDate()!=null)out.print( order.getReceivedDate().toString() );out.print("</p></div>\n"
-                        + "                                        <div class=\"col-md-1 text-center d-flex flex-column justify-content-center\"><p id=\"status" + order.getOrderID() + "\">" + order.getStatus() + "</p></div>\n"
+                        + "                                        <div class=\"col-md-1 text-center d-flex flex-column justify-content-center\"><p class=\"status" + order.getOrderID() + "\">" + order.getStatus() + "</p></div>\n"
                         + "                                    </div> \n");
             }
             out.print("</div> <div class=\"col-md-1 text-center d-flex flex-column justify-content-center border-start\">\n");

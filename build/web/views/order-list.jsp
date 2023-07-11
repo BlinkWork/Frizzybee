@@ -141,8 +141,8 @@
                                         <div class="col-md-1 text-center d-flex flex-column justify-content-center border-end"><p class="overflow-hidden">$<%=orderItem.getQuantity()*product.getPrice()%></p></div>
                                         <div class="col-md-2 text-center d-flex flex-column justify-content-center border-end"><p class="overflow-hidden"><%=order.getPaymentMethod()%></p></div>
                                         <div class="col-md-2 text-center d-flex flex-column justify-content-center border-end"><p class="overflow-hidden"><%=order.getOrderDate()%></p></div>
-                                        <div class="col-md-2 text-center d-flex flex-column justify-content-center border-end"><p id="received-date<%=order.getOrderID()%>"  class="overflow-hidden"><%if(order.getReceivedDate()!=null){%><%=order.getReceivedDate().toString()%><%}%></p></div>
-                                        <div class="col-md-1 text-center d-flex flex-column justify-content-center"><p  class="overflow-hidden" id="status<%=order.getOrderID()%>"><%=order.getStatus()%></p></div>
+                                        <div class="col-md-2 text-center d-flex flex-column justify-content-center border-end"><p class="overflow-hidden received-date<%=order.getOrderID()%>"><%if(order.getReceivedDate()!=null){%><%=order.getReceivedDate().toString()%><%}%></p></div>
+                                        <div class="col-md-1 text-center d-flex flex-column justify-content-center"><p  class="overflow-hidden" class="status<%=order.getOrderID()%>"><%=order.getStatus()%></p></div>
                                     </div> 
                                     <%}%>
                                 </div> 

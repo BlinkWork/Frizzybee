@@ -14,7 +14,10 @@ function comfirm(id) {
             document.getElementById(id).textContent = "Delivery";
             document.getElementById(id).removeEventListener("click", comfirm);
             document.getElementById(id).setAttribute("onclick", "delivery(" + id + ")");
-            document.getElementById("status" + id).textContent = "comfirm";
+            const statusElements = document.querySelectorAll('.status' + id);
+            statusElements.forEach(element => {
+                element.textContent = "comfirm";
+            });
         },
         error: function (xhr, status, error) {
             console.log(error);
@@ -30,9 +33,15 @@ function delivery(id) {
             // X? lý k?t qu? tr? v? t? trang x? lý
             document.getElementById(id).textContent = "Delivered";
             document.getElementById(id).style = "color: silver";
-            document.getElementById("status" + id).textContent = "delivered";
+            const statusElements = document.querySelectorAll('.status' + id);
+            statusElements.forEach(element => {
+                element.textContent = "delivered";
+            });
             const today = new Date();
-            document.getElementById("received-date" + id).textContent = today.toLocaleDateString('vi-VN', {year: 'numeric', month: 'numeric', day: 'numeric'});
+            const receivedDateElements = document.querySelectorAll('.received-date' + id);
+            receivedDateElements.forEach(element => {
+                element.textContent = today.toLocaleDateString('vi-VN', {year: 'numeric', month: 'numeric', day: 'numeric'});
+            });
         },
         error: function (xhr, status, error) {
             console.log(error);
@@ -42,18 +51,6 @@ function delivery(id) {
 
 // JavaScript
 const navItems = document.querySelectorAll('.nav-item');
-
-//navItems.forEach(item => {
-//  item.addEventListener('click', () => {
-//    // Bỏ lớp 'active' khỏi tất cả các phần tử 'nav-item'
-//    navItems.forEach(item => {
-//      item.classList.remove('active');
-//    });
-//
-//    // Thêm lớp 'active' cho phần tử được click
-//    item.classList.add('active');
-//  });
-//});
 
 
 function allOrder(page) {
