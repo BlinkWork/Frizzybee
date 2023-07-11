@@ -70,6 +70,8 @@ public class OrderManageServlet extends HttpServlet {
             renderOrderList(request, response);
         } else if (event.equals("all-order")) {
             renderOrderListByStatus(request, response);
+        }else if (event.equals("my-order")) {
+            request.getRequestDispatcher("./views/order-of-user.jsp").forward(request, response);
         }
     }
 
@@ -176,7 +178,7 @@ public class OrderManageServlet extends HttpServlet {
                         + "                                        class=\"col-md-12 row fw-normal align-items-center align-items-stretch\" style=\"background-color: rgb(255, 255, 255); \" >\n"
                         + "                                        <div class=\"col-md-4 row border-end\">\n"
                         + "                                            <div class=\"col-md-10 d-flex ps-4\" >\n"
-                        + "                                                <img src=\"<" + product.getImageURL() + "\" alt=\"alt\" width=\"50px\"/>\n"
+                        + "                                                <img class=\"mb-1\" src=\"" + product.getImageURL() + "\" alt=\"alt\" width=\"50px\"/>\n"
                         + "                                                <div class=\"align-self-center\"><p class=\"overflow-hidden\">" + product.getProductName() + "</p></div>\n"
                         + "                                            </div>\n"
                         + "                                            <div class=\"col-md-2 text-end align-self-center\"><p class=\"overflow-hidden\">x" + orderItem.getQuantity() + "</p></div>\n"

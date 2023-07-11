@@ -103,7 +103,7 @@
 
                                           <li><a class="dropdown-item" href="updateinformation">Update my information</a></li>
                                           <li><a class="dropdown-item" href="changepassword">Change password</a></li>
-
+                                          <li><a class="dropdown-item" href="order-management?event=my-order">My Order</a></li>
                                           <%if(curUser.getRole().equals("seller") || curUser.getRole().equals("admin")){%>
                                           <li><hr class="dropdown-divider"></li>
                                           <li><a class="dropdown-item" href="product-management?event=product-management">Product manage</a></li>
