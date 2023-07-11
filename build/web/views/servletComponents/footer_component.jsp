@@ -97,7 +97,7 @@
               </div>
             </div>
             <div class="col-md-6">
-              <ul class="footer_payment">
+              <ul class="footer_payment" style="opacity: 0">
                 <li><a href="#"><img src="./resources/img/visa.png" alt="visa"></a></li>
                 <li><a href="#"><img src="./resources/img/discover.png" alt="discover"></a></li>
                 <li><a href="#"><img src="./resources/img/master_card.png" alt="master_card"></a></li>

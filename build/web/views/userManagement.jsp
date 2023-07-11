@@ -92,7 +92,7 @@
                 <td><%= u.getUserInformation(user.getUsername(), infor) %></td>
                 <% } }%>
 
-            <form action="editUser" method="get">
+            <form action="updateUser" method="get">
                 <input type="hidden" name="userId" value="<%=user.getId()%>">
                 <td> <input type="submit" value="Edit" /> </td>
             </form>
