@@ -26,6 +26,18 @@ import jakarta.servlet.annotation.MultipartConfig;
 public class ProductUpdateServlet extends HttpServlet {
 
     @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        String id = request.getParameter("productId");
+        ProductDAO p = new ProductDAO();
+        request.setAttribute("product", p.getProductByID(id));
+        request.getRequestDispatcher("views/productEdit.jsp").forward(request, response);
+
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -90,10 +102,12 @@ public class ProductUpdateServlet extends HttpServlet {
                 filePart = request.getPart("image");
                 byte[] imageData = convertToByteArray(filePart);
                 imageBase64 = Base64.getEncoder().encodeToString(imageData);
-                if (imageBase64.equals("") || imageBase64.equals(null)) throw new Exception();
-                imageBase64 = "data:image/jpeg;base64,"+imageBase64;
+                if (imageBase64.equals("") || imageBase64.equals(null)) {
+                    throw new Exception();
+                }
+                imageBase64 = "data:image/jpeg;base64," + imageBase64;
             } catch (Exception e) {
-                
+
                 request.setAttribute("error", e.toString());
                 request.setAttribute("product", p.getProductByID(id));
                 request.getRequestDispatcher("views/productEdit.jsp").forward(request, response);
