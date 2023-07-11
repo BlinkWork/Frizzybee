@@ -24,6 +24,12 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
     
+    <style>
+      .hidden {
+        display: none !important;
+      }
+    </style>
+    
   </head>
   <body>
     <%@include file="../views/servletComponents/header_component.jsp" %>
@@ -215,6 +221,17 @@
                 
               <div class="tab-pane fade" id="Review" role="tabpanel" aria-labelledby="Review-tab">
                 <div class="product-review">
+                  <div class="product-review-form">
+                    <h3>Add a review</h3>
+                   
+                    <div id="rateUser"></div>
+                    <div id="rating--score" hidden=" "></div>
+                    <form action="#">
+                      <textarea id="text--comment" name="review-message" class="form-control" placeholder="Your Review"></textarea>
+                      <button id="submit--review" type="submit">Submit Review</button>
+                    </form>
+                  </div>
+                  
                   <div class="product-review-list">
                     <ul>
                       <!-- Single -->
@@ -241,16 +258,7 @@
                   </div>
                   <!-- Form -->
 
-                  <div class="product-review-form">
-                    <h3>Add a review</h3>
-                   
-                    <div id="rateUser"></div>
-                    <div id="rating--score" hidden=" "></div>
-                    <form action="#">
-                      <textarea id="text--comment" name="review-message" class="form-control" placeholder="Your Review"></textarea>
-                      <button id="submit--review" type="submit">Submit Review</button>
-                    </form>
-                  </div>
+
                 </div>
               </div>
             </div>
@@ -283,88 +291,9 @@
     <script src="./resources/js/script.js"></script>
     <script src="./resources/js/mobile-menu.js"></script>
     <script src="./resources/js/cart.js"></script>
+    <script src="./resources/js/review.js"></script>
     <script src="./resources/js/jquery.rateyo.js"></script>
 
-    <script>
-      $(function () {
-
-        $("#rateUser").rateYo({
-          rating: 5.0,
-          onChange: function (rating, rateYoInstance) {
-            document.getElementById("rating--score").innerHTML = rating;
-          },
-        });
-
-      });
-      let paramTemp = new URLSearchParams(window.location.search);
-      let id = paramTemp.get('id');
-      showComment(id, "show");
-
-      document.getElementById("submit--review").addEventListener("click", function(event){
-        event.preventDefault();
-
-        let comment = document.getElementById("text--comment").value;
-        if(comment.trim() == ""){
-          alert("INPUT SOMETHING PLEASE")
-          return;
-        }
-        let rateScore = document.getElementById("rating--score").innerHTML;
-        let searchParams = new URLSearchParams(window.location.search);
-        let productId = searchParams.get('id');
-        let method = "add";
-        $.ajax({
-          type: 'POST',
-          url: '/FrizzyBee/review',
-          data: {comment: comment, rateScore: rateScore, productId: productId, method: method},
-          success: function ()
-          {
-            showComment(productId, "show");
-            document.getElementById("text--comment").value = "";
-            renderRate(productId, "rate");
-          },
-          error: function ()
-          {
-            $('#myModal').modal('show');
-          }
-        });
-        
-        
-        
-      });
-
-      function showComment(productId, method){
-        $.ajax({
-          type: 'POST',
-          url: '/FrizzyBee/review',
-          data: {productId: productId, method: method},
-          success: function (response)
-          {
-            document.querySelector(".product-review-list ul").innerHTML = response;
-          },
-          error: function ()
-          {
-            alert('Error show request.');
-          }
-        });
-      }
-
-      function renderRate(productId, method){
-        $.ajax({
-          type: 'POST',
-          url: '/FrizzyBee/review',
-          data: {productId: productId, method: method},
-          success: function (response)
-          {
-            document.querySelector(".product-details-img-full .ratting").innerHTML = response;
-          },
-          error: function ()
-          {
-            alert('Error render request.');
-          }
-        });
-      }
-
-    </script>
 
   </body>
 </html>

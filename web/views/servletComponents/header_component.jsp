@@ -46,7 +46,11 @@
             padding: 0 10px;
           }
           
+          .hidden {
+            display: none !important;
+            }
         </style>
+
     </head>
 
     <body>
