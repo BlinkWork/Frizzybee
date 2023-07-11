@@ -114,7 +114,7 @@ public class MiniCartServlet extends HttpServlet {
                         }
                         String dataItem = "<li class='cart-list-single'>\n"
                                 + "<img src='" + p.getImageURL() + "' alt='img'>\n"
-                                + "<h5><a href='/productDetails?id=" + p.getProductID() + "'>" + p.getProductName() + "</a></h5>\n"
+                                + "<h5><a href='./productDetails?id=" + p.getProductID() + "'>" + p.getProductName() + "</a></h5>\n"
                                 + "<span class='price'>$ " + p.getPrice() + " X " + cartItem.getQuantity() + "</span>\n"
                                 + "<div class='close'><a href=\"#\" class=\"removeProduct productId_" + cartItem.getProduct_id() + "\" style=\"color: black\"><i class=\"fas fa-times\"></i></div>\n"
                                 + "</li>";

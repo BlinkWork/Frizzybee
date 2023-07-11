@@ -127,7 +127,6 @@ function addCartEvent() {
       success: function (response) {
         showMiniCart("add");
         $('#modal--warning--login').modal('show');
-
       },
       error: function () {
         alert('Error add request.');

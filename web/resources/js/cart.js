@@ -45,6 +45,7 @@ let backShop = document.getElementById("back--shop");
 if (backShop != null) {
   backShop.addEventListener("click", function ()
   {
+    $('#modal--warning--login').modal('hide');
     window.location.href = "./shop";
   });
 }
@@ -52,14 +53,16 @@ let loginFunction = document.getElementById("login--function");
 if (loginFunction != null) {
   loginFunction.addEventListener("click", function ()
   {
+    $('#modal--warning--login').modal('hide');
     window.location.href = "./login";
   });
 }
 
-let viewCart = document.getElementById("back--shop");
+let viewCart = document.getElementById("view--cart");
 if (viewCart != null) {
   document.getElementById("view--cart").addEventListener("click", function ()
   {
+    $('#modal--warning--login').modal('hide');
     window.location.href = "./cart";
   });
 }
@@ -190,7 +193,7 @@ function addEventQuantityBtn()
       {
         let inputNumber = this.closest(".quantity").querySelector("input[type='number']");
         if (inputNumber.max - inputNumber.value > 0) {
-        inputNumber.value++;
+          inputNumber.value++;
         }
       });
     });
@@ -201,7 +204,7 @@ function addEventQuantityBtn()
       {
         let inputNumber = this.closest(".quantity").querySelector("input[type='number']");
         if (inputNumber.value > inputNumber.min) {
-        inputNumber.value--;
+          inputNumber.value--;
         }
       });
     });

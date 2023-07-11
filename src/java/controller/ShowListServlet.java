@@ -176,7 +176,7 @@ public class ShowListServlet extends HttpServlet {
                 + "<ul>"
                 + "<li><a href='' class='addCart' id='cart_" + product.getProductID() + "'><i class='fas fa-shopping-cart'></i></a></li>"
                 + "<li><a href='wishlist.jsp'><i class='far fa-heart'></i></a></li>"
-                + "<li><a href='./productDetails?id=" + product.getProductID() + "' ><iclass='far fa-eye'></i></a></li>"
+                + "<li><a href='./productDetails?id=" + product.getProductID() + "' ><i class='far fa-eye'></i></a></li>"
                 + "</ul>"
                 + "</div>"
                 + "</div>"
