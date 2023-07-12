@@ -65,11 +65,29 @@ public class ReviewServlet extends HttpServlet {
 
         }
 
+        if (method.equals("more")) {
+            String data = "";
+            String productId = request.getParameter("productId");
+            String temp = request.getParameter("numberComment");
+            int numberComment = Integer.parseInt(temp);
+            numberComment += 1;
+            List<Rating> listRate = rdao.getRatingByProductID(productId);
+            if (listRate.size() == 0 || listRate.size() < numberComment) {
+                System.out.println(listRate.size() + "-" + numberComment);
+                data = "0";
+            } else {
+                data = "1";
+            }
+            response.setContentType("text/plain");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(data);
+
+        }
+
         if (method.equals("show")) {
             String data = "";
             String productId = request.getParameter("productId");
             String temp = request.getParameter("numberComment");
-            System.out.println(temp);
             int numberComment = Integer.parseInt(temp);
 
             List<Rating> listRate = rdao.getRatingByProductID(productId);

@@ -14,7 +14,9 @@ $(function () {
 let paramTemp = new URLSearchParams(window.location.search);
 let id = paramTemp.get('id');
 let numberComment = 3;
+let numberBefore = 0;
 showComment(id, "show", numberComment);
+
 
 document.getElementById("submit--review").addEventListener("click", function (event) {
   event.preventDefault();
@@ -55,13 +57,8 @@ function showComment(productId, method, numberComment) {
     data: {productId: productId, method: method, numberComment: numberComment},
     success: function (response)
     {
-      document.querySelector(".product-review-list ul").innerHTML = response;
-      const str = response;
-      const count = (str.match(/<\/li>/g) || []).length;
-      if (count % 3 != 0) {
-        view_more.style.display = "none";
-      }
 
+      document.querySelector(".product-review-list ul").innerHTML = response;
 
     },
     error: function ()
@@ -69,6 +66,27 @@ function showComment(productId, method, numberComment) {
       alert('Error show request.');
     }
   });
+
+  method = "more";
+
+  $.ajax({
+    type: 'POST',
+    url: '/FrizzyBee/review',
+    data: {productId: productId, method: method, numberComment: numberComment},
+    success: function (response)
+    {
+      if (response == "0") {
+        view_more.style.display = "none";
+      }
+
+    },
+    error: function ()
+    {
+      alert('Error show request.');
+    }
+  });
+
+
 }
 
 function renderRate(productId, method) {
@@ -101,6 +119,7 @@ hiddenCmt.addEventListener("click", function () {
   let productId = searchParams.get('id');
   showComment(productId, "show", numberComment);
   hiddenCmt.style.display = "none";
+  view_more.style.display = "block";
 
 });
 
