@@ -73,7 +73,7 @@ public class ReviewServlet extends HttpServlet {
             numberComment += 1;
             List<Rating> listRate = rdao.getRatingByProductID(productId);
             if (listRate.size() == 0 || listRate.size() < numberComment) {
-                System.out.println(listRate.size() + "-" + numberComment);
+               
                 data = "0";
             } else {
                 data = "1";
