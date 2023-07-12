@@ -297,7 +297,7 @@
     <script src="./resources/js/script.js"></script>
     <script src="./resources/js/mobile-menu.js"></script>
     <script src="./resources/js/cart.js"></script>
-    <script src="./resources/js/review_1.js"></script>
+    <script src="./resources/js/review.js"></script>
     <script src="./resources/js/jquery.rateyo.js"></script>
 
   </body>
