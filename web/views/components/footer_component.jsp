@@ -75,7 +75,7 @@
           <div class="row">
             <div class="col-md-6">
               <div class="copyright-text">
-                <p> &copy; Copyright 2021 <a href="https://codepopular.com" target="_blank">CodePopular</a> All Rights
+                <p> &copy; Copyright 2023. All Rights
                   Reserved. </p>
               </div>
             </div>
