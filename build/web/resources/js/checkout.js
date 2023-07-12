@@ -17,10 +17,15 @@ normalShipping.addEventListener("click", function ()
 calAmount(20);
 function calAmount(shipCost)
 {
-  let subPriceArr = document.getElementById("subPrice").textContent.substring(1).split(",");
-  let subPrice = subPriceArr[ 0 ] + "." + subPriceArr[ 1 ];
+  let subPrice = document.getElementById("subPrice").textContent.substring(1);
+  if (document.getElementById("subPrice").textContent.includes(",")) {
+    let subPriceArr = document.getElementById("subPrice").textContent.substring(1).split(",");
+    subPrice = subPriceArr[ 0 ] + "." + subPriceArr[ 1 ];
+  }
   let totalAmount = ((subPrice * 1) + shipCost) + "";
-  totalAmount = totalAmount.split(".")[ 0 ] + "," + totalAmount.split(".")[ 1 ];
+  if (document.getElementById("subPrice").textContent.includes(",")) {
+    totalAmount = totalAmount.split(".")[ 0 ] + "," + totalAmount.split(".")[ 1 ];
+  }
   document.getElementById("totalAmount").textContent = "$" + totalAmount;
   if (document.querySelector(".grand-total") != null) {
     document.querySelector(".grand-total").querySelector("span").textContent = "$" + totalAmount;
@@ -54,7 +59,7 @@ if (document.querySelector(".proceedOrder") != null) {
       $.ajax({
         type: 'POST',
         url: '/FrizzyBee/checkout',
-        data: {addresss: street_address, totalPrice: grandTotalCost, paymentMethod: shippingType},
+        data: { addresss: street_address, totalPrice: grandTotalCost, paymentMethod: shippingType },
         success: function ()
         {
           showModalSuccess();

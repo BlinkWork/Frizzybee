@@ -5,10 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>FrizzeBee - Electronics Shop</title>
-        <link rel="icon" href="./resources/img/logo.png" type="image/gif" sizes="16x16">
-        <link rel="icon" href="./resources/img/logo.png" type="image/gif" sizes="18x18">
-        <link rel="icon" href="./resources/img/logo.png" type="image/gif" sizes="20x20">
+  <title>FrizzeBee - Electronics Shop</title>
+  <link rel="icon" href="./resources/img/logo.png" type="image/gif" sizes="16x16">
+  <link rel="icon" href="./resources/img/logo.png" type="image/gif" sizes="18x18">
+  <link rel="icon" href="./resources/img/logo.png" type="image/gif" sizes="20x20">
   <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
   <link rel="stylesheet" href="./resources/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="./resources/css/owl.carousel.min.css">
@@ -107,32 +107,15 @@
                         </tr>
                       </thead>
                       <tbody id="tbody-product--cart">
-                        <% double totalPrice = 0;
-                            String data = (String) request.getAttribute("dataCart");
-                            if (data != null) {
-                                          
-                                String[] items = data.split("@");
-                                for (String item : items) {
-                                    String[] attributes = item.split("_");
-                                    out.println("" + "<tr>" + "<td><a href='#'>" + attributes[0] + " <strong> X " + attributes[1]
-                                            + "</strong></a>" + "</td>" + "<td>" + attributes[2] + "</td>" + "</tr>" + "");
-
-                                    String[] subtotalArr;
-                                    
-                                     if(attributes[2].contains(",")){
-                                        subtotalArr = attributes[2].substring(1).split(",");
-                                     }
-                                     else{
-                                       subtotalArr = attributes[2].substring(1).split("\\.");
-                                    }
-                         
-                                    String subtotal = subtotalArr[0] + "." + subtotalArr[1];
-                                    totalPrice += Double.parseDouble(subtotal);
-                                }
-                            }
-                            DecimalFormat df = new DecimalFormat("#.##");
-                            String subPriceAmount = df.format(totalPrice);
-                        %>
+                        <% double totalPrice=0; String data=(String) request.getAttribute("dataCart"); if (data !=null)
+                          { String[] items=data.split("@"); for (String item : items) { String[]
+                          attributes=item.split("_"); out.println("" + "<tr>" + "<td><a href='#'>" + attributes[0]
+                          + " <strong> X " + attributes[1] + "</strong></a>" + "</td>" + "<td>" + attributes[2]
+                          + "</td>" + "</tr>" + "" ); String[] subtotalArr; if(attributes[2].contains(",")){
+                          subtotalArr=attributes[2].substring(1).split(","); } else{
+                          subtotalArr=attributes[2].substring(1).split("\\."); } String subtotal=subtotalArr[0] + "." +
+                          subtotalArr[1]; totalPrice +=Double.parseDouble(subtotal); } } DecimalFormat df=new
+                          DecimalFormat("#.##"); String subPriceAmount=df.format(totalPrice); %>
                       </tbody>
                       <tfoot>
                         <tr>
@@ -252,7 +235,8 @@
             <div class="modal-body" style="padding-top: 100px; padding-bottom: 100px">
               <div class="row">
                 <div class="col-md-4 d-flex align-items-center justify-content-center">
-                  <div class="bg-success text-light rounded-circle d-flex align-items-center justify-content-center" style="width: 150px; height: 150px;">
+                  <div class="bg-success text-light rounded-circle d-flex align-items-center justify-content-center"
+                    style="width: 150px; height: 150px;">
                     <i class="fas fa-check fa-4x"></i>
                   </div>
                 </div>
@@ -265,17 +249,21 @@
           </div>
         </div>
       </div>
-      
+
       <div class="modal fade" id="blank-info" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-body" style="padding-top: 100px; padding-bottom: 100px">
               <div class="row">
                 <div class="col-md-4 d-flex align-items-center justify-content-center">
-                  <div class="bg-success text-light rounded-circle d-flex align-items-center justify-content-center" style="width: 150px; height: 150px; color: red; background-color: red !important;">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" style="stroke:red;">
-  <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clip-rule="evenodd" />
-</svg>
+                  <div class="bg-success text-light rounded-circle d-flex align-items-center justify-content-center"
+                    style="width: 150px; height: 150px; color: red; background-color: red !important;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"
+                      style="stroke:red;">
+                      <path fill-rule="evenodd"
+                        d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
+                        clip-rule="evenodd" />
+                    </svg>
 
                   </div>
                 </div>
@@ -288,17 +276,21 @@
           </div>
         </div>
       </div>
-      
+
       <div class="modal fade" id="failed-order" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-body" style="padding-top: 100px; padding-bottom: 100px">
               <div class="row">
                 <div class="col-md-4 d-flex align-items-center justify-content-center">
-                  <div class="bg-success text-light rounded-circle d-flex align-items-center justify-content-center" style="width: 150px; height: 150px; color: red; background-color: red !important;">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" style="stroke:red;">
-  <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clip-rule="evenodd" />
-</svg>
+                  <div class="bg-success text-light rounded-circle d-flex align-items-center justify-content-center"
+                    style="width: 150px; height: 150px; color: red; background-color: red !important;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"
+                      style="stroke:red;">
+                      <path fill-rule="evenodd"
+                        d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
+                        clip-rule="evenodd" />
+                    </svg>
 
                   </div>
                 </div>
@@ -311,8 +303,8 @@
           </div>
         </div>
       </div>
-      
-      
+
+
       <%@include file="../views/servletComponents/footer_component.jsp" %>
 
 

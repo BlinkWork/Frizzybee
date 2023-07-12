@@ -75,8 +75,12 @@ function showComment(productId, method, numberComment) {
     data: {productId: productId, method: method, numberComment: numberComment},
     success: function (response)
     {
+      console.log(response);
       if (response == "0") {
         view_more.style.display = "none";
+      } else {
+        view_more.style.display = "block";
+
       }
 
     },
