@@ -14,8 +14,6 @@
         <link rel="icon" href="./resources/img/logo.png" type="image/gif" sizes="20x20">
     </head>
     <body>
-        <h1>Admin Panel</h1>
-
         <jsp:include page="adminnavbar.jsp" />
         <div class="live-statistic"> 
             <p> Number of users : <%=request.getAttribute("count")%> 

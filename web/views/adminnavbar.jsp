@@ -43,9 +43,24 @@
                 background-color: #333;
                 color: #fff;
             }
+            
+            a.heading-link {
+                text-align: center;
+                display: block;
+                font-size: 2em;
+                font-weight: bold;
+                color: #000;
+                text-decoration: none;
+                margin-block-start: 0.67em;
+                margin-block-end: 0.67em;
+                margin-inline-start: 0px;
+                margin-inline-end: 0px;
+            }   
         </style>
     </head>
     <body>
+        <a class="heading-link" href="adminpanel">Admin Panel</a>
+        
         <nav>
             <ul>
                 <li><a class="panel" href="usermanagement">User Management</a></li>
@@ -54,5 +69,5 @@
                 <li><a class="panel" href="brandmanagement">Brand Management</a></li>
             </ul>
         </nav>
-    </body>
+</body>
 </html>

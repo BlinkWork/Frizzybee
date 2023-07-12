@@ -124,7 +124,6 @@
             String[] cols = (String[]) b.getColNames("Brand");
             String error = (String) request.getAttribute("error");
         %>  
-        <h1>Admin Panel</h1>
 
         <jsp:include page="adminnavbar.jsp" />
 
