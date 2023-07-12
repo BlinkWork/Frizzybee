@@ -49,7 +49,7 @@
           <div class="col-lg-12">
             <div class="privacy-policy-content">
               <h3>Privacy Policy</h3>
-              <p>At [insert company name], we are committed to protecting your privacy and safeguarding your personal
+              <p>At FrizzyBee, we are committed to protecting your privacy and safeguarding your personal
                 information. This Privacy Policy outlines how we collect, use, and disclose your personal information in
                 connection with our website and services.</p>
 
