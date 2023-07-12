@@ -132,8 +132,7 @@
             String[] cols = (String[]) u.getColNames("User");
             String error = (String) request.getAttribute("error");
         %>  
-        <h1>Admin Panel</h1>
-
+        
         <jsp:include page="adminnavbar.jsp" />
 
         <h2>Insert a user</h2>

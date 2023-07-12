@@ -132,8 +132,6 @@
             String[] cols = (String[]) p.getColNames("Product");
             String error = (String) request.getAttribute("error");
         %>  
-        <h1>Admin Panel</h1>
-
         <jsp:include page="adminnavbar.jsp" />
 
         <h2>Insert a product</h2>

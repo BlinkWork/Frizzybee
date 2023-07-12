@@ -56,11 +56,12 @@
             h1 {
                 text-align: center;
             }
+            .search-box {
+                width: 100px;
+            }
         </style>
     </head>
     <body>
-        <h1>Admin Panel</h1>
-
         <jsp:include page="adminnavbar.jsp" />
 
         <%
@@ -68,22 +69,24 @@
             String[] cols = (String[]) p.getColNames("Product");
         %>
 
-        <table border="1">
+        <table id="myTable" border="1">
             <tr>
                 <% for (String s : cols) { %>
                 <th><%= s %></th>
                     <% } %>
-                <form action="insertProduct" method="get">
-                    <td> <input type="submit" value="Insert" /> </td>
-                </form>
-                <th></th>
-            </tr>
+            <form action="insertProduct" method="get">
+                <th> <input type="submit" value="Insert" /> </th>
+            </form>
+            <th>
+                <input type="text" id="searchBox" class="search-box" placeholder="Search..." onkeyup="searchTable()">
+            </th>
+        </tr>
         <% for (Product product : p.getProducts()) { %>
         <tr> 
             <% for (String infor : cols) {
             if (infor.equals("image")) { %>
             <td> <img style="width: 128px;" src="<%=p.getProductInformation(Integer.toString(product.getProductID()), infor)%>" alt="image_product"/> </td>
-            <% } else {%>
+                <% } else {%>
             <td><%= p.getProductInformation(Integer.toString(product.getProductID()), infor) %></td>
 
             <% } } %>
@@ -100,5 +103,45 @@
     </tr>
     <% } %>
 </table>
+<script>
+    function searchTable() {
+        var input = document.getElementById("searchBox");
+        var filter = input.value.toUpperCase();
+        var table = document.getElementById("myTable");
+        var rows = table.getElementsByTagName("tr");
+
+        for (var i = 0; i < rows.length; i++) {
+            var product_idColumn = rows[i].getElementsByTagName("td")[0];
+            var seller_idColumn = rows[i].getElementsByTagName("td")[1];
+            var product_nameColumn = rows[i].getElementsByTagName("td")[2];
+            var product_descriptionColumn = rows[i].getElementsByTagName("td")[3];
+            var category_idColumn = rows[i].getElementsByTagName("td")[4];
+            var brand_idColumn = rows[i].getElementsByTagName("td")[5];
+            var birthdayColumn = rows[i].getElementsByTagName("td")[6];
+            var priceColumn = rows[i].getElementsByTagName("td")[7];
+            var addressColumn = rows[i].getElementsByTagName("td")[8];
+            var quantityColumn = rows[i].getElementsByTagName("td")[9];
+            var imageColumn = rows[i].getElementsByTagName("td")[10];
+            var discountColumn = rows[i].getElementsByTagName("td")[11];
+            var insertColumn = rows[i].getElementsByTagName("td")[12];
+            var removeColumn = rows[i].getElementsByTagName("td")[13];
+
+            if (product_idColumn || seller_idColumn
+                    || product_nameColumn) {
+                var product_idText = product_idColumn.textContent || product_idColumn.innerText;
+                var seller_idText = seller_idColumn.textContent || seller_idColumn.innerText;
+                var product_nameText = product_nameColumn.textContent || product_nameColumn.innerText;
+
+                if (product_idText.toUpperCase().indexOf(filter) > -1
+                        || seller_idText.toUpperCase().indexOf(filter) > -1
+                        || product_nameText.toUpperCase().indexOf(filter) > -1) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
 </body>
 </html>

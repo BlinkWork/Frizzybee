@@ -145,7 +145,6 @@
         </style>
     </head>
     <body>
-        <h1>Admin Panel</h1>
 
         <jsp:include page="adminnavbar.jsp" />
 
@@ -160,7 +159,7 @@
                 <th><%= s %></th>
                     <% } %>
             <form action="insertCategory" method="get">
-                <td> <input type="submit" value="Insert" /> </td>
+                <th> <input type="submit" value="Insert" /> </th>
             </form>
             <th></th>
         </tr>

@@ -109,7 +109,6 @@
             String error = (String) request.getAttribute("error");
             if (brand == null) return;
         %>  
-        <h1>Admin Panel</h1>
 
         <jsp:include page="adminnavbar.jsp" />
 
