@@ -10,7 +10,7 @@ $(document).ready(function ()
   $.ajax({
     type: 'POST',
     url: '/FrizzyBee/miniCart',
-    data: { action: action },
+    data: {action: action},
     success: function (response)
     {
       document.querySelector(".mini-cart-icon").innerHTML = response;
@@ -52,3 +52,18 @@ function addRemoveButton()
     });
   }
 }
+
+
+let dropdown = document.querySelector('.dropdown');
+let dropdownMenu = document.querySelector('.dropdown-menu');
+
+dropdown.addEventListener('click', function (event) {
+  event.stopPropagation();
+  dropdownMenu.classList.toggle('show');
+});
+
+document.addEventListener('click', function (event) {
+  if (!dropdown.contains(event.target)) {
+    dropdownMenu.classList.remove('show');
+  }
+});

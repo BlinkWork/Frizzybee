@@ -130,6 +130,7 @@ function addCartEvent() {
         showMiniCart("add");
         $('#modal--warning--login').modal('show');
 
+
       },
       error: function () {
         alert('Error add request.');
@@ -137,3 +138,4 @@ function addCartEvent() {
     });
   });
 }
+

@@ -32,23 +32,25 @@
         <link rel="stylesheet" href="./resources/css/responsive.css">
 
         <style>
-          .user-image .show {
-            margin-top: 30px !important;  
-          }
-          .user-image ul.show a{
-            color: black;
-          }
-          .user-image ul.show a:hover{
-            color: rgb(234, 136, 13);
+          
+          
+          
+          
+          .user-setting li{
+            padding: 0 10px;
           }
           
-          .user-image li{
-            padding: 0 10px;
+          .dropdown-item{
+            color: black !important;
+          }
+          
+          .dropdown-item:hover{
+            color: orange !important;
           }
           
           .hidden {
             display: none !important;
-            }
+          }
         </style>
 
     </head>
@@ -95,35 +97,28 @@
                                 <%if(curUser!=null){%>
                                     <div class="d-flex align-items-center justify-content-center" style="float: right" />
 
-                            <ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-infor ">
-                                <li class="nav-item dropdown dropstart user-image">
-                                    <a data-bs-toggle="dropdown" aria-expanded="false"> 
-                                      <img alt="setting" src="<%=curUser.getAvatarURL()%>"  style="width:30px; border: 2px solid #cccccc5e; border-radius: 50%;"></a>
-                                      <ul class="dropdown-menu" style="margin-top: 50px !important;">
-                                          <li><a class="dropdown-item userName" href="#"><%=curUser.getName()%></a></li>
-                                          <li><a class="dropdown-item" href="./cart">My Cart</a></li>
-
-                                          <li><a class="dropdown-item" href="updateinformation">Update my information</a></li>
-                                          <li><a class="dropdown-item" href="changepassword">Change password</a></li>
-                                          <li><a class="dropdown-item" href="order-management?event=my-order">My Order</a></li>
-                                          <%if(curUser.getRole().equals("seller") || curUser.getRole().equals("admin")){%>
-                                          <li><hr class="dropdown-divider"></li>
-                                          <li><a class="dropdown-item" href="product-management?event=product-management">Product manage</a></li>
-                                          <li><a class="dropdown-item" href="product-management?event=send-to-add">Add product</a></li>
-                                          <li><a class="dropdown-item" href="order-management?event=order-management">Order management</a></li>
-
-                                          <%} 
-                                          if (curUser.getRole().equals("admin")) {%>
-                                          <li><hr class="dropdown-divider"></li>
-                                          <li><a class="dropdown-item" href="adminpanel">Admin panel</a></li>
-
-                                          <%} %>
-                                          <li><hr class="dropdown-divider"></li>
-                                          <li><a class="dropdown-item" href="logout">Logout</a></li>
-
-                                      </ul>
-                                </li>
-                                </ul>
+                            <div class="dropdown">
+                              <img class="test" alt="setting" src="<%=curUser.getAvatarURL()%>" style="width:30px; border: 2px solid #cccccc5e; border-radius: 50%;">
+                              <ul class="dropdown-menu user-setting" style="margin-left: -77px !important;">
+                                <li><a class="dropdown-item userName" href="#"><%=curUser.getName()%></a></li>
+                                <li><a class="dropdown-item" href="./cart">My Cart</a></li>
+                                <li><a class="dropdown-item" href="updateinformation">Update my information</a></li>
+                                <li><a class="dropdown-item" href="changepassword">Change password</a></li>
+                                <li><a class="dropdown-item" href="order-management?event=my-order">My Order</a></li>
+                                <%if(curUser.getRole().equals("seller") || curUser.getRole().equals("admin")){%>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="product-management?event=product-management">Product manage</a></li>
+                                <li><a class="dropdown-item" href="product-management?event=send-to-add">Add product</a></li>
+                                <li><a class="dropdown-item" href="order-management?event=order-management">Order management</a></li>
+                                <%} 
+                                if (curUser.getRole().equals("admin")) {%>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="adminpanel">Admin panel</a></li>
+                                <%} %>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="logout">Logout</a></li>
+                              </ul>
+                            </div>
                             </div>
                             <%}else{%>
                             <a href="login"><i class="fas fa-user"></i> Login / Register</a>
@@ -270,6 +265,21 @@
     <script src="./resources/js/wow.min.js"></script>
     <script src="./resources/js/script.js"></script>
     <script src="./resources/js/mobile-menu.js"></script>
+    <script>
+      let dropdown = document.querySelector('.dropdown');
+let dropdownMenu = document.querySelector('.dropdown-menu');
+
+dropdown.addEventListener('click', function (event) {
+  event.stopPropagation();
+  dropdownMenu.classList.toggle('show');
+});
+
+document.addEventListener('click', function (event) {
+  if (!dropdown.contains(event.target)) {
+    dropdownMenu.classList.remove('show');
+  }
+});
+    </script>
 </body>
 
 </html>
