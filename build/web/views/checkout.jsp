@@ -110,14 +110,23 @@
                         <% double totalPrice = 0;
                             String data = (String) request.getAttribute("dataCart");
                             if (data != null) {
+                                          
                                 String[] items = data.split("@");
                                 for (String item : items) {
                                     String[] attributes = item.split("_");
                                     out.println("" + "<tr>" + "<td><a href='#'>" + attributes[0] + " <strong> X " + attributes[1]
                                             + "</strong></a>" + "</td>" + "<td>" + attributes[2] + "</td>" + "</tr>" + "");
-                                    String[] subtotalArr = attributes[2].substring(1).split(",");
-                                    String subtotal = subtotalArr[0] + "."
-                                            + subtotalArr[1];
+
+                                    String[] subtotalArr;
+                                    
+                                     if(attributes[2].contains(",")){
+                                        subtotalArr = attributes[2].substring(1).split(",");
+                                     }
+                                     else{
+                                       subtotalArr = attributes[2].substring(1).split("\\.");
+                                    }
+                         
+                                    String subtotal = subtotalArr[0] + "." + subtotalArr[1];
                                     totalPrice += Double.parseDouble(subtotal);
                                 }
                             }
