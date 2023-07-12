@@ -49,10 +49,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-content">
-                        <h2>Product Management</h2>
+                        <h2>My Order</h2>
                         <ul>
                             <li><a href="index.jsp">Home</a></li>
-                            <li class="active">Product Management</li>
+                            <li class="active">My Order</li>
                         </ul>
                     </div>
                 </div>
@@ -91,15 +91,14 @@
                                         <div class="col-md-1"><p>Status</p></div>
                                     </div>
                                 </div>
-                                <div class="row fw-light" style="background-color: rgb(245, 246, 250); border: 1px solid rgb(213, 213, 213); border-top: 0px;">
-                                    <div class="col-md-6 d-flex"><img class="ms-2" src="./resources/img/user-icon.png" alt="user" width="20px" style="object-fit: contain;"><p class="p-2"><%=order.getUser().getName()%></p></div>
-                                    <div class="col-md-6 text-end"><p class="p-2 pe-4">ID Order: <%=order.getOrderID()%></p></div>
-                                </div>
                                 <div class="row">
                                          <%
                                          List<OrderItem> listOrderItem = oidao.getOrderItemsByOrderID(order.getOrderID()+"");
+                                         double totalPrice = 0;
                                          for (OrderItem orderItem : listOrderItem) {
                                          Product product = orderItem.getProduct();
+                                         double totalPriceOrderItem = orderItem.getQuantity() * (product.getPrice()-product.getDiscount()*product.getPrice()/100) ;
+                                         totalPrice+=totalPriceOrderItem;
                                          %>
                                          
                                        <div  class="col-md-12 row fw-normal align-items-center align-items-stretch" style="background-color: rgb(255, 255, 255); " >
@@ -120,9 +119,9 @@
                                 
                             </div>
                             <div class="row" style="background-color: rgb(245, 246, 250); border: 1px solid rgb(213, 213, 213);">
-                                <div class="col-md-11 row fw-normal">
+                                <div class="col-md-12 row fw-normal">
                                     <div class="col-md-4 p-3 text-center">Total:</div>
-                                    <div class="col-md-1 p-3 ps-0 text-center">Price</div>
+                                    <div class="col-md-1 p-3 ps-0 text-center">$<%=((int)(totalPrice * 100)) / 100.0%></div>
                                 </div>
                             </div>
                         </div>

@@ -205,7 +205,7 @@ public class OrderManageServlet extends HttpServlet {
                     + "                                    <div class=\"col-md-11 row fw-normal\">\n"
                     + "                                    <div class=\"col-md-12 row\">\n"
                     + "                                        <div class=\"col-md-4 p-3 text-center\">Total:</div>\n"
-                    + "                                        <div class=\"col-md-1 p-3 ps-0  text-center\">$"+totalPrice+"</div>\n"
+                    + "                                        <div class=\"col-md-1 p-3 ps-0  text-center\">$"+((int)(totalPrice * 100)) / 100.0+"</div>\n"
                     + "                                    </div>\n"
                     + "                                    </div>\n"
                     + "                                </div>\n"
