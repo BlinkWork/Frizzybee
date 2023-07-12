@@ -166,13 +166,15 @@ public class ProductManageServlet extends HttpServlet {
     protected void renderProductDetails(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String id = request.getParameter("product-id");
-        ProductDAO dao = new ProductDAO();
-        Product product = dao.getProductByID(id);
-        if (product != null) {
-            request.setAttribute("productDetail", product);
-            RequestDispatcher rd = request.getRequestDispatcher("./views/product-details.jsp");
-            rd.forward(request, response);
-        }
+        response.sendRedirect("./productDetails?id=" +id);
+//        ProductDAO dao = new ProductDAO();
+//        Product product = dao.getProductByID(id);
+//        if (product != null) {
+//            request.setAttribute("productDetail", product);
+//            System.out.println(product.getProductName());
+//            RequestDispatcher rd = request.getRequestDispatcher("./views/product-details.jsp");
+//            rd.forward(request, response);
+//        }
     }
 
     protected void renderFormProductEdit(HttpServletRequest request, HttpServletResponse response)
@@ -217,13 +219,19 @@ public class ProductManageServlet extends HttpServlet {
                 uploadDir.mkdir();
             }
             String url = uploadPath + File.separator + fileName;
-            imageURL = "./uploads/" + fileName;
+            if(fileName.length()>0){
+                imageURL = "./uploads/" + fileName;
+            }else{
+                throw new IOException();
+            }
+            
             filePart.write(url);
         } catch (IOException e) {
             if (newImg.length() > 0) {
                 imageURL = newImg;
             }
         }
+        System.out.println(imageURL);
         //validate input
         boolean check = true;
         if (productName.isEmpty()) {

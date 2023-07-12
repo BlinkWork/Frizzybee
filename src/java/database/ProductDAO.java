@@ -673,8 +673,9 @@ public class ProductDAO extends MyDAO {
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
         List<Product>  list = dao.getProducts();
-        for (Product product : list) {
-            System.out.println(product.getProductName() + " " + product.getQuantity());
-        }
+//        for (Product product : list) {
+//            System.out.println(product.getProductName() + " " + product.getQuantity());
+//        }
+//         System.out.println(dao.getPageNumBySeller(1));
     }
 }

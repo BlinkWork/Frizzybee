@@ -30,6 +30,7 @@
          <%@include file="../views/servletComponents/header_component.jsp" %>
 
         <%
+            ProductDAO productDao = new ProductDAO();
         List<Product> listProduct = (List<Product>) request.getAttribute("listProduct");
         if(curUser != null && !(curUser.getRole().equals("seller") || curUser.getRole().equals("admin"))){
         %>
