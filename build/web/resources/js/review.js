@@ -1,3 +1,6 @@
+let view_more = document.getElementById("view--more");
+let hiddenCmt = document.getElementById("hide--comment");
+
 $(function () {
 
   $("#rateUser").rateYo({
@@ -10,7 +13,8 @@ $(function () {
 });
 let paramTemp = new URLSearchParams(window.location.search);
 let id = paramTemp.get('id');
-showComment(id, "show");
+let numberComment = 3;
+showComment(id, "show", numberComment);
 
 document.getElementById("submit--review").addEventListener("click", function (event) {
   event.preventDefault();
@@ -21,7 +25,7 @@ document.getElementById("submit--review").addEventListener("click", function (ev
     return;
   }
   let rateScore = document.getElementById("rating--score").innerHTML;
-  if(rateScore == null || rateScore == ""){
+  if (rateScore == null || rateScore == "") {
     rateScore = 5.0;
   }
   let searchParams = new URLSearchParams(window.location.search);
@@ -33,7 +37,7 @@ document.getElementById("submit--review").addEventListener("click", function (ev
     data: {comment: comment, rateScore: rateScore, productId: productId, method: method},
     success: function ()
     {
-      showComment(productId, "show");
+      showComment(productId, "show", numberComment);
       document.getElementById("text--comment").value = "";
       renderRate(productId, "rate");
     },
@@ -42,20 +46,23 @@ document.getElementById("submit--review").addEventListener("click", function (ev
       $('#myModal').modal('show');
     }
   });
-
-
-
 });
 
-function showComment(productId, method) {
+function showComment(productId, method, numberComment) {
   $.ajax({
     type: 'POST',
     url: '/FrizzyBee/review',
-    data: {productId: productId, method: method},
+    data: {productId: productId, method: method, numberComment: numberComment},
     success: function (response)
     {
       document.querySelector(".product-review-list ul").innerHTML = response;
-//      hideComment();
+      const str = response;
+      const count = (str.match(/<\/li>/g) || []).length;
+      if (count % 3 != 0) {
+        view_more.style.display = "none";
+      }
+
+
     },
     error: function ()
     {
@@ -80,10 +87,20 @@ function renderRate(productId, method) {
   });
 }
 
-function hideComment(){
-  let comment = document.querySelector(".product-review-list ul").querySelectorAll("li");
-  for (let i = 2; i < comment.length; i++) {
-    comment[i].classList.add("hidden");
-    comment[i].querySelectorAll("*").forEach(e => e.style.display = "none");
-  }
-}
+view_more.addEventListener("click", function () {
+  numberComment += 3;
+  let searchParams = new URLSearchParams(window.location.search);
+  let productId = searchParams.get('id');
+  showComment(productId, "show", numberComment);
+  hiddenCmt.style.display = "block";
+});
+
+hiddenCmt.addEventListener("click", function () {
+  numberComment = 3;
+  let searchParams = new URLSearchParams(window.location.search);
+  let productId = searchParams.get('id');
+  showComment(productId, "show", numberComment);
+  hiddenCmt.style.display = "none";
+
+});
+

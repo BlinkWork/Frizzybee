@@ -21,9 +21,7 @@
     <link rel="stylesheet" href="./resources/css/style.css">
     <link rel="stylesheet" href="./resources/css/responsive.css">
     <link rel="stylesheet" href="./resources/css/jquery.rateyo.css">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
-    
+   
     <style>
       .hidden {
         display: none !important;
@@ -255,6 +253,14 @@
                       <!-- Single -->
  
                     </ul>
+                    <div id="cmt--nav" style="display: flex; justify-content: space-evenly;">
+                      <button class="btn button-2" id="view--more">
+                        View More+
+                      </button>
+                      <button class="btn button-2" id="hide--comment" style="display: none;">
+                        Hide Comment
+                      </button>
+                    </div>
                   </div>
                   <!-- Form -->
 
@@ -293,7 +299,6 @@
     <script src="./resources/js/cart.js"></script>
     <script src="./resources/js/review.js"></script>
     <script src="./resources/js/jquery.rateyo.js"></script>
-
 
   </body>
 </html>

@@ -55,6 +55,7 @@ public class ReviewServlet extends HttpServlet {
             for (; i <= avgRate; i++) {
                 rateText += "<span><i class='fas fa-star'></i></span>";
             }
+
             for (; i <= 5; i++) {
                 rateText += "<i class='fas fa-star'></i>";
             }
@@ -67,6 +68,9 @@ public class ReviewServlet extends HttpServlet {
         if (method.equals("show")) {
             String data = "";
             String productId = request.getParameter("productId");
+            String temp = request.getParameter("numberComment");
+            System.out.println(temp);
+            int numberComment = Integer.parseInt(temp);
 
             List<Rating> listRate = rdao.getRatingByProductID(productId);
 
@@ -78,7 +82,7 @@ public class ReviewServlet extends HttpServlet {
                     String rateText = "";
                     double rateScoreTemp = rating.getVote();
                     int i = 1;
-                    for (; i < rateScoreTemp; i++) {
+                    for (; i <= rateScoreTemp; i++) {
                         rateText += "<span><i class='fas fa-star'></i></span>";
                     }
                     for (; i <= 5; i++) {
@@ -104,6 +108,10 @@ public class ReviewServlet extends HttpServlet {
                             + "</div>"
                             + "</li>";
                     data += dataItem;
+                    numberComment--;
+                    if (numberComment == 0) {
+                        break;
+                    }
                 }
                 response.setContentType("text/plain");
                 response.setCharacterEncoding("UTF-8");

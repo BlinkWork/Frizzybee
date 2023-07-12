@@ -52,6 +52,7 @@
                 <li><a class="panel" href="productmanagement">Product Management</a></li>
                 <li><a class="panel" href="categorymanagement">Category Management</a></li>
                 <li><a class="panel" href="brandmanagement">Brand Management</a></li>
+                <li><a class="panel" href="./">Back to Home</a></li>
             </ul>
         </nav>
     </body>
