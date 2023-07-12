@@ -59,12 +59,15 @@
                     <a href="shop.jsp" class="active"><i class="fa fa-th"></i></a>
                   </div>
                   <%
-                    int recordNumbers = (Integer) request.getAttribute("recordNumbers");
+                    int recordNumbers = 0;
+                    if(request.getAttribute("recordNumbers") != null) {
+                        recordNumbers = (Integer) request.getAttribute("recordNumbers");
+                    }
                     int recordShow = recordNumbers;
                     if(recordNumbers > 9){
-                      recordShow = 9;
+                        recordShow = 9;
                     }
-                  %>
+                    %>
                   
                   <div class="product-amount">
                     <p>Showing <%=recordShow%> of <%=recordNumbers%> results</p>
@@ -198,12 +201,15 @@
                   <ul>
                     <!--<li class="page-item"><a href="#"><i class="fa fa-angle-left"></i></a></li>-->
                     <%
-                      if(listProduct != null){
-                        if(listProduct.size() > 0){
-                          int number = (Integer)request.getAttribute("pageNumbers");
-                          for(int i = 1; i <= number ; i++){
-                            if(i == 1){
-                              out.println(
+                      int number = 0;
+                        if(request.getAttribute("pageNumbers") != null) {
+                            number = (Integer)request.getAttribute("pageNumbers");
+                        }
+                        if(listProduct != null){
+                            if(listProduct.size() > 0){
+                                for(int i = 1; i <= number ; i++){
+                                    if(i == 1){
+                                        out.println(
                                 "<li class='page-item'><a href=''> <span>" + i + "</span></a></li>"
                               );
                             }
