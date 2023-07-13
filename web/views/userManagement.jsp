@@ -14,10 +14,19 @@
         <link rel="icon" href="./resources/img/logo.png" type="image/gif" sizes="16x16">
         <link rel="icon" href="./resources/img/logo.png" type="image/gif" sizes="18x18">
         <link rel="icon" href="./resources/img/logo.png" type="image/gif" sizes="20x20">
+        <link rel="stylesheet" href="./resources/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="./resources/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="./resources/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="./resources/css/animate.css">
+    <link rel="stylesheet" href="./resources/css/magnific-popup.css">
+    <link rel="stylesheet" href="./resources/css/normalize.css">
+    <link rel="stylesheet" href="./resources/css/style.css">
+    <link rel="stylesheet" href="./resources/css/responsive.css">
         <style>
 
             table {
-                border-collapse: collapse;
+                                border: 4px solid gray;
+
                 width: 80%;
                 max-width: 800px;
                 margin: 0 auto;
