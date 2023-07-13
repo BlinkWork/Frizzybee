@@ -10,9 +10,6 @@
         <link rel="icon" href="./resources/img/logo.png" type="image/gif" sizes="16x16">
         <link rel="icon" href="./resources/img/logo.png" type="image/gif" sizes="18x18">
         <link rel="icon" href="./resources/img/logo.png" type="image/gif" sizes="20x20">
- <%
-        String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()  + request.getContextPath();
-        %>
         <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
         <link rel="stylesheet" href="./resources/css/fontawesome.all.min.css">
         <link rel="stylesheet" href="./resources/css/owl.carousel.min.css">
