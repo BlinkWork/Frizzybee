@@ -314,11 +314,19 @@
     <script src="./resources/js/cart.js"></script>
 
     <script>
-      let priceArray = document.querySelectorAll('.priceDiscount');
+      let priceArray = document.querySelectorAll('.pricing');
       priceArray.forEach(function (item)
       {
-        let dualString = item.textContent.split(' ');
-        if (dualString[0] === dualString[1]) {
+        let dualString = item.innerHTML.split('<del>');
+        if (dualString[0] === item.querySelector("del").textContent) {
+          item.children[0].remove();
+        }
+      });
+      let pricing = document.querySelectorAll('.pricing span');
+      pricing.forEach(function (item)
+      {
+        let dualString = item.innerHTML.split('<del>');
+        if (dualString[0] === item.querySelector("del").textContent) {
           item.children[0].remove();
         }
       });

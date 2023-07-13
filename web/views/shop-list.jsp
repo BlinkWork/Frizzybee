@@ -240,5 +240,17 @@
     <script src="./resources/js/script.js"></script>
     <script src="./resources/js/mobile-menu.js"></script>
     <script src="./resources/js/product-manage-script.js"></script>
+    <script>
+      let pricing = document.querySelectorAll('.pricing span');
+      pricing.forEach(function (item)
+      {
+ 
+        let dualString = item.innerHTML.split('<del>');
+        
+        if (dualString[0] === item.querySelector("del").textContent) {
+          item.querySelector("del").remove();
+        }
+      });
+    </script>
   </body>
 </html>

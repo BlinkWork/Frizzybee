@@ -162,6 +162,9 @@
                   <button type="submit" class="btn button-1 addToCartBtn" data-bs-toggle="modal" data-bs-target="#myModal">
                     Add to cart
                   </button>
+                  <button type="submit" class="btn button-1 addToCartBtn">
+                    Add to cart not notify
+                  </button>
                 </form>
               </div>
               <h3>Share This Product</h3>
@@ -299,6 +302,15 @@
     <script src="./resources/js/cart.js"></script>
     <script src="./resources/js/review.js"></script>
     <script src="./resources/js/jquery.rateyo.js"></script>
-
+    <script>
+      let pricing = document.querySelectorAll('.pricing span');
+      pricing.forEach(function (item)
+      {
+        let dualString = item.innerHTML.split('<del>');
+        if (dualString[0] === item.querySelector("del").textContent) {
+          item.children[0].remove();
+        }
+      });
+    </script>
   </body>
 </html>

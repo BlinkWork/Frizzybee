@@ -10,9 +10,6 @@
         <link rel="icon" href="./resources/img/logo.png" type="image/gif" sizes="16x16">
         <link rel="icon" href="./resources/img/logo.png" type="image/gif" sizes="18x18">
         <link rel="icon" href="./resources/img/logo.png" type="image/gif" sizes="20x20">
- <%
-        String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()  + request.getContextPath();
-        %>
         <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
         <link rel="stylesheet" href="./resources/css/fontawesome.all.min.css">
         <link rel="stylesheet" href="./resources/css/owl.carousel.min.css">
@@ -159,5 +156,15 @@
         <script src="./resources/js/wow.min.js"></script>
         <script src="./resources/js/script.js"></script>
         <script src="./resources/js/mobile-menu.js"></script>
+        <script>
+      let pricing = document.querySelectorAll('.pricing span');
+      pricing.forEach(function (item)
+      {
+        let dualString = item.innerHTML.split('<del>');
+        if (dualString[0] === item.querySelector("del").textContent) {
+          item.children[0].remove();
+        }
+      });
+    </script>
     </body>
 </html>

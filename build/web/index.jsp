@@ -416,7 +416,7 @@
             <!-- Single -->
             <div class="col-lg-4 col-md-6 mb-30">
                 <div class="banner-item">
-                    <a href="#">
+                    <a href="./shop">
                         <img src="./resources/img/banner11.jpg" alt="img">
                     </a>
                 </div>
@@ -424,7 +424,7 @@
             <!-- Single -->
             <div class="col-lg-4 col-md-6 mb-30">
                 <div class="banner-item">
-                    <a href="#">
+                    <a href="./shop">
                         <img src="./resources/img/banner12.jpg" alt="img">
                     </a>
                 </div>
@@ -432,7 +432,7 @@
             <!-- Single -->
             <div class="col-lg-4 col-md-6 mb-30">
                 <div class="banner-item">
-                    <a href="#">
+                    <a href="./shop">
                         <img src="./resources/img/banner13.jpg" alt="img">
                     </a>
                 </div>

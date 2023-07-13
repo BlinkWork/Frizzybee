@@ -156,5 +156,15 @@
         <script src="./resources/js/wow.min.js"></script>
         <script src="./resources/js/script.js"></script>
         <script src="./resources/js/mobile-menu.js"></script>
+        <script>
+      let pricing = document.querySelectorAll('.pricing span');
+      pricing.forEach(function (item)
+      {
+        let dualString = item.innerHTML.split('<del>');
+        if (dualString[0] === item.querySelector("del").textContent) {
+          item.children[0].remove();
+        }
+      });
+    </script>
     </body>
 </html>

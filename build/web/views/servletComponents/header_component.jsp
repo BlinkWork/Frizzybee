@@ -57,7 +57,6 @@
 
     <body>
         <%
-        String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()  + request.getContextPath();
         String username = (String) session.getAttribute("username");
         UserDAO dao = new UserDAO();
         User curUser = dao.getUserByUsername(username);

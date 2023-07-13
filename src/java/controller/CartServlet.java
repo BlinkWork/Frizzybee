@@ -128,6 +128,7 @@ public class CartServlet extends HttpServlet {
         if (q != null) {
             quantity = Integer.parseInt(q);
         }
+        quantity = 2;
         String cartItems = getCartSession(request, response, user_id);
         CartDAO cdao = new CartDAO();
         if (cartItems != null) {
