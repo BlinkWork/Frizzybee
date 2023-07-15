@@ -4,9 +4,10 @@ import java.util.*;
 import java.sql.*;
 import model.User;
 import java.sql.Date;
+import model.Product;
 
 public class UserDAO extends MyDAO {
-
+    
     public List<User> getUsers() {
         List<User> t = new ArrayList<>();
         xSql = "select * from [dbo].[User]";
@@ -41,7 +42,7 @@ public class UserDAO extends MyDAO {
                 } else {
                     role = "user";
                 }
-
+                
                 x = new User(id, name, avatarURL, username, password, sex, birthday, email, address, role);
                 t.add(x);
             }
@@ -52,7 +53,7 @@ public class UserDAO extends MyDAO {
         }
         return (t);
     }
-
+    
     public User getUserByID(String ID) {
         xSql = "select * from [dbo].[User] where id = ?";
         User x = null;
@@ -60,7 +61,7 @@ public class UserDAO extends MyDAO {
             ps = con.prepareStatement(xSql);
             ps.setString(1, ID);
             rs = ps.executeQuery();
-
+            
             if (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
@@ -88,7 +89,7 @@ public class UserDAO extends MyDAO {
         }
         return (x);
     }
-
+    
     public User getUserByUsername(String xUsername) {
         xSql = "select * from [dbo].[User] where username = ?";
         User x = null;
@@ -96,7 +97,7 @@ public class UserDAO extends MyDAO {
             ps = con.prepareStatement(xSql);
             ps.setString(1, xUsername);
             rs = ps.executeQuery();
-
+            
             if (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
@@ -124,7 +125,7 @@ public class UserDAO extends MyDAO {
         }
         return (x);
     }
-
+    
     public List<User> getUsersByName(String keyword) {
         List<User> t = new ArrayList<>();
         xSql = "select * from [dbo].[User] where name like ?";
@@ -133,7 +134,7 @@ public class UserDAO extends MyDAO {
             ps = con.prepareStatement(xSql);
             ps.setString(1, "%" + keyword + "%");
             rs = ps.executeQuery();
-
+            
             if (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
@@ -162,7 +163,7 @@ public class UserDAO extends MyDAO {
         }
         return (t);
     }
-
+    
     public boolean checkDuplicateUsername(String xUsername) {
         xSql = "SELECT * FROM [dbo].[User] WHERE username = ?";
         boolean result = false;
@@ -180,7 +181,7 @@ public class UserDAO extends MyDAO {
         }
         return result;
     }
-
+    
     public boolean loginAccount(String xUsername, String xPassword) {
         xSql = "SELECT * FROM [dbo].[User] WHERE username = ? AND password = ?";
         boolean result = false;
@@ -189,7 +190,7 @@ public class UserDAO extends MyDAO {
             ps.setString(1, xUsername);
             ps.setString(2, util.DataEncrypt.toSHA1(xPassword));
             rs = ps.executeQuery();
-
+            
             if (rs.next()) {
                 result = true;
             }
@@ -200,7 +201,7 @@ public class UserDAO extends MyDAO {
         }
         return result;
     }
-
+    
     public void insert(User x) {
         xSql = "INSERT INTO [dbo].[User]([name],[avatar],[username],[password],[sex],[birthday],[email],[address],[isSeller],[isAdmin])"
                 + "     VALUES(?,?,?,?,?,?,?,?,?,?)";
@@ -234,8 +235,18 @@ public class UserDAO extends MyDAO {
             e.printStackTrace();
         }
     }
-
+    
     public void delete(String ID) {
+        CartDAO c = new CartDAO();
+        c.deleteAllCartsByUserId(Integer.parseInt(ID));
+        RatingDAO r = new RatingDAO();
+        r.removeByUserID(ID);
+        OrderDAO o = new OrderDAO();
+        o.deleteByUserID(ID);
+        ProductDAO p = new ProductDAO();
+        for (Product product : p.getProductsBySeller(Integer.parseInt(ID))) {
+            p.deleteByID(Integer.toString(product.getProductID()));
+        }
         xSql = "delete from [dbo].[User] where id=?";
         try {
             ps = con.prepareStatement(xSql);
@@ -247,7 +258,7 @@ public class UserDAO extends MyDAO {
             e.printStackTrace();
         }
     }
-
+    
     public void update(User x) {
         xSql = "UPDATE [dbo].[User]\n"
                 + "   SET [name] =     ?\n"
@@ -293,7 +304,7 @@ public class UserDAO extends MyDAO {
             System.out.println(e);
         }
     }
-
+    
     public int countNumberUser() {
         int number = 0;
         xSql = "select count(*) as numberUser from [dbo].[User] where isAdmin = 'FALSE'";
@@ -310,7 +321,7 @@ public class UserDAO extends MyDAO {
         }
         return number;
     }
-
+    
     public String[] getColNames(String xTable) {
         List<String> columnNames = new ArrayList<>();
         String sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = ?";
@@ -327,7 +338,7 @@ public class UserDAO extends MyDAO {
         }
         return columnNames.toArray(new String[0]);
     }
-
+    
     public String getUserInformation(String username, String proper) {
         xSql = "select " + proper + " from [dbo].[User] where username = '" + username + "'";
         String result = "";
@@ -347,7 +358,7 @@ public class UserDAO extends MyDAO {
         }
         return result;
     }
-
+    
     public static void main(String[] args) {
         UserDAO dao = new UserDAO();
 //    dao.insert(new User(1, "Lê Minh Thang", "cccc", "lethangd", "123456", "M", Date.valueOf("2003-08-05"), "lethangd@gmail.com", "Phu Ly", "admin"));
@@ -355,8 +366,8 @@ public class UserDAO extends MyDAO {
         List<User> temp = dao.getUsers();
         for (User te : temp) {
             System.out.println(te.getId());
-
-        }       
+            
+        }        
         
     }
 }
