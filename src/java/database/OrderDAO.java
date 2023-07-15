@@ -4,7 +4,6 @@ import java.util.*;
 import java.sql.*;
 import model.Order;
 import java.sql.Date;
-import model.Product;
 import model.User;
 
 public class OrderDAO extends MyDAO {
@@ -209,6 +208,19 @@ public class OrderDAO extends MyDAO {
 
     public void deleteByID(String ID) {
         xSql = "delete from [dbo].[Order] where [OrderID]=?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, ID);
+            ps.executeUpdate();
+            //con.commit();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void deleteByUserID(String ID) {
+        xSql = "delete from [dbo].[Order] where [user_id]=?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, ID);
