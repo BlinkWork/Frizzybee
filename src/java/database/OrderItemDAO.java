@@ -3,7 +3,6 @@ package database;
 import java.util.*;
 import java.sql.*;
 import model.OrderItem;
-import java.sql.Date;
 import model.Order;
 import model.Product;
 
@@ -137,6 +136,19 @@ public class OrderItemDAO extends MyDAO {
         } catch (SQLException e) {
             // Handle exception appropriately
             System.out.println(e);
+        }
+    }
+    
+    public void removeByProductID(String ID) {
+        xSql = "delete from [dbo].[OrderItem] where [product_id]=?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, ID);
+            ps.executeUpdate();
+            //con.commit();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     
