@@ -3,6 +3,7 @@ package database;
 import java.util.*;
 import java.sql.*;
 import model.Brand;
+import model.Product;
 
 public class BrandDAO extends MyDAO {
 
@@ -120,13 +121,9 @@ public class BrandDAO extends MyDAO {
     }
     
     public void deleteByID(String ID) {
-        xSql = "delete from Product where [brand_id] = ?";
-        try {
-            ps = con.prepareStatement(xSql);
-            ps.setString(1, ID);
-            ps.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
+        ProductDAO p = new ProductDAO();
+        for (Product product : p.getProductsByCategory(ID)) {
+            p.deleteByID(Integer.toString(product.getProductID()));
         }
         xSql = "delete from Brand where [brand_id] = ?";
         try {
