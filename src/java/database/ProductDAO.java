@@ -3,7 +3,6 @@ package database;
 import java.util.*;
 import java.sql.*;
 import model.Product;
-import java.sql.Date;
 import model.Brand;
 import model.Category;
 
@@ -230,6 +229,12 @@ public class ProductDAO extends MyDAO {
     }
 
     public void deleteByID(String ID) {
+        CartDAO c = new CartDAO();
+        c.removeByProductID(ID);
+        RatingDAO r = new RatingDAO();
+        r.removeByProductID(ID);
+        OrderItemDAO o = new OrderItemDAO();
+        o.removeByProductID(ID);
         xSql = "delete from Product where [product_id]=?";
         try {
             ps = con.prepareStatement(xSql);
