@@ -3,7 +3,6 @@ package database;
 import java.util.*;
 import java.sql.*;
 import model.Rating;
-import java.sql.Date;
 
 public class RatingDAO extends MyDAO {
 
@@ -114,6 +113,32 @@ public class RatingDAO extends MyDAO {
         } catch (SQLException e) {
             // Handle exception appropriately
             System.out.println(e);
+        }
+    }
+    
+    public void removeByProductID(String ID) {
+        xSql = "delete from [dbo].[Rating] where [product_id]=?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, ID);
+            ps.executeUpdate();
+            //con.commit();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void removeByUserID(String ID) {
+        xSql = "delete from [dbo].[Rating] where [user_id]=?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, ID);
+            ps.executeUpdate();
+            //con.commit();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
